@@ -1,10 +1,16 @@
 import App from "../App";
-import { Dashboard, Login, MasterUsesr, PageNoteFound } from "../pages";
+import {
+  Dashboard,
+  HomePublic,
+  Login,
+  MasterUsesr,
+  PageNoteFound,
+} from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const AppRoute = [
   {
-    path: "/admin/",
+    path: "/app/",
     element: <App />,
     children: [
       {
@@ -18,7 +24,7 @@ const AppRoute = [
         element: <PageNoteFound />,
       },
       {
-        path: "/admin/dashboard",
+        path: "/app/dashboard",
         title: "Dashboard",
         element: (
           <ProtectedRoute>
@@ -27,7 +33,7 @@ const AppRoute = [
         ),
       },
       {
-        path: "/admin/master-user",
+        path: "/app/master-user",
         title: "Master User",
         element: (
           <ProtectedRoute>
@@ -55,6 +61,11 @@ const AppRoute = [
         path: "",
         title: "Login",
         element: <Login />,
+      },
+      {
+        path: "absen",
+        title: "Login",
+        element: <HomePublic />,
       },
     ],
   },

@@ -46,7 +46,7 @@ const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
     }, 300);
   };
   if (utility.getIsLogin) {
-    return <Navigate to="/admin/dashboard" />;
+    return <Navigate to="/app/dashboard" />;
   }
 
   return (
@@ -63,7 +63,7 @@ const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
         <div className="login-header">
           <div className="brand">
             <div className="d-flex align-items-center">
-              <span className="logo"></span> <b>Color</b> Admin Base
+              <span className="logo"></span> <b>Login Us </b>
             </div>
           </div>
           <div className="icon">
@@ -119,7 +119,7 @@ const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
               </ButtonCustom>
             </div>
             <div className="text-center">
-              © All Right Reserved Color Admin Base <br />
+              © All Right Reserved Time Keeping Management Solution <br />
             </div>
           </form>
         </div>

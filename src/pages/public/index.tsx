@@ -23,7 +23,7 @@ const HomePublic = () => {
       className="container d-flex justify-content-center align-items-center"
       style={{ height: "100vh" }}
     >
-      <button className="btn btn-primary" onClick={() => navigate("login")}>
+      <button className="btn btn-primary" onClick={() => navigate("/")}>
         Login
       </button>
     </div>

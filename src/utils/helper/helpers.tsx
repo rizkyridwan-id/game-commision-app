@@ -4,8 +4,27 @@ import { LocalStorageItem, UserLoginInterFace } from "@/interface";
 import * as XLSX from "xlsx";
 import moment from "moment-timezone";
 
-const VITE_APP_KEY = process.env.VITE_APP_KEY || "";
-const VITE_APP_SECRETKEY = process.env.VITE_APP_SECRETKEY || "";
+export const { VITE_APP_SECRETKEY, VITE_APP_KEY } = import.meta.env;
+
+interface GlobalConfig {
+  VITE_APP_BE?: string;
+  VITE_APP_FIREBASE_NAME?: string;
+  VITE_APP_KODE_TOKO?: string;
+  VITE_APP_VERSION?: string;
+}
+
+let globalConfigEnv: string = "";
+let globalConfig: GlobalConfig = (window as any).globalConfig || {};
+
+globalConfigEnv = doDecrypt(globalConfig);
+globalConfig = JSON?.parse(globalConfigEnv?.replaceAll("~", ""));
+export const VITE_APP_BE: string | undefined = globalConfig.VITE_APP_BE;
+export const VITE_APP_KODE_TOKO: string | undefined =
+  globalConfig.VITE_APP_KODE_TOKO;
+export const VITE_APP_FIREBASE_NAME: string | undefined =
+  globalConfig.VITE_APP_FIREBASE_NAME;
+export const VITE_APP_VERSION: string | undefined =
+  globalConfig.VITE_APP_VERSION;
 
 interface LoadingContentProps {
   loading?: boolean;

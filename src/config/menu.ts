@@ -1,15 +1,6 @@
-const Menu = [
-  {
-    path: "/admin/dashboard",
-    icon: "fa fa-home",
-    title: "Dashboard",
-  },
-  {
-    path: "#",
-    icon: "fa fa-database",
-    title: "Data Master",
-    children: [{ path: "/admin/master-user", title: "Master User" }],
-  },
-];
+import { VITE_APP_VERSION } from "@/utils";
+import MenuPusat from "./menuPusat";
+import MenuCabang from "./menuCabang";
+console.log(VITE_APP_VERSION);
 
-export default Menu;
+export default VITE_APP_VERSION === "PUSAT" ? MenuPusat : MenuCabang;

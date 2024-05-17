@@ -1,13 +1,13 @@
 import firebase from "firebase/app";
 import "firebase/storage";
 const firebaseConfig = {
-  apiKey: "AIzaSyDxL_bvBwjv9ZBJSBauTGphfgrUNoejonQ",
-  authDomain: "pabrikdevelopment.firebaseapp.com",
-  projectId: "pabrikdevelopment",
-  storageBucket: "pabrikdevelopment.appspot.com",
-  messagingSenderId: "628070690068",
-  appId: "1:628070690068:web:d8a28189d3b39612da2601",
-  measurementId: "G-7LZ2MQYGDP",
+  apiKey: "AIzaSyB1JES7FtWNBoz9obp-5Z6HifP5XCsUsOI",
+  authDomain: "gambar-78b2b.firebaseapp.com",
+  projectId: "gambar-78b2b",
+  storageBucket: "gambar-78b2b.appspot.com",
+  messagingSenderId: "694976070405",
+  appId: "1:694976070405:web:eef580e9823e39e64dad6c",
+  measurementId: "G-YX2KKT4KRH",
 };
 
 export default firebase.initializeApp(firebaseConfig);

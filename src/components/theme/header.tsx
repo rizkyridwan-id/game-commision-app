@@ -15,7 +15,7 @@ const Header = () => {
       <div className="navbar-header">
         <a href="index.html" className="navbar-brand">
           <span className="navbar-logo" />
-          Color Admin Base
+          TIME KEEPING MANAGEMENT SOLUTION
         </a>
         <button
           type="button"

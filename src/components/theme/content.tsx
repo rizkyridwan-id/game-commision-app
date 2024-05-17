@@ -19,7 +19,8 @@ const Content = () => {
       });
     });
     document.title =
-      (appTitle ? appTitle : "Halaman Admin") + " | Color Admin Base";
+      (appTitle ? appTitle : "Halaman Admin") +
+      " | TIME KEEPING MANAGEMENT SOLUTION";
   };
 
   useEffect(() => {

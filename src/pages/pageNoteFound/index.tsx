@@ -27,7 +27,7 @@ const PageNoteFound = () => {
         </div>
         <div>
           <Link
-            to={utility.getIsLogin ? "/admin/dashboard" : "/"}
+            to={utility.getIsLogin ? "/app/dashboard" : "/"}
             className="btn btn-success px-3"
           >
             Go Home

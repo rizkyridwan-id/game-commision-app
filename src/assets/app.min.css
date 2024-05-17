@@ -1,5 +1,5 @@
 @charset "UTF-8"; /*!
- * Color Admin v5.2.0 (https://seantheme.com/color-admin/)
+ * TIME KEEPING MANAGEMENT SOLUTION v5.2.0 (https://seantheme.com/color-admin/)
  * Copyright 2023 SeanTheme
  */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700); /*!
@@ -2204,7 +2204,9 @@ progress {
   -moz-appearance: none;
   appearance: none;
   border-radius: 4px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -2258,8 +2260,11 @@ progress {
   border-width: 0;
   border-inline-end-width: 1px;
   border-radius: 0;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control::file-selector-button {
@@ -2360,7 +2365,9 @@ textarea.form-control-lg {
   background-size: 16px 12px;
   border: 1px solid var(--bs-component-border-color);
   border-radius: 4px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -2546,10 +2553,14 @@ textarea.form-control-lg {
   outline: 0;
 }
 .form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #dee2e6, 0 0 0 0.25rem rgba(52, 143, 226, 0.25);
+  box-shadow:
+    0 0 0 1px #dee2e6,
+    0 0 0 0.25rem rgba(52, 143, 226, 0.25);
 }
 .form-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #dee2e6, 0 0 0 0.25rem rgba(52, 143, 226, 0.25);
+  box-shadow:
+    0 0 0 1px #dee2e6,
+    0 0 0 0.25rem rgba(52, 143, 226, 0.25);
 }
 .form-range::-moz-focus-outer {
   border: 0;
@@ -2561,9 +2572,13 @@ textarea.form-control-lg {
   background-color: var(--bs-component-active-bg);
   border: 0;
   border-radius: 1rem;
-  -webkit-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  -webkit-transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
   appearance: none;
@@ -2592,9 +2607,13 @@ textarea.form-control-lg {
   background-color: var(--bs-component-active-bg);
   border: 0;
   border-radius: 1rem;
-  -moz-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  -moz-transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   -moz-appearance: none;
   appearance: none;
@@ -2650,7 +2669,9 @@ textarea.form-control-lg {
   pointer-events: none;
   border: 1px solid transparent;
   transform-origin: 0 0;
-  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  transition:
+    opacity 0.1s ease-in-out,
+    transform 0.1s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-floating > label {
@@ -2893,8 +2914,12 @@ textarea.form-control.is-valid {
 .was-validated .form-select:valid:not([multiple])[size="1"] {
   --bs-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2300acac' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   padding-right: 4.125rem;
-  background-position: right 0.75rem center, center right 2.25rem;
-  background-size: 16px 12px, calc(0.75em + 0.4375rem) calc(0.75em + 0.4375rem);
+  background-position:
+    right 0.75rem center,
+    center right 2.25rem;
+  background-size:
+    16px 12px,
+    calc(0.75em + 0.4375rem) calc(0.75em + 0.4375rem);
 }
 .form-select.is-valid:focus,
 .was-validated .form-select:valid:focus {
@@ -2988,8 +3013,12 @@ textarea.form-control.is-invalid {
 .was-validated .form-select:invalid:not([multiple])[size="1"] {
   --bs-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ff5b57'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff5b57' stroke='none'/%3e%3c/svg%3e");
   padding-right: 4.125rem;
-  background-position: right 0.75rem center, center right 2.25rem;
-  background-size: 16px 12px, calc(0.75em + 0.4375rem) calc(0.75em + 0.4375rem);
+  background-position:
+    right 0.75rem center,
+    center right 2.25rem;
+  background-size:
+    16px 12px,
+    calc(0.75em + 0.4375rem) calc(0.75em + 0.4375rem);
 }
 .form-select.is-invalid:focus,
 .was-validated .form-select:invalid:focus {
@@ -3060,8 +3089,11 @@ textarea.form-control.is-invalid {
   border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
   border-radius: var(--bs-btn-border-radius);
   background-color: var(--bs-btn-bg);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -4717,7 +4749,9 @@ fieldset:disabled .btn {
   text-decoration: none;
   background: 0 0;
   border: 0;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -5673,8 +5707,11 @@ fieldset:disabled .btn {
   background-color: var(--bs-pagination-bg);
   border: var(--bs-pagination-border-width) solid
     var(--bs-pagination-border-color);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .page-link {
@@ -17441,7 +17478,10 @@ a:focus {
   text-align: center;
   font-size: 0.6875rem;
   border: none;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -17719,7 +17759,10 @@ a:focus {
   text-align: center;
   font-size: 0.6875rem;
   border: none;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -18342,7 +18385,10 @@ a:focus {
   font-size: 11px;
   border: none;
   margin-left: 5px;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -21039,7 +21085,10 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -21163,7 +21212,10 @@ a:focus {
   line-height: 16px;
   font-size: 10px;
   text-align: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -22299,7 +22351,10 @@ a:focus {
 .gallery .image .image-info .rating span.star:before {
   content: "\f005";
   color: rgba(var(--bs-component-color-rgb), 0.15);
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -23348,7 +23403,10 @@ a:focus {
   height: 20px;
   line-height: 20px;
   text-align: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -24873,7 +24931,10 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -26037,7 +26098,10 @@ body .datepicker .datepicker-years table thead tr th.prev {
   color: transparent;
   width: 15%;
   position: relative;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -26746,7 +26810,10 @@ body .datetimepicker .datetimepicker-minutes table {
 body .datetimepicker .glyphicon {
   font-size: 14px;
   color: #2d353c;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -30296,7 +30363,10 @@ body .bootstrap-timepicker .input-group-addon i {
   box-shadow: 0 0 0 0.25rem rgba(52, 143, 226, 0.25);
 }
 .bootstrap-timepicker-widget table tbody tr td .glyphicon {
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -30384,7 +30454,10 @@ body ul.wysihtml5-toolbar .btn.btn-default.wysihtml5-command-active {
   box-shadow: none;
 }
 body ul.wysihtml5-toolbar .glyphicon {
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -30590,7 +30663,10 @@ body table.dataTable thead tr th.sorting_desc:after {
   font-size: 0.875rem;
   display: flex;
   align-items: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -30648,7 +30724,10 @@ body table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -30707,7 +30786,10 @@ body #Datepickk .d-calendar .d-header #d-previous {
   right: 0;
   height: auto;
   font-size: 0.875rem;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -30934,7 +31016,10 @@ body
   align-items: center;
   justify-content: center;
   border-radius: 40px;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -31095,7 +31180,10 @@ body
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -31568,7 +31656,9 @@ body .introjs-helperNumberLayer {
 body .introjs-helperLayer {
   border: none;
   border-radius: 4px;
-  box-shadow: transparent 0 0 1px 2px, rgba(32, 37, 42, 0.5) 0 0 0 5000px !important;
+  box-shadow:
+    transparent 0 0 1px 2px,
+    rgba(32, 37, 42, 0.5) 0 0 0 5000px !important;
 }
 body .introjs-button {
   background: #e9ecef;
@@ -31797,7 +31887,10 @@ body .introjs-button.introjs-prevbutton {
   right: 7px;
   bottom: 7px;
   display: block;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -32195,7 +32288,10 @@ body .picker > .pc-element .pc-close {
   opacity: 0.25;
   color: inherit;
   font-size: 0.75rem;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -32261,7 +32357,9 @@ body .picker .pc-select .pc-list input[type="search"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   border-radius: 4px;
 }
 body .picker .pc-select .pc-list input[type="search"]:focus {
@@ -32375,7 +32473,10 @@ body .picker .pc-select .pc-list ul > li:hover {
   color: var(--bs-component-color);
   width: auto;
   height: auto;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -33102,7 +33203,10 @@ body .sp-container button.sp-cancel {
   width: auto;
   text-indent: 0;
   margin-top: 0;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -33254,7 +33358,10 @@ body .sp-container button.sp-cancel {
   width: auto;
   height: auto;
   margin: 0;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -34621,7 +34728,10 @@ body .sp-container button.sp-cancel {
   th.prev {
   color: transparent;
   width: 14.28%;
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -37750,7 +37860,10 @@ body .sp-container button.sp-cancel {
   .editable-buttons
   .btn
   .glyphicon-ok {
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
@@ -37772,7 +37885,10 @@ body .sp-container button.sp-cancel {
   .editable-buttons
   .btn
   .glyphicon-remove {
-  font-family: Font Awesome\6 Free, Font Awesome\6 Pro, FontAwesome !important;
+  font-family:
+    Font Awesome\6 Free,
+    Font Awesome\6 Pro,
+    FontAwesome !important;
   font-weight: 900;
   font-style: normal;
   font-variant: normal;
