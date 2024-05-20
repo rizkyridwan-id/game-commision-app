@@ -1,3 +1,4 @@
+import { getItem, userData } from "@/utils";
 import {
   useResolvedPath,
   useMatch,
@@ -6,6 +7,7 @@ import {
   matchPath,
 } from "../../../package";
 import { Menu } from "@/config";
+import { HakAksesInterFace } from "@/interface";
 
 const SidebarMenu = () => {
   const handleSidebarSearch = (e: any) => {
@@ -146,6 +148,11 @@ const SidebarMenu = () => {
     }
   };
 
+  const newMenuAkses =
+    userData.level === "OWN" || userData.level === "SU"
+      ? Menu
+      : getItem<HakAksesInterFace[]>("hakAkses");
+
   return (
     <div className="menu">
       <div className="menu-search mb-n3">
@@ -157,7 +164,7 @@ const SidebarMenu = () => {
         />
       </div>
       <div className="menu-header">Navigation</div>
-      {Menu.map((menu, i) => (
+      {newMenuAkses.map((menu, i) => (
         <NavItem key={i} menu={menu} />
       ))}
     </div>

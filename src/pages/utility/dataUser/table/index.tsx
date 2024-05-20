@@ -10,10 +10,12 @@ import { ColumnInterFace, DataUserInterFace } from "@/interface";
 import { Button } from "antd";
 import { ButtonDelete } from "@/utils";
 import { useEffect } from "react";
+import { datauserController } from "../redux";
 
 const TableDataUser = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
+  const reduxUser = datauserController();
 
   useEffect(() => {
     dispatch(actionMaster.getDataUser());
@@ -44,12 +46,23 @@ const TableDataUser = () => {
         <div className="text-center">
           <Button
             type="primary"
-            onClick={() => dispatch(helperRedux.showModal("EDIT", row))}
+            onClick={() =>
+              dispatch(
+                helperRedux.showModal({
+                  isEdit: true,
+                  title: "Edit Data",
+                  namaForm: "FormDataUser",
+                  data: row,
+                })
+              )
+            }
           >
             <i className="fa fa-edit"></i>
           </Button>
           &nbsp;
-          <ButtonDelete prosesDelete={() => console.log("Mask")} />
+          <ButtonDelete
+            prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
+          />
         </div>
       ),
     },
@@ -63,7 +76,15 @@ const TableDataUser = () => {
       dataSource={dataUser.data}
       columns={columnsTableDataUser}
       rowKey={"_id"}
-      onAddButtonClick={() => dispatch(helperRedux.showModal("Tambah"))}
+      onAddButtonClick={() =>
+        dispatch(
+          helperRedux.showModal({
+            isEdit: false,
+            title: "Tambah Data",
+            namaForm: "FormDataUser",
+          })
+        )
+      }
     />
   );
 };

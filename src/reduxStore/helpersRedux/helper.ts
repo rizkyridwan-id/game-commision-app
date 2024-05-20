@@ -1,13 +1,21 @@
 import { AppDispatch, AppThunk, utilityActions } from "@/reduxStore";
+
+export interface ModalInterFace<T> {
+  isEdit: boolean;
+  data?: T;
+  title: string;
+  namaForm?: string;
+}
 export const utilityController = <T>() => {
-  const showModal = (namaForm: string, data?: T): AppThunk => {
+  const showModal = <T>(data: ModalInterFace<T>): AppThunk => {
     return async (dispatch: AppDispatch) => {
       dispatch(
         utilityActions.showModal({
           isModalShow: true,
-          isEdit: namaForm === "EDIT" ? true : false,
-          data: data || [],
-          namaForm: namaForm,
+          isEdit: data.isEdit,
+          title: data.title,
+          data: data.data || [],
+          namaForm: data.namaForm,
         })
       );
     };
@@ -20,6 +28,7 @@ export const utilityController = <T>() => {
           isEdit: false,
           data: [],
           namaForm: "",
+          title: "",
         })
       );
     };

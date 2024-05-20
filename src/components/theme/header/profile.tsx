@@ -1,5 +1,4 @@
-import { AppDispatch, utilityActions } from "@/reduxStore";
-import { removeItem } from "@/utils";
+import { AppDispatch, helperActions, utilityActions } from "@/reduxStore";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,11 +20,11 @@ const DropdownProfile = () => {
 
   const logout = () => {
     dispatch(utilityActions.setLoading({ screen: true }));
-    removeItem("userdata");
-    setTimeout(() => {
+    setTimeout(async () => {
       navigate("/login");
       dispatch(utilityActions.stopLoading());
-      dispatch(utilityActions.isLogin(false));
+      dispatch(helperActions.isLogin(false));
+      localStorage.clear();
     }, 1000);
   };
 

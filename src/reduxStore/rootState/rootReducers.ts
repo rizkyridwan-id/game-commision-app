@@ -11,10 +11,12 @@ import utilityReducer from "../reducers/reducerUtility";
 import themeReducer from "../reducers/reducerTheme";
 import RootAction, { RootState } from "./rootAtion";
 import dataUserReducer from "../reducers/dataMaster/dataUserReducer";
+import reducerHelper from "../reducers/reducerHelper";
 
 export const rootReducer = combineReducers({
   form: formReducer,
   utility: utilityReducer,
+  helper: reducerHelper,
   theme: themeReducer,
   dataMaster: combineReducers({
     dataUser: dataUserReducer,

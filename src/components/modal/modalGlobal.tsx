@@ -30,6 +30,7 @@ const ModalGlobal: React.FC<ModalGlobalInterFace> = (props) => {
         isEdit: false,
         data: [],
         namaForm: "",
+        title: "",
       })
     );
   };

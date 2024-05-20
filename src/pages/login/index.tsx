@@ -13,21 +13,15 @@ import {
   useAppSelector,
   utilityActions,
 } from "@/reduxStore";
-import {
-  ButtonCustom,
-  NotifInfo,
-  ReanderField,
-  postData,
-  setItem,
-  urlApi,
-} from "@/utils";
+import { ButtonCustom, ReanderField } from "@/utils";
 import { useState } from "react";
-import { FormLoginDto } from "./dto/formLoginDto";
 import { Navigate } from "react-router-dom";
+import { DataUserInterFace } from "@/interface";
+import { reduxLogin } from "./reduxLogin";
 
-const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
+const LoginForm = (props: InjectedFormProps<DataUserInterFace>) => {
   const dispatch = useDispatch<AppDispatch>();
-  const utility = useAppSelector((state) => state.utility);
+  const helpers = useAppSelector((state) => state.helper);
   const [isShowPassword, setIsShowPassword] = useState(true);
 
   useEffect(() => {
@@ -41,20 +35,11 @@ const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
   }, [dispatch]);
   const { handleSubmit } = props;
 
-  const prosesLogin = async (dataForm: FormLoginDto) => {
+  const prosesLogin = async () => {
     dispatch(utilityActions.setLoading({ screen: true }));
-    try {
-      const result = await postData(urlApi.login, dataForm);
-      setItem("userdata", result.data);
-      setTimeout(() => {
-        dispatch(utilityActions.isLogin(true));
-        dispatch(utilityActions.stopLoading());
-      }, 300);
-    } catch (error) {
-      NotifInfo(`${error}`);
-    }
+    dispatch(reduxLogin());
   };
-  if (utility.getIsLogin) {
+  if (helpers.getIsLogin) {
     return <Navigate to="/app/dashboard" />;
   }
 
@@ -137,7 +122,7 @@ const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
   );
 };
 
-export default reduxForm<FormLoginDto>({
+export default reduxForm<DataUserInterFace>({
   form: "loginForm",
   validate: validateLogin,
 })(LoginForm);

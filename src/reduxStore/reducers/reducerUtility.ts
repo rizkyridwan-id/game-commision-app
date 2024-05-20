@@ -13,12 +13,14 @@ function initialState<T>(): UtilityState<T> {
       isEdit: false,
       data: [] as T,
       namaForm: "",
+      title: "",
     },
     hideModal: {
       isModalShow: false,
       isEdit: false,
       data: [] as T,
       namaForm: "",
+      title: "",
     },
 
     setLoadingTabel: false,
@@ -28,7 +30,6 @@ function initialState<T>(): UtilityState<T> {
       data: [] as T,
     },
 
-    getIsLogin: false,
     getScreenSize: "lg",
   };
 }
@@ -58,11 +59,7 @@ const utility = <T>(
         ...state,
         getLoading: action.payload,
       };
-    case AppActionTypes.IS_LOGIN:
-      return {
-        ...state,
-        getIsLogin: action.payload,
-      };
+
     case AppActionTypes.HIDE_MODAL:
       return {
         ...state,

@@ -36,7 +36,7 @@ export interface DataUserInterFace {
    * Level akses DataUserInterFace.
    * @example "admin"
    */
-  level: "OWN" | "ADMIN" | "SPV";
+  level: string;
 }
 
 // Contoh pembuatan objek DataUserInterFace

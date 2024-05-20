@@ -4,19 +4,19 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 export const ProtectedRoute = ({ children }: any) => {
-  const utility = useAppSelector((state) => state.utility);
+  const helpers = useAppSelector((state) => state.helper);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (utility.getIsLogin) {
+    if (helpers.getIsLogin) {
       dispatch(themesActions.handleSetPageHeader(true));
       dispatch(themesActions.handleSetPageSidebar(true));
       dispatch(themesActions.handleSetFooter(true));
       dispatch(themesActions.handleSetContent(true));
     }
-  }, [dispatch, utility.getIsLogin]);
+  }, [dispatch, helpers.getIsLogin]);
 
-  if (!utility.getIsLogin) {
+  if (!helpers.getIsLogin) {
     return <Navigate to={"/login"} />;
   } else {
     return children;

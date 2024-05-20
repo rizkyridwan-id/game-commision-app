@@ -11,7 +11,7 @@ const DataUser = () => {
       <TableDataUser />
       <ModalGlobal
         namaForm="FormMasterKodePabrikan"
-        title={`${utility.getModal.namaForm} Data`}
+        title={`${utility.getModal.title}`}
         width={1200}
       >
         <FormDataUser />

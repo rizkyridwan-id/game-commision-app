@@ -49,7 +49,6 @@ const FormDataUser = (
   }, [idUser, dispatch]);
 
   const getAksesMenu = async () => {
-    console.log(hakAkses);
     if (hakAkses) {
       const dataakses = JSON.parse(hakAkses || "[]");
       const updatedMenuCabang = Menu.map((item) => {
@@ -111,6 +110,8 @@ const FormDataUser = (
       setisLoading(false);
     }
   };
+
+  const [isShowPassword, setIsShowPassword] = useState(true);
 
   const treeData: any = utility.getDataTmp?.data;
 
@@ -259,12 +260,26 @@ const FormDataUser = (
               <div className={`col-6 `}>
                 <div className="mb-20px">
                   <Field
-                    type="password"
+                    type={"text"}
                     label="Passsword"
                     name="password"
+                    enableenter
                     noUpperCase
+                    id="password"
+                    nouperCase
                     placeholder="Masukan Password"
                     component={ReanderField}
+                    right
+                    inputGroup
+                    textIconGroup={
+                      isShowPassword ? (
+                        <i className="fa-regular fa-eye-slash"></i>
+                      ) : (
+                        <i className="fa fa-eye"></i>
+                      )
+                    }
+                    customeCss={isShowPassword ? "password-hide" : ""}
+                    handleClick={() => setIsShowPassword(!isShowPassword)}
                   />
                 </div>
               </div>

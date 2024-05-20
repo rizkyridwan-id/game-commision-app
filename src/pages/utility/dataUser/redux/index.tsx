@@ -10,7 +10,6 @@ import {
   deleteData,
   postData,
   putData,
-  setItem,
   urlApi,
 } from "@/utils";
 import { reset } from "redux-form";
@@ -33,48 +32,9 @@ export const datauserController = () => {
       } else {
         dispatch(save(data, hakAkses));
       }
-
-      updateHakAksesSidebar(data, hakAkses);
     };
   };
 
-  const updateHakAksesSidebar = (
-    data: DataUserInterFace,
-    hakAkses: HakAksesInterFace[]
-  ) => {
-    const menu: any = [];
-    hakAkses?.forEach((row: any) => {
-      if (row.is_show) {
-        if (!row.children) {
-          const hasil1 = {
-            icon: row.icon,
-            is_show: row.is_show,
-            path: row.path,
-            title: row.title,
-            user_id: data?.user_id,
-          };
-          menu.push(hasil1);
-        } else {
-          const menuChildern = row.children?.map((list: any) => {
-            const children = Array.isArray(list.children)
-              ? list.children.filter((child: any) => child.is_show)
-              : undefined;
-            return {
-              ...list,
-              children,
-            };
-          });
-
-          const hasil = {
-            ...row,
-            children: menuChildern.filter((child: any) => child.is_show),
-          };
-          menu.push(hasil);
-        }
-      }
-    });
-    setItem("hakAkses", menu);
-  };
   const save = (
     data: DataUserInterFace,
     hakAkses: HakAksesInterFace[]
@@ -143,7 +103,7 @@ export const datauserController = () => {
             button: true,
           })
         );
-        await deleteData<DataUserInterFace>(urlApi.dataMaster.user + id);
+        await deleteData<DataUserInterFace>(`${urlApi.dataMaster.user}/${id}`);
         dispatch(actionMaster.getDataUser());
         NotifSuccess("Data Berhasil Dihapus");
         dispatch(utilityActions.stopLoading());

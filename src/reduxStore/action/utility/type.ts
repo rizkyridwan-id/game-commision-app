@@ -7,7 +7,6 @@ export const AppActionTypes = {
   IS_EDIT: "IS_EDIT",
   GET_DATA_EDIT: "GET_DATA_EDIT",
   LOADING_TABEL: "LOADING_TABEL",
-  IS_LOGIN: "IS_LOGIN",
   SIMPAN_DATA_TMP: "SIMPAN_DATA_TMP",
   SHOW_BUTTON_DELETE: "SHOW_BUTTON_DELETE",
   SCREEN_SIZE: "SCREEN_SIZE",
@@ -55,9 +54,6 @@ export interface LoadingTabelAction
   extends Action<typeof AppActionTypes.LOADING_TABEL> {
   payload: boolean;
 }
-export interface IsLoginAction extends Action<typeof AppActionTypes.IS_LOGIN> {
-  payload: boolean;
-}
 
 export interface LoadingData {
   table?: boolean;
@@ -69,6 +65,7 @@ export interface ModalData<T> {
   isEdit: boolean;
   data?: T;
   namaForm?: string;
+  title: string;
 }
 
 export interface DataTmp<T> {
@@ -79,7 +76,6 @@ export interface UtilityState<T> {
   getLoading: LoadingData;
   setLoadingTabel: boolean;
   getShowButtonDelete: boolean;
-  getIsLogin: boolean;
   getDataEdit: [];
   getScreenSize: string;
   getModal: ModalData<T>;
@@ -93,7 +89,6 @@ export type AppActionUtility<T> =
   | SetLoadingAction
   | SetIsEditAction
   | GetDataEditAction
-  | IsLoginAction
   | ShowButtonDelete
   | ScreenSizeAction
   | SimpanDataTmpAction<T>

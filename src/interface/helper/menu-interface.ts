@@ -8,7 +8,7 @@ export interface ChildrenMenu {
   is_show?: boolean;
   children?: Array<ChildrenMenu>;
 }
-export interface Menu {
+export interface MenuInterFace {
   path?: string;
   icon?: string;
   title?: string;

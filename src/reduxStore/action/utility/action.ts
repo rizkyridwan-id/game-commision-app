@@ -4,7 +4,6 @@ import {
   AppActionTypes,
   DataTmp,
   GetDataEditAction,
-  IsLoginAction,
   LoadingData,
   LoadingTabelAction,
   ModalData,
@@ -51,10 +50,6 @@ const loadingTabel = (data: boolean): LoadingTabelAction => ({
   type: AppActionTypes.LOADING_TABEL,
   payload: data,
 });
-const isLogin = (data: boolean): IsLoginAction => ({
-  type: AppActionTypes.IS_LOGIN,
-  payload: data,
-});
 
 export const showModal = <T>(data: ModalData<T>): AppThunk => {
   return async (dispatch: Dispatch<ShowModalAction<T>>) => {
@@ -82,6 +77,7 @@ export const hideModal = (): AppThunk => {
         isEdit: false,
         data: [],
         namaForm: "",
+        title: "",
       },
     });
   };
@@ -97,7 +93,6 @@ const utilityActions = {
   loadingTabel,
   stopLoading,
   showButtonDelete,
-  isLogin,
   setScreenSize,
 };
 export default utilityActions;

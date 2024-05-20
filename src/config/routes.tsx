@@ -3,7 +3,6 @@ import {
   Dashboard,
   HomePublic,
   Login,
-  MasterUsesr,
   MasterPegawai,
   PageNoteFound,
   DataUser,
@@ -34,15 +33,7 @@ const AppRoute = [
           </ProtectedRoute>
         ),
       },
-      {
-        path: "/app/master-user",
-        title: "Master User",
-        element: (
-          <ProtectedRoute>
-            <MasterUsesr />
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "/app/data-pegawai",
         title: "Data Pegawai",

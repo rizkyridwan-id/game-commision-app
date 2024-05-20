@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 const App = () => {
   const utility = useAppSelector((state) => state.utility);
+  const helpers = useAppSelector((state) => state.helper);
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -25,7 +26,7 @@ const App = () => {
   }, [theme]);
   return (
     <React.Fragment>
-      {utility.getIsLogin ? (
+      {helpers.getIsLogin ? (
         <div
           className={
             "app " +
@@ -38,11 +39,11 @@ const App = () => {
           {theme.handleSetPageHeader && <Header />}
           {theme.handleSetPageSidebar && <Siderbar />}
           {theme.handleSetContent && <Content />}
-          <LoadingContent loading={utility.getLoading.screen} />
         </div>
       ) : (
         theme.handleSetContent && <Content />
       )}
+      <LoadingContent loading={utility.getLoading.screen} />
       <ToastContainer />
     </React.Fragment>
   );
