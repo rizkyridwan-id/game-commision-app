@@ -7,6 +7,12 @@ export interface TableColumn {
   key: string;
 }
 
+export interface SearchInterface {
+  skip?: number;
+  limit?: number;
+  q?: string;
+  status_valid?: boolean;
+}
 interface CustomTablePaginationConfig extends TablePaginationConfig {
   q?: string;
   skip?: number;

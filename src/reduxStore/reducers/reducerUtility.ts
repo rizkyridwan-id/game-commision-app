@@ -29,6 +29,7 @@ function initialState<T>(): UtilityState<T> {
     },
 
     getIsLogin: false,
+    getScreenSize: "lg",
   };
 }
 
@@ -78,6 +79,11 @@ const utility = <T>(
         getDataTmp: action.payload,
       };
 
+    case AppActionTypes.SCREEN_SIZE:
+      return {
+        ...state,
+        getScreenSize: action.payload,
+      };
     default:
       return state;
   }

@@ -12,7 +12,7 @@ const TableDataPegawai = () => {
       addButtonTitle="Tambah Data"
       dataSource={exampleDataPegawai}
       columns={columnsTablePegawai}
-      rowKey={"_id"}
+      rowKey={"kode_pegawai"}
       scrollX
       width={2000}
       onAddButtonClick={() => dispatch(helperRedux.showModal("Tambah"))}

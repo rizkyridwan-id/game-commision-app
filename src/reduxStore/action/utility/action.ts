@@ -8,6 +8,7 @@ import {
   LoadingData,
   LoadingTabelAction,
   ModalData,
+  ScreenSizeAction,
   SetIsEditAction,
   SetLoadingAction,
   ShowButtonDelete,
@@ -18,6 +19,10 @@ import {
 const setLoading = (data: LoadingData): SetLoadingAction => ({
   type: AppActionTypes.IS_LOADING,
   payload: data,
+});
+const setScreenSize = (value: string): ScreenSizeAction => ({
+  type: AppActionTypes.SCREEN_SIZE,
+  payload: value,
 });
 const stopLoading = (): SetLoadingAction => ({
   type: AppActionTypes.IS_LOADING,
@@ -93,5 +98,6 @@ const utilityActions = {
   stopLoading,
   showButtonDelete,
   isLogin,
+  setScreenSize,
 };
 export default utilityActions;

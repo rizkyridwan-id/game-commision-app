@@ -10,7 +10,13 @@ export const AppActionTypes = {
   IS_LOGIN: "IS_LOGIN",
   SIMPAN_DATA_TMP: "SIMPAN_DATA_TMP",
   SHOW_BUTTON_DELETE: "SHOW_BUTTON_DELETE",
+  SCREEN_SIZE: "SCREEN_SIZE",
 } as const;
+
+export interface ScreenSizeAction
+  extends Action<typeof AppActionTypes.SCREEN_SIZE> {
+  payload: string;
+}
 
 export interface HideModalAction<T>
   extends Action<typeof AppActionTypes.HIDE_MODAL> {
@@ -75,6 +81,7 @@ export interface UtilityState<T> {
   getShowButtonDelete: boolean;
   getIsLogin: boolean;
   getDataEdit: [];
+  getScreenSize: string;
   getModal: ModalData<T>;
   hideModal: ModalData<T>;
   getDataTmp: DataTmp<T>;
@@ -88,5 +95,6 @@ export type AppActionUtility<T> =
   | GetDataEditAction
   | IsLoginAction
   | ShowButtonDelete
+  | ScreenSizeAction
   | SimpanDataTmpAction<T>
   | LoadingTabelAction;

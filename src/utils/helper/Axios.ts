@@ -6,11 +6,15 @@ import {
 import { AxiosError, AxiosRequestConfig } from "axios";
 import firebase from "./firebase";
 import { getItem } from ".";
-import { generateSecret, generateSignature, setItem } from "./helpers";
+import {
+  VITE_APP_BE,
+  VITE_APP_FIREBASE_NAME,
+  generateSecret,
+  generateSignature,
+  setItem,
+} from "./helpers";
 import { doEncrypt } from "./encrypt";
 import { Axios } from "@/package";
-const VITE_APP_BE = process.env.VITE_APP_BE;
-const VITE_APP_FIREBASE_NAME = process.env.VITE_APP_FIREBASE_NAME;
 
 // const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
 
@@ -65,6 +69,7 @@ export async function getData<T>(
 ): Promise<ApiResponse<T>> {
   const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
   const url = `${VITE_APP_BE}/${endpoint}`;
+  console.log(VITE_APP_BE);
   const timestamp = new Date().toISOString();
   const signature = generateSignature(timestamp);
 
@@ -80,7 +85,6 @@ export async function getData<T>(
     params: params,
   };
 
-  // console.log(params);
   return new Promise<ApiResponse<T>>((resolve, reject) => {
     Axios.get<ApiResponse<T>>(url, config)
       .then((response) => {
@@ -124,18 +128,18 @@ export async function postData<T>(
   const timestamp = new Date().toISOString();
   const signature = generateSignature(timestamp);
   const secret = generateSecret();
+  const datauser = getItem<UserLoginInterFace>("userdata");
 
   const config: AxiosRequestConfig = {
     headers: {
       timestamp: timestamp,
       signature: signature,
+      user_id: datauser?.user_id,
       Accept: "application/json",
       "secret-key": secret,
       Authorization:
         endpoint !== "auth/login"
-          ? `Bearer ${
-              getItem<UserLoginInterFace>("userdata")?.access_token || ""
-            }`
+          ? `Bearer ${datauser.access_token || ""}`
           : undefined,
     },
   };
@@ -189,15 +193,15 @@ export async function putData<T>(
   const url = `${VITE_APP_BE}/${endpoint}`;
   const timestamp = new Date().toISOString();
   const signature = generateSignature(timestamp);
+  const datauser = getItem<UserLoginInterFace>("userdata");
 
   const config: AxiosRequestConfig = {
     headers: {
       timestamp: timestamp,
       signature: signature,
       Accept: "application/json",
-      Authorization: `Bearer ${
-        getItem<UserLoginInterFace>("userdata")?.access_token || ""
-      }`,
+      user_id: datauser?.user_id,
+      Authorization: `Bearer ${datauser?.access_token || ""}`,
     },
   };
 
@@ -250,15 +254,15 @@ export async function deleteData<T>(
   const url = `${VITE_APP_BE}/${endpoint}`;
   const timestamp = new Date().toISOString();
   const signature = generateSignature(timestamp);
+  const datauser = getItem<UserLoginInterFace>("userdata");
 
   const config: AxiosRequestConfig = {
     headers: {
       timestamp: timestamp,
       signature: signature,
       Accept: "application/json",
-      Authorization: `Bearer ${
-        getItem<UserLoginInterFace>("userdata")?.access_token || ""
-      }`,
+      user_id: datauser?.user_id,
+      Authorization: `Bearer ${datauser?.access_token || ""}`,
     },
     params: params,
   };
@@ -310,15 +314,15 @@ export const refreshToken = async (): Promise<RefresTokenInterFace> => {
   const url = `${VITE_APP_BE}/auth/refresh`;
   const timestamp = new Date().toISOString();
   const signature = generateSignature(timestamp);
+  const datauser = getItem<UserLoginInterFace>("userdata");
 
   const config: AxiosRequestConfig = {
     headers: {
       timestamp: timestamp,
       signature: signature,
       Accept: "application/json",
-      Authorization: `Bearer ${
-        getItem<UserLoginInterFace>("userdata")?.access_token || ""
-      }`,
+      user_id: datauser.user_id,
+      Authorization: `Bearer ${datauser?.access_token || ""}`,
     },
   };
 

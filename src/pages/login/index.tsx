@@ -13,7 +13,14 @@ import {
   useAppSelector,
   utilityActions,
 } from "@/reduxStore";
-import { ButtonCustom, ReanderField, setItem } from "@/utils";
+import {
+  ButtonCustom,
+  NotifInfo,
+  ReanderField,
+  postData,
+  setItem,
+  urlApi,
+} from "@/utils";
 import { useState } from "react";
 import { FormLoginDto } from "./dto/formLoginDto";
 import { Navigate } from "react-router-dom";
@@ -34,16 +41,18 @@ const LoginForm = (props: InjectedFormProps<FormLoginDto>) => {
   }, [dispatch]);
   const { handleSubmit } = props;
 
-  const prosesLogin = (dataForm: FormLoginDto) => {
+  const prosesLogin = async (dataForm: FormLoginDto) => {
     dispatch(utilityActions.setLoading({ screen: true }));
-    setItem("userdata", {
-      token: 1231,
-      username: dataForm.user_id,
-    });
-    setTimeout(() => {
-      dispatch(utilityActions.isLogin(true));
-      dispatch(utilityActions.stopLoading());
-    }, 300);
+    try {
+      const result = await postData(urlApi.login, dataForm);
+      setItem("userdata", result.data);
+      setTimeout(() => {
+        dispatch(utilityActions.isLogin(true));
+        dispatch(utilityActions.stopLoading());
+      }, 300);
+    } catch (error) {
+      NotifInfo(`${error}`);
+    }
   };
   if (utility.getIsLogin) {
     return <Navigate to="/app/dashboard" />;
