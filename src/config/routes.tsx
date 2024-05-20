@@ -4,6 +4,7 @@ import {
   HomePublic,
   Login,
   MasterUsesr,
+  MasterPegawai,
   PageNoteFound,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -38,6 +39,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <MasterUsesr />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-pegawai",
+        title: "Data Pegawai",
+        element: (
+          <ProtectedRoute>
+            <MasterPegawai />
           </ProtectedRoute>
         ),
       },

@@ -9,6 +9,7 @@ import CryptoJS from "crypto-js";
 import { Button, Table, Popover, Spin } from "antd";
 import { TablePaginationConfig } from "antd";
 import { debounce } from "lodash";
+import { ConfigProps } from "redux-form";
 
 import {
   useResolvedPath,
@@ -47,6 +48,10 @@ export {
   PerfectScrollbar,
   useLocation,
 };
-export type { AxiosResponse, TablePaginationConfig };
-export type { InjectedFormProps };
-export type { ThunkDispatch };
+export type {
+  ThunkDispatch,
+  ConfigProps,
+  InjectedFormProps,
+  AxiosResponse,
+  TablePaginationConfig,
+};

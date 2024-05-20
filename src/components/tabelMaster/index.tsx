@@ -1,9 +1,9 @@
 import { Col, Input, Row, TablePaginationConfig } from "antd";
-import { TableMasterProps } from "@/reduxStore";
-import { Button, Table, useSelector } from "@/package";
-import { RootState, UtilityState } from "@/reduxStore";
+import { Button, Table } from "@/package";
+import { useAppSelector } from "@/reduxStore";
 import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { TableMasterProps } from "@/interface";
 
 const TableMaster = (props: TableMasterProps) => {
   const {
@@ -12,7 +12,6 @@ const TableMaster = (props: TableMasterProps) => {
     addButtonTitle,
     rowKey,
     total,
-    loading,
     isLoading = false,
     changePagenation,
     onAddButtonClick,
@@ -28,28 +27,27 @@ const TableMaster = (props: TableMasterProps) => {
     id,
     footer,
     summary,
+    width = 1300,
   } = props;
 
-  const utility = useSelector<RootState<string>, UtilityState<string>>(
-    (state) => state.utility
-  );
+  const utility = useAppSelector((state) => state.utility);
 
-  const [value, setvalue] = useState("");
+  const [value, setValue] = useState("");
   const [data, setData] = useState(dataSource);
 
   useEffect(() => {
     setData(dataSource);
   }, [dataSource]);
 
-  useState<TablePaginationConfig>();
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setvalue(e.target.value);
+    setValue(e.target.value);
     if (handleSearch === undefined) {
       const regex = new RegExp(`.*${e.target.value}.*`, "gi"); // Tambahkan .* di sekitar e.target.value
 
       const result = dataSource.filter((item: any) => {
-        return columns.some((column) => regex.test(item[column.dataIndex]));
+        return columns.some((column: any) =>
+          regex.test(item[column.dataIndex])
+        );
       });
 
       if (e.target.value === "") {
@@ -71,14 +69,10 @@ const TableMaster = (props: TableMasterProps) => {
     }
   };
 
-  const tableProps = {
-    loading,
-  };
-
   return (
     <Row gutter={16}>
       <Col span={6}>
-        {disabledSearch !== true && (
+        {!disabledSearch && (
           <Input
             placeholder="Search"
             prefix={<SearchOutlined />}
@@ -89,33 +83,32 @@ const TableMaster = (props: TableMasterProps) => {
         )}
       </Col>
       <Col span={18} className="text-end">
-        {addButtonTitle !== undefined && (
+        {addButtonTitle && (
           <Button type="primary" onClick={onAddButtonClick}>
             {addButtonTitle}
           </Button>
         )}
-        {addButtonTitle2 !== undefined && (
+        {addButtonTitle2 && (
           <Button type="primary" className="ml-2" onClick={onAddButtonClick2}>
             {addButtonTitle2}
           </Button>
         )}
       </Col>
       <Col span={24} className="mt-4">
-        {title && title}
+        {title && <h3>{title}</h3>}
         <Table
-          {...tableProps}
           id={id}
           rowSelection={rowSelection}
           dataSource={data}
           columns={columns}
           loading={utility.getLoading.table || isLoading}
-          rowKey={rowKey}
-          scroll={{ x: scrollX ? 1300 : 0 }}
+          rowKey={rowKey as string}
+          scroll={{ x: scrollX ? (width ? width : 1300) : 0 }}
           pagination={
             disabledPagenation
               ? false
               : {
-                  total: total || 0, // totalData count returned from backend
+                  total: total || 0,
                 }
           }
           expandable={expandable}

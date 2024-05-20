@@ -9,7 +9,7 @@ const MenuPusat = [
     icon: "fa fa-database",
     title: "Data Master",
     children: [
-      { path: "#", title: "Data Pegawai" },
+      { path: "/app/data-pegawai", title: "Data Pegawai" },
       { path: "#", title: "Data Jabatan" },
       { path: "#", title: "Data Hari Libur Toko" },
     ],
