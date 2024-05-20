@@ -9,7 +9,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "obfuscate": "node ./script/obfuscate.js",
-    "purgecss": "node ./script/purgecss.js"
+    "purgecss": "node ./script/purgecss.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "antd": "^5.12.1",
@@ -32,6 +33,7 @@
     "sweetalert2": "^11.10.3"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
     "bwip-js": "^4.2.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.1",
