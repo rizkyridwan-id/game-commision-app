@@ -7,7 +7,6 @@ import React, { useEffect } from "react";
 const App = () => {
   const utility = useAppSelector((state) => state.utility);
   const theme = useAppSelector((state) => state.theme);
-
   useEffect(() => {
     const body = document.body;
     if (!theme.handleSetPageHeader && !theme.handleSetPageSidebar) {

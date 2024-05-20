@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "obfuscate": "node ./script/obfuscate.js",
     "purgecss": "node ./script/purgecss.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "update:version": "node ./script/update-version.js"
   },
   "dependencies": {
     "antd": "^5.12.1",
