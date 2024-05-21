@@ -7,7 +7,6 @@ import {
   utilityController,
 } from "@/reduxStore";
 import { ColumnInterFace, DataJabatanInterFace } from "@/interface";
-import { Button } from "antd";
 import { useEffect } from "react";
 import { ButtonDelete } from "@/utils";
 import { dataJabatanRedux } from "../redux";
@@ -33,22 +32,6 @@ const TableDataJabatan = () => {
       align: "center",
       render: (_cell, row) => (
         <div className="text-center">
-          <Button
-            type="primary"
-            onClick={() =>
-              dispatch(
-                helperRedux.showModal({
-                  isEdit: true,
-                  title: "Edit Data",
-                  namaForm: "FormDataUser",
-                  data: row,
-                })
-              )
-            }
-          >
-            <i className="fa fa-edit"></i>
-          </Button>
-          &nbsp;
           <ButtonDelete
             prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
           />
@@ -57,11 +40,11 @@ const TableDataJabatan = () => {
     },
   ];
 
-  const dataUser = useAppSelector((state) => state.dataMaster.dataJabatan);
+  const dataJabatan = useAppSelector((state) => state.dataMaster.dataJabatan);
   return (
     <TableMaster
       addButtonTitle="Tambah Data"
-      dataSource={dataUser.data || []}
+      dataSource={dataJabatan.data || []}
       columns={columnsTableDataJabatan}
       rowKey={"_id"}
       onAddButtonClick={() =>
@@ -69,7 +52,7 @@ const TableDataJabatan = () => {
           helperRedux.showModal({
             isEdit: false,
             title: "Tambah Data",
-            namaForm: "FormDataUser",
+            namaForm: "FormDataJabatan",
           })
         )
       }

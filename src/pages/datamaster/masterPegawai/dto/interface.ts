@@ -3,6 +3,11 @@
  */
 export interface PegawaiInterface {
   /**
+   * Kode unik untuk setiap _id.
+   * @example "001"
+   */
+  _id: string;
+  /**
    * Kode unik untuk setiap pegawai.
    * @example "001"
    */
@@ -116,6 +121,7 @@ export interface PegawaiInterface {
 //Contoh penggunaan Interface
 export const exampleDataPegawai: PegawaiInterface[] = [
   {
+    _id: "id_01231203123",
     kode_pegawai: "001",
     nama_pegawai: "AGNES",
     tgl_lahir: new Date("1992-10-24"),
@@ -136,6 +142,7 @@ export const exampleDataPegawai: PegawaiInterface[] = [
     input_date: new Date("2024-05-01T01:01:01"),
   },
   {
+    _id: "id_012312123123",
     kode_pegawai: "002",
     nama_pegawai: "ZIANKA",
     tgl_lahir: new Date("1992-10-24"),

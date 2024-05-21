@@ -13,6 +13,7 @@ import {
   putData,
   urlApi,
 } from "@/utils";
+import { reset } from "redux-form";
 
 export const dataJabatanRedux = () => {
   const prosesData = (): AppThunk => {
@@ -35,8 +36,10 @@ export const dataJabatanRedux = () => {
         dispatch(utilityActions.setLoading({ screen: true }));
         await postData<DataJabatanInterFace>(urlApi.dataMaster.jabatan, data);
         NotifSuccess("Data Berhasil Disimpan");
-        dispatch(utilityActions.stopLoading());
         dispatch(actionMaster.getDataJabatan());
+        dispatch(utilityActions.stopLoading());
+        dispatch(utilityActions.hideModal());
+        dispatch(reset("FormDataJabatan"));
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());
@@ -52,8 +55,10 @@ export const dataJabatanRedux = () => {
           data
         );
         NotifSuccess("Data Berhasil Diedit");
-        dispatch(utilityActions.stopLoading());
         dispatch(actionMaster.getDataJabatan());
+        dispatch(utilityActions.stopLoading());
+        dispatch(reset("FormDataJabatan"));
+        dispatch(utilityActions.hideModal());
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());

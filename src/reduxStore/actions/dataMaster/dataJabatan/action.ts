@@ -1,12 +1,12 @@
 import { DataJabatanInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
 import { NotifInfo, getData, urlApi } from "@/utils";
-import { DataJabataAction, DataJabatanType } from "./type";
+import { DataJabatanAction, DataJabatanType } from "./type";
 
-export const getDataJabataAction = (
+export const getDataJabatanAction = (
   users: DataJabatanInterFace[],
   total: number
-): DataJabataAction => ({
+): DataJabatanAction => ({
   type: DataJabatanType.GET_DATA_JABATAN,
   payload: {
     data: users,
@@ -28,13 +28,13 @@ export const getDataJabatan = (row?: SearchInterface): AppThunk => {
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<DataJabatanInterFace[]>(
-        urlApi.dataMaster.user,
+        urlApi.dataMaster.jabatan,
         params
       );
-      dispatch(getDataJabataAction(response.data, response.count));
+      dispatch(getDataJabatanAction(response.data, response.count));
       dispatch(utilityActions.stopLoading());
     } catch (error) {
-      dispatch(getDataJabataAction([], 0));
+      dispatch(getDataJabatanAction([], 0));
       dispatch(utilityActions.stopLoading());
       NotifInfo(`${error}`);
     }

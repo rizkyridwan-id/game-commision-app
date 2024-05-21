@@ -9,7 +9,7 @@ export interface DataJabatanInterFace {
    */
   _id: string;
 
-  jabatan: "SALES" | "KASIR" | "KEPALA TOKO";
+  jabatan: string;
 
   /**
    * Status aktif jabatan (true jika aktif, false jika tidak).

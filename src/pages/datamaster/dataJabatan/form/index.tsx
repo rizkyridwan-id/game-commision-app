@@ -1,10 +1,23 @@
-import { RootState } from "@/reduxStore";
-import { ButtonCustom, HiddenField, ReanderField } from "@/utils";
-import { Field, InjectedFormProps, reduxForm, connect } from "@/package";
+import { AppDispatch, RootState } from "@/reduxStore";
+import {
+  ButtonCustom,
+  HiddenField,
+  ReanderField,
+  setFocusField,
+} from "@/utils";
+import {
+  Field,
+  InjectedFormProps,
+  reduxForm,
+  connect,
+  useEffect,
+} from "@/package";
 import { ConfigProps } from "redux-form";
 import { DataJabatanInterFace } from "@/interface";
+import { validateJabatan } from "../validate";
 
-// import { datauserController } from "../redux";
+import { dataJabatanRedux } from "../redux";
+import { useDispatch } from "react-redux";
 type FormProps = {
   isEdit: boolean;
 };
@@ -13,11 +26,16 @@ const FormDataJabatan = (
   props: InjectedFormProps<DataJabatanInterFace, FormProps, string> & FormProps
 ) => {
   const { handleSubmit, isEdit } = props;
+  const proses = dataJabatanRedux();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const simpan = async () => {
-    // const hakaskses = utility.getDataTmp.data as HakAksesInterFace[];
-    // dispatch(proses.prosesData(data, hakaskses));
+  const simpan = () => {
+    dispatch(proses.prosesData());
   };
+
+  useEffect(() => {
+    setFocusField("jabatan");
+  }, [dispatch]);
 
   return (
     <form onSubmit={handleSubmit(simpan)}>
@@ -25,10 +43,10 @@ const FormDataJabatan = (
       <div className="row">
         <div className={"col-6"}>
           <Field
+            id="jabatan"
             label="Jabatan"
             name="jabatan"
             type="text"
-            noUpperCase
             placeholder="Masukan Jabatan"
             component={ReanderField}
           />
@@ -65,6 +83,7 @@ const connector = connect(mapState);
 const config: ConfigProps<DataJabatanInterFace, FormProps> = {
   form: "FormDataJabatan",
   enableReinitialize: true,
+  validate: validateJabatan,
 };
 
 export default connector(

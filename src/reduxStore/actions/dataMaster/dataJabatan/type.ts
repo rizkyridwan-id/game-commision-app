@@ -12,8 +12,8 @@ export interface getDataJabatanActionType {
   };
 }
 
-export interface DataJabataState {
+export interface DataJabatanState {
   data: DataJabatanInterFace[];
   total: number;
 }
-export type DataJabataAction = getDataJabatanActionType;
+export type DataJabatanAction = getDataJabatanActionType;

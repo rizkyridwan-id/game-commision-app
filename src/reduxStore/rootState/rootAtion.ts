@@ -3,8 +3,11 @@ import { FormStateMap } from "redux-form";
 import {
   AppActionTheme,
   AppActionUtility,
-  DataJabataState,
+  DataHariLiburState,
+  DataJabatanState,
+  DataPegawaiState,
   DataUserState,
+  ParameterBonusSalesState,
   ThemeState,
   UtilityState,
   helperState,
@@ -19,6 +22,11 @@ export interface RootState<T> {
   helper: helperState;
   dataMaster: {
     dataUser: DataUserState;
-    dataJabatan: DataJabataState;
+    dataJabatan: DataJabatanState;
+    dataHariLibur: DataHariLiburState;
+    dataPegawai: DataPegawaiState;
+  };
+  parameter: {
+    dataBonusSales: ParameterBonusSalesState;
   };
 }

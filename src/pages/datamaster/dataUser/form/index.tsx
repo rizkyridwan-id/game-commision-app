@@ -4,7 +4,13 @@ import {
   useAppSelector,
   utilityActions,
 } from "@/reduxStore";
-import { ButtonCustom, HiddenField, ReanderField, RenderSelect } from "@/utils";
+import {
+  ButtonCustom,
+  HiddenField,
+  ReanderField,
+  RenderSelect,
+  setFocusField,
+} from "@/utils";
 import {
   Field,
   InjectedFormProps,
@@ -23,6 +29,7 @@ import SortableTree, {
 import "@nosferatu500/react-sortable-tree/style.css";
 import { DataUserInterFace, HakAksesInterFace } from "@/interface";
 import { datauserController } from "../redux";
+import { validateDataUser } from "../validate";
 type FormProps = {
   isEdit: boolean;
   idUser?: string;
@@ -46,6 +53,11 @@ const FormDataUser = (
 
   useEffect(() => {
     getAksesMenu();
+    if (isEdit) {
+      setFocusField("user_name");
+    } else {
+      setFocusField("user_id");
+    }
   }, [idUser, dispatch]);
 
   const getAksesMenu = async () => {
@@ -235,6 +247,7 @@ const FormDataUser = (
               <div className="mb-20px">
                 <Field
                   label="User Id"
+                  id="user_id"
                   name="user_id"
                   type="text"
                   noUpperCase
@@ -248,9 +261,9 @@ const FormDataUser = (
               <div className="mb-20px">
                 <Field
                   label="Username"
+                  id="user_name"
                   name="user_name"
                   type="text"
-                  noUpperCase
                   placeholder="Masukan Username"
                   component={ReanderField}
                 />
@@ -352,6 +365,7 @@ const connector = connect(mapState);
 const config: ConfigProps<DataUserInterFace, FormProps> = {
   form: "FormDataUser",
   enableReinitialize: true,
+  validate: validateDataUser,
 };
 
 export default connector(

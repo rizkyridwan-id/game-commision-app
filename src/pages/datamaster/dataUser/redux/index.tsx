@@ -54,7 +54,7 @@ export const datauserController = () => {
         NotifSuccess("Data Berhasil Disimpan");
         dispatch(utilityActions.hideModal());
         dispatch(utilityActions.stopLoading());
-        dispatch(reset("FormUser"));
+        dispatch(reset("FormDataUser"));
         dispatch(
           utilityActions.simpanDataTmp({
             data: Menu,
@@ -81,7 +81,7 @@ export const datauserController = () => {
         );
         dispatch(actionMaster.getDataUser());
         NotifSuccess("Data Berhasil Diedit");
-        dispatch(reset("FormUser"));
+        dispatch(reset("FormDataUser"));
         dispatch(utilityActions.hideModal());
         dispatch(
           utilityActions.simpanDataTmp({

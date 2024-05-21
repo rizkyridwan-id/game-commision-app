@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import RootAction, { RootState } from "./rootAtion";
 import {
+  dataHariLiburReducer,
   dataJabatanReducer,
+  dataPegawaiReducer,
   dataUserReducer,
+  parameterBonusSalesReducer,
   reducerHelper,
   themeReducer,
   utilityReducer,
@@ -24,6 +27,11 @@ export const rootReducer = combineReducers({
   dataMaster: combineReducers({
     dataJabatan: dataJabatanReducer,
     dataUser: dataUserReducer,
+    dataHariLibur: dataHariLiburReducer,
+    dataPegawai: dataPegawaiReducer,
+  }),
+  parameter: combineReducers({
+    dataBonusSales: parameterBonusSalesReducer,
   }),
 });
 const store = createStore(rootReducer);

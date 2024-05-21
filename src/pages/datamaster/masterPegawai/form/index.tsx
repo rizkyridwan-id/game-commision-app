@@ -1,4 +1,10 @@
-import { AppDispatch, RootState, utilityActions } from "@/reduxStore";
+import {
+  AppDispatch,
+  RootState,
+  actionMaster,
+  useAppSelector,
+  utilityActions,
+} from "@/reduxStore";
 import {
   ButtonCustom,
   HiddenField,
@@ -16,6 +22,7 @@ import {
 } from "@/package";
 import { PegawaiInterface } from "../dto";
 import { ConfigProps } from "redux-form";
+import { validatePegawai } from "../validate";
 
 type FormProps = {
   isEdit: boolean;
@@ -37,7 +44,10 @@ const FormPegawai = (
     if (kode_jenis) {
       kode_jenis.focus();
     }
+    dispatch(actionMaster.getDataJabatan());
   }, []);
+
+  const dataJabatan = useAppSelector((state) => state.dataMaster.dataJabatan);
 
   return (
     <form onSubmit={handleSubmit(simpan)}>
@@ -46,8 +56,8 @@ const FormPegawai = (
         <div className="col-3">
           <Field
             label="Nama Pegawai"
-            id="nama_peagwai"
-            name="nama_peagwai"
+            id="nama_pegawai"
+            name="nama_pegawai"
             type="text"
             placeholder="Masukan Nama Pegawai"
             component={ReanderField}
@@ -69,7 +79,12 @@ const FormPegawai = (
             id="jabatan"
             name="jabatan"
             placeholder="Pilih Jabatan"
-            options={[]}
+            options={dataJabatan.data.map((list) => {
+              return {
+                value: list.jabatan,
+                label: list.jabatan,
+              };
+            })}
             component={RenderSelect}
           />
         </div>
@@ -79,7 +94,20 @@ const FormPegawai = (
             id="shift"
             name="shift"
             placeholder="Pilih Shift"
-            options={[]}
+            options={[
+              {
+                value: "1",
+                label: "1",
+              },
+              {
+                value: "2",
+                label: "2",
+              },
+              {
+                value: "3",
+                label: "3",
+              },
+            ]}
             component={RenderSelect}
           />
         </div>
@@ -179,12 +207,26 @@ const mapState = (state: RootState<PegawaiInterface>) => {
     return {
       isEdit: state?.utility?.getModal?.isEdit,
       initialValues: {
+        _id: state?.utility?.getModal?.data?._id,
         kode_pegawai: state?.utility?.getModal?.data?.kode_pegawai,
+        nama_pegawai: state?.utility?.getModal?.data?.nama_pegawai,
+        tgl_lahir: state?.utility?.getModal?.data?.tgl_lahir,
+        jabatan: state?.utility?.getModal?.data?.jabatan,
+        shift: state?.utility?.getModal?.data?.shift,
+        jam_istirahat: state?.utility?.getModal?.data?.jam_istirahat,
+        jam_sholat: state?.utility?.getModal?.data?.jam_sholat,
+        jam_break: state?.utility?.getModal?.data?.jam_break,
+        jatah_cuti: state?.utility?.getModal?.data?.jatah_cuti,
+        gaji_pokok: state?.utility?.getModal?.data?.gaji_pokok,
+        tunjangan_jabatan: state?.utility?.getModal?.data?.tunjangan_jabatan,
+        kode_sales: state?.utility?.getModal?.data?.kode_sales,
+        kode_toko: state?.utility?.getModal?.data?.kode_toko,
       },
     };
   } else {
     return {
       isEdit: false,
+      initialValues: {},
     };
   }
 };
@@ -193,6 +235,7 @@ const connector = connect(mapState);
 const config: ConfigProps<PegawaiInterface, FormProps> = {
   form: "FormPegawai",
   enableReinitialize: true,
+  validate: validatePegawai,
 };
 
 export default connector(

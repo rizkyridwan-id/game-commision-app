@@ -1,12 +1,19 @@
 import App from "../App";
 import {
   Dashboard,
+  DataHariLibur,
   DataJabatan,
   DataUser,
   HomePublic,
   Login,
   MasterPegawai,
   PageNoteFound,
+  ParameterBonusSales,
+  ParameterCuti,
+  ParameterKonversiCuti,
+  ParameterShiftKerja,
+  ParameterTagetSales,
+  ParameterTargetToko,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -59,6 +66,69 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <DataJabatan />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-hari-libur",
+        title: "Data Hari Libur",
+        element: (
+          <ProtectedRoute>
+            <DataHariLibur />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-bonus",
+        title: "Parameter Bonus",
+        element: (
+          <ProtectedRoute>
+            <ParameterBonusSales />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-cuti",
+        title: "Parameter Cuti",
+        element: (
+          <ProtectedRoute>
+            <ParameterCuti />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-koversi-cuti",
+        title: "Parameter Koversi Cuti",
+        element: (
+          <ProtectedRoute>
+            <ParameterKonversiCuti />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-shift-Kerja",
+        title: "Parameter Shift Kerja",
+        element: (
+          <ProtectedRoute>
+            <ParameterShiftKerja />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-target-sales",
+        title: "Target Sales",
+        element: (
+          <ProtectedRoute>
+            <ParameterTagetSales />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-target-toko",
+        title: "Target Toko",
+        element: (
+          <ProtectedRoute>
+            <ParameterTargetToko />
           </ProtectedRoute>
         ),
       },

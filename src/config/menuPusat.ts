@@ -13,7 +13,11 @@ const MenuPusat = [
     children: [
       { path: "/app/data-pegawai", title: "Data Pegawai", is_show: false },
       { path: "/app/data-jabatan", title: "Data Jabatan", is_show: false },
-      { path: "#", title: "Data Hari Libur Toko", is_show: false },
+      {
+        path: "/app/data-hari-libur",
+        title: "Data Hari Libur Toko",
+        is_show: false,
+      },
       { path: "/app/data-user", title: "Data User", is_show: false },
     ],
   },
@@ -23,12 +27,28 @@ const MenuPusat = [
     title: "Parameter",
     is_show: false,
     children: [
-      { path: "#", title: "Bonus Sales", is_show: false },
-      { path: "#", title: "Target Sales", is_show: false },
-      { path: "#", title: "Target Toko", is_show: false },
-      { path: "#", title: "Parameter Cuti", is_show: false },
-      { path: "#", title: "Parameter Konversi CUti", is_show: false },
-      { path: "#", title: "Parameter Shift Kerja", is_show: false },
+      { path: "/app/parameter-bonus", title: "Bonus Sales", is_show: false },
+      {
+        path: "/app/parameter-target-sales",
+        title: "Target Sales",
+        is_show: false,
+      },
+      {
+        path: "/app/parameter-target-toko",
+        title: "Target Toko",
+        is_show: false,
+      },
+      { path: "/app/parameter-cuti", title: "Parameter Cuti", is_show: false },
+      {
+        path: "/app/parameter-koversi-cuti",
+        title: "Parameter Konversi Cuti",
+        is_show: false,
+      },
+      {
+        path: "/app/parameter-shift-kerja",
+        title: "Parameter Shift Kerja",
+        is_show: false,
+      },
     ],
   },
   {

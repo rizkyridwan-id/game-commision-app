@@ -23,8 +23,9 @@ export interface ErrorResponse {
   message: string;
 }
 
-const errorRegex =
-  /Unauthorized|Invalid token|Invalid signature|Token Tidak Ditemukan/i;
+// const errorRegex =
+//   /Unauthorized|Invalid token|Invalid signature|Token Tidak Ditemukan/i;
+const errorRegex = /Invalid signature/i;
 
 const getNewRefresToken = async () => {
   const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
@@ -49,19 +50,23 @@ const getNewRefresToken = async () => {
 };
 
 export const logout = async () => {
-  const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
-  if (!userData.user_id) {
-    return false;
-  }
-  try {
-    await postData("auth/logout");
-    setTimeout(() => {
-      localStorage.clear();
-      window.location.reload();
-    }, 3000);
-  } catch (error) {
-    console.log(error);
-  }
+  setTimeout(() => {
+    localStorage.clear();
+    window.location.reload();
+  }, 3000);
+  // const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
+  // if (!userData.user_id) {
+  //   return false;
+  // }
+  // try {
+  //   await postData("auth/logout");
+  //   setTimeout(() => {
+  //     localStorage.clear();
+  //     window.location.reload();
+  //   }, 3000);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 export async function getData<T>(
   endpoint: string,

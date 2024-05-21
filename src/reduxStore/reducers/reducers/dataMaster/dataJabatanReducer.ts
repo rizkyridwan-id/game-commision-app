@@ -1,16 +1,16 @@
 import {
-  DataJabataAction,
-  DataJabataState,
+  DataJabatanAction,
+  DataJabatanState,
   DataJabatanType,
 } from "@/reduxStore/actions";
 
-const initialState: DataJabataState = {
+const initialState: DataJabatanState = {
   data: [],
   total: 0,
 };
 const dataJabatanReducer = (
-  state: DataJabataState = initialState,
-  action: DataJabataAction
+  state: DataJabatanState = initialState,
+  action: DataJabatanAction
 ) => {
   switch (action.type) {
     case DataJabatanType.GET_DATA_JABATAN:
