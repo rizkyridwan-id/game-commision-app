@@ -4,12 +4,12 @@ import { NotifInfo, getData, urlApi } from "@/utils";
 import { DataHariLiburAction, DataHariLiburType } from "./type";
 
 export const getDataHariLiburAction = (
-  users: HariLiburInterFace[],
+  data: HariLiburInterFace[],
   total: number
 ): DataHariLiburAction => ({
   type: DataHariLiburType.GET_DATA_HARI_LIBUR,
   payload: {
-    data: users,
+    data: data,
     total: total,
   },
 });

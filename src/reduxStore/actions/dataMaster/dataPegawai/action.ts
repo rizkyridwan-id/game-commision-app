@@ -4,12 +4,12 @@ import { NotifInfo, getData, urlApi } from "@/utils";
 import { DataPegawaiAction, DataPegawaiType } from "./type";
 
 export const getDataPegawaiAction = (
-  users: PegawaiInterface[],
+  data: PegawaiInterface[],
   total: number
 ): DataPegawaiAction => ({
   type: DataPegawaiType.GET_DATA_PEGAWAI,
   payload: {
-    data: users,
+    data: data,
     total: total,
   },
 });

@@ -1,4 +1,7 @@
 import { getParameterBonusSales } from "./parameterBonusSales";
+import { getParameterCuti } from "./parameterCuti";
+import { getParameterKonversiCuti } from "./parameterKonversiCuti";
+import { getParameterShiftKerja } from "./parameterShiftKerja";
 import { getParameterTargetSales } from "./parameterTargetSales";
 import { getParameterTargetToko } from "./parameterTargetToko";
 
@@ -6,6 +9,9 @@ const actionParameter = {
   getParameterBonusSales,
   getParameterTargetSales,
   getParameterTargetToko,
+  getParameterCuti,
+  getParameterShiftKerja,
+  getParameterKonversiCuti,
 };
 
 export { actionParameter };
@@ -13,3 +19,6 @@ export { actionParameter };
 export * from "./parameterBonusSales";
 export * from "./parameterTargetSales";
 export * from "./parameterTargetToko";
+export * from "./parameterCuti";
+export * from "./parameterShiftKerja";
+export * from "./parameterKonversiCuti";

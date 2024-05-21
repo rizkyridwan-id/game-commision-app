@@ -2,12 +2,11 @@ import {
   AppDispatch,
   RootState,
   actionMaster,
+  actionParameter,
   useAppSelector,
-  utilityActions,
 } from "@/reduxStore";
 import {
   ButtonCustom,
-  HiddenField,
   ReanderField,
   RenderNumber,
   RenderSelect,
@@ -19,10 +18,13 @@ import {
   connect,
   useDispatch,
   useEffect,
+  useState,
 } from "@/package";
-import { PegawaiInterface } from "../dto";
 import { ConfigProps } from "redux-form";
 import { validatePegawai } from "../validate";
+import { NumberOnly } from "@/utils";
+import { PegawaiInterface } from "@/interface";
+import { dataPegawaiRedux } from "../redux";
 
 type FormProps = {
   isEdit: boolean;
@@ -33,11 +35,11 @@ const FormPegawai = (
 ) => {
   const { handleSubmit, pristine, submitting, isEdit } = props;
   const dispatch = useDispatch<AppDispatch>();
-
-  const simpan = async (data: PegawaiInterface) => {
-    console.log(data);
-    dispatch(utilityActions.setLoading({ screen: true }));
+  const proses = dataPegawaiRedux();
+  const simpan = async () => {
+    dispatch(proses.prosesData());
   };
+  const [isShowPassword, setIsShowPassword] = useState(true);
 
   useEffect(() => {
     const kode_jenis = document.getElementById("kode_jenis");
@@ -45,14 +47,31 @@ const FormPegawai = (
       kode_jenis.focus();
     }
     dispatch(actionMaster.getDataJabatan());
+    dispatch(actionMaster.getDataToko());
+    dispatch(actionParameter.getParameterShiftKerja());
   }, []);
 
   const dataJabatan = useAppSelector((state) => state.dataMaster.dataJabatan);
+  const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
+  const dataShiftKerja = useAppSelector(
+    (state) => state.parameter.parameterShiftKerja
+  );
+
+  // console.log(dataToko);
 
   return (
     <form onSubmit={handleSubmit(simpan)}>
-      <Field name="kode_pegawai" type="hidden" component={HiddenField} />
       <div className="row">
+        <div className="col-3">
+          <Field
+            label="Kode Pegawai"
+            id="kode_pegawai"
+            name="kode_pegawai"
+            type="text"
+            placeholder="Masukan Kode Pegawai"
+            component={ReanderField}
+          />
+        </div>
         <div className="col-3">
           <Field
             label="Nama Pegawai"
@@ -94,18 +113,49 @@ const FormPegawai = (
             id="shift"
             name="shift"
             placeholder="Pilih Shift"
+            options={dataShiftKerja.data.map((list) => {
+              return {
+                value: list.type_shift,
+                label: list.type_shift,
+              };
+            })}
+            component={RenderSelect}
+          />
+        </div>
+        <div className="col-3">
+          <Field
+            label="Hari Libur"
+            id="hari_libur"
+            name="hari_libur"
+            placeholder="Masukan Hari Libur"
             options={[
               {
-                value: "1",
-                label: "1",
+                value: "SUNDAY",
+                label: "MINGGU",
               },
               {
-                value: "2",
-                label: "2",
+                value: "MONDAY",
+                label: "SENIN",
               },
               {
-                value: "3",
-                label: "3",
+                value: "TUESDAY",
+                label: "SELASA",
+              },
+              {
+                value: "WEDNESDAY",
+                label: "RABU",
+              },
+              {
+                value: "THURSDAY",
+                label: "KAMIS",
+              },
+              {
+                value: "FRIDAY",
+                label: "JUMAT",
+              },
+              {
+                value: "SATURDAY",
+                label: "SABTU",
               },
             ]}
             component={RenderSelect}
@@ -181,12 +231,38 @@ const FormPegawai = (
             label="Kode Toko"
             id="kode_toko"
             name="kode_toko"
-            options={[]}
+            options={dataToko.data.map((list) => {
+              return {
+                value: list.kode_toko,
+                label: list.kode_toko,
+              };
+            })}
             placeholder="Pilih Kode Toko"
             component={RenderSelect}
           />
         </div>
-        <div className="col-12 text-end mt-4">
+        <div className="col-3">
+          <Field
+            label="PIN"
+            id="pin"
+            name="pin"
+            placeholder="Masukan PIN"
+            component={ReanderField}
+            normalize={NumberOnly}
+            right
+            inputGroup
+            textIconGroup={
+              isShowPassword ? (
+                <i className="fa-regular fa-eye-slash"></i>
+              ) : (
+                <i className="fa fa-eye"></i>
+              )
+            }
+            customeCss={isShowPassword ? "password-hide" : ""}
+            handleClick={() => setIsShowPassword(!isShowPassword)}
+          />
+        </div>
+        <div className="col-3 text-end mt-4">
           <ButtonCustom
             disabled={pristine || submitting}
             color="primary"
@@ -226,7 +302,6 @@ const mapState = (state: RootState<PegawaiInterface>) => {
   } else {
     return {
       isEdit: false,
-      initialValues: {},
     };
   }
 };

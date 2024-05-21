@@ -9,12 +9,12 @@ import {
 import { NotifInfo, getData, urlApi } from "@/utils";
 
 export const fetchDataUser = (
-  users: DataUserInterFace[],
+  data: DataUserInterFace[],
   total: number
 ): DataUserAction => ({
   type: DataUserType.GET_DATA_USER,
   payload: {
-    data: users,
+    data: data,
     total: total,
   },
 });

@@ -4,12 +4,12 @@ import { NotifInfo, getData, urlApi } from "@/utils";
 import { DataJabatanAction, DataJabatanType } from "./type";
 
 export const getDataJabatanAction = (
-  users: DataJabatanInterFace[],
+  data: DataJabatanInterFace[],
   total: number
 ): DataJabatanAction => ({
   type: DataJabatanType.GET_DATA_JABATAN,
   payload: {
-    data: users,
+    data: data,
     total: total,
   },
 });

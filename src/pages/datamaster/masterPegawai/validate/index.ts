@@ -48,6 +48,12 @@ export const validatePegawai = (
   if (!values.kode_toko) {
     errors.kode_toko = "Kode Toko harus di pilih";
   }
+  if (!values.hari_libur) {
+    errors.hari_libur = "Hari Libur harus di pilih";
+  }
+  if (!values.kode_pegawai) {
+    errors.kode_pegawai = "Kode Pegawai harus di pilih";
+  }
 
   return errors;
 };

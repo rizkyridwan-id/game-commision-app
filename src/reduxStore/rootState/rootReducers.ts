@@ -12,14 +12,19 @@ import {
   dataHariLiburReducer,
   dataJabatanReducer,
   dataPegawaiReducer,
+  dataTokoReducer,
   dataUserReducer,
   parameterBonusSalesReducer,
+  parameterCutiReducer,
+  parameterShiftKerjaReducer,
   parameterTargetSalesReducer,
   reducerHelper,
   themeReducer,
   utilityReducer,
+  parameterTargetTokoReducer,
+  parameterKonversiCutiReducer,
+  timeKeepingKehadiranReducer,
 } from "../reducers";
-import parameterTargetTokoReducer from "../reducers/reducers/parameter/parameterTargetToko";
 
 export const rootReducer = combineReducers({
   form: formReducer,
@@ -31,13 +36,22 @@ export const rootReducer = combineReducers({
     dataUser: dataUserReducer,
     dataHariLibur: dataHariLiburReducer,
     dataPegawai: dataPegawaiReducer,
+    dataToko: dataTokoReducer,
   }),
   parameter: combineReducers({
     dataBonusSales: parameterBonusSalesReducer,
     parameterTargetSales: parameterTargetSalesReducer,
     parameterTargetToko: parameterTargetTokoReducer,
+    parameterCuti: parameterCutiReducer,
+    parameterShiftKerja: parameterShiftKerjaReducer,
+    parameterKonversiCuti: parameterKonversiCutiReducer,
+  }),
+
+  timeKeeping: combineReducers({
+    timeKeepingKehadiran: timeKeepingKehadiranReducer,
   }),
 });
+
 const store = createStore(rootReducer);
 
 export type AppDispatch = ThunkDispatch<RootState<string>, unknown, RootAction>;

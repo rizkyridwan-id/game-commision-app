@@ -1,6 +1,7 @@
 const urlApi = {
   dataMaster: {
     user: "user",
+    toko: "toko",
     jabatan: "jabatan",
     hariLibur: "hari-libur",
     pegawai: "pegawai",

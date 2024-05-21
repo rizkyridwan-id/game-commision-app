@@ -4,12 +4,12 @@ import { NotifInfo, getData, urlApi } from "@/utils";
 import { ParameterTargetTokoAction, ParameterTargetTokoType } from "./type";
 
 export const getParameterTargetTokoAction = (
-  users: ParameterTargetInterFace[],
+  data: ParameterTargetInterFace[],
   total: number
 ): ParameterTargetTokoAction => ({
   type: ParameterTargetTokoType.GET_PARAMETER_TARGET_TOKO,
   payload: {
-    data: users,
+    data: data,
     total: total,
   },
 });

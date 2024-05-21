@@ -6,11 +6,16 @@ import {
   DataHariLiburState,
   DataJabatanState,
   DataPegawaiState,
+  DataTokoState,
   DataUserState,
   ParameterBonusSalesState,
+  ParameterCutiState,
+  ParameterKonversiCutiState,
+  ParameterShiftKerjaState,
   ParameterTargetSalesState,
   ParameterTargetTokoState,
   ThemeState,
+  TimeKeepingKehadiranState,
   UtilityState,
   helperState,
 } from "../actions";
@@ -27,10 +32,18 @@ export interface RootState<T> {
     dataJabatan: DataJabatanState;
     dataHariLibur: DataHariLiburState;
     dataPegawai: DataPegawaiState;
+    dataToko: DataTokoState;
   };
   parameter: {
     dataBonusSales: ParameterBonusSalesState;
     parameterTargetSales: ParameterTargetSalesState;
     parameterTargetToko: ParameterTargetTokoState;
+    parameterCuti: ParameterCutiState;
+    parameterShiftKerja: ParameterShiftKerjaState;
+    parameterKonversiCuti: ParameterKonversiCutiState;
+  };
+
+  timeKeeping: {
+    timeKeepingKehadiran: TimeKeepingKehadiranState;
   };
 }

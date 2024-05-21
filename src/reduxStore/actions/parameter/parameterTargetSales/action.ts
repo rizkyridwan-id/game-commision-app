@@ -4,12 +4,12 @@ import { NotifInfo, getData, urlApi } from "@/utils";
 import { ParameterTargetSalesAction, ParameterTargetSalesType } from "./type";
 
 export const getParameterTargetSalesAction = (
-  users: ParameterTargetInterFace[],
+  data: ParameterTargetInterFace[],
   total: number
 ): ParameterTargetSalesAction => ({
   type: ParameterTargetSalesType.GET_PARAMETER_TARGET_SALES,
   payload: {
-    data: users,
+    data: data,
     total: total,
   },
 });
