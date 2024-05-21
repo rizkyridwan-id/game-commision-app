@@ -11,7 +11,7 @@ const MasterPegawai = () => {
       <TableDataPegawai />
       <ModalGlobal
         namaForm="FormMasterKodePabrikan"
-        title={`${utiliy.getModal.namaForm} Data`}
+        title={`${utiliy.getModal.title}`}
         width={1000}
       >
         <FormPegawai />

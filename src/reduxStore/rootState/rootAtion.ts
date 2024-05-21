@@ -8,6 +8,8 @@ import {
   DataPegawaiState,
   DataUserState,
   ParameterBonusSalesState,
+  ParameterTargetSalesState,
+  ParameterTargetTokoState,
   ThemeState,
   UtilityState,
   helperState,
@@ -28,5 +30,7 @@ export interface RootState<T> {
   };
   parameter: {
     dataBonusSales: ParameterBonusSalesState;
+    parameterTargetSales: ParameterTargetSalesState;
+    parameterTargetToko: ParameterTargetTokoState;
   };
 }

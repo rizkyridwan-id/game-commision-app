@@ -14,10 +14,12 @@ import {
   dataPegawaiReducer,
   dataUserReducer,
   parameterBonusSalesReducer,
+  parameterTargetSalesReducer,
   reducerHelper,
   themeReducer,
   utilityReducer,
 } from "../reducers";
+import parameterTargetTokoReducer from "../reducers/reducers/parameter/parameterTargetToko";
 
 export const rootReducer = combineReducers({
   form: formReducer,
@@ -32,6 +34,8 @@ export const rootReducer = combineReducers({
   }),
   parameter: combineReducers({
     dataBonusSales: parameterBonusSalesReducer,
+    parameterTargetSales: parameterTargetSalesReducer,
+    parameterTargetToko: parameterTargetTokoReducer,
   }),
 });
 const store = createStore(rootReducer);
