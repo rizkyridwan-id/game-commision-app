@@ -333,7 +333,7 @@ export function convertDateTime(tgl: string) {
 }
 
 export const setTitle = (title: string) => {
-  document.title = title + " | Kresno Gk";
+  document.title = title + " | Time Keeping Management";
 };
 export const convertToJson = (csv: string): string => {
   const lines = csv.split("\n");

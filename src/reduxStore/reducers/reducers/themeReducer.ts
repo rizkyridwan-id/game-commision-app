@@ -2,7 +2,7 @@ import {
   AppActionTheme,
   AppActionTypesTheme,
   ThemeState,
-} from "../action/theme";
+} from "../../actions/theme";
 
 const initialState: ThemeState = {
   handleSetPageSidebar: true,

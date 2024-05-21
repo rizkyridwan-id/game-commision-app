@@ -1,23 +1,24 @@
 import { ModalGlobal, PanelContent } from "@/components";
-import TableDataUser from "./table";
-import FormDataUser from "./form";
+import TableDataJabatan from "./table";
+import FormDataJabatan from "./form";
 import { useAppSelector } from "@/reduxStore";
 
-const DataUser = () => {
+const DataJabatan = () => {
   const utility = useAppSelector((state) => state.utility);
 
   return (
-    <PanelContent title="Data User">
-      <TableDataUser />
+    <PanelContent title="Data Jabatan">
+      <TableDataJabatan />
+
       <ModalGlobal
-        namaForm="FormMasterKodePabrikan"
+        namaForm="FormDataJabatan"
         title={`${utility.getModal.title}`}
-        width={1200}
+        width={500}
       >
-        <FormDataUser />
+        <FormDataJabatan />
       </ModalGlobal>
     </PanelContent>
   );
 };
 
-export default DataUser;
+export default DataJabatan;

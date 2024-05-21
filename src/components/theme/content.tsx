@@ -33,7 +33,8 @@ const Content = () => {
         });
       }
     });
-    document.title = (appTitle ? appTitle : "Halaman Admin") + " | Kresno Geka";
+    document.title =
+      (appTitle ? appTitle : "Halaman Admin") + " | Time Keeping Management";
   };
 
   const { pathname } = location;

@@ -1,11 +1,12 @@
 import App from "../App";
 import {
   Dashboard,
+  DataJabatan,
+  DataUser,
   HomePublic,
   Login,
   MasterPegawai,
   PageNoteFound,
-  DataUser,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -49,6 +50,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <DataUser />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-jabatan",
+        title: "Data Jabatan",
+        element: (
+          <ProtectedRoute>
+            <DataJabatan />
           </ProtectedRoute>
         ),
       },

@@ -3,11 +3,12 @@ import { FormStateMap } from "redux-form";
 import {
   AppActionTheme,
   AppActionUtility,
+  DataJabataState,
   DataUserState,
   ThemeState,
   UtilityState,
   helperState,
-} from "../action";
+} from "../actions";
 type RootAction = Action | AppActionTheme | AppActionUtility<string>;
 export default RootAction;
 
@@ -18,5 +19,6 @@ export interface RootState<T> {
   helper: helperState;
   dataMaster: {
     dataUser: DataUserState;
+    dataJabatan: DataJabataState;
   };
 }

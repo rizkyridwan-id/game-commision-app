@@ -75,7 +75,7 @@ const TableDataUser = () => {
       addButtonTitle="Tambah Data"
       dataSource={dataUser.data}
       columns={columnsTableDataUser}
-      rowKey={"_id"}
+      rowKey={"user_id"}
       onAddButtonClick={() =>
         dispatch(
           helperRedux.showModal({

@@ -5,7 +5,12 @@ const MenuCabang = [
     title: "Dashboard",
     is_show: false,
   },
-
+  {
+    icon: "fa fa-users",
+    path: "/app/data-user",
+    title: "Data User",
+    is_show: false,
+  },
   {
     path: "#",
     icon: "fa fa-business-time",
@@ -30,17 +35,6 @@ const MenuCabang = [
       { path: "#", title: "Potongan Lain", is_show: false },
       { path: "#", title: "Pelanggaran Pegawai", is_show: false },
       { path: "#", title: "Payroll", is_show: false },
-    ],
-  },
-
-  {
-    path: "#",
-    icon: "fa fa-sliders",
-    title: "Utility",
-    is_show: false,
-    children: [
-      { path: "#", title: "Data User", is_show: false },
-      { path: "#", title: "Hak Akses User", is_show: false },
     ],
   },
 ];

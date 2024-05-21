@@ -18,6 +18,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { DataUserInterFace } from "@/interface";
 import { reduxLogin } from "./reduxLogin";
+import { metaData } from "@/config";
 
 const LoginForm = (props: InjectedFormProps<DataUserInterFace>) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -114,6 +115,9 @@ const LoginForm = (props: InjectedFormProps<DataUserInterFace>) => {
             </div>
             <div className="text-center">
               © All Right Reserved Time Keeping Management Solution <br />
+              Version {metaData.buildVersion.major}.
+              {metaData.buildVersion.minor}.{metaData.buildVersion.patch}.
+              {metaData.buildVersion.revision}
             </div>
           </form>
         </div>

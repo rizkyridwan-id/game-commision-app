@@ -69,7 +69,6 @@ export async function getData<T>(
 ): Promise<ApiResponse<T>> {
   const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
   const url = `${VITE_APP_BE}/${endpoint}`;
-  console.log(VITE_APP_BE);
   const timestamp = new Date().toISOString();
   const signature = generateSignature(timestamp);
 

@@ -7,11 +7,14 @@ import { reducer as formReducer } from "redux-form";
 import { TypedUseSelectorHook } from "react-redux";
 import { useSelector } from "react-redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import utilityReducer from "../reducers/reducerUtility";
-import themeReducer from "../reducers/reducerTheme";
 import RootAction, { RootState } from "./rootAtion";
-import dataUserReducer from "../reducers/dataMaster/dataUserReducer";
-import reducerHelper from "../reducers/reducerHelper";
+import {
+  dataJabatanReducer,
+  dataUserReducer,
+  reducerHelper,
+  themeReducer,
+  utilityReducer,
+} from "../reducers";
 
 export const rootReducer = combineReducers({
   form: formReducer,
@@ -19,6 +22,7 @@ export const rootReducer = combineReducers({
   helper: reducerHelper,
   theme: themeReducer,
   dataMaster: combineReducers({
+    dataJabatan: dataJabatanReducer,
     dataUser: dataUserReducer,
   }),
 });

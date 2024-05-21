@@ -6,4 +6,3 @@ import HomePublic from "./public";
 export { Login, Dashboard, PageNoteFound, HomePublic };
 
 export * from "./datamaster";
-export * from "./utility";

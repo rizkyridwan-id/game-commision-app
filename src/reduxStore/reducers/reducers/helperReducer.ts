@@ -1,5 +1,5 @@
-import { helperState } from "../action";
-import { HelperActionTypes, helperAction } from "../action/helpers/type";
+import { helperState } from "../../actions";
+import { HelperActionTypes, helperAction } from "../../actions/helpers/type";
 
 function initialState(): helperState {
   return {

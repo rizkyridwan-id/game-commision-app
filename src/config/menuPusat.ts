@@ -12,8 +12,9 @@ const MenuPusat = [
     is_show: false,
     children: [
       { path: "/app/data-pegawai", title: "Data Pegawai", is_show: false },
-      { path: "#", title: "Data Jabatan", is_show: false },
+      { path: "/app/data-jabatan", title: "Data Jabatan", is_show: false },
       { path: "#", title: "Data Hari Libur Toko", is_show: false },
+      { path: "/app/data-user", title: "Data User", is_show: false },
     ],
   },
   {
@@ -70,16 +71,6 @@ const MenuPusat = [
       { path: "#", title: "Laporan Payroll", is_show: false },
       { path: "#", title: "Laporan Pelanggaran Pegawai", is_show: false },
       { path: "#", title: "Laporan Global Payroll", is_show: false },
-    ],
-  },
-  {
-    path: "#",
-    icon: "fa fa-sliders",
-    title: "Utility",
-    is_show: false,
-    children: [
-      { path: "/app/data-user", title: "Data User", is_show: false },
-      { path: "#", title: "Hak Akses User", is_show: false },
     ],
   },
 ];

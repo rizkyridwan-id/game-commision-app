@@ -1,4 +1,4 @@
-import { AppActionTypes, AppActionUtility, UtilityState } from "../action";
+import { AppActionTypes, AppActionUtility, UtilityState } from "../../actions";
 
 function initialState<T>(): UtilityState<T> {
   return {
