@@ -15,7 +15,15 @@ const TableDataPegawai = () => {
       rowKey={"kode_pegawai"}
       scrollX
       width={2000}
-      onAddButtonClick={() => dispatch(helperRedux.showModal("Tambah"))}
+      onAddButtonClick={() =>
+        dispatch(
+          helperRedux.showModal({
+            isEdit: false,
+            title: "Tambah Data",
+            namaForm: "FormPegawai",
+          })
+        )
+      }
     />
   );
 };

@@ -4,7 +4,7 @@ import { themesActions, useAppSelector } from "../../reduxStore";
 
 const PageNoteFound = () => {
   const dispatch = useDispatch();
-  const utility = useAppSelector((state) => state.utility);
+  const isLogin = useAppSelector((state) => state.helper.getIsLogin);
 
   useEffect(() => {
     dispatch(themesActions.handleSetPageSidebar(false));
@@ -27,7 +27,7 @@ const PageNoteFound = () => {
         </div>
         <div>
           <Link
-            to={utility.getIsLogin ? "/app/dashboard" : "/"}
+            to={isLogin ? "/app/dashboard" : "/"}
             className="btn btn-success px-3"
           >
             Go Home
