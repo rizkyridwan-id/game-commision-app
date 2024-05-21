@@ -6,14 +6,14 @@ export const validateParameterShiftKerja = (
 ): FormErrors<ParameterShiftKerjaInterFace> => {
   const errors: FormErrors<ParameterShiftKerjaInterFace> = {};
 
-  if (!values.dari_jam_datang) {
-    errors.dari_jam_datang = "Dari Jam Datang harus diisi";
+  if (!values.start_time) {
+    errors.start_time = "Dari Jam Datang harus diisi";
   }
-  if (!values.sampai_jam_datang) {
-    errors.sampai_jam_datang = "Sampai Jam Datang harus diisi";
+  if (!values.due_time) {
+    errors.due_time = "Sampai Jam Datang harus diisi";
   }
-  if (!values.jam_pulang) {
-    errors.jam_pulang = "Jam Pulang harus diisi";
+  if (!values.work_end_time) {
+    errors.work_end_time = "Jam Pulang harus diisi";
   }
 
   return errors;

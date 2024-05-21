@@ -18,19 +18,19 @@ export interface ParameterShiftKerjaInterFace {
    * Waktu awal kedatangan yang diharapkan dalam format "HH:mm".
    * @example "08:00"
    */
-  dari_jam_datang: string;
+  start_time: string;
 
   /**
    * Waktu batas terakhir kedatangan dalam format "HH:mm".
    * @example "09:00"
    */
-  sampai_jam_datang: string;
+  due_time: string;
 
   /**
    * Waktu batas pulang dalam format "HH:mm".
    * @example "17:00"
    */
-  jam_pulang: string;
+  work_end_time: string;
 
   /**
    * Nama pengguna yang memperbarui data shift.
@@ -50,9 +50,9 @@ export interface ParameterShiftKerjaInterFace {
 export const contohShift: ParameterShiftKerjaInterFace = {
   _id: "12345",
   type_shift: "1",
-  dari_jam_datang: "08:00",
-  sampai_jam_datang: "09:00",
-  jam_pulang: "17:00",
+  start_time: "08:00",
+  due_time: "09:00",
+  work_end_time: "17:00",
   update_by: "admin",
   update_date: new Date("2024-05-01T01:01:01"),
 };

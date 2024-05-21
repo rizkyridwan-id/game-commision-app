@@ -56,8 +56,8 @@ const FormShiftKerja = (
         <div className={"col-6"}>
           <Field
             label="Dari Jam Datang"
-            id="dari_jam_datang"
-            name="dari_jam_datang"
+            id="start_time"
+            name="start_time"
             type="time"
             placeholder="Masukan Dari Jam Datang"
             component={ReanderField}
@@ -66,15 +66,25 @@ const FormShiftKerja = (
         <div className={"col-6"}>
           <Field
             label="Sampai Jam Datang"
-            id="sampai_jam_datang"
-            name="sampai_jam_datang"
+            id="due_time"
+            name="due_time"
             type="time"
             placeholder="Masukan Sampai Jam Datang"
             component={ReanderField}
           />
         </div>
+        <div className={"col-6"}>
+          <Field
+            label="Jam Pulang"
+            id="work_end_time"
+            name="work_end_time"
+            type="time"
+            placeholder="Masukan Jam Pulang"
+            component={ReanderField}
+          />
+        </div>
 
-        <div className={`col-6 text-end mt-4`}>
+        <div className={`col-12 text-end mt-4`}>
           {isEdit && <> &nbsp;</>}
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
@@ -91,9 +101,10 @@ const mapState = (state: RootState<ParameterShiftKerjaInterFace>) => {
       isEdit: state?.utility?.getModal?.isEdit,
       initialValues: {
         _id: state?.utility?.getModal?.data?._id,
-        dari_jam_datang: state?.utility?.getModal?.data?.dari_jam_datang,
-        sampai_jam_datang: state?.utility?.getModal?.data?.sampai_jam_datang,
-        jam_pulang: state?.utility?.getModal?.data?.jam_pulang,
+        type_shift: state?.utility?.getModal?.data?.type_shift,
+        start_time: state?.utility?.getModal?.data?.start_time,
+        due_time: state?.utility?.getModal?.data?.due_time,
+        work_end_time: state?.utility?.getModal?.data?.work_end_time,
       },
     };
   } else {

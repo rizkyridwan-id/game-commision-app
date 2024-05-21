@@ -8,14 +8,11 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, ParameterShiftKerjaInterFace } from "@/interface";
 import { useEffect } from "react";
-import { ButtonDelete } from "@/utils";
-import { parameterShiftKerjaRedux } from "../redux";
 import { Button } from "antd";
 
 const TableParameterShiftKerja = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
-  const reduxUser = parameterShiftKerjaRedux();
 
   useEffect(() => {
     dispatch(actionParameter.getParameterShiftKerja());
@@ -30,20 +27,20 @@ const TableParameterShiftKerja = () => {
       },
       {
         title: "Dari Jam Datang",
-        dataIndex: "dari_jam_datang",
-        key: "dari_jam_datang",
+        dataIndex: "start_time",
+        key: "start_time",
         align: "right",
       },
       {
         title: "Sampai Jam Datang",
-        dataIndex: "sampai_jam_datang",
-        key: "sampai_jam_datang",
+        dataIndex: "due_time",
+        key: "due_time",
         align: "right",
       },
       {
         title: "Jam Pulang",
-        dataIndex: "jam_pulang",
-        key: "jam_pulang",
+        dataIndex: "work_end_time",
+        key: "work_end_time",
         align: "right",
       },
 
@@ -68,10 +65,6 @@ const TableParameterShiftKerja = () => {
             >
               <i className="fa fa-edit"></i>
             </Button>
-            &nbsp;
-            <ButtonDelete
-              prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
-            />
           </div>
         ),
       },
