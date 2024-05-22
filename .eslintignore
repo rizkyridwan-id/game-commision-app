@@ -8,3 +8,4 @@ node_modules/*
 vite.config.ts
 public/envconfig.js
 script/update-version.js
+tailwind.config.js

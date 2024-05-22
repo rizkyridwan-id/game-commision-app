@@ -5,3 +5,19 @@
 @import "./assets/app.min.css";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "react-simple-keyboard/build/css/index.css";
+
+/* dark-theme.css */
+.myTheme {
+  background: #333 !important;
+  color: #fff;
+}
+
+.myTheme .hg-button {
+  background: #555;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.myTheme .hg-button:hover {
+  background: #666;
+}

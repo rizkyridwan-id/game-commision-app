@@ -32,18 +32,20 @@ export const Toast = () => {
   );
 };
 
-export const showConfirmation = (
-  title: string,
-  textBody: string,
-  iconInfo: string,
-  html?: string
-): Promise<boolean> => {
+interface showConfirmation {
+  title: string;
+  textBody?: string;
+  icon: string;
+  html?: string;
+}
+export const showConfirmation = (props: showConfirmation): Promise<boolean> => {
+  const { title, textBody, html, icon } = props;
   return new Promise((resolve, reject) => {
     Swal.fire({
       title: title,
       text: textBody,
       html: html,
-      icon: iconInfo as SweetAlertResult["value"], // Assume iconInfo is a valid SweetAlert icon type
+      icon: icon as SweetAlertResult["value"], // Assume iconInfo is a valid SweetAlert icon type
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",

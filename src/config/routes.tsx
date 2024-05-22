@@ -16,7 +16,7 @@ import {
   ParameterShiftKerja,
   ParameterTagetSales,
   ParameterTargetToko,
-  TimeKeepingKehadiran,
+  TimeKeeping,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -171,9 +171,9 @@ const AppRoute = [
         element: <HomePublic />,
       },
       {
-        path: "/time-keeping/kehadiran",
-        title: "Time Keeping Kehadiran",
-        element: <TimeKeepingKehadiran />,
+        path: "/time-keeping",
+        title: "Time Keeping",
+        element: <TimeKeeping />,
       },
     ],
   },

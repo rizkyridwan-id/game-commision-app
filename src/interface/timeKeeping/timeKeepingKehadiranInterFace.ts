@@ -12,7 +12,7 @@ export interface TimeKeepingKehadiranInterFace {
    * Kode unik untuk setiap toko.
    * @example "MKT"
    */
-  kode_toko: "MKT" | "KMT" | "PML" | "DLL";
+  kode_toko: string;
 
   /**
    * Tanggal kehadiran.
@@ -36,7 +36,7 @@ export interface TimeKeepingKehadiranInterFace {
    * Status kedatangan untuk indikator dashboard.
    * @example "green"
    */
-  status_datang: "green" | "orange" | "red" | "white" | "yellow";
+  status_datang: string;
 
   /**
    * Waktu pulang dalam format "HH:mm".
@@ -48,7 +48,7 @@ export interface TimeKeepingKehadiranInterFace {
    * Status pulang untuk indikator dashboard.
    * @example "green"
    */
-  status_pulang: "green" | "orange" | "red" | "white" | "yellow";
+  status_pulang: string;
 
   /**
    * Waktu mulai break dalam format "HH:mm".
@@ -72,7 +72,7 @@ export interface TimeKeepingKehadiranInterFace {
    * Status break untuk indikator dashboard.
    * @example "green"
    */
-  status_break: "green" | "orange" | "red" | "white" | "yellow";
+  status_break: string;
 
   /**
    * Waktu mulai istirahat dalam format "HH:mm".
@@ -96,7 +96,7 @@ export interface TimeKeepingKehadiranInterFace {
    * Status istirahat untuk indikator dashboard.
    * @example "green"
    */
-  status_istirahat: "green" | "orange" | "red" | "white" | "yellow";
+  status_istirahat: string;
 
   /**
    * Waktu mulai sholat dalam format "HH:mm".
@@ -120,7 +120,7 @@ export interface TimeKeepingKehadiranInterFace {
    * Status sholat untuk indikator dashboard.
    * @example "green"
    */
-  status_sholat: "green" | "orange" | "red" | "white" | "yellow";
+  status_sholat: string;
 
   /**
    * Nama pengguna yang menginput data kehadiran.
