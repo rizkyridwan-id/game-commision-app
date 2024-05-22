@@ -4,6 +4,7 @@ import {
   actionMaster,
   actionParameter,
   useAppSelector,
+  utilityActions,
 } from "@/reduxStore";
 import {
   ButtonCustom,
@@ -23,7 +24,7 @@ import {
 import { ConfigProps } from "redux-form";
 import { validatePegawai } from "../validate";
 import { NumberOnly } from "@/utils";
-import { PegawaiInterface } from "@/interface";
+import { DataSalesInterFace, PegawaiInterface } from "@/interface";
 import { dataPegawaiRedux } from "../redux";
 
 type FormProps = {
@@ -46,18 +47,32 @@ const FormPegawai = (
     if (kode_jenis) {
       kode_jenis.focus();
     }
+
+    if (isEdit) {
+      dispatch(proses.cariDataSales());
+    }
     dispatch(actionMaster.getDataJabatan());
     dispatch(actionMaster.getDataToko());
     dispatch(actionParameter.getParameterShiftKerja());
-  }, []);
+    return () => {
+      dispatch(
+        utilityActions.simpanDataTmp({
+          data: [],
+        })
+      );
+    };
+  }, [dispatch, isEdit]);
 
   const dataJabatan = useAppSelector((state) => state.dataMaster.dataJabatan);
   const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
+  const dataTmp = useAppSelector((state) => state.utility.getDataTmp)
+    ?.data as DataSalesInterFace[];
+
   const dataShiftKerja = useAppSelector(
     (state) => state.parameter.parameterShiftKerja
   );
 
-  // console.log(dataToko);
+  // console.log(datatmp?.data);
 
   return (
     <form onSubmit={handleSubmit(simpan)}>
@@ -68,6 +83,7 @@ const FormPegawai = (
             id="kode_pegawai"
             name="kode_pegawai"
             type="text"
+            readOnly={isEdit}
             placeholder="Masukan Kode Pegawai"
             component={ReanderField}
           />
@@ -110,8 +126,8 @@ const FormPegawai = (
         <div className="col-3">
           <Field
             label="Shift"
-            id="shift"
-            name="shift"
+            id="type_shift"
+            name="type_shift"
             placeholder="Pilih Shift"
             options={dataShiftKerja.data.map((list) => {
               return {
@@ -164,8 +180,8 @@ const FormPegawai = (
         <div className="col-3">
           <Field
             label="Jam Istirahat"
-            id="jam_istirahat"
-            name="jam_istirahat"
+            id="daily_rest_minute"
+            name="daily_rest_minute"
             placeholder="Masukan Jam Istirahat"
             component={RenderNumber}
           />
@@ -173,8 +189,8 @@ const FormPegawai = (
         <div className="col-3">
           <Field
             label="Jam Sholat"
-            id="jam_sholat"
-            name="jam_sholat"
+            id="daily_sholat_minute"
+            name="daily_sholat_minute"
             placeholder="Masukan Jam Sholat"
             component={RenderNumber}
           />
@@ -182,8 +198,8 @@ const FormPegawai = (
         <div className="col-3">
           <Field
             label="Jam Break"
-            id="jam_break"
-            name="jam_break"
+            id="daily_break_minute"
+            name="daily_break_minute"
             placeholder="Masukan Jam Break"
             component={RenderNumber}
           />
@@ -191,8 +207,8 @@ const FormPegawai = (
         <div className="col-3">
           <Field
             label="Jatah Cuti"
-            id="jatah_cuti"
-            name="jatah_cuti"
+            id="cuti_tahunan"
+            name="cuti_tahunan"
             placeholder="Masukan Jatah Cuti"
             component={RenderNumber}
           />
@@ -217,15 +233,7 @@ const FormPegawai = (
             component={RenderNumber}
           />
         </div>
-        <div className="col-3">
-          <Field
-            label="Kode Sales"
-            id="kode_sales"
-            name="kode_sales"
-            placeholder="Masukan Kode Sales"
-            component={ReanderField}
-          />
-        </div>
+
         <div className="col-3">
           <Field
             label="Kode Toko"
@@ -237,31 +245,49 @@ const FormPegawai = (
                 label: list.kode_toko,
               };
             })}
+            onChange={() => dispatch(proses.cariDataSales())}
             placeholder="Pilih Kode Toko"
             component={RenderSelect}
           />
         </div>
         <div className="col-3">
           <Field
-            label="PIN"
-            id="pin"
-            name="pin"
-            placeholder="Masukan PIN"
-            component={ReanderField}
-            normalize={NumberOnly}
-            right
-            inputGroup
-            textIconGroup={
-              isShowPassword ? (
-                <i className="fa-regular fa-eye-slash"></i>
-              ) : (
-                <i className="fa fa-eye"></i>
-              )
-            }
-            customeCss={isShowPassword ? "password-hide" : ""}
-            handleClick={() => setIsShowPassword(!isShowPassword)}
+            label="Kode Sales"
+            id="kode_sales"
+            name="kode_sales"
+            options={dataTmp.map((list) => {
+              return {
+                value: list.kode_sales,
+                label: list.kode_sales,
+              };
+            })}
+            placeholder="Pilih Kode Sales"
+            component={RenderSelect}
           />
         </div>
+        {!isEdit && (
+          <div className="col-3">
+            <Field
+              label="PIN"
+              id="pin"
+              name="pin"
+              placeholder="Masukan PIN"
+              component={ReanderField}
+              normalize={NumberOnly}
+              right
+              inputGroup
+              textIconGroup={
+                isShowPassword ? (
+                  <i className="fa-regular fa-eye-slash"></i>
+                ) : (
+                  <i className="fa fa-eye"></i>
+                )
+              }
+              customeCss={isShowPassword ? "password-hide" : ""}
+              handleClick={() => setIsShowPassword(!isShowPassword)}
+            />
+          </div>
+        )}
         <div className="col-3 text-end mt-4">
           <ButtonCustom
             disabled={pristine || submitting}
@@ -288,15 +314,17 @@ const mapState = (state: RootState<PegawaiInterface>) => {
         nama_pegawai: state?.utility?.getModal?.data?.nama_pegawai,
         tgl_lahir: state?.utility?.getModal?.data?.tgl_lahir,
         jabatan: state?.utility?.getModal?.data?.jabatan,
-        shift: state?.utility?.getModal?.data?.shift,
-        jam_istirahat: state?.utility?.getModal?.data?.jam_istirahat,
-        jam_sholat: state?.utility?.getModal?.data?.jam_sholat,
-        jam_break: state?.utility?.getModal?.data?.jam_break,
-        jatah_cuti: state?.utility?.getModal?.data?.jatah_cuti,
+        type_shift: state?.utility?.getModal?.data?.type_shift,
+        daily_rest_minute: state?.utility?.getModal?.data?.daily_rest_minute,
+        daily_sholat_minute:
+          state?.utility?.getModal?.data?.daily_sholat_minute,
+        daily_break_minute: state?.utility?.getModal?.data?.daily_break_minute,
+        cuti_tahunan: state?.utility?.getModal?.data?.cuti_tahunan,
         gaji_pokok: state?.utility?.getModal?.data?.gaji_pokok,
         tunjangan_jabatan: state?.utility?.getModal?.data?.tunjangan_jabatan,
         kode_sales: state?.utility?.getModal?.data?.kode_sales,
         kode_toko: state?.utility?.getModal?.data?.kode_toko,
+        hari_libur: state?.utility?.getModal?.data?.hari_libur,
       },
     };
   } else {

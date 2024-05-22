@@ -1,4 +1,4 @@
-import { PegawaiInterface } from "@/interface";
+import { DataSalesInterFace, PegawaiInterface } from "@/interface";
 import {
   AppDispatch,
   AppThunk,
@@ -9,8 +9,10 @@ import {
   NotifInfo,
   NotifSuccess,
   deleteData,
+  getData,
   postData,
   putData,
+  timeout,
   urlApi,
 } from "@/utils";
 import { reset } from "redux-form";
@@ -86,8 +88,50 @@ export const dataPegawaiRedux = () => {
     };
   };
 
+  const cariDataSales = (): AppThunk => {
+    return async (dispatch, getState) => {
+      await timeout();
+      const state = getState();
+      const formValue = state.form.FormPegawai?.values as PegawaiInterface;
+      // console.log(formValue);
+
+      if (formValue?.kode_toko) {
+        try {
+          dispatch(utilityActions.setLoading({ screen: true }));
+          const result = await getData<DataSalesInterFace[]>(
+            urlApi.externalApi.dataSales,
+            {
+              kode_toko: formValue?.kode_toko,
+            }
+          );
+          dispatch(
+            utilityActions.simpanDataTmp<DataSalesInterFace[]>({
+              data: result.data as DataSalesInterFace[],
+            })
+          );
+          dispatch(utilityActions.stopLoading());
+        } catch (error) {
+          dispatch(utilityActions.stopLoading());
+          NotifInfo(`${error}`);
+          dispatch(
+            utilityActions.simpanDataTmp({
+              data: [],
+            })
+          );
+        }
+      } else {
+        dispatch(
+          utilityActions.simpanDataTmp({
+            data: [],
+          })
+        );
+      }
+    };
+  };
+
   return {
     prosesData,
     removeData,
+    cariDataSales,
   };
 };

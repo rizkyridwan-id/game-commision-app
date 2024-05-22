@@ -14,6 +14,9 @@ const urlApi = {
     parameterKonversiCuti: "parameter-konversi-cuti",
     parameterShiftKerja: "parameter-shift-kerja",
   },
+  externalApi: {
+    dataSales: "external/sales",
+  },
   login: "auth/login",
 };
 

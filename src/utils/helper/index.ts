@@ -2,6 +2,8 @@ import { ButtonCustom } from "./Button";
 import indexedDBStorage from "./IndexDbStore";
 
 import ButtonDelete from "./buttonDelete";
+import HiddenText from "./hiddenText";
+import KeyboardWrapper from "./keyboardWrapper";
 
 import { toRupiah } from "./toRupiah";
 
@@ -19,5 +21,12 @@ export * from "./Toast";
 export * from "./Field";
 export * from "./helpers";
 export * from "./exportPdfExcel";
-
-export { toRupiah, ButtonCustom, today, ButtonDelete, indexedDBStorage };
+export {
+  HiddenText,
+  toRupiah,
+  ButtonCustom,
+  today,
+  ButtonDelete,
+  indexedDBStorage,
+  KeyboardWrapper,
+};

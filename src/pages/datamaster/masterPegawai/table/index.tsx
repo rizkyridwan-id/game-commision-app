@@ -1,25 +1,51 @@
 import { TableMaster } from "@/components";
 import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector, utilityController } from "@/reduxStore";
+import {
+  AppDispatch,
+  actionMaster,
+  useAppSelector,
+  utilityController,
+} from "@/reduxStore";
 import { ColumnInterFace, PegawaiInterface } from "@/interface";
 import { Button } from "antd";
 import { ButtonDelete, convertDate } from "@/utils";
+import { useEffect } from "react";
+import { dataPegawaiRedux } from "../redux";
 
 const TableDataPegawai = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
+  const proses = dataPegawaiRedux();
+  useEffect(() => {
+    dispatch(actionMaster.getDataPegawai());
+  }, [dispatch]);
+
   const columnsTablePegawai: ColumnInterFace<PegawaiInterface>[] = [
     {
       title: "Actions",
       key: "actions",
       align: "center",
-      render: () => (
+      render: (_cell, row) => (
         <div className="text-center">
-          <Button type="primary">
+          <Button
+            type="primary"
+            onClick={() =>
+              dispatch(
+                helperRedux.showModal({
+                  isEdit: true,
+                  title: "Edit Data",
+                  namaForm: "FormPegawai",
+                  data: row,
+                })
+              )
+            }
+          >
             <i className="fa fa-edit"></i>
           </Button>
           &nbsp;
-          <ButtonDelete prosesDelete={() => console.log("Mask")} />
+          <ButtonDelete
+            prosesDelete={() => dispatch(proses.removeData(row._id))}
+          />
         </div>
       ),
     },
@@ -53,28 +79,28 @@ const TableDataPegawai = () => {
     },
     {
       title: "Shift",
-      dataIndex: "shift",
-      key: "shift",
+      dataIndex: "type_shift",
+      key: "type_shift",
     },
     {
       title: "Jam Istirahat",
-      dataIndex: "jam_istirahat",
-      key: "jam_istirahat",
+      dataIndex: "daily_rest_minute",
+      key: "daily_rest_minute",
     },
     {
       title: "Jam Sholat",
-      dataIndex: "jam_sholat",
-      key: "jam_sholat",
+      dataIndex: "daily_sholat_minute",
+      key: "daily_sholat_minute",
     },
     {
       title: "Jam Break",
-      dataIndex: "jam_break",
-      key: "jam_break",
+      dataIndex: "daily_break_minute",
+      key: "daily_break_minute",
     },
     {
       title: "Jatah Cuti",
-      dataIndex: "jatah_cuti",
-      key: "jatah_cuti",
+      dataIndex: "cuti_tahunan",
+      key: "cuti_tahunan",
     },
     {
       title: "Gajih Pokok",

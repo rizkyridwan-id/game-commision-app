@@ -4,6 +4,7 @@ import { Content, Header, Siderbar } from "./components";
 import { LoadingContent, calculateWindowSize } from "./utils";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const utility = useAppSelector((state) => state.utility);
@@ -12,18 +13,18 @@ const App = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const body = document.body;
+    // const body = document.body;
     const size = calculateWindowSize();
     if (utility.getScreenSize !== size) {
       dispatch(utilityActions.setScreenSize(size));
     }
-    if (!theme.handleSetPageHeader && !theme.handleSetPageSidebar) {
-      body.style.backgroundColor = "white";
-    }
-    return () => {
-      body.style.backgroundColor = "#dee2e6"; // Reset to default
-    };
-  }, [theme]);
+    // if (!theme.handleSetPageHeader && !theme.handleSetPageSidebar) {
+    //   body.style.backgroundColor = "white";
+    // }
+    // return () => {
+    //   body.style.backgroundColor = "#dee2e6"; // Reset to default
+    // };
+  }, []);
   return (
     <React.Fragment>
       {helpers.getIsLogin ? (
@@ -45,6 +46,7 @@ const App = () => {
       )}
       <LoadingContent loading={utility.getLoading.screen} />
       <ToastContainer />
+      <Toaster position="top-center" reverseOrder={false} />
     </React.Fragment>
   );
 };

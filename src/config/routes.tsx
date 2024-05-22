@@ -1,8 +1,10 @@
+import { userData } from "@/utils";
 import App from "../App";
 import {
   Dashboard,
   DataHariLibur,
   DataJabatan,
+  DataToko,
   DataUser,
   HomePublic,
   Login,
@@ -14,6 +16,7 @@ import {
   ParameterShiftKerja,
   ParameterTagetSales,
   ParameterTargetToko,
+  TimeKeepingKehadiran,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -29,8 +32,17 @@ const AppRoute = [
       },
       {
         path: "",
-        title: "Dashboard",
+        title: "Halaman Tidak Ditemukan",
         element: <PageNoteFound />,
+      },
+      {
+        path: "/app/data-toko",
+        title: "Data Toko",
+        element: (
+          <ProtectedRoute>
+            {userData.level === "SU" ? <DataToko /> : <PageNoteFound />}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/app/dashboard",
@@ -157,6 +169,11 @@ const AppRoute = [
         path: "absen",
         title: "Login",
         element: <HomePublic />,
+      },
+      {
+        path: "/time-keeping/kehadiran",
+        title: "Time Keeping Kehadiran",
+        element: <TimeKeepingKehadiran />,
       },
     ],
   },

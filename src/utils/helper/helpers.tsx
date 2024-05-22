@@ -48,6 +48,13 @@ export const setFocusField = (name: string) => {
   }
 };
 
+export const maskText = (text: string): string => {
+  const visibleDigits = 4;
+  const maskedSection = text.slice(0, -visibleDigits).replace(/\d/g, "*");
+  const visibleSection = text.slice(-visibleDigits);
+  return maskedSection + visibleSection;
+};
+
 export const calculateWindowSize = (): string => {
   let currentSize = "";
   if (!currentSize) {
@@ -532,6 +539,9 @@ export const useWindowSize = () => {
   return windowSize;
 };
 
+export const timeout = async () => {
+  return new Promise((resolve) => setTimeout(resolve, 100)); // contoh delay 1 detik
+};
 export const removeWindowClass = (classList: string) => {
   const window: HTMLElement | null =
     document && document.getElementById("root");
