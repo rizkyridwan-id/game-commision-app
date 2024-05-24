@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useDispatch, Link, useEffect } from "../../package";
-import { themesActions, useAppSelector } from "../../reduxStore";
+import { useDispatch, Link, useEffect } from "../../../package";
+import { themesActions, useAppSelector } from "../../../reduxStore";
 
 const PageNoteFound = () => {
   const dispatch = useDispatch();

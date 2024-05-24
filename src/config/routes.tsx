@@ -6,7 +6,6 @@ import {
   DataJabatan,
   DataToko,
   DataUser,
-  HomePublic,
   Login,
   MasterPegawai,
   PageNoteFound,
@@ -164,11 +163,6 @@ const AppRoute = [
         path: "",
         title: "Login",
         element: <Login />,
-      },
-      {
-        path: "absen",
-        title: "Login",
-        element: <HomePublic />,
       },
       {
         path: "/time-keeping",

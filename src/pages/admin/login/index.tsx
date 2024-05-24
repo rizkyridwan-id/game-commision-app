@@ -4,9 +4,9 @@ import {
   useDispatch,
   reduxForm,
   InjectedFormProps,
-} from "../../package";
+} from "../../../package";
 import { validateLogin } from "./validate";
-import bgLogin from "../../assets/images/white-concrete-wall.webp";
+import bgLogin from "../../../assets/images/white-concrete-wall.webp";
 import {
   AppDispatch,
   themesActions,
