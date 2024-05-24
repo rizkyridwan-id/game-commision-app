@@ -1,4 +1,4 @@
-import { ParameterShiftKerjaInterFace } from "@/interface";
+import { ParameterKonversiCutiInterFace } from "@/interface";
 import {
   AppDispatch,
   AppThunk,
@@ -11,23 +11,23 @@ export const parameterKonversiCutiaRedux = () => {
   const prosesData = (): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
       const state = getState();
-      const formValue = state.form.FormCuti
-        ?.values as ParameterShiftKerjaInterFace;
+      const formValue = state.form.FormKonversiCuti
+        ?.values as ParameterKonversiCutiInterFace;
 
       dispatch(save(formValue));
     };
   };
 
-  const save = (data: ParameterShiftKerjaInterFace) => {
+  const save = (data: ParameterKonversiCutiInterFace) => {
     return async (dispatch: AppDispatch) => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
-        await postData<ParameterShiftKerjaInterFace>(
-          urlApi.paramter.parameterShiftKerja,
+        await postData<ParameterKonversiCutiInterFace>(
+          urlApi.paramter.parameterKonversiCuti,
           data
         );
         NotifSuccess("Data Berhasil Disimpan");
-        dispatch(actionParameter.getParameterShiftKerja());
+        dispatch(actionParameter.getParameterKonversiCuti());
         dispatch(utilityActions.stopLoading());
         dispatch(utilityActions.hideModal());
       } catch (error) {
@@ -45,10 +45,10 @@ export const parameterKonversiCutiaRedux = () => {
             button: true,
           })
         );
-        await deleteData<ParameterShiftKerjaInterFace>(
+        await deleteData<ParameterKonversiCutiInterFace>(
           `${urlApi.paramter.parameterShiftKerja}/${id}`
         );
-        dispatch(actionParameter.getParameterShiftKerja());
+        dispatch(actionParameter.getParameterKonversiCuti());
         NotifSuccess("Data Berhasil Dihapus");
         dispatch(utilityActions.stopLoading());
       } catch (error) {

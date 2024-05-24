@@ -8,7 +8,7 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, PegawaiInterface } from "@/interface";
 import { Button } from "antd";
-import { ButtonDelete, convertDate } from "@/utils";
+import { ButtonCustom, ButtonDelete, convertDate } from "@/utils";
 import { useEffect } from "react";
 import { dataPegawaiRedux } from "../redux";
 
@@ -42,6 +42,14 @@ const TableDataPegawai = () => {
           >
             <i className="fa fa-edit"></i>
           </Button>
+          &nbsp;
+          <ButtonCustom
+            type="button"
+            color="yellow"
+            onClick={() => dispatch(proses.showFingerPrint(row))}
+          >
+            <i className="fa fa-fingerprint"></i>
+          </ButtonCustom>
           &nbsp;
           <ButtonDelete
             prosesDelete={() => dispatch(proses.removeData(row._id))}

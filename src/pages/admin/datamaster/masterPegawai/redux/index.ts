@@ -45,21 +45,7 @@ export const dataPegawaiRedux = () => {
         dispatch(utilityActions.hideModal());
         dispatch(reset("ModalPegawai"));
 
-        const textGenerate = document.getElementById(
-          "nota_ganerate"
-        ) as HTMLFormElement;
-        if (textGenerate) {
-          textGenerate.value = `${data.kode_toko}~${data.kode_pegawai}`;
-        }
-        TextFile("reg_fingerprint");
-        dispatch(
-          helperRedux.showModal({
-            isEdit: true,
-            title: "Fingerprint",
-            namaForm: "Fingerprint",
-            data: data,
-          })
-        );
+        dispatch(showFingerPrint(data));
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());
@@ -104,6 +90,26 @@ export const dataPegawaiRedux = () => {
         dispatch(utilityActions.stopLoading());
         NotifInfo(`${error || "Data Gagal Hapus"}`);
       }
+    };
+  };
+
+  const showFingerPrint = (data: PegawaiInterface): AppThunk => {
+    return async (dispatch: AppDispatch) => {
+      const textGenerate = document.getElementById(
+        "nota_ganerate"
+      ) as HTMLFormElement;
+      if (textGenerate) {
+        textGenerate.value = `${data.kode_toko}~${data.kode_pegawai}`;
+      }
+      TextFile("reg_fingerprint");
+      dispatch(
+        helperRedux.showModal({
+          isEdit: true,
+          title: "Fingerprint",
+          namaForm: "Fingerprint",
+          data: data,
+        })
+      );
     };
   };
 
@@ -152,5 +158,6 @@ export const dataPegawaiRedux = () => {
     prosesData,
     removeData,
     cariDataSales,
+    showFingerPrint,
   };
 };
