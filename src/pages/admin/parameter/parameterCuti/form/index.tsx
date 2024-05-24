@@ -53,7 +53,7 @@ const FormPengajuanCuti = (
           />
         </div>
 
-        <div className={`col-12 text-end mt-4`}>
+        <div className={`col-6 text-end mt-4`}>
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
           </ButtonCustom>

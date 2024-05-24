@@ -55,7 +55,7 @@ const TableParameterCuti = () => {
   );
   return (
     <TableMaster
-      addButtonTitle="Tambah Data"
+      addButtonTitle={dataParameter.data.length > 0 ? undefined : "Tambah Data"}
       dataSource={dataParameter.data || []}
       columns={columnsTableParameterCuti}
       rowKey={"_id"}
