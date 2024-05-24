@@ -539,9 +539,23 @@ export const useWindowSize = () => {
   return windowSize;
 };
 
+export const TextFile = (nama_file: string): void => {
+  const element: HTMLAnchorElement = document.createElement("a");
+  const elementValue: any = document.getElementById("nota_ganerate");
+  if (elementValue) {
+    const file: Blob = new Blob([elementValue?.value], {
+      type: "text/plain;charset=utf-8",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = nama_file + ".txt";
+    document.body.appendChild(element);
+    element.click();
+  }
+};
 export const timeout = async () => {
   return new Promise((resolve) => setTimeout(resolve, 100)); // contoh delay 1 detik
 };
+
 export const removeWindowClass = (classList: string) => {
   const window: HTMLElement | null =
     document && document.getElementById("root");

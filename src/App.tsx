@@ -25,6 +25,8 @@ const App = () => {
     //   body.style.backgroundColor = "#dee2e6"; // Reset to default
     // };
   }, []);
+
+  console.log(utility.getLoading);
   return (
     <React.Fragment>
       {helpers.getIsLogin ? (

@@ -4,10 +4,12 @@ import {
   AppThunk,
   actionMaster,
   utilityActions,
+  utilityController,
 } from "@/reduxStore";
 import {
   NotifInfo,
   NotifSuccess,
+  TextFile,
   deleteData,
   getData,
   postData,
@@ -16,12 +18,13 @@ import {
   urlApi,
 } from "@/utils";
 import { reset } from "redux-form";
+const helperRedux = utilityController();
 
 export const dataPegawaiRedux = () => {
   const prosesData = (): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
       const state = getState();
-      const formValue = state.form.FormPegawai?.values as PegawaiInterface;
+      const formValue = state.form.ModalPegawai?.values as PegawaiInterface;
 
       if (state.utility.getModal.isEdit) {
         dispatch(edit(formValue));
@@ -40,7 +43,23 @@ export const dataPegawaiRedux = () => {
         dispatch(actionMaster.getDataPegawai());
         dispatch(utilityActions.stopLoading());
         dispatch(utilityActions.hideModal());
-        dispatch(reset("FormPegawai"));
+        dispatch(reset("ModalPegawai"));
+
+        const textGenerate = document.getElementById(
+          "nota_ganerate"
+        ) as HTMLFormElement;
+        if (textGenerate) {
+          textGenerate.value = `${data.kode_toko}~${data.kode_pegawai}`;
+        }
+        TextFile("reg_fingerprint");
+        dispatch(
+          helperRedux.showModal({
+            isEdit: true,
+            title: "Fingerprint",
+            namaForm: "Fingerprint",
+            data: data,
+          })
+        );
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());
@@ -58,7 +77,7 @@ export const dataPegawaiRedux = () => {
         NotifSuccess("Data Berhasil Diedit");
         dispatch(actionMaster.getDataPegawai());
         dispatch(utilityActions.stopLoading());
-        dispatch(reset("FormPegawai"));
+        dispatch(reset("ModalPegawai"));
         dispatch(utilityActions.hideModal());
       } catch (error) {
         NotifInfo(`${error}`);
@@ -92,7 +111,7 @@ export const dataPegawaiRedux = () => {
     return async (dispatch, getState) => {
       await timeout();
       const state = getState();
-      const formValue = state.form.FormPegawai?.values as PegawaiInterface;
+      const formValue = state.form.ModalPegawai?.values as PegawaiInterface;
       // console.log(formValue);
 
       if (formValue?.kode_toko) {

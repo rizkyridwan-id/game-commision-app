@@ -14,27 +14,23 @@ export const reduxLogin = (): AppThunk => {
       const state = getState();
       const formValues = state.form?.loginForm?.values as DataUserInterFace;
 
-      setTimeout(async () => {
-        if (formValues) {
-          const response = await postData<DataUserInterFace>(
-            urlApi.login,
-            formValues
-          );
+      const response = await postData<DataUserInterFace>(
+        urlApi.login,
+        formValues
+      );
 
-          setItem("userdata", response.data);
+      setItem("userdata", response.data);
 
-          if (response.data.level !== "SU" && response.data.level !== "OWNER") {
-            await getHakAkses(response.data);
-          } else {
-            setItem("hakAkses", Menu);
-          }
+      if (response.data.level !== "SU" && response.data.level !== "OWNER") {
+        await getHakAkses(response.data);
+      } else {
+        setItem("hakAkses", Menu);
+      }
 
-          setTimeout(() => {
-            dispatch(utilityActions.stopLoading());
-            dispatch(helperActions.isLogin(true));
-          }, 1000);
-        }
-      }, 300);
+      setTimeout(() => {
+        dispatch(utilityActions.stopLoading());
+        dispatch(helperActions.isLogin(true));
+      }, 1000);
     } catch (error) {
       NotifInfo(`${error}`);
       dispatch(utilityActions.stopLoading());

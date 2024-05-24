@@ -5,12 +5,22 @@ import { Field, change, reduxForm } from "redux-form";
 import {
   KeyboardWrapper,
   NotifSuccess,
+  NotificationSwal,
   NumberOnly,
   ReanderField,
+  VITE_APP_BE,
+  VITE_APP_KODE_TOKO,
+  playSound,
   showConfirmation,
 } from "@/utils";
 import { Link } from "react-router-dom";
 import { TypeInputOnChangeValue } from "@/interface";
+import { io } from "socket.io-client";
+import { SocketData } from "@/interface";
+import ok from "./audio/ok.mp3";
+import tryagain from "./audio/tryagain.mp3";
+import beep from "./audio/beep.mp3";
+import trash from "./audio/trash.mp3";
 
 const TimeKeeping = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -49,6 +59,7 @@ const TimeKeeping = () => {
   const [focus, setFocus] = useState("kode_pegawai");
 
   const inputKeyBoard = (e: string) => {
+    playSound(beep);
     if (focus === "kode_pegawai") {
       setInput({
         ...input,
@@ -66,7 +77,8 @@ const TimeKeeping = () => {
 
   const cekPin = (e: string) => {
     if (e === "{enter}") {
-      console.log(input);
+      // console.log(input);
+      playSound(trash);
       if (input.pin !== "") {
         showConfirmation({
           title: `Konfirmasi Time Keeping <b>${menu}</b>`,
@@ -81,7 +93,7 @@ const TimeKeeping = () => {
             });
             setFocus("kode_pegawai");
             dispatch(change("timeKeeping", "pin", ""));
-            dispatch(change("timeKeeping", "kode_peagawai", ""));
+            dispatch(change("timeKeeping", "kode_pegawai", ""));
           })
           .catch((er) => {
             console.log(er);
@@ -89,6 +101,35 @@ const TimeKeeping = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const socket = io((VITE_APP_BE as string).replace("/api/v1", ""));
+    socket.connect();
+    socket.on("connect", async () => {
+      socket.emit("join-room", `${VITE_APP_KODE_TOKO}`);
+      socket.on("fingerprint-validation", (data: SocketData) => {
+        console.log(data);
+        if (data.is_valid) {
+          NotificationSwal({
+            title: `Fingerprint Time Keeping <b>${menu}</b> Berhasil`,
+            html: ``,
+            icon: "success",
+          });
+          playSound(ok);
+        } else {
+          NotificationSwal({
+            title: `Fingerprint Time Keeping <b>${menu}</b> Gagal`,
+            html: ``,
+            icon: "error",
+          });
+          playSound(tryagain);
+        }
+      });
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, [menu]);
 
   return (
     <div>

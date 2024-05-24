@@ -31,7 +31,7 @@ type FormProps = {
   isEdit: boolean;
 };
 
-const FormPegawai = (
+const ModalPegawai = (
   props: InjectedFormProps<PegawaiInterface, FormProps, string> & FormProps
 ) => {
   const { handleSubmit, pristine, submitting, isEdit } = props;
@@ -86,6 +86,7 @@ const FormPegawai = (
             readOnly={isEdit}
             placeholder="Masukan Kode Pegawai"
             component={ReanderField}
+            normalize={NumberOnly}
           />
         </div>
         <div className="col-3">
@@ -336,11 +337,11 @@ const mapState = (state: RootState<PegawaiInterface>) => {
 
 const connector = connect(mapState);
 const config: ConfigProps<PegawaiInterface, FormProps> = {
-  form: "FormPegawai",
+  form: "ModalPegawai",
   enableReinitialize: true,
   validate: validatePegawai,
 };
 
 export default connector(
-  reduxForm<PegawaiInterface, FormProps>(config)(FormPegawai)
+  reduxForm<PegawaiInterface, FormProps>(config)(ModalPegawai)
 );

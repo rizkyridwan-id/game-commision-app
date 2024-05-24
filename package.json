@@ -33,6 +33,7 @@
     "redux-form": "^8.3.10",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
+    "socket.io-client": "^4.7.5",
     "sweetalert2": "^11.10.3"
   },
   "devDependencies": {

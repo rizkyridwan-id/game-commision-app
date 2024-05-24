@@ -60,6 +60,23 @@ export const showConfirmation = (props: showConfirmation): Promise<boolean> => {
     });
   });
 };
+export const NotificationSwal = (props: showConfirmation): Promise<boolean> => {
+  const { title, textBody, html, icon } = props;
+  return new Promise((resolve, reject) => {
+    Swal.fire({
+      title: title,
+      text: textBody,
+      html: html,
+      icon: icon as SweetAlertResult["value"], // Assume iconInfo is a valid SweetAlert icon type
+    }).then((result) => {
+      if (result.isConfirmed) {
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
+  });
+};
 
 export const NotifSuccess = (
   text: string,
