@@ -4,8 +4,18 @@ import {
   Dashboard,
   DataHariLibur,
   DataJabatan,
+  DataTimeKeepingBreak,
+  DataTimeKeepingIstirahat,
+  DataTimeKeepingKSholat,
+  DataTimeKeepingKehadiran,
   DataToko,
   DataUser,
+  KasBon,
+  LaporanGlobalPayroll,
+  LaporanKasBon,
+  LaporanPayroll,
+  LaporanPelanggaran,
+  LaporanPengajuanCuti,
   Login,
   MasterPegawai,
   PageNoteFound,
@@ -15,9 +25,15 @@ import {
   ParameterShiftKerja,
   ParameterTagetSales,
   ParameterTargetToko,
+  Payroll,
+  PelanggaranPegawai,
+  PengajuanCuti,
+  PotonganLainLain,
+  ReviewCuti,
   TimeKeeping,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
+import LaporanPotonganLainLain from "@/pages/admin/laporan/laporanPotonganLainLain/laporanPotonganLainLain";
 
 const AppRoute = [
   {
@@ -140,6 +156,150 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <ParameterTargetToko />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-potongan-lain-lain",
+        title: "Laporan Potongan Lain Lain",
+        element: (
+          <ProtectedRoute>
+            <LaporanPotonganLainLain />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-kas-bon",
+        title: "Laporan Kas Bon",
+        element: (
+          <ProtectedRoute>
+            <LaporanKasBon />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-payroll",
+        title: "Laporan Payroll",
+        element: (
+          <ProtectedRoute>
+            <LaporanPayroll />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-pelangaran-pegawai",
+        title: "Laporan Pelanggaran Pegawai",
+        element: (
+          <ProtectedRoute>
+            <LaporanPelanggaran />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-global-payroll",
+        title: "Laporan Global Payroll",
+        element: (
+          <ProtectedRoute>
+            <LaporanGlobalPayroll />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-global-payroll",
+        title: "Laporan Global Payroll",
+        element: (
+          <ProtectedRoute>
+            <LaporanPengajuanCuti />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/pengajuan-cuti",
+        title: "Pengajuan Cuti",
+        element: (
+          <ProtectedRoute>
+            <PengajuanCuti />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/review-cuti",
+        title: "Review Cuti",
+        element: (
+          <ProtectedRoute>
+            <ReviewCuti />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/kas-bon",
+        title: "Kas Bon",
+        element: (
+          <ProtectedRoute>
+            <KasBon />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/potongan-lain",
+        title: "Potongan Lain",
+        element: (
+          <ProtectedRoute>
+            <PotonganLainLain />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/pelanggaran-pegawai",
+        title: "Pelanggaran Pegawai",
+        element: (
+          <ProtectedRoute>
+            <PelanggaranPegawai />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/payroll",
+        title: "Payroll",
+        element: (
+          <ProtectedRoute>
+            <Payroll />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-time-keeping-sholat",
+        title: "Data Time Keeping Sholat",
+        element: (
+          <ProtectedRoute>
+            <DataTimeKeepingKSholat />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-time-keeping-istirahat",
+        title: "Data Time Keeping Istirahat",
+        element: (
+          <ProtectedRoute>
+            <DataTimeKeepingIstirahat />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-time-keeping-break",
+        title: "Data Time Keeping Break",
+        element: (
+          <ProtectedRoute>
+            <DataTimeKeepingBreak />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/data-time-keeping-kehadiran",
+        title: "Data Time Keeping Kehadiran",
+        element: (
+          <ProtectedRoute>
+            <DataTimeKeepingKehadiran />
           </ProtectedRoute>
         ),
       },

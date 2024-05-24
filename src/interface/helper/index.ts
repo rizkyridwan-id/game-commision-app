@@ -11,3 +11,4 @@ export * from "./renderField-interface";
 export * from "./hiddenField-interface";
 export * from "./export-pdf-interface";
 export * from "./socket-interface";
+export * from "./filter-laporan-dto";

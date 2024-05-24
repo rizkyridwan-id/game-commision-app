@@ -1,38 +1,27 @@
-import { ParameterTargetInterFace } from "@/interface";
+import { ParameterCutiInterFace } from "@/interface";
 import {
   AppDispatch,
   AppThunk,
   actionParameter,
   utilityActions,
 } from "@/reduxStore";
-import {
-  NotifInfo,
-  NotifSuccess,
-  deleteData,
-  postData,
-  putData,
-  urlApi,
-} from "@/utils";
+import { NotifInfo, NotifSuccess, postData, urlApi } from "@/utils";
 
 export const parameterCutiRedux = () => {
   const prosesData = (): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
       const state = getState();
-      const formValue = state.form.FormCuti?.values as ParameterTargetInterFace;
+      const formValue = state.form.FormCuti?.values as ParameterCutiInterFace;
 
-      if (state.utility.getModal.isEdit) {
-        dispatch(edit(formValue));
-      } else {
-        dispatch(save(formValue));
-      }
+      dispatch(save(formValue));
     };
   };
 
-  const save = (data: ParameterTargetInterFace) => {
+  const save = (data: ParameterCutiInterFace) => {
     return async (dispatch: AppDispatch) => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
-        await postData<ParameterTargetInterFace>(
+        await postData<ParameterCutiInterFace>(
           urlApi.paramter.parameterCuti,
           data
         );
@@ -46,48 +35,8 @@ export const parameterCutiRedux = () => {
       }
     };
   };
-  const edit = (data: ParameterTargetInterFace) => {
-    return async (dispatch: AppDispatch) => {
-      try {
-        dispatch(utilityActions.setLoading({ screen: true }));
-        await putData<ParameterTargetInterFace>(
-          `${urlApi.paramter.parameterCuti}/${data._id}`,
-          data
-        );
-        NotifSuccess("Data Berhasil Diedit");
-        dispatch(actionParameter.getParameterCuti());
-        dispatch(utilityActions.stopLoading());
-        dispatch(utilityActions.hideModal());
-      } catch (error) {
-        NotifInfo(`${error}`);
-        dispatch(utilityActions.stopLoading());
-      }
-    };
-  };
-
-  const removeData = (id: string): AppThunk => {
-    return async (dispatch: AppDispatch) => {
-      try {
-        dispatch(
-          utilityActions.setLoading({
-            button: true,
-          })
-        );
-        await deleteData<ParameterTargetInterFace>(
-          `${urlApi.paramter.parameterCuti}/${id}`
-        );
-        dispatch(actionParameter.getParameterCuti());
-        NotifSuccess("Data Berhasil Dihapus");
-        dispatch(utilityActions.stopLoading());
-      } catch (error) {
-        dispatch(utilityActions.stopLoading());
-        NotifInfo(`${error || "Data Gagal Hapus"}`);
-      }
-    };
-  };
 
   return {
     prosesData,
-    removeData,
   };
 };

@@ -1,59 +1,33 @@
-import { DataJabatanInterFace } from "@/interface";
+import { ParameterBonusSalesInterFace } from "@/interface";
 import {
   AppDispatch,
   AppThunk,
-  actionMaster,
+  actionParameter,
   utilityActions,
 } from "@/reduxStore";
-import {
-  NotifInfo,
-  NotifSuccess,
-  deleteData,
-  postData,
-  putData,
-  urlApi,
-} from "@/utils";
+import { NotifInfo, NotifSuccess, deleteData, postData, urlApi } from "@/utils";
 
 export const parameterBonusRedux = () => {
   const prosesData = (): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
       const state = getState();
       const formValue = state.form.FormParameterBonus
-        ?.values as DataJabatanInterFace;
+        ?.values as ParameterBonusSalesInterFace;
 
-      if (state.utility.getModal.isEdit) {
-        dispatch(edit(formValue));
-      } else {
-        dispatch(save(formValue));
-      }
+      dispatch(save(formValue));
     };
   };
 
-  const save = (data: DataJabatanInterFace) => {
+  const save = (data: ParameterBonusSalesInterFace) => {
     return async (dispatch: AppDispatch) => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
-        await postData<DataJabatanInterFace>(urlApi.dataMaster.jabatan, data);
-        NotifSuccess("Data Berhasil Disimpan");
-        dispatch(actionMaster.getDataJabatan());
-        dispatch(utilityActions.stopLoading());
-        dispatch(utilityActions.hideModal());
-      } catch (error) {
-        NotifInfo(`${error}`);
-        dispatch(utilityActions.stopLoading());
-      }
-    };
-  };
-  const edit = (data: DataJabatanInterFace) => {
-    return async (dispatch: AppDispatch) => {
-      try {
-        dispatch(utilityActions.setLoading({ screen: true }));
-        await putData<DataJabatanInterFace>(
-          `${urlApi.dataMaster.jabatan}/${data._id}`,
+        await postData<ParameterBonusSalesInterFace>(
+          urlApi.paramter.bonusSales,
           data
         );
-        NotifSuccess("Data Berhasil Diedit");
-        dispatch(actionMaster.getDataJabatan());
+        NotifSuccess("Data Berhasil Disimpan");
+        dispatch(actionParameter.getParameterBonusSales());
         dispatch(utilityActions.stopLoading());
         dispatch(utilityActions.hideModal());
       } catch (error) {
@@ -71,10 +45,10 @@ export const parameterBonusRedux = () => {
             button: true,
           })
         );
-        await deleteData<DataJabatanInterFace>(
-          `${urlApi.dataMaster.jabatan}/${id}`
+        await deleteData<ParameterBonusSalesInterFace>(
+          `${urlApi.paramter.bonusSales}/${id}`
         );
-        dispatch(actionMaster.getDataJabatan());
+        dispatch(actionParameter.getParameterBonusSales());
         NotifSuccess("Data Berhasil Dihapus");
         dispatch(utilityActions.stopLoading());
       } catch (error) {

@@ -5,14 +5,7 @@ import {
   actionParameter,
   utilityActions,
 } from "@/reduxStore";
-import {
-  NotifInfo,
-  NotifSuccess,
-  deleteData,
-  postData,
-  putData,
-  urlApi,
-} from "@/utils";
+import { NotifInfo, NotifSuccess, deleteData, postData, urlApi } from "@/utils";
 
 export const parameterKonversiCutiaRedux = () => {
   const prosesData = (): AppThunk => {
@@ -21,11 +14,7 @@ export const parameterKonversiCutiaRedux = () => {
       const formValue = state.form.FormCuti
         ?.values as ParameterShiftKerjaInterFace;
 
-      if (state.utility.getModal.isEdit) {
-        dispatch(edit(formValue));
-      } else {
-        dispatch(save(formValue));
-      }
+      dispatch(save(formValue));
     };
   };
 
@@ -38,24 +27,6 @@ export const parameterKonversiCutiaRedux = () => {
           data
         );
         NotifSuccess("Data Berhasil Disimpan");
-        dispatch(actionParameter.getParameterShiftKerja());
-        dispatch(utilityActions.stopLoading());
-        dispatch(utilityActions.hideModal());
-      } catch (error) {
-        NotifInfo(`${error}`);
-        dispatch(utilityActions.stopLoading());
-      }
-    };
-  };
-  const edit = (data: ParameterShiftKerjaInterFace) => {
-    return async (dispatch: AppDispatch) => {
-      try {
-        dispatch(utilityActions.setLoading({ screen: true }));
-        await putData<ParameterShiftKerjaInterFace>(
-          `${urlApi.paramter.parameterShiftKerja}/${data._id}`,
-          data
-        );
-        NotifSuccess("Data Berhasil Diedit");
         dispatch(actionParameter.getParameterShiftKerja());
         dispatch(utilityActions.stopLoading());
         dispatch(utilityActions.hideModal());

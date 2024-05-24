@@ -1,5 +1,7 @@
+import { PanelContent } from "@/components";
+
 const DataTimeKeepingBreak = () => {
-  return <div>Hai</div>;
+  return <PanelContent title="Data Time Keeping Break">Hai</PanelContent>;
 };
 
 export default DataTimeKeepingBreak;

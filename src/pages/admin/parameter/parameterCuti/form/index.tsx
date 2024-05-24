@@ -3,7 +3,6 @@ import {
   ButtonCustom,
   HiddenField,
   RenderNumber,
-  RenderSelect,
   setFocusField,
 } from "@/utils";
 import {
@@ -14,17 +13,17 @@ import {
   useEffect,
 } from "@/package";
 import { ConfigProps } from "redux-form";
-import { ParameterTargetInterFace } from "@/interface";
+import { ParameterCutiInterFace } from "@/interface";
 
 import { parameterCutiRedux } from "../redux";
 import { useDispatch } from "react-redux";
-import { validateParamaterTarget } from "../../targetSales";
+import { validateParameterCuti } from "../validate";
 type FormProps = {
   isEdit: boolean;
 };
 
-const FormCuti = (
-  props: InjectedFormProps<ParameterTargetInterFace, FormProps, string> &
+const FormPengajuanCuti = (
+  props: InjectedFormProps<ParameterCutiInterFace, FormProps, string> &
     FormProps
 ) => {
   const { handleSubmit, isEdit } = props;
@@ -45,40 +44,16 @@ const FormCuti = (
       <div className="row">
         <div className={"col-6"}>
           <Field
-            label="Target"
-            id="target"
-            name="target"
+            label="Jangka Waktu Pengajuan Cuti"
+            id="leave_request_gap_days"
+            name="leave_request_gap_days"
             type="text"
-            isRp
-            placeholder="Masukan Target"
+            placeholder="Masukan Jangka Waktu Pengajuan Cuti"
             component={RenderNumber}
-          />
-        </div>
-        <div className={"col-6"}>
-          <Field
-            label="Type Target"
-            name="tipe_target"
-            placeholder="Masukan Type Target"
-            component={RenderSelect}
-            options={[
-              {
-                value: "FAKTUR",
-                label: "FAKTUR",
-              },
-              {
-                value: "GRAM",
-                label: "GRAM",
-              },
-              {
-                value: "RUPIAH",
-                label: "RUPIAH",
-              },
-            ]}
           />
         </div>
 
         <div className={`col-12 text-end mt-4`}>
-          {isEdit && <> &nbsp;</>}
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
           </ButtonCustom>
@@ -88,14 +63,14 @@ const FormCuti = (
   );
 };
 
-const mapState = (state: RootState<ParameterTargetInterFace>) => {
+const mapState = (state: RootState<ParameterCutiInterFace>) => {
   if (state?.utility?.getModal?.isEdit === true) {
     return {
       isEdit: state?.utility?.getModal?.isEdit,
       initialValues: {
         _id: state?.utility?.getModal?.data?._id,
-        target: state?.utility?.getModal?.data?.target,
-        tipe_target: state?.utility?.getModal?.data?.tipe_target,
+        leave_request_gap_days:
+          state?.utility?.getModal?.data?.leave_request_gap_days,
       },
     };
   } else {
@@ -106,12 +81,12 @@ const mapState = (state: RootState<ParameterTargetInterFace>) => {
 };
 
 const connector = connect(mapState);
-const config: ConfigProps<ParameterTargetInterFace, FormProps> = {
+const config: ConfigProps<ParameterCutiInterFace, FormProps> = {
   form: "FormCuti",
   enableReinitialize: true,
-  validate: validateParamaterTarget,
+  validate: validateParameterCuti,
 };
 
 export default connector(
-  reduxForm<ParameterTargetInterFace, FormProps>(config)(FormCuti)
+  reduxForm<ParameterCutiInterFace, FormProps>(config)(FormPengajuanCuti)
 );

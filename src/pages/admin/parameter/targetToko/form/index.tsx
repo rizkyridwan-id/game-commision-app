@@ -45,17 +45,6 @@ const FormTargetToko = (
       <div className="row">
         <div className={"col-6"}>
           <Field
-            label="Target"
-            id="target"
-            name="target"
-            type="text"
-            isRp
-            placeholder="Masukan Target"
-            component={RenderNumber}
-          />
-        </div>
-        <div className={"col-6"}>
-          <Field
             label="Type Target"
             name="tipe_target"
             placeholder="Masukan Type Target"
@@ -76,9 +65,19 @@ const FormTargetToko = (
             ]}
           />
         </div>
+        <div className={"col-6"}>
+          <Field
+            label="Target"
+            id="target"
+            name="target"
+            type="text"
+            isRp
+            placeholder="Masukan Target"
+            component={RenderNumber}
+          />
+        </div>
 
         <div className={`col-12 text-end mt-4`}>
-          {isEdit && <> &nbsp;</>}
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
           </ButtonCustom>

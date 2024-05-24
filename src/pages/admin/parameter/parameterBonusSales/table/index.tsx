@@ -8,13 +8,11 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, ParameterBonusSalesInterFace } from "@/interface";
 import { useEffect } from "react";
-import { ButtonDelete } from "@/utils";
-import { parameterBonusRedux } from "../redux";
+import { Button } from "antd";
 
 const TableParameterBonusSales = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
-  const reduxUser = parameterBonusRedux();
 
   useEffect(() => {
     dispatch(actionParameter.getParameterBonusSales());
@@ -26,7 +24,6 @@ const TableParameterBonusSales = () => {
         title: "Bonus Beli",
         dataIndex: "bonus_beli",
         key: "bonus_beli",
-        align: "right",
         render: (cell: number) => {
           return cell?.toLocaleString("kr-ko");
         },
@@ -35,7 +32,6 @@ const TableParameterBonusSales = () => {
         title: "Bonus Beli",
         dataIndex: "bonus_jual",
         key: "bonus_jual",
-        align: "right",
         render: (cell: number) => {
           return cell?.toLocaleString("kr-ko");
         },
@@ -44,11 +40,8 @@ const TableParameterBonusSales = () => {
         title: "Bonus Beli",
         dataIndex: "bonus_hutang",
         key: "bonus_hutang",
-        align: "right",
         render: (cell: number) => {
-          return (
-            <div className="text-end">{cell?.toLocaleString("kr-ko")}</div>
-          );
+          return <div>{cell?.toLocaleString("kr-ko")}</div>;
         },
       },
       {
@@ -57,9 +50,21 @@ const TableParameterBonusSales = () => {
         align: "center",
         render: (_cell, row) => (
           <div className="text-center">
-            <ButtonDelete
-              prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
-            />
+            <Button
+              type="primary"
+              onClick={() =>
+                dispatch(
+                  helperRedux.showModal({
+                    isEdit: true,
+                    title: "Edit Data",
+                    namaForm: "FormDataUser",
+                    data: row,
+                  })
+                )
+              }
+            >
+              <i className="fa fa-edit"></i>
+            </Button>
           </div>
         ),
       },
@@ -70,7 +75,7 @@ const TableParameterBonusSales = () => {
   );
   return (
     <TableMaster
-      addButtonTitle="Tambah Data"
+      addButtonTitle={dataParameter.data.length > 0 ? undefined : "Tambah Data"}
       dataSource={dataParameter.data || []}
       columns={columnsTableParameterBonusSales}
       rowKey={"_id"}

@@ -6,50 +6,49 @@ import {
   useAppSelector,
   utilityController,
 } from "@/reduxStore";
-import { ColumnInterFace, ParameterTargetInterFace } from "@/interface";
+import { ColumnInterFace, ParameterCutiInterFace } from "@/interface";
 import { useEffect } from "react";
-import { ButtonDelete } from "@/utils";
-import { parameterCutiRedux } from "../redux";
+import { Button } from "antd";
 
 const TableParameterCuti = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
-  const reduxUser = parameterCutiRedux();
 
   useEffect(() => {
     dispatch(actionParameter.getParameterCuti());
   }, [dispatch]);
 
-  const columnsTableParameterCuti: ColumnInterFace<ParameterTargetInterFace>[] =
-    [
-      {
-        title: "Tipe Target",
-        dataIndex: "tipe_target",
-        key: "tipe_target",
-      },
-      {
-        title: "Target",
-        dataIndex: "target",
-        key: "target",
-        align: "right",
-        render: (cell: number) => {
-          return cell?.toLocaleString("kr-ko");
-        },
-      },
-
-      {
-        title: "Actions",
-        key: "actions",
-        align: "center",
-        render: (_cell, row) => (
-          <div className="text-center">
-            <ButtonDelete
-              prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
-            />
-          </div>
-        ),
-      },
-    ];
+  const columnsTableParameterCuti: ColumnInterFace<ParameterCutiInterFace>[] = [
+    {
+      title: "Jangka Waktu Pengajuan Cuti",
+      dataIndex: "leave_request_gap_days",
+      key: "leave_request_gap_days",
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      align: "center",
+      render: (_cell, row) => (
+        <div className="text-center">
+          <Button
+            type="primary"
+            onClick={() =>
+              dispatch(
+                helperRedux.showModal({
+                  isEdit: true,
+                  title: "Edit Data",
+                  namaForm: "FormDataUser",
+                  data: row,
+                })
+              )
+            }
+          >
+            <i className="fa fa-edit"></i>
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
   const dataParameter = useAppSelector(
     (state) => state.parameter.parameterCuti

@@ -8,16 +8,14 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, ParameterTargetInterFace } from "@/interface";
 import { useEffect } from "react";
-import { ButtonDelete } from "@/utils";
-import { parameterTargetSalesRedux } from "../redux";
+import { Button } from "antd";
 
 const TableTargetSales = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
-  const reduxUser = parameterTargetSalesRedux();
 
   useEffect(() => {
-    dispatch(actionParameter.getParameterBonusSales());
+    dispatch(actionParameter.getParameterTargetSales());
   }, [dispatch]);
 
   const columnsTableTargetSales: ColumnInterFace<ParameterTargetInterFace>[] = [
@@ -42,9 +40,21 @@ const TableTargetSales = () => {
       align: "center",
       render: (_cell, row) => (
         <div className="text-center">
-          <ButtonDelete
-            prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
-          />
+          <Button
+            type="primary"
+            onClick={() =>
+              dispatch(
+                helperRedux.showModal({
+                  isEdit: true,
+                  title: "Edit Data",
+                  namaForm: "FormDataUser",
+                  data: row,
+                })
+              )
+            }
+          >
+            <i className="fa fa-edit"></i>
+          </Button>
         </div>
       ),
     },
@@ -55,7 +65,7 @@ const TableTargetSales = () => {
   );
   return (
     <TableMaster
-      addButtonTitle="Tambah Data"
+      addButtonTitle={dataParameter.data.length > 0 ? undefined : "Tambah Data"}
       dataSource={dataParameter.data || []}
       columns={columnsTableTargetSales}
       rowKey={"_id"}

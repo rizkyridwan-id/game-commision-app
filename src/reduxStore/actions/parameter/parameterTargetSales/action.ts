@@ -28,7 +28,7 @@ export const getParameterTargetSales = (row?: SearchInterface): AppThunk => {
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<ParameterTargetInterFace[]>(
-        urlApi.paramter.bonusSales,
+        urlApi.paramter.targetSales,
         params
       );
       dispatch(getParameterTargetSalesAction(response.data, response.count));

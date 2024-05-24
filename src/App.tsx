@@ -26,7 +26,6 @@ const App = () => {
     // };
   }, []);
 
-  console.log(utility.getLoading);
   return (
     <React.Fragment>
       {helpers.getIsLogin ? (

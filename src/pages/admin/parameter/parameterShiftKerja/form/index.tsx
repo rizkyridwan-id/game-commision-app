@@ -85,7 +85,6 @@ const FormShiftKerja = (
         </div>
 
         <div className={`col-12 text-end mt-4`}>
-          {isEdit && <> &nbsp;</>}
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
           </ButtonCustom>

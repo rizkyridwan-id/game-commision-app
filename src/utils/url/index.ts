@@ -8,8 +8,8 @@ const urlApi = {
   },
   paramter: {
     bonusSales: "parameter-bonus-sales",
-    targetSales: "target-sales",
-    targetToko: "target-toko",
+    targetSales: "parameter-target-sales",
+    targetToko: "parameter-target-toko",
     parameterCuti: "parameter-cuti",
     parameterKonversiCuti: "parameter-konversi-cuti",
     parameterShiftKerja: "parameter-shift-kerja",

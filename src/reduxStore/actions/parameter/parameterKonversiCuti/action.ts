@@ -28,7 +28,7 @@ export const getParameterKonversiCuti = (row?: SearchInterface): AppThunk => {
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<ParameterKonversiCutiInterFace[]>(
-        urlApi.paramter.bonusSales,
+        urlApi.paramter.parameterKonversiCuti,
         params
       );
       dispatch(getParameterKonversiCutiAction(response.data, response.count));

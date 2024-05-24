@@ -28,7 +28,7 @@ export const getParameterTargetToko = (row?: SearchInterface): AppThunk => {
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<ParameterTargetInterFace[]>(
-        urlApi.paramter.bonusSales,
+        urlApi.paramter.targetToko,
         params
       );
       dispatch(getParameterTargetTokoAction(response.data, response.count));

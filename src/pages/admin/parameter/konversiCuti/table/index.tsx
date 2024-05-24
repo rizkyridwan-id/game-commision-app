@@ -8,14 +8,12 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, ParameterKonversiCutiInterFace } from "@/interface";
 import { useEffect } from "react";
-import { ButtonDelete } from "@/utils";
-import { parameterKonversiCutiaRedux } from "../redux";
+
 import { Button } from "antd";
 
 const TableKonversiCuti = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
-  const reduxUser = parameterKonversiCutiaRedux();
 
   useEffect(() => {
     dispatch(actionParameter.getParameterKonversiCuti());
@@ -53,10 +51,6 @@ const TableKonversiCuti = () => {
             >
               <i className="fa fa-edit"></i>
             </Button>
-            &nbsp;
-            <ButtonDelete
-              prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
-            />
           </div>
         ),
       },

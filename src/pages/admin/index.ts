@@ -6,3 +6,5 @@ export { Login, Dashboard, PageNoteFound };
 export * from "./datamaster";
 export * from "./parameter";
 export * from "./dataTimeKeeping";
+export * from "./laporan";
+export * from "./transaksi";

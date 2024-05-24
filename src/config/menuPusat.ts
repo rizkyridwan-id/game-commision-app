@@ -58,10 +58,26 @@ const MenuPusat = [
     is_show: false,
 
     children: [
-      { path: "#", title: "Time Keeping Kehadiran", is_show: false },
-      { path: "#", title: "Time Keeping Break", is_show: false },
-      { path: "#", title: "Time Keeping Istirahat", is_show: false },
-      { path: "#", title: "Time Keeping Sholat", is_show: false },
+      {
+        path: "/app/data-time-keeping-kehadiran",
+        title: "Time Keeping Kehadiran",
+        is_show: false,
+      },
+      {
+        path: "/app/data-time-keeping-break",
+        title: "Time Keeping Break",
+        is_show: false,
+      },
+      {
+        path: "/app/data-time-keeping-istirahat",
+        title: "Time Keeping Istirahat",
+        is_show: false,
+      },
+      {
+        path: "/app/data-time-keeping-sholat",
+        title: "Time Keeping Sholat",
+        is_show: false,
+      },
     ],
   },
   {
@@ -70,12 +86,20 @@ const MenuPusat = [
     title: "Transaksi",
     is_show: false,
     children: [
-      { path: "#", title: "Pengajuan Cuti", is_show: false },
-      { path: "#", title: "Review Cuti", is_show: false },
-      { path: "#", title: "Kas Bon", is_show: false },
-      { path: "#", title: "Potongan Lain", is_show: false },
-      { path: "#", title: "Pelanggaran Pegawai", is_show: false },
-      { path: "#", title: "Payroll", is_show: false },
+      { path: "/app/pengajuan-cuti", title: "Pengajuan Cuti", is_show: false },
+      { path: "/app/review-cuti", title: "Review Cuti", is_show: false },
+      { path: "/app/kas-bon", title: "Kas Bon", is_show: false },
+      {
+        path: "/app/potongan-lain",
+        title: "Potongan Lain",
+        is_show: false,
+      },
+      {
+        path: "/app/pelanggaran-pegawai",
+        title: "Pelanggaran Pegawai",
+        is_show: false,
+      },
+      { path: "/app/payroll", title: "Payroll", is_show: false },
     ],
   },
   {
@@ -86,11 +110,27 @@ const MenuPusat = [
     children: [
       { path: "#", title: "Laporan Time Keeping", is_show: false },
       { path: "#", title: "Laporan Pengajuan Cuti", is_show: false },
-      { path: "#", title: "Laporan Kas Bon" },
-      { path: "#", title: "Laporan Potongan Lain", is_show: false },
-      { path: "#", title: "Laporan Payroll", is_show: false },
-      { path: "#", title: "Laporan Pelanggaran Pegawai", is_show: false },
-      { path: "#", title: "Laporan Global Payroll", is_show: false },
+      { path: "/app/laporan-kas-bon", title: "Laporan Kas Bon" },
+      {
+        path: "/app/laporan-potongan-lain-lain",
+        title: "Laporan Potongan Lain",
+        is_show: false,
+      },
+      {
+        path: "/app/laporan-payroll",
+        title: "Laporan Payroll",
+        is_show: false,
+      },
+      {
+        path: "/app/laporan-pelangaran-pegawai",
+        title: "Laporan Pelanggaran Pegawai",
+        is_show: false,
+      },
+      {
+        path: "/app/laporan-global-payroll",
+        title: "Laporan Global Payroll",
+        is_show: false,
+      },
     ],
   },
 ];
