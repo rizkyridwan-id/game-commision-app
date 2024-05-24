@@ -15,17 +15,17 @@ export const validatePegawai = (
   if (!values.jabatan) {
     errors.jabatan = "Jabatan harus dipilih";
   }
-  if (!values.jam_break) {
-    errors.jam_break = "Jam Break harus diisi";
+  if (!values.daily_break_minute) {
+    errors.daily_break_minute = "Jam Break harus diisi";
   }
-  if (!values.jam_istirahat) {
-    errors.jam_istirahat = "Jam Istirahat harus diisi";
+  if (!values.daily_rest_minute) {
+    errors.daily_rest_minute = "Jam Istirahat harus diisi";
   }
-  if (!values.jam_sholat) {
-    errors.jam_sholat = "Jam Sholat harus diisi";
+  if (!values.daily_sholat_minute) {
+    errors.daily_sholat_minute = "Jam Sholat harus diisi";
   }
-  if (!values.jatah_cuti) {
-    errors.jatah_cuti = "Jatah Cuti harus diisi";
+  if (!values.cuti_tahunan) {
+    errors.cuti_tahunan = "Jatah Cuti harus diisi";
   }
   if (!values.kode_sales) {
     errors.kode_sales = "Kode Sales harus diisi";
@@ -36,8 +36,8 @@ export const validatePegawai = (
   if (!values.pin) {
     errors.pin = "Pin harus diisi";
   }
-  if (!values.shift) {
-    errors.shift = "Shift harus dipilih";
+  if (!values.type_shift) {
+    errors.type_shift = "Shift harus dipilih";
   }
   if (!values.tgl_lahir) {
     errors.tgl_lahir = "Tanggal Lahir harus diisi";
