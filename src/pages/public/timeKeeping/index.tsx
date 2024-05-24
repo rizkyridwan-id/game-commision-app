@@ -77,7 +77,6 @@ const TimeKeeping = () => {
 
   const cekPin = (e: string) => {
     if (e === "{enter}") {
-      // console.log(input);
       playSound(trash);
       if (input.pin !== "") {
         showConfirmation({
@@ -86,6 +85,7 @@ const TimeKeeping = () => {
           icon: "info",
         })
           .then(() => {
+            playSound(ok);
             NotifSuccess(input.pin);
             setInput({
               pin: "",
@@ -95,8 +95,8 @@ const TimeKeeping = () => {
             dispatch(change("timeKeeping", "pin", ""));
             dispatch(change("timeKeeping", "kode_pegawai", ""));
           })
-          .catch((er) => {
-            console.log(er);
+          .catch(() => {
+            playSound(tryagain);
           });
       }
     }
@@ -108,7 +108,6 @@ const TimeKeeping = () => {
     socket.on("connect", async () => {
       socket.emit("join-room", `${VITE_APP_KODE_TOKO}`);
       socket.on("fingerprint-validation", (data: SocketData) => {
-        console.log(data);
         if (data.is_valid) {
           NotificationSwal({
             title: `Fingerprint Time Keeping <b>${menu}</b> Berhasil`,
