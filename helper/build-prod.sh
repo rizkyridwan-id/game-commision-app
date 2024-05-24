@@ -1,5 +1,5 @@
-repoNameProduction = "kresno-gk-production";
-repoName = "kresno-gk";
+repoNameProduction = "payroll-fe-production";
+repoName = "payroll-fe";
 
 cd ../"$repoNameProduction" &&
 
