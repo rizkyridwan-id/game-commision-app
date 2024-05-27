@@ -598,10 +598,9 @@ export const TextFile = (nama_file: string): void => {
     element.click();
   }
 };
-export const timeout = async () => {
-  return new Promise((resolve) => setTimeout(resolve, 100)); // contoh delay 1 detik
+export const timeout = (time: number = 100): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, time));
 };
-
 export const removeWindowClass = (classList: string) => {
   const window: HTMLElement | null =
     document && document.getElementById("root");
@@ -617,3 +616,39 @@ export const addWindowClass = (classList: string) => {
     window.classList.add(classList);
   }
 };
+
+interface StatusInput {
+  type: "jam_datang" | "jam_pulang" | "isoma";
+  status: string;
+}
+
+export function getBgColor({ type, status }: StatusInput): string {
+  switch (type) {
+    case "jam_datang":
+      if (status === "ONTIME") {
+        return "#D5E7D4";
+      } else if (status === "LATE") {
+        return "#F7CECC";
+      } else {
+        return "#F7CECC";
+      }
+    case "jam_pulang":
+      if (status === "ONTIME") {
+        return "#D5E7D4";
+      } else if (status === "EARLY") {
+        return "#ebc9b2";
+      } else {
+        return "#F7CECC";
+      }
+    case "isoma":
+      if (status === "ONTIME") {
+        return "#D5E7D4";
+      } else if (status === "OVERTIME") {
+        return "#FFE6CC";
+      } else {
+        return "#F7CECC";
+      }
+    default:
+      return "#F7CECC";
+  }
+}

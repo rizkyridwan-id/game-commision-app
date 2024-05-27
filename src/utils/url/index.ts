@@ -30,6 +30,10 @@ const urlApi = {
     timeKeeping: "time-keeping/report/pegawai-time-keeping",
   },
   login: "auth/login",
+  dashboard: {
+    hbd: "dashboard/member-hbd",
+    cuti: "dashboard/unreviewed-cuti-request",
+  },
 };
 
 export { urlApi };

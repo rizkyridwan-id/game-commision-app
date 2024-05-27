@@ -1,4 +1,3 @@
-import { PanelContent } from "@/components";
 import DashbaordTimeKeeping from "./form/dashbaordTimeKeeping";
 import DashbaordReviewCuti from "./form/dashboardReviewCuti";
 import DashbaordUlangTahun from "./form/dashboardUlangTahun";
@@ -13,19 +12,17 @@ const Dashboard = () => {
     dispatch(actionMaster.getDataToko());
   }, [dispatch]);
   return (
-    <PanelContent>
-      <div className="row">
-        <div className="colr-12">
-          <DashbaordTimeKeeping />
-        </div>
-        <div className="colr-12">
-          <DashbaordReviewCuti />
-        </div>
-        <div className="colr-12">
-          <DashbaordUlangTahun />
-        </div>
+    <div className="row">
+      <div className="col-6">
+        <DashbaordUlangTahun />
       </div>
-    </PanelContent>
+      <div className="col-6">
+        <DashbaordReviewCuti />
+      </div>
+      <div className="col-12">
+        <DashbaordTimeKeeping />
+      </div>
+    </div>
   );
 };
 

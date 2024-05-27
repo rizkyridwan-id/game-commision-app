@@ -1,2 +1,2 @@
 export * from "./timeKeepingKehadiranInterFace";
-export * from "./laporanTimeKeeping";
+export * from "./iReportTImeKeeping";

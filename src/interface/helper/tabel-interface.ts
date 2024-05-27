@@ -79,5 +79,5 @@ export interface ColumnInterFace<T> {
   dataIndex?: keyof T; // Use keyof to ensure keys match interface
   key: keyof T | React.Key; // Use React.Key for key type
   align?: "left" | "right" | "center" | undefined;
-  render?: (text: any, record: T, index: number) => React.ReactNode;
+  render?: (text: any, record: T, index: number) => any;
 }

@@ -23,19 +23,26 @@ export const reduxLaporanTimeKeeping = () => {
     };
   };
 
-  const cariLaporan = (): AppThunk => {
+  const cariLaporan = (type: string): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
+      const typeAkses = type === "DASHBOARD" ? true : false;
       try {
         const state = getState();
-        const formValues = state.form.LaporanTimeKeeping
-          .values as LaporanTimeKeepingDto;
+        const formValues = (
+          typeAkses
+            ? state.form.dashboardTimeKeeping?.values
+            : state.form.LaporanTimeKeeping.values
+        ) as LaporanTimeKeepingDto;
+
         dispatch(utilityActions.setLoading({ screen: true }));
 
         const newData = {
           tgl_system: convertDate(formValues.tgl_system),
           kode_toko: formValues.kode_toko,
-          type_shift: formValues.type_shift,
-          type_time_keeping: formValues.type_time_keeping,
+          type_shift:
+            formValues.type_shift === "SEMUA"
+              ? undefined
+              : formValues.type_shift,
         };
         const response = await getData<IReportTimeKeeping[]>(
           urlApi.report.timeKeeping,
@@ -44,22 +51,22 @@ export const reduxLaporanTimeKeeping = () => {
         if (response.data.length === 0) {
           dispatch(
             utilityActions.setLaporanKosong<IReportTimeKeeping[]>(
-              "Laporan Time Keeping Tidak Tersedia"
+              `${typeAkses ? "Data" : "Laporan"} Time Keeping Tidak Tersedia`
             )
           );
           return false;
         }
         const dataTmp: DataTmp<IReportTimeKeeping[]> = {
           data: response.data,
-          namaForm: "Laporan Time Keeping Tidak Tersedia",
+          namaForm: `${typeAkses ? "Data" : "Laporan"} Time Keeping Tidak Tersedia`,
         };
         dispatch(simpanDataTmp(dataTmp));
-        NotifSuccess("Laporan Tersedia");
+        NotifSuccess(`${typeAkses ? "Data" : "Laporan"} Tersedia`);
         dispatch(utilityActions.stopLoading());
       } catch (error) {
         dispatch(
           utilityActions.setLaporanKosong<IReportTimeKeeping[]>(
-            "Laporan Time Keeping Tidak Tersedia",
+            `${typeAkses ? "Data" : "Laporan"} Time Keeping Tidak Tersedia`,
             `${error}`
           )
         );

@@ -4,6 +4,7 @@ import {
   AppDispatch,
   actionMaster,
   actionParameter,
+  simpanDataTmp,
   useAppSelector,
 } from "@/reduxStore";
 import { ButtonCustom, ReanderField, RenderSelect, today } from "@/utils";
@@ -18,6 +19,7 @@ import {
 } from "redux-form";
 import TableLaproanTimeKeeping from "./table";
 import { reduxLaporanTimeKeeping } from "./redux";
+import { validateLaporanTimeKeeping } from "./validate";
 
 const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
   const { handleSubmit } = props;
@@ -25,13 +27,15 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
 
   useEffect(() => {
     dispatch(change("LaporanTimeKeeping", "tgl_system", today));
+    dispatch(change("LaporanTimeKeeping", "type_shift", "SEMUA"));
+    dispatch(change("LaporanTimeKeeping", "type_time_keeping", "KEHADIRAN"));
     dispatch(actionMaster.getDataToko());
     dispatch(actionParameter.getParameterShiftKerja());
   }, [dispatch]);
   const proses = reduxLaporanTimeKeeping();
 
   const filterLaporan = () => {
-    dispatch(proses.cariLaporan());
+    dispatch(proses.cariLaporan("LAPORAN"));
   };
   const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
   const dataShiftKerja = useAppSelector(
@@ -70,12 +74,18 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
               name="type_shift"
               component={RenderSelect}
               placeholder="Pilih Type Shift"
-              options={dataShiftKerja.data.map((list) => {
-                return {
-                  value: list.type_shift,
-                  label: list.type_shift,
-                };
-              })}
+              options={[
+                {
+                  value: "SEMUA",
+                  label: "SEMUA",
+                },
+                ...dataShiftKerja.data.map((list) => {
+                  return {
+                    value: list.type_shift,
+                    label: list.type_shift,
+                  };
+                }),
+              ]}
             />
           </div>
           <div className="col-3">
@@ -84,6 +94,7 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
               name="type_time_keeping"
               component={RenderSelect}
               placeholder="Pilih Type Time Keeping"
+              onChange={() => dispatch(simpanDataTmp({ data: [] }))}
               options={[
                 {
                   value: "KEHADIRAN",
@@ -125,6 +136,7 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
 const config: ConfigProps<FormFilterLaporanDto> = {
   form: "LaporanTimeKeeping",
   enableReinitialize: true,
+  validate: validateLaporanTimeKeeping,
 };
 
 export default reduxForm<FormFilterLaporanDto>(config)(LaporanTimeKeeping);

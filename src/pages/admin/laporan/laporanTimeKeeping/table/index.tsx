@@ -1,46 +1,39 @@
 import { TableMaster } from "@/components";
-import { ColumnInterFace, IReportTimeKeeping } from "@/interface";
-import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
+import { IReportTimeKeeping } from "@/interface";
+import {
+  AppDispatch,
+  RootState,
+  simpanDataTmp,
+  useAppSelector,
+} from "@/reduxStore";
 import { ButtonCustom } from "@/utils";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { reduxLaporanTimeKeeping } from "../redux";
+import {
+  columnsTableBreak,
+  columnsTableIstirahat,
+  columnsTableKehadiran,
+  columnsTableSholat,
+} from "../report/column";
+import {
+  ConfigProps,
+  InjectedFormProps,
+  getFormValues,
+  reduxForm,
+} from "redux-form";
+import { LaporanTimeKeepingDto } from "../dto";
 
-const TableLaproanTimeKeeping = () => {
+type FormProps = {
+  getForm: LaporanTimeKeepingDto; // Add the type for getForm
+};
+
+const TableLaporanTimeKeeping = (
+  props: InjectedFormProps<LaporanTimeKeepingDto, FormProps, string> & FormProps
+) => {
+  const { getForm } = props;
+
   const dispatch = useDispatch<AppDispatch>();
-
-  const columnsTableData: ColumnInterFace<IReportTimeKeeping>[] = [
-    {
-      title: "Kode Pegawai",
-      dataIndex: "kode_pegawai",
-      key: "kode_pegawai",
-    },
-    {
-      title: "Nama Pegawai",
-      dataIndex: "nama_pegawai",
-      key: "nama_pegawai",
-    },
-    {
-      title: "Jam Datang",
-      dataIndex: "jam_datang",
-      key: "jam_datang",
-    },
-    {
-      title: "Jam Pulang",
-      dataIndex: "jam_pulang",
-      key: "jam_pulang",
-    },
-    {
-      title: "Staus Datang",
-      dataIndex: "status_datang",
-      key: "status_datang",
-    },
-    {
-      title: "Staus Pulang",
-      dataIndex: "status_pulang",
-      key: "status_pulang",
-    },
-  ];
 
   useEffect(() => {
     dispatch(simpanDataTmp({ data: [] }));
@@ -54,13 +47,21 @@ const TableLaproanTimeKeeping = () => {
   ) as IReportTimeKeeping[];
 
   const proses = reduxLaporanTimeKeeping();
-
+  const typeTimeKeeping = getForm?.type_time_keeping;
   return (
     <div className="row mt-4">
       <div className="col-12">
         <TableMaster
           dataSource={datatmp || []}
-          columns={columnsTableData}
+          columns={
+            typeTimeKeeping === "KEHADIRAN"
+              ? columnsTableKehadiran
+              : typeTimeKeeping === "ISTIRAHAT"
+                ? columnsTableIstirahat
+                : typeTimeKeeping === "BREAK"
+                  ? columnsTableBreak
+                  : columnsTableSholat
+          }
           rowKey={"kode_pegawai"}
         />
       </div>
@@ -90,4 +91,20 @@ const TableLaproanTimeKeeping = () => {
   );
 };
 
-export default TableLaproanTimeKeeping;
+const mapState = (state: RootState<LaporanTimeKeepingDto>) => {
+  return {
+    getForm: getFormValues("LaporanTimeKeeping")(
+      state
+    ) as LaporanTimeKeepingDto,
+  };
+};
+
+const connector = connect(mapState);
+const config: ConfigProps<LaporanTimeKeepingDto, FormProps> = {
+  form: "TableLaporanTimeKeeping",
+  enableReinitialize: true,
+};
+
+export default connector(
+  reduxForm<LaporanTimeKeepingDto, FormProps>(config)(TableLaporanTimeKeeping)
+);
