@@ -30,6 +30,41 @@ interface LoadingContentProps {
   loading?: boolean;
 }
 
+export const speak = (text: string): void => {
+  // Create a SpeechSynthesisUtterance
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  // Ensure voices are loaded
+  const loadVoices = (): Promise<SpeechSynthesisVoice[]> => {
+    return new Promise((resolve) => {
+      let voices = speechSynthesis.getVoices();
+      if (voices.length) {
+        resolve(voices);
+      } else {
+        speechSynthesis.onvoiceschanged = () => {
+          voices = speechSynthesis.getVoices();
+          resolve(voices);
+        };
+      }
+    });
+  };
+
+  loadVoices().then((voices) => {
+    // Filter voices for Indonesian language
+    const indonesianVoices = voices.filter((voice) => voice.lang === "id-ID");
+
+    if (indonesianVoices.length > 0) {
+      utterance.voice = indonesianVoices[0]; // Choose the first Indonesian voice
+    } else {
+      console.warn("No Indonesian voice found");
+    }
+
+    utterance.lang = "id-ID";
+    // Speak the text
+    speechSynthesis.speak(utterance);
+  });
+};
+
 export const LoadingContent: React.FC<LoadingContentProps> = (
   props: LoadingContentProps
 ) => {

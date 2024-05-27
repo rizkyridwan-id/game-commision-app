@@ -1,9 +1,10 @@
-import { AppDispatch, themesActions } from "@/reduxStore";
+import { AppDispatch, themesActions, utilityActions } from "@/reduxStore";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Field, change, reduxForm } from "redux-form";
 import {
   KeyboardWrapper,
+  NotifInfo,
   NotifSuccess,
   NotificationSwal,
   NumberOnly,
@@ -11,7 +12,12 @@ import {
   VITE_APP_BE,
   VITE_APP_KODE_TOKO,
   playSound,
+  postData,
+  setFocusField,
   showConfirmation,
+  speak,
+  today,
+  urlApi,
 } from "@/utils";
 import { Link } from "react-router-dom";
 import { TypeInputOnChangeValue } from "@/interface";
@@ -21,6 +27,8 @@ import ok from "./audio/ok.mp3";
 import tryagain from "./audio/tryagain.mp3";
 import beep from "./audio/beep.mp3";
 import trash from "./audio/trash.mp3";
+
+type MenuType = "Kehadiran" | "Istirahat" | "Break" | "Sholat";
 
 const TimeKeeping = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,7 +45,7 @@ const TimeKeeping = () => {
   }, [dispatch]);
 
   const [time, setTime] = useState(new Date());
-  const [menu, setMenu] = useState("Kehadiran");
+  const [menu, setMenu] = useState<MenuType>("Kehadiran");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -78,27 +86,64 @@ const TimeKeeping = () => {
   const cekPin = (e: string) => {
     if (e === "{enter}") {
       playSound(trash);
-      if (input.pin !== "") {
+      if (input.pin !== "" && input.kode_pegawai !== "") {
         showConfirmation({
           title: `Konfirmasi Time Keeping <b>${menu}</b>`,
           html: `Jam  <b>${menu}</b> anda ${hours}:${minutes}:${seconds}`,
           icon: "info",
         })
-          .then(() => {
-            playSound(ok);
-            NotifSuccess(input.pin);
-            setInput({
-              pin: "",
-              kode_pegawai: "",
-            });
-            setFocus("kode_pegawai");
-            dispatch(change("timeKeeping", "pin", ""));
-            dispatch(change("timeKeeping", "kode_pegawai", ""));
+          .then(async () => {
+            try {
+              dispatch(utilityActions.setLoading({ screen: true }));
+              await postData(urlApi.timeKeeping.validationPin, input);
+              prosesAbsen();
+            } catch (error) {
+              speak(`${error}`);
+              NotifInfo(`${error}`);
+              dispatch(utilityActions.stopLoading());
+            }
           })
           .catch(() => {
             playSound(tryagain);
           });
       }
+    }
+  };
+
+  const prosesAbsen = async () => {
+    try {
+      let url = "";
+      if (menu === "Kehadiran") {
+        url = urlApi.timeKeeping.kehadiran;
+      } else if (menu === "Break") {
+        url = urlApi.timeKeeping.break;
+      } else if (menu === "Istirahat") {
+        url = urlApi.timeKeeping.istirahat;
+      } else {
+        url = urlApi.timeKeeping.sholat;
+      }
+
+      const dataBody = {
+        kode_pegawai: input.kode_pegawai,
+        kode_toko: VITE_APP_KODE_TOKO,
+        jam: `${hours}:${minutes}`,
+        tgl_system: today,
+      };
+      await postData(url, dataBody);
+      playSound(ok);
+      NotifSuccess(`Time Keeping ${menu} berhasil`);
+      setInput({
+        pin: "",
+        kode_pegawai: "",
+      });
+      setFocus("kode_pegawai");
+      dispatch(change("timeKeeping", "pin", ""));
+      dispatch(change("timeKeeping", "kode_pegawai", ""));
+      dispatch(utilityActions.stopLoading());
+    } catch (error) {
+      speak(`${error}`);
+      NotifInfo(`${error}`);
+      dispatch(utilityActions.stopLoading());
     }
   };
 
@@ -130,6 +175,19 @@ const TimeKeeping = () => {
     };
   }, [menu]);
 
+  const pindahMenu = (namaMenu: MenuType) => {
+    setMenu(namaMenu);
+    setInput({
+      kode_pegawai: "",
+      pin: "",
+    });
+    dispatch(change("timeKeeping", "pin", ""));
+    dispatch(change("timeKeeping", "kode_pegawai", ""));
+    setTimeout(() => {
+      setFocusField("kode_pegawai");
+    }, 100);
+  };
+
   return (
     <div>
       <div className={"pos pos-with-menu "} id="pos">
@@ -148,7 +206,7 @@ const TimeKeeping = () => {
                 <a
                   href="#/"
                   className={`nav-link ${menu === "Kehadiran" ? "active" : ""}`}
-                  onClick={() => setMenu("Kehadiran")}
+                  onClick={() => pindahMenu("Kehadiran")}
                 >
                   <div className="nav-icon">
                     <i className={""}></i>
@@ -160,7 +218,7 @@ const TimeKeeping = () => {
                 <a
                   href="#/"
                   className={`nav-link ${menu === "Break" ? "active" : ""}`}
-                  onClick={() => setMenu("Break")}
+                  onClick={() => pindahMenu("Break")}
                 >
                   <div className="nav-icon">
                     <i className={""}></i>
@@ -172,7 +230,7 @@ const TimeKeeping = () => {
                 <a
                   href="#/"
                   className={`nav-link ${menu === "Sholat" ? "active" : ""}`}
-                  onClick={() => setMenu("Sholat")}
+                  onClick={() => pindahMenu("Sholat")}
                 >
                   <div className="nav-icon">
                     <i className={""}></i>
@@ -184,7 +242,7 @@ const TimeKeeping = () => {
                 <a
                   href="#/"
                   className={`nav-link ${menu === "Istirahat" ? "active" : ""}`}
-                  onClick={() => setMenu("Istirahat")}
+                  onClick={() => pindahMenu("Istirahat")}
                 >
                   <div className="nav-icon">
                     <i className={""}></i>

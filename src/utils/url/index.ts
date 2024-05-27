@@ -17,6 +17,14 @@ const urlApi = {
   externalApi: {
     dataSales: "external/sales",
   },
+  timeKeeping: {
+    kehadiran: "time-keeping/service/absen-kehadiran",
+    istirahat: "time-keeping/service/absen-istirahat",
+    break: "time-keeping/service/absen-break",
+    sholat: "time-keeping/service/absen-sholat",
+    validationPin: "pegawai/service/pin-validation",
+    dataTimeKeeping: "time-keeping",
+  },
   login: "auth/login",
 };
 

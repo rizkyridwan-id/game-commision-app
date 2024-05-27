@@ -52,33 +52,10 @@ const MenuPusat = [
     ],
   },
   {
-    path: "#",
+    path: "/app/time-keeping",
     icon: "fa fa-business-time",
     title: "Time Keeping",
     is_show: false,
-
-    children: [
-      {
-        path: "/app/data-time-keeping-kehadiran",
-        title: "Time Keeping Kehadiran",
-        is_show: false,
-      },
-      {
-        path: "/app/data-time-keeping-break",
-        title: "Time Keeping Break",
-        is_show: false,
-      },
-      {
-        path: "/app/data-time-keeping-istirahat",
-        title: "Time Keeping Istirahat",
-        is_show: false,
-      },
-      {
-        path: "/app/data-time-keeping-sholat",
-        title: "Time Keeping Sholat",
-        is_show: false,
-      },
-    ],
   },
   {
     path: "#",

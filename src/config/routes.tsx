@@ -295,8 +295,8 @@ const AppRoute = [
         ),
       },
       {
-        path: "/app/data-time-keeping-kehadiran",
-        title: "Data Time Keeping Kehadiran",
+        path: "/app/time-keeping",
+        title: "Data Time Keeping",
         element: (
           <ProtectedRoute>
             <DataTimeKeepingKehadiran />
