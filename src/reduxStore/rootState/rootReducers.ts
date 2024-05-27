@@ -24,6 +24,7 @@ import {
   parameterTargetTokoReducer,
   parameterKonversiCutiReducer,
   timeKeepingReducer,
+  pengajuanCutiReducer,
 } from "../reducers";
 
 export const rootReducer = combineReducers({
@@ -49,6 +50,10 @@ export const rootReducer = combineReducers({
 
   timeKeeping: combineReducers({
     dataTimeKeeping: timeKeepingReducer,
+  }),
+
+  transaksi: combineReducers({
+    dataPengajuanCuti: pengajuanCutiReducer,
   }),
 });
 

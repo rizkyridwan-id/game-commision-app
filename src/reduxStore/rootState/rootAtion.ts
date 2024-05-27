@@ -14,6 +14,7 @@ import {
   ParameterShiftKerjaState,
   ParameterTargetSalesState,
   ParameterTargetTokoState,
+  PengajuanCutiState,
   ThemeState,
   TimeKeepingState,
   UtilityState,
@@ -45,5 +46,9 @@ export interface RootState<T> {
 
   timeKeeping: {
     dataTimeKeeping: TimeKeepingState;
+  };
+
+  transaksi: {
+    dataPengajuanCuti: PengajuanCutiState;
   };
 }

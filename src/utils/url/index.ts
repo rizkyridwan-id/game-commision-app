@@ -26,8 +26,13 @@ const urlApi = {
     dataTimeKeeping: "time-keeping",
   },
 
+  transaksi: {
+    cuti: "cuti-request",
+  },
+
   report: {
     timeKeeping: "time-keeping/report/pegawai-time-keeping",
+    cuti: "cuti-request/report/pengajuan-cuti",
   },
   login: "auth/login",
   dashboard: {

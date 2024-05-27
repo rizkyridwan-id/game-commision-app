@@ -4,3 +4,4 @@ export * from "./dataMaster";
 export * from "./helpers";
 export * from "./parameter";
 export * from "./timeKeeping";
+export * from "./transaksi";

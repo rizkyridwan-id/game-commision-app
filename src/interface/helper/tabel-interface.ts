@@ -13,6 +13,8 @@ export interface SearchInterface {
   q?: string;
   tgl_system?: string;
   status_valid?: boolean;
+  end_date?: string;
+  start_date?: string;
 }
 interface CustomTablePaginationConfig extends TablePaginationConfig {
   q?: string;
