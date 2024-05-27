@@ -1,57 +1,75 @@
-import { DataItemGenerator, GenaratorExport } from "@/interface";
-import { convertDateTime } from "@/utils";
+import {
+  DataItemGenerator,
+  DataSystemInterFace,
+  GenaratorExportPdfExcel,
+} from "@/interface";
+import { convertDate, convertDateTime, getItem } from "@/utils";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import "jspdf-autotable";
 
 const ExportPDF = <T>({
+  title,
   columns,
   data,
   grouping,
-  pdfSetting,
+  formatPdf,
   date,
-}: GenaratorExport<T>): void => {
-  const doc: jsPDF = new jsPDF(pdfSetting?.orientation, pdfSetting?.unit, [
-    pdfSetting?.width || 297,
-    pdfSetting?.height || 210,
+  grandTotalSetting,
+  dataToko,
+}: GenaratorExportPdfExcel<T>): void => {
+  const doc: any = new jsPDF(formatPdf.orientation, formatPdf.unit, [
+    formatPdf.width || 297,
+    formatPdf.height || 210,
   ]);
-  let tableRows: any[] = [];
-  let finalY = date ? 30 : 20;
+  const tableRows: any[] = [];
+  let finalY = 30;
   columns = columns.filter((item) => !item.options?.disabledColumn);
+  const widthPortrait = doc.internal.pageSize.getWidth();
 
-  doc.setFontSize(15);
-  doc.text(`${pdfSetting?.titlePdf}`, 15, 18);
   doc.setFontSize(10);
+  doc.text(
+    dataToko?.nama_toko || getItem<DataSystemInterFace>("dataSystem").nama_toko,
+    15,
+    18
+  );
+  const address =
+    dataToko?.alamat_toko ||
+    getItem<DataSystemInterFace>("dataSystem").nama_toko;
+  const addressLines = doc.splitTextToSize(address, 100); // Adjust width as needed
+  doc.text(addressLines, 15, 22);
+
+  // Teks di kanan
+  doc.text(title, widthPortrait - 15, 18, { align: "right" });
   if (date) {
+    const titleWidth = doc.getTextWidth(title);
+    const startX = widthPortrait - 15 - titleWidth;
     doc.text(
-      `Tanggal : ${date?.start_date} ${
-        date?.end_date ? `s/d ${date?.end_date}` : ""
+      `Tanggal : ${convertDate(String(date?.start_date || date?.tgl_system), true)} ${
+        date?.end_date ? `S/D ${convertDate(String(date?.end_date), true)}` : ""
       }`,
-      15,
-      25
+      startX + 35,
+      22,
+      { align: "right" }
     );
   }
   doc.setProperties({
-    title: pdfSetting?.titlePdf,
+    title: title,
   });
 
   // Header Tabel
-  const tableHeader = columns.map((column) => {
-    return {
-      content: column.label,
-      key: column.key,
-      options: column?.options,
-      styles: {
-        textColor: `#${pdfSetting?.txtColor || "000"}`,
-        fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
-        fontStyle: "bold",
-        halign: column?.options?.halign
-          ? column?.options?.halign
-          : column?.options?.format === "RP" || column?.options?.format === "GR"
-            ? "right"
-            : "left",
-      },
-    };
-  });
+  const tableHeader = columns.map((column) => ({
+    content: column.label,
+    styles: {
+      textColor: "#000",
+      fillColor: "#E8E5E5",
+      fontStyle: "bold",
+      halign: column?.options?.halign
+        ? column?.options?.halign
+        : column?.options?.format === "RP" || column?.options?.format === "GR"
+          ? "right"
+          : "left",
+    },
+  }));
 
   tableRows.push(tableHeader);
 
@@ -89,6 +107,10 @@ const ExportPDF = <T>({
                 case "DATETIME":
                   return list2[column.key] !== undefined
                     ? convertDateTime(list2[column.key] || new Date())
+                    : "";
+                case "DATE":
+                  return list2[column.key] !== undefined
+                    ? convertDate(list2[column.key] || new Date(), true)
                     : "";
                 default:
                   return list2[column.key] !== undefined
@@ -139,8 +161,8 @@ const ExportPDF = <T>({
                     column?.options?.format === "GR"
                   ? "right"
                   : "left",
-              textColor: `#${pdfSetting?.txtColor || "000"}`,
-              fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+              textColor: "#000",
+              fillColor: "#E8E5E5",
               fontStyle: "bold",
             },
           };
@@ -150,28 +172,28 @@ const ExportPDF = <T>({
           footersubtotal.push({
             content: "",
             styles: {
-              textColor: `#${pdfSetting?.txtColor || "000"}`,
-              fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+              textColor: "#000",
+              fillColor: "#E8E5E5",
               fontStyle: "bold",
             },
           });
         }
       });
-      const colSpan = pdfSetting?.grandTotalSetting?.colSpan
-        ? Number(pdfSetting?.grandTotalSetting?.colSpan || 0) + 1
+      const colSpan = grandTotalSetting?.colSpan
+        ? Number(grandTotalSetting?.colSpan || 0) + 1
         : 0;
       footersubtotal[0] = {
         content: "SUB TOTAL",
         colSpan: colSpan,
         styles: {
-          textColor: `#${pdfSetting?.txtColor || "000"}`,
-          fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+          textColor: "#000",
+          fillColor: "#E8E5E5",
           fontStyle: "bold",
           halign: "center",
         },
       };
-      if (pdfSetting?.grandTotalSetting?.colSpan) {
-        footersubtotal.splice(1, pdfSetting?.grandTotalSetting?.colSpan);
+      if (grandTotalSetting?.colSpan) {
+        footersubtotal.splice(1, grandTotalSetting?.colSpan);
       }
       tableRows.push(footersubtotal);
     } else {
@@ -180,7 +202,6 @@ const ExportPDF = <T>({
         const columnKey = column.key as keyof DataItemGenerator;
         totals[columnKey] = (totals[columnKey] || 0) + Number(value);
         return {
-          options: column?.options,
           content: (() => {
             switch (column?.options?.format) {
               case "RP":
@@ -199,6 +220,13 @@ const ExportPDF = <T>({
                 return item[column.key as keyof DataItemGenerator] !== undefined
                   ? convertDateTime(
                       item[column.key as keyof DataItemGenerator] || new Date()
+                    )
+                  : "";
+              case "DATE":
+                return item[column.key as keyof DataItemGenerator] !== undefined
+                  ? convertDate(
+                      item[column.key as keyof DataItemGenerator] || new Date(),
+                      true
                     )
                   : "";
               default:
@@ -229,7 +257,6 @@ const ExportPDF = <T>({
     const total = totals[column.key as keyof DataItemGenerator];
     if (column?.options?.format === "RP" || column?.options?.format === "GR") {
       const row = {
-        options: column?.options,
         content: column?.options?.disabledFooter
           ? ""
           : (() => {
@@ -249,8 +276,8 @@ const ExportPDF = <T>({
                 column?.options?.format === "GR"
               ? "right"
               : "left",
-          textColor: `#${pdfSetting?.txtColor || "000"}`,
-          fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+          textColor: "#000",
+          fillColor: "#E8E5E5",
           fontStyle: "bold",
         },
       };
@@ -259,33 +286,32 @@ const ExportPDF = <T>({
     } else {
       grandTotal.push({
         content: "",
-        options: column?.options,
         styles: {
-          textColor: `#${pdfSetting?.txtColor || "000"}`,
-          fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+          textColor: "#000",
+          fillColor: "#E8E5E5",
           fontStyle: "bold",
         },
       });
     }
   });
 
-  const colSpan = pdfSetting?.grandTotalSetting?.colSpan
-    ? Number(pdfSetting?.grandTotalSetting?.colSpan || 0) + 1
+  const colSpan = grandTotalSetting?.colSpan
+    ? Number(grandTotalSetting?.colSpan || 0) + 1
     : 0;
 
-  if (!pdfSetting?.grandTotalSetting?.disableGrandTotal) {
+  if (!grandTotalSetting?.disableGrandTotal) {
     grandTotal[0] = {
       content: "GRAND TOTAL",
       colSpan: colSpan,
       styles: {
-        textColor: `#${pdfSetting?.txtColor || "000"}`,
-        fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+        textColor: "#000",
+        fillColor: "#E8E5E5",
         fontStyle: "bold",
         halign: "center",
       },
     };
-    if (pdfSetting?.grandTotalSetting?.colSpan) {
-      grandTotal.splice(1, pdfSetting?.grandTotalSetting?.colSpan);
+    if (grandTotalSetting?.colSpan) {
+      grandTotal.splice(1, grandTotalSetting?.colSpan);
     }
 
     tableRows.push(grandTotal);
@@ -296,33 +322,32 @@ const ExportPDF = <T>({
       content: `Print Date : ${convertDateTime(`${new Date()}`)}`,
       colSpan: columns.length,
       styles: {
-        textColor: `#${pdfSetting?.txtColor || "000"}`,
-        fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+        textColor: "#000",
+        fillColor: "#E8E5E5",
         fontStyle: "italic",
       },
     },
   ]);
 
-  autoTable(doc, {
+  doc.autoTable({
     head: [],
     body: tableRows,
     startY: finalY,
-    theme: pdfSetting?.theme || "plain",
+    theme: "plain",
     rowPageBreak: "avoid",
     margin: { top: 10 },
-    bodyStyles: { fontSize: pdfSetting?.fontSIze || 8 },
+    bodyStyles: { fontSize: formatPdf.fontSIze || 8 },
     headStyles: {
-      fontSize: pdfSetting?.fontSIze || 8,
-      textColor: `#${pdfSetting?.txtColor || "000"}`,
-      fillColor: `#${pdfSetting?.bgColor || "E8E5E5"}`,
+      fontSize: formatPdf.fontSIze || 8,
+      textColor: "#000",
+      fillColor: "#E8E5E5",
     },
-    tableLineColor: [255, 255, 255],
   });
-  tableRows = [];
-  finalY = (doc as any).lastAutoTable.finalY;
-  +3;
 
-  const pages = (doc as any).internal.getNumberOfPages();
+  // finalY = doc.autoTableEndPosY() + 3;
+  finalY = doc.lastAutoTable.finalY + 3;
+
+  const pages = doc.internal.getNumberOfPages();
   const pageWidth = doc.internal.pageSize.width;
   const pageHeight = doc.internal.pageSize.height;
 
@@ -337,12 +362,7 @@ const ExportPDF = <T>({
     });
   }
 
-  if (pdfSetting?.openNewTab) {
-    const blob = doc.output("bloburl");
-    window.open(blob);
-  } else {
-    doc.save(`${pdfSetting?.titlePdf}.pdf`);
-  }
+  doc.save(`${title}.pdf`);
 };
 
 const formatingTitle = (title: string): string => {

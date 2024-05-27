@@ -85,7 +85,11 @@ const MenuPusat = [
     title: "Laporan",
     is_show: false,
     children: [
-      { path: "#", title: "Laporan Time Keeping", is_show: false },
+      {
+        path: "/app/laporan-time-keeping",
+        title: "Laporan Time Keeping",
+        is_show: false,
+      },
       { path: "#", title: "Laporan Pengajuan Cuti", is_show: false },
       { path: "/app/laporan-kas-bon", title: "Laporan Kas Bon" },
       {

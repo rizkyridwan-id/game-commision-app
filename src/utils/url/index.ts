@@ -25,6 +25,10 @@ const urlApi = {
     validationPin: "pegawai/service/pin-validation",
     dataTimeKeeping: "time-keeping",
   },
+
+  report: {
+    timeKeeping: "time-keeping/report/pegawai-time-keeping",
+  },
   login: "auth/login",
 };
 

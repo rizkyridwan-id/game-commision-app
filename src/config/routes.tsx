@@ -4,10 +4,7 @@ import {
   Dashboard,
   DataHariLibur,
   DataJabatan,
-  DataTimeKeepingBreak,
-  DataTimeKeepingIstirahat,
-  DataTimeKeepingKSholat,
-  DataTimeKeepingKehadiran,
+  DataTimeKeeping,
   DataToko,
   DataUser,
   KasBon,
@@ -16,6 +13,7 @@ import {
   LaporanPayroll,
   LaporanPelanggaran,
   LaporanPengajuanCuti,
+  LaporanTimeKeeping,
   Login,
   MasterPegawai,
   PageNoteFound,
@@ -31,9 +29,9 @@ import {
   PotonganLainLain,
   ReviewCuti,
   TimeKeeping,
+  LaporanPotonganLainLain,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
-import LaporanPotonganLainLain from "@/pages/admin/laporan/laporanPotonganLainLain/laporanPotonganLainLain";
 
 const AppRoute = [
   {
@@ -268,38 +266,20 @@ const AppRoute = [
         ),
       },
       {
-        path: "/app/data-time-keeping-sholat",
-        title: "Data Time Keeping Sholat",
-        element: (
-          <ProtectedRoute>
-            <DataTimeKeepingKSholat />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/app/data-time-keeping-istirahat",
-        title: "Data Time Keeping Istirahat",
-        element: (
-          <ProtectedRoute>
-            <DataTimeKeepingIstirahat />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/app/data-time-keeping-break",
-        title: "Data Time Keeping Break",
-        element: (
-          <ProtectedRoute>
-            <DataTimeKeepingBreak />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "/app/time-keeping",
         title: "Data Time Keeping",
         element: (
           <ProtectedRoute>
-            <DataTimeKeepingKehadiran />
+            <DataTimeKeeping />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-time-keeping",
+        title: "Laporan Time Keeping",
+        element: (
+          <ProtectedRoute>
+            <LaporanTimeKeeping />
           </ProtectedRoute>
         ),
       },

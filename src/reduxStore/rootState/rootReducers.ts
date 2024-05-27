@@ -23,7 +23,7 @@ import {
   utilityReducer,
   parameterTargetTokoReducer,
   parameterKonversiCutiReducer,
-  timeKeepingKehadiranReducer,
+  timeKeepingReducer,
 } from "../reducers";
 
 export const rootReducer = combineReducers({
@@ -48,7 +48,7 @@ export const rootReducer = combineReducers({
   }),
 
   timeKeeping: combineReducers({
-    timeKeepingKehadiran: timeKeepingKehadiranReducer,
+    dataTimeKeeping: timeKeepingReducer,
   }),
 });
 

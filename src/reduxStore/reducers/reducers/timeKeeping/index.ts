@@ -1,3 +1,3 @@
-import timeKeepingKehadiranReducer from "./timeKeepingKehadiranReducer";
+import timeKeepingReducer from "./timeKeepingReducer";
 
-export { timeKeepingKehadiranReducer };
+export { timeKeepingReducer };

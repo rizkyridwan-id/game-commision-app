@@ -11,6 +11,7 @@ export interface SearchInterface {
   skip?: number;
   limit?: number;
   q?: string;
+  tgl_system?: string;
   status_valid?: boolean;
 }
 interface CustomTablePaginationConfig extends TablePaginationConfig {

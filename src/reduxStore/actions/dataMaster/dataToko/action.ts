@@ -1,6 +1,6 @@
 import { DataTokoInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
-import { NotifInfo, getData, urlApi } from "@/utils";
+import { NotifInfo, getData, setItem, urlApi } from "@/utils";
 import { DataTokoAction, DataTokoType } from "./type";
 
 export const getDataTokoAction = (
@@ -31,6 +31,7 @@ export const getDataToko = (row?: SearchInterface): AppThunk => {
         urlApi.dataMaster.toko,
         params
       );
+      setItem<DataTokoInterFace[]>("dataToko", response.data);
       dispatch(getDataTokoAction(response.data, response.count));
       dispatch(utilityActions.stopLoading());
     } catch (error) {

@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { AppThunk } from "../..";
+import { AppDispatch, AppThunk } from "../..";
 import {
   AppActionTypes,
   DataTmp,
@@ -14,6 +14,7 @@ import {
   ShowModalAction,
   SimpanDataTmpAction,
 } from "./type";
+import { NotifInfo } from "@/utils";
 
 const setLoading = (data: LoadingData): SetLoadingAction => ({
   type: AppActionTypes.IS_LOADING,
@@ -82,9 +83,24 @@ export const hideModal = (): AppThunk => {
     });
   };
 };
+const setLaporanKosong = <T>(
+  namaForm: string,
+  errorMessage?: string
+): AppThunk => {
+  return async (dispatch: AppDispatch) => {
+    NotifInfo(errorMessage || "Laporan Tidak Tersedia");
+    const dataTmp: DataTmp<T[]> = {
+      data: [],
+      namaForm: namaForm,
+    };
+    dispatch(simpanDataTmp(dataTmp));
+    dispatch(stopLoading());
+  };
+};
 
 const utilityActions = {
   simpanDataTmp,
+  setLaporanKosong,
   getDataEdit,
   setLoading,
   isEdit,

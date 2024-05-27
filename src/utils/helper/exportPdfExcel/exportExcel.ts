@@ -1,27 +1,29 @@
 import {
   ColumnGenarator,
   DataItemGenerator,
-  GenaratorExport,
+  DataSystemInterFace,
+  GenaratorExportPdfExcel,
 } from "@/interface";
 import ExcelJS from "exceljs";
-import { convertDateTime } from "..";
-import BwipJs from "bwip-js";
+import { convertDate, convertDateTime, getItem } from "../helpers";
 
 const ExportExcel = async <T>({
+  title,
   columns,
   data,
   grouping,
   date,
-  excelSetting,
-}: GenaratorExport<T>): Promise<void> => {
+  grandTotalSetting,
+  dataToko,
+}: GenaratorExportPdfExcel<T>): Promise<void> => {
   const workbook = new ExcelJS.Workbook();
   columns = columns.filter((item) => !item.options?.disabledColumn);
-  const worksheet = workbook.addWorksheet(excelSetting?.titleExcel);
+  const worksheet = workbook.addWorksheet(title);
 
   const lastUsedColumnIndex = columns.length;
   // Judul
   const judul = worksheet.addRow([]);
-  judul.getCell(1).value = excelSetting?.titleExcel;
+  judul.getCell(1).value = title;
   judul.getCell(1).alignment = { horizontal: "center" };
   worksheet.mergeCells(
     `A${judul.number}:${String.fromCharCode(64 + lastUsedColumnIndex)}${
@@ -29,18 +31,49 @@ const ExportExcel = async <T>({
     }`
   );
   judul.eachCell((cell) => {
-    cell.font = {
-      color: { argb: "000000" },
-      bold: true,
-      size: 12,
-    };
+    cell.font = { color: { argb: "000000" }, bold: true, size: 12 };
+  });
+
+  //DataTOko
+  const namaTokoRow = worksheet.addRow([]);
+  namaTokoRow.getCell(1).value =
+    dataToko?.nama_toko ||
+    getItem<DataSystemInterFace>("dataSystem").nama_toko ||
+    "";
+  namaTokoRow.getCell(1).alignment = { horizontal: "center" };
+  worksheet.mergeCells(
+    `A${namaTokoRow.number}:${String.fromCharCode(64 + lastUsedColumnIndex)}${
+      namaTokoRow.number
+    }`
+  );
+  namaTokoRow.eachCell((cell) => {
+    cell.font = { color: { argb: "000000" }, bold: true, size: 12 };
+  });
+
+  //DataTOko
+  const alamatToko = worksheet.addRow([]);
+  alamatToko.getCell(1).value =
+    dataToko?.alamat_toko ||
+    getItem<DataSystemInterFace>("dataSystem").alamat_toko ||
+    "";
+  alamatToko.getCell(1).alignment = { horizontal: "center" };
+  worksheet.mergeCells(
+    `A${alamatToko.number}:${String.fromCharCode(64 + lastUsedColumnIndex)}${
+      alamatToko.number
+    }`
+  );
+  alamatToko.eachCell((cell) => {
+    cell.font = { color: { argb: "000000" }, bold: true, size: 12 };
   });
 
   // Tanggal
   if (date) {
     const tanggalRow = worksheet.addRow([]);
-    tanggalRow.getCell(1).value = `Tanggal : ${date?.start_date} ${
-      date?.end_date ? `s/d ${date?.end_date}` : ""
+    tanggalRow.getCell(1).value = `Tanggal : ${convertDate(
+      String(date?.start_date || date?.tgl_system || new Date()),
+      true
+    )} ${
+      date?.end_date ? `S/D ${convertDate(String(date?.end_date), true)}` : ""
     }`;
     tanggalRow.getCell(1).alignment = { horizontal: "center" };
 
@@ -51,11 +84,7 @@ const ExportExcel = async <T>({
       }`
     );
     tanggalRow.eachCell((cell) => {
-      cell.font = {
-        color: { argb: "00000" },
-        bold: true,
-        size: 12,
-      };
+      cell.font = { color: { argb: "000000" }, bold: true, size: 12 };
     });
   }
 
@@ -67,13 +96,10 @@ const ExportExcel = async <T>({
     cell.fill = {
       type: "pattern",
       pattern: "solid",
-      fgColor: { argb: excelSetting?.bgColor || "#E8E5E5" }, // Warna hijau yang diinginkan
-      bgColor: { argb: excelSetting?.bgColor || "#E8E5E5" },
+      fgColor: { argb: "E8E5E5" }, // Warna hijau yang diinginkan
+      bgColor: { argb: "E8E5E5" },
     };
-    cell.font = {
-      color: { argb: excelSetting?.txtColor },
-      bold: true,
-    };
+    cell.font = { color: { argb: "000000" }, bold: true };
 
     const columnValue = cell.value as unknown as ColumnGenarator<T>;
 
@@ -110,10 +136,20 @@ const ExportExcel = async <T>({
         const rowData = columns.map((column) => {
           const value =
             column?.options?.format === "DATETIME"
-              ? convertDateTime(
-                  itemDetail[column.key as keyof DataItemGenerator]
-                )
-              : itemDetail[column.key as keyof DataItemGenerator];
+              ? itemDetail[column.key as keyof DataItemGenerator] === undefined
+                ? convertDateTime(
+                    itemDetail[column.key as keyof DataItemGenerator]
+                  )
+                : ""
+              : column?.options?.format === "DATE"
+                ? itemDetail[column.key as keyof DataItemGenerator] !==
+                  undefined
+                  ? convertDate(
+                      itemDetail[column.key as keyof DataItemGenerator],
+                      true
+                    )
+                  : ""
+                : itemDetail[column.key as keyof DataItemGenerator];
           const alignment = {
             horizontal: column?.options?.halign
               ? column?.options?.halign
@@ -177,33 +213,28 @@ const ExportExcel = async <T>({
           subtotalRow.getCell(columnIndex + 1).value = "";
         }
       });
-      if (excelSetting?.grandTotalSetting?.colSpan) {
-        worksheet.mergeCells(
-          `A${subtotalRow.number}:${String.fromCharCode(
-            64 + Number(excelSetting?.grandTotalSetting?.colSpan)
-          )}${subtotalRow.number}`
-        );
-      }
       subtotalRow.eachCell((cell) => {
         cell.fill = {
           type: "pattern",
           pattern: "solid",
-          fgColor: { argb: excelSetting?.bgColor || "#E8E5E5" }, // Warna hijau yang diinginkan
-          bgColor: { argb: excelSetting?.bgColor || "#E8E5E5" },
+          fgColor: { argb: "E8E5E5" }, // Warna hijau yang diinginkan
+          bgColor: { argb: "E8E5E5" },
         };
-        cell.font = {
-          color: { argb: excelSetting?.txtColor },
-          bold: true,
-        };
+        cell.font = { color: { argb: "000000" }, bold: true };
       });
     } else {
       const rowData = columns.map((column) => {
         const value =
           column?.options?.format === "DATETIME"
-            ? convertDateTime(item[column.key as keyof DataItemGenerator])
-            : item[column.key as keyof DataItemGenerator];
+            ? item[column.key as keyof DataItemGenerator] !== undefined
+              ? convertDateTime(item[column.key as keyof DataItemGenerator])
+              : ""
+            : column?.options?.format === "DATE"
+              ? item[column.key as keyof DataItemGenerator] !== undefined
+                ? convertDate(item[column.key as keyof DataItemGenerator], true)
+                : ""
+              : item[column.key as keyof DataItemGenerator];
         const alignment = {
-          vertical: "middle",
           horizontal: column?.options?.halign
             ? column?.options?.halign
             : column?.options?.format === "RP" ||
@@ -211,22 +242,18 @@ const ExportExcel = async <T>({
               ? "right"
               : "left" || "right",
         };
-
         const columnKey = column.key as keyof DataItemGenerator;
         totals[columnKey] = (totals[columnKey] || 0) + Number(value);
 
         return {
           value,
-          options: column?.options,
           alignment,
           numFmt:
             column?.options?.format === "RP"
               ? "#,##0"
               : column?.options?.format === "GR"
                 ? "#,##0.000"
-                : column?.options?.barcodeOption !== undefined
-                  ? "BARCODE"
-                  : undefined,
+                : undefined,
         };
       });
 
@@ -234,69 +261,7 @@ const ExportExcel = async <T>({
 
       rowData.forEach((cellData, index) => {
         const cell = row.getCell(index + 1);
-
-        // console.log(cellData.options?.showTextBarcode);
-
-        const barcodeOption = cellData.options?.barcodeOption;
-        if (barcodeOption !== undefined) {
-          // console.log(worksheet.getColumn("A4").number);
-          const canvas = document.createElement("canvas");
-          BwipJs.toCanvas(canvas, {
-            bcid: barcodeOption.format || "code128", // Barcode type
-            text: String(cellData.value), // Text to encode
-            scale: 3, // 3x scaling factor
-            height: 10, // Bar height, in millimeters
-            includetext: barcodeOption.showText || true, // Show human-readable text
-            textxalign: "center",
-          });
-
-          const imageId = cell.workbook.addImage({
-            base64: canvas.toDataURL("image/png"),
-            extension: "png",
-          });
-
-          row.height = barcodeOption.heightColumn || 39;
-          const firstColumn = worksheet.getColumn(index + 1);
-          firstColumn.width = barcodeOption.widthColumn || 12;
-
-          worksheet.addImage(imageId, {
-            tl: {
-              col: index + 1 - 1,
-              row: Number(cell.row || 0) - 1,
-            }, // Gunakan nomor baris yang benar
-            ext: {
-              width: barcodeOption.widthBarcode || 100,
-              height: barcodeOption.heightBarcode || 50,
-            }, // Sesuaikan dengan ukuran gambar Anda
-          });
-
-          cell.alignment = { horizontal: "center" };
-
-          cell.value = "";
-          // Tidak perlu mengembalikan nilai untuk kolom gambar barcode
-          return null;
-        }
-        const vertical = cellData.alignment.vertical
-          ? String(cellData.alignment.vertical || "bottom")
-          : "bottom";
-
-        let verticalAlignment: any = ""; // Default value
-
-        // Check if the value is valid and assign it
-        if (
-          vertical === "middle" ||
-          vertical === "bottom" ||
-          vertical === "justify" ||
-          vertical === "distributed" ||
-          vertical === "top"
-        ) {
-          verticalAlignment = vertical as any;
-        }
-
-        cell.alignment = {
-          horizontal: cellData.alignment.horizontal,
-          vertical: verticalAlignment,
-        };
+        cell.alignment = cellData.alignment;
 
         if (cellData.numFmt) {
           cell.numFmt = cellData.numFmt;
@@ -329,10 +294,10 @@ const ExportExcel = async <T>({
       grandTotalRow.getCell(columnIndex + 1).value = "";
     }
   });
-  if (excelSetting?.grandTotalSetting?.colSpan) {
+  if (grandTotalSetting?.colSpan) {
     worksheet.mergeCells(
       `A${grandTotalRow.number}:${String.fromCharCode(
-        64 + Number(excelSetting?.grandTotalSetting?.colSpan)
+        64 + Number(grandTotalSetting?.colSpan)
       )}${grandTotalRow.number}`
     );
   }
@@ -340,13 +305,10 @@ const ExportExcel = async <T>({
     cell.fill = {
       type: "pattern",
       pattern: "solid",
-      fgColor: { argb: excelSetting?.bgColor || "#E8E5E5" }, // Warna hijau yang diinginkan
-      bgColor: { argb: excelSetting?.bgColor || "#E8E5E5" },
+      fgColor: { argb: "E8E5E5" }, // Warna hijau yang diinginkan
+      bgColor: { argb: "E8E5E5" },
     };
-    cell.font = {
-      color: { argb: excelSetting?.txtColor },
-      bold: true,
-    };
+    cell.font = { color: { argb: "000000" }, bold: true };
   });
 
   const buffer = await workbook.xlsx.writeBuffer();
@@ -355,7 +317,7 @@ const ExportExcel = async <T>({
   });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `${excelSetting?.titleExcel}.xlsx`;
+  link.download = `${title}.xlsx`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

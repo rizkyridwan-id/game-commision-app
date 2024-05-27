@@ -15,7 +15,7 @@ import {
   ParameterTargetSalesState,
   ParameterTargetTokoState,
   ThemeState,
-  TimeKeepingKehadiranState,
+  TimeKeepingState,
   UtilityState,
   helperState,
 } from "../actions";
@@ -44,6 +44,6 @@ export interface RootState<T> {
   };
 
   timeKeeping: {
-    timeKeepingKehadiran: TimeKeepingKehadiranState;
+    dataTimeKeeping: TimeKeepingState;
   };
 }

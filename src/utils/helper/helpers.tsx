@@ -1,6 +1,10 @@
 import { doDecrypt, doEncrypt } from "./encrypt";
 import { CryptoJS, useEffect, useState } from "../../package";
-import { LocalStorageItem, UserLoginInterFace } from "@/interface";
+import {
+  DataTokoInterFace,
+  LocalStorageItem,
+  UserLoginInterFace,
+} from "@/interface";
 import * as XLSX from "xlsx";
 import moment from "moment-timezone";
 
@@ -29,6 +33,13 @@ export const VITE_APP_VERSION: string | undefined =
 interface LoadingContentProps {
   loading?: boolean;
 }
+
+export const filterKodeToko = (kodeToko: string) => {
+  const datatoko = getItem<DataTokoInterFace[]>("dataToko").find(
+    (list) => list.kode_toko === kodeToko
+  );
+  return datatoko;
+};
 
 export const speak = (text: string): void => {
   // Create a SpeechSynthesisUtterance

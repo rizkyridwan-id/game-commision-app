@@ -1,4 +1,3 @@
-export * from "./break";
-export * from "./istirahat";
-export * from "./kehadiran";
-export * from "./sholat";
+import DataTimeKeeping from "./dataTimeKeeping";
+
+export { DataTimeKeeping };

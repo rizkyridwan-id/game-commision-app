@@ -1,20 +1,20 @@
 import { TimeKeepingKehadiranInterFace, SearchInterface } from "@/interface";
-import { AppDispatch, AppThunk, utilityActions } from "../../../index";
+import { AppDispatch, AppThunk, utilityActions } from "../../index";
 import { NotifInfo, getData, urlApi } from "@/utils";
-import { TimeKeepingKehadiranAction, TimeKeepingKehadiranType } from "./type";
+import { TimeKeepingAction, TimeKeepingType } from "./type";
 
-export const getTimeKeepingKehadiranAction = (
+export const getDataTimeKeepingAction = (
   data: TimeKeepingKehadiranInterFace[],
   total: number
-): TimeKeepingKehadiranAction => ({
-  type: TimeKeepingKehadiranType.GET_TIME_KEEPING_KEHADIRAN,
+): TimeKeepingAction => ({
+  type: TimeKeepingType.GET_DATA_TIME_KEEPING,
   payload: {
     data: data,
     total: total,
   },
 });
 
-export const getTimeKeepingKehadiran = (row?: SearchInterface): AppThunk => {
+export const getDataTimeKeeping = (row?: SearchInterface): AppThunk => {
   return async (dispatch: AppDispatch) => {
     try {
       const params: Record<string, string | number | undefined> = {
@@ -22,19 +22,19 @@ export const getTimeKeepingKehadiran = (row?: SearchInterface): AppThunk => {
         limit: row?.limit,
       };
 
-      if (row?.q !== undefined) {
-        params.q = row.q || "";
+      if (row?.tgl_system !== undefined) {
+        params.tgl_system = row.tgl_system || "";
       }
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<TimeKeepingKehadiranInterFace[]>(
-        urlApi.paramter.bonusSales,
+        urlApi.timeKeeping.dataTimeKeeping,
         params
       );
-      dispatch(getTimeKeepingKehadiranAction(response.data, response.count));
+      dispatch(getDataTimeKeepingAction(response.data, response.count));
       dispatch(utilityActions.stopLoading());
     } catch (error) {
-      dispatch(getTimeKeepingKehadiranAction([], 0));
+      dispatch(getDataTimeKeepingAction([], 0));
       dispatch(utilityActions.stopLoading());
       NotifInfo(`${error}`);
     }
