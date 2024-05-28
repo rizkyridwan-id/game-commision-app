@@ -62,7 +62,7 @@ const RenderTextArea: React.FC<IFieldProps> = ({
         )}
 
         <textarea
-          // {...input}
+          {...input}
           onKeyPress={(event) => {
             if (!enableenter && event.key === "Enter") {
               event.preventDefault();
@@ -77,8 +77,8 @@ const RenderTextArea: React.FC<IFieldProps> = ({
           minLength={minLength}
           maxLength={maxLength}
           placeholder={placeholder}
-          rows={height || 10}
-          cols={width || 10}
+          rows={height}
+          cols={width}
           value={
             noUpperCase ? input?.value : (input?.value?.toUpperCase() as string)
           }

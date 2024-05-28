@@ -28,11 +28,13 @@ const urlApi = {
 
   transaksi: {
     cuti: "cuti-request",
+    pelanggaranPegawai: "pelanggaran-pegawai",
   },
 
   report: {
     timeKeeping: "time-keeping/report/pegawai-time-keeping",
     cuti: "cuti-request/report/pengajuan-cuti",
+    pelanggaranPegawai: "pelanggaran-pegawai/report",
   },
   login: "auth/login",
   dashboard: {

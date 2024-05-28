@@ -203,8 +203,8 @@ const AppRoute = [
         ),
       },
       {
-        path: "/app/laporan-global-payroll",
-        title: "Laporan Global Payroll",
+        path: "/app/laporan-pengajuan-cuti",
+        title: "Laporan Pengajuan Cuti",
         element: (
           <ProtectedRoute>
             <LaporanPengajuanCuti />

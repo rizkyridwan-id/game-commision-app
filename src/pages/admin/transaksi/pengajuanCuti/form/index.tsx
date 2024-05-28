@@ -1,15 +1,16 @@
 import {
   AppDispatch,
   RootState,
-  actionMaster,
-  useAppSelector,
+  // actionMaster,
+  // useAppSelector,
 } from "@/reduxStore";
 import {
   ButtonCustom,
   HiddenField,
   ReanderField,
-  RenderSelect,
+  // RenderSelect,
   setFocusField,
+  today,
 } from "@/utils";
 import {
   Field,
@@ -18,7 +19,7 @@ import {
   connect,
   useEffect,
 } from "@/package";
-import { ConfigProps } from "redux-form";
+import { ConfigProps, change } from "redux-form";
 import { PengajuanCutiInterFace } from "@/interface";
 
 import { pengajuanCutiRedux } from "../redux";
@@ -41,9 +42,11 @@ const FormPengajuanCuti = (
 
   useEffect(() => {
     setFocusField("target");
-    dispatch(actionMaster.getDataToko());
+    // dispatch(actionMaster.getDataToko());
+    dispatch(change("FormPengajuanCuti", "leave_start_date", today));
+    dispatch(change("FormPengajuanCuti", "leave_end_date", today));
   }, [dispatch]);
-  const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
+  // const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
 
   return (
     <form onSubmit={handleSubmit(simpan)}>
@@ -55,11 +58,11 @@ const FormPengajuanCuti = (
             id="kode_pegawai"
             name="kode_pegawai"
             type="text"
-            placeholder="Masukan Target"
+            placeholder="Masukan Kode Pegawai"
             component={ReanderField}
           />
         </div>
-        <div className={"col-6"}>
+        {/* <div className={"col-6"}>
           <Field
             label="Kode Toko"
             name="kode_toko"
@@ -72,7 +75,7 @@ const FormPengajuanCuti = (
               };
             })}
           />
-        </div>
+        </div> */}
         <div className={"col-6"}>
           <Field
             label="Cuti Dari"
@@ -91,7 +94,7 @@ const FormPengajuanCuti = (
             component={ReanderField}
           />
         </div>
-        <div className={"col-12"}>
+        <div className={"col-6"}>
           <Field
             label="Alasan Cuti"
             name="leave_description"

@@ -90,7 +90,11 @@ const MenuPusat = [
         title: "Laporan Time Keeping",
         is_show: false,
       },
-      { path: "#", title: "Laporan Pengajuan Cuti", is_show: false },
+      {
+        path: "/app/laporan-pengajuan-cuti",
+        title: "Laporan Pengajuan Cuti",
+        is_show: false,
+      },
       { path: "/app/laporan-kas-bon", title: "Laporan Kas Bon" },
       {
         path: "/app/laporan-potongan-lain-lain",

@@ -25,6 +25,8 @@ import {
   parameterKonversiCutiReducer,
   timeKeepingReducer,
   pengajuanCutiReducer,
+  reviewPengajuanCutiReducer,
+  pelanggaranPegawaiReducer,
 } from "../reducers";
 
 export const rootReducer = combineReducers({
@@ -54,6 +56,8 @@ export const rootReducer = combineReducers({
 
   transaksi: combineReducers({
     dataPengajuanCuti: pengajuanCutiReducer,
+    reviewPengajuanCuti: reviewPengajuanCutiReducer,
+    pelanggaranPegawaiReducer: pelanggaranPegawaiReducer,
   }),
 });
 

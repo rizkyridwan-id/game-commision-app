@@ -1,4 +1,4 @@
-import { PengajuanCutiInterFace } from "@/interface";
+import { PelanggaranPegawaiInterFace } from "@/interface";
 import {
   AppDispatch,
   AppThunk,
@@ -12,19 +12,17 @@ import {
   deleteData,
   postData,
   putData,
-  today,
   urlApi,
 } from "@/utils";
 import { reset } from "redux-form";
 
-export const pengajuanCutiRedux = () => {
+export const reduxPelanggaranPegawai = () => {
   const prosesData = (): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
       const state = getState();
-      const formValue = state.form.FormPengajuanCuti
-        ?.values as PengajuanCutiInterFace;
+      const formValue = state.form.FormPelanggaranPegawai
+        ?.values as PelanggaranPegawaiInterFace;
 
-      formValue.tgl_system = today;
       formValue.kode_toko = `${VITE_APP_KODE_TOKO}`;
 
       if (state.utility.getModal.isEdit) {
@@ -35,35 +33,38 @@ export const pengajuanCutiRedux = () => {
     };
   };
 
-  const save = (data: PengajuanCutiInterFace) => {
+  const save = (data: PelanggaranPegawaiInterFace) => {
     return async (dispatch: AppDispatch) => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
-        await postData<PengajuanCutiInterFace>(urlApi.transaksi.cuti, data);
+        await postData<PelanggaranPegawaiInterFace>(
+          urlApi.transaksi.pelanggaranPegawai,
+          data
+        );
         NotifSuccess("Data Berhasil Disimpan");
-        dispatch(actionTransaksi.getPengajuanCuti());
         dispatch(utilityActions.stopLoading());
+        dispatch(actionTransaksi.getPelanggaranPegawai());
         dispatch(utilityActions.hideModal());
-        dispatch(reset("FormPengajuanCuti"));
+        dispatch(reset("FormPelanggaranPegawai"));
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());
       }
     };
   };
-  const edit = (data: PengajuanCutiInterFace) => {
+  const edit = (data: PelanggaranPegawaiInterFace) => {
     return async (dispatch: AppDispatch) => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
-        await putData<PengajuanCutiInterFace>(
-          `${urlApi.transaksi.cuti}/${data._id}`,
+        await putData<PelanggaranPegawaiInterFace>(
+          `${urlApi.transaksi.pelanggaranPegawai}/${data._id}`,
           data
         );
         NotifSuccess("Data Berhasil Diedit");
-        dispatch(actionTransaksi.getPengajuanCuti());
         dispatch(utilityActions.stopLoading());
-        dispatch(reset("FormPengajuanCuti"));
+        dispatch(actionTransaksi.getPelanggaranPegawai());
         dispatch(utilityActions.hideModal());
+        dispatch(reset("FormPelanggaranPegawai"));
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());
@@ -79,12 +80,13 @@ export const pengajuanCutiRedux = () => {
             button: true,
           })
         );
-        await deleteData<PengajuanCutiInterFace>(
-          `${urlApi.transaksi.cuti}/${id}`
+        await deleteData<PelanggaranPegawaiInterFace>(
+          `${urlApi.transaksi.pelanggaranPegawai}/${id}`
         );
-        dispatch(actionTransaksi.getPengajuanCuti());
+        dispatch(actionTransaksi.getPelanggaranPegawai());
         NotifSuccess("Data Berhasil Dihapus");
         dispatch(utilityActions.stopLoading());
+        dispatch(reset("FormPelanggaranPegawai"));
       } catch (error) {
         dispatch(utilityActions.stopLoading());
         NotifInfo(`${error || "Data Gagal Hapus"}`);

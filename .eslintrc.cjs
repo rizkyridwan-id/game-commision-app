@@ -13,7 +13,10 @@ module.exports = {
   overrides: [],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2020,
     sourceType: "module",
     project: "./tsconfig.json",
   },
@@ -29,10 +32,14 @@ module.exports = {
       "off",
       { allowConstantExport: true },
     ],
+    "react/prop-types": "off",
+    "import/no-unresolved": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
   settings: {
     react: {
       version: "detect",
     },
   },
+  ignorePatterns: ["node_modules/", "dist/", "build/"],
 };

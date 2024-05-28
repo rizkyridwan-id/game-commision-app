@@ -1,5 +1,4 @@
 import { InputHTMLAttributes } from "react";
-import { WrappedFieldMetaProps } from "redux-form";
 
 export interface IFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -7,41 +6,36 @@ export interface IFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   required?: boolean;
   formGroup?: boolean;
+  isNumber?: boolean;
   readOnly?: boolean;
   textColor?: string;
   iconFormGroup?: string;
   tabIndex?: number;
   // input: any;
-  isNumber?: boolean;
-  noUpperCase?: string;
-  // input: React.ChangeEvent<HTMLInputElement>;
   input: {
-    target: {
-      files?: FileList;
-      name: string;
-      value: any;
-    };
+    target: any;
+    name: string;
     value: any;
     onBlur: () => void;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (value: any) => void;
     onFocus: () => void;
   };
   ref?: React.RefObject<HTMLInputElement>;
   id?: string;
   minLength?: number;
   maxLength?: number;
-  nouperCase?: string;
+  noUpperCase?: string;
   placeholder?: string;
   customeCss?: string;
   titleTooltip?: string;
   iconOptional?: string;
   optionalLabel?: string;
-  width: number;
-  height: number;
   stylelabel?: React.CSSProperties;
-  meta: WrappedFieldMetaProps; // Sesuaikan dengan kebutuhan sebenarnya
+  meta?: any;
   enableenter: boolean;
   inputGroup?: boolean;
+  height?: number;
+  width?: number;
   left?: boolean;
   right?: boolean;
   handleClick?: () => void;

@@ -1,12 +1,19 @@
-import { PanelContent, TableMaster } from "@/components";
+import { TableMaster } from "@/components";
 import { ColumnInterFace, PengajuanCutiInterFace } from "@/interface";
-import { AppDispatch, actionTransaksi, useAppSelector } from "@/reduxStore";
+import {
+  AppDispatch,
+  actionTransaksi,
+  useAppSelector,
+  utilityController,
+} from "@/reduxStore";
+import { Button } from "antd";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { reduxForm } from "redux-form";
 
-const DashbaordReviewCuti = () => {
+const TableReviewCuti = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const helperRedux = utilityController();
 
   const columns: ColumnInterFace<PengajuanCutiInterFace>[] = [
     {
@@ -34,7 +41,31 @@ const DashbaordReviewCuti = () => {
       dataIndex: "kode_toko",
       key: "kode_toko",
     },
+    {
+      title: "Action",
+      key: "actions",
+      render: (_cell: string, row: PengajuanCutiInterFace) => {
+        return (
+          <Button
+            type="primary"
+            onClick={() =>
+              dispatch(
+                helperRedux.showModal({
+                  isEdit: true,
+                  title: "Review Cuti",
+                  namaForm: "FormReviewCuti",
+                  data: row,
+                })
+              )
+            }
+          >
+            <i className="fa fa-edit"></i>
+          </Button>
+        );
+      },
+    },
   ];
+
   useEffect(() => {
     dispatch(actionTransaksi.getReviewPengajuanCuti());
   }, [dispatch]);
@@ -42,20 +73,19 @@ const DashbaordReviewCuti = () => {
   const dataReviewCuti = useAppSelector(
     (state) => state.transaksi.reviewPengajuanCuti
   );
+
   return (
-    <PanelContent title="Dashboard Review Cuti">
-      <TableMaster
-        dataSource={dataReviewCuti.data}
-        columns={columns}
-        rowKey={"_id"}
-        scrollX
-        width={800}
-        disabledSearch
-      />
-    </PanelContent>
+    <TableMaster
+      dataSource={dataReviewCuti.data}
+      columns={columns}
+      rowKey={"kode_pegawai"}
+      scrollX
+      width={800}
+      disabledSearch
+    />
   );
 };
 
 export default reduxForm({
-  form: "dashboardReviewCuti",
-})(DashbaordReviewCuti);
+  form: "TableReviewCuti",
+})(TableReviewCuti);

@@ -47,7 +47,7 @@ const ExportPDF = <T>({
       `Tanggal : ${convertDate(String(date?.start_date || date?.tgl_system), true)} ${
         date?.end_date ? `S/D ${convertDate(String(date?.end_date), true)}` : ""
       }`,
-      startX + 35,
+      startX + (date?.end_date ? 48 : 35),
       22,
       { align: "right" }
     );

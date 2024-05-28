@@ -1,2 +1,8 @@
+import pelanggaranPegawaiReducer from "./pelanggaranPegawaiReducer";
 import pengajuanCutiReducer from "./pengajuanCutiReducer";
-export { pengajuanCutiReducer };
+import reviewPengajuanCutiReducer from "./reviewCutiReducer";
+export {
+  pengajuanCutiReducer,
+  reviewPengajuanCutiReducer,
+  pelanggaranPegawaiReducer,
+};
