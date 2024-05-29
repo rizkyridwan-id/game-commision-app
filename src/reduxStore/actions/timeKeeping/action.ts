@@ -1,6 +1,6 @@
 import { TimeKeepingKehadiranInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../index";
-import { NotifInfo, getData, urlApi } from "@/utils";
+import { NotifInfo, VITE_APP_KODE_TOKO, getData, urlApi } from "@/utils";
 import { TimeKeepingAction, TimeKeepingType } from "./type";
 
 export const getDataTimeKeepingAction = (
@@ -25,6 +25,7 @@ export const getDataTimeKeeping = (row?: SearchInterface): AppThunk => {
       if (row?.tgl_system !== undefined) {
         params.tgl_system = row.tgl_system || "";
       }
+      params.kode_toko = VITE_APP_KODE_TOKO;
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<TimeKeepingKehadiranInterFace[]>(

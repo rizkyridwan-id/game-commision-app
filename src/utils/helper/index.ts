@@ -16,6 +16,7 @@ const date = new Date().toLocaleDateString("id-ID", {
 
 const [day, month, year] = date.split("/");
 const today = `${year}-${month}-${day}`;
+export const todayMonth = date.toString().substring(0, 7);
 export * from "./Axios";
 export * from "./Toast";
 export * from "./Field";

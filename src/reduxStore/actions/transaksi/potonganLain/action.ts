@@ -1,20 +1,20 @@
-import { PengajuanCutiInterFace, SearchInterface } from "@/interface";
+import { PotonganLainInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
 import { NotifInfo, VITE_APP_KODE_TOKO, getData, today, urlApi } from "@/utils";
-import { PengajuanCutiAction, PengajuanCutiType } from "./type";
+import { PotonganLainAction, PotonganLainType } from "./type";
 
-export const getPengajuanCutiAction = (
-  data: PengajuanCutiInterFace[],
+export const getPotonganLainAction = (
+  data: PotonganLainInterFace[],
   total: number
-): PengajuanCutiAction => ({
-  type: PengajuanCutiType.GET_DATA_CUTI,
+): PotonganLainAction => ({
+  type: PotonganLainType.GET_POTONGAN_LAIN,
   payload: {
     data: data,
     total: total,
   },
 });
 
-export const getPengajuanCuti = (row?: SearchInterface): AppThunk => {
+export const getPotonganLain = (row?: SearchInterface): AppThunk => {
   return async (dispatch: AppDispatch) => {
     try {
       const params: Record<string, string | number | undefined> = {
@@ -27,17 +27,17 @@ export const getPengajuanCuti = (row?: SearchInterface): AppThunk => {
       params.kode_toko = VITE_APP_KODE_TOKO;
 
       dispatch(utilityActions.setLoading({ table: true }));
-      const response = await getData<PengajuanCutiInterFace[]>(
-        urlApi.report.cuti,
+      const response = await getData<PotonganLainInterFace[]>(
+        urlApi.report.potonganLain,
         params
       );
-      dispatch(getPengajuanCutiAction(response.data, response.count));
+      dispatch(getPotonganLainAction(response.data, response.count));
       dispatch(utilityActions.stopLoading());
     } catch (error) {
-      dispatch(getPengajuanCutiAction([], 0));
+      dispatch(getPotonganLainAction([], 0));
       dispatch(utilityActions.stopLoading());
-      if (row?.namaForm === "Data Pengajuan Cuti") {
-        NotifInfo(`Data Pengajuan Cuti Kosong`);
+      if (row?.namaForm === "Data Potongan") {
+        NotifInfo(`Data Potongan Lain Kosong`);
       } else {
         NotifInfo(`${error}`);
       }

@@ -1,6 +1,6 @@
 import { PelanggaranPegawaiInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
-import { NotifInfo, getData, today, urlApi } from "@/utils";
+import { NotifInfo, VITE_APP_KODE_TOKO, getData, today, urlApi } from "@/utils";
 import { PelanggaranPegawaiAction, PelanggaranPegawaiType } from "./type";
 
 export const getPelanggaranPegawaiAction = (
@@ -24,6 +24,7 @@ export const getPelanggaranPegawai = (row?: SearchInterface): AppThunk => {
 
       params.start_date = row?.start_date || today;
       params.end_date = row?.end_date || today;
+      params.kode_toko = VITE_APP_KODE_TOKO;
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<PelanggaranPegawaiInterFace[]>(

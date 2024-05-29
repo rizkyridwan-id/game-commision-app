@@ -33,7 +33,7 @@ const TableMaster = (props: TableMasterProps) => {
   const utility = useAppSelector((state) => state.utility);
 
   const [value, setValue] = useState("");
-  const [data, setData] = useState(dataSource);
+  const [data, setData] = useState(dataSource.length > 0 ? dataSource : []);
 
   useEffect(() => {
     setData(dataSource);

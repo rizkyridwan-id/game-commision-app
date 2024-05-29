@@ -30,6 +30,9 @@ const urlApi = {
     cuti: "cuti-request",
     pelanggaranPegawai: "pelanggaran-pegawai",
     kasbon: "kasbon",
+    payroll: "payroll",
+    payrollSummary: "payroll/pegawai-summary",
+    potonganLain: "potongan-lain-lain",
   },
 
   report: {
@@ -37,6 +40,7 @@ const urlApi = {
     cuti: "cuti-request/report/pengajuan-cuti",
     pelanggaranPegawai: "pelanggaran-pegawai/report",
     kasbon: "kasbon/report",
+    potonganLain: "potongan-lain-lain/report",
   },
   login: "auth/login",
   dashboard: {

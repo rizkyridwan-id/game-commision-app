@@ -28,6 +28,7 @@ import {
   reviewPengajuanCutiReducer,
   pelanggaranPegawaiReducer,
   kasBonReducer,
+  potonganLainReducer,
 } from "../reducers";
 
 export const rootReducer = combineReducers({
@@ -60,6 +61,7 @@ export const rootReducer = combineReducers({
     reviewPengajuanCuti: reviewPengajuanCutiReducer,
     pelanggaranPegawai: pelanggaranPegawaiReducer,
     kasBon: kasBonReducer,
+    potonganLain: potonganLainReducer,
   }),
 });
 

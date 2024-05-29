@@ -67,8 +67,8 @@ const MenuPusat = [
       { path: "/app/review-cuti", title: "Review Cuti", is_show: false },
       { path: "/app/kas-bon", title: "Kas Bon", is_show: false },
       {
-        path: "/app/potongan-lain",
-        title: "Potongan Lain",
+        path: "/app/potongan-lain-lain",
+        title: "Potongan Lain Lain",
         is_show: false,
       },
       {

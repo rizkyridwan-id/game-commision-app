@@ -1,10 +1,9 @@
 import { TableMaster } from "@/components";
 import { ColumnInterFace, KasBonInterFace } from "@/interface";
-import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
+import { AppDispatch, useAppSelector } from "@/reduxStore";
 import { ButtonCustom } from "@/utils";
 import { useDispatch } from "react-redux";
 import { reduxLaporanKasBon } from "../redux";
-import { useEffect } from "react";
 
 const TableLporanKasBon = () => {
   const columnsTableKasbon: ColumnInterFace<KasBonInterFace>[] = [
@@ -49,12 +48,7 @@ const TableLporanKasBon = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const proses = reduxLaporanKasBon();
-  useEffect(() => {
-    dispatch(simpanDataTmp({ data: [] }));
-    return () => {
-      dispatch(simpanDataTmp({ data: [] }));
-    };
-  }, [dispatch]);
+
   return (
     <div className="row mt-4">
       <TableMaster

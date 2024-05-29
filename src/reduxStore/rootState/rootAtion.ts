@@ -17,6 +17,7 @@ import {
   ParameterTargetTokoState,
   PelanggaranPegawaiState,
   PengajuanCutiState,
+  PotonganLainState,
   ReviewPengajuanCutiState,
   ThemeState,
   TimeKeepingState,
@@ -54,7 +55,8 @@ export interface RootState<T> {
   transaksi: {
     dataPengajuanCuti: PengajuanCutiState;
     reviewPengajuanCuti: ReviewPengajuanCutiState;
-    pelanggaranPegawaiReducer: PelanggaranPegawaiState;
-    kasBonReducer: KasBonState;
+    pelanggaranPegawai: PelanggaranPegawaiState;
+    kasBon: KasBonState;
+    potonganLain: PotonganLainState;
   };
 }

@@ -239,8 +239,8 @@ const AppRoute = [
         ),
       },
       {
-        path: "/app/potongan-lain",
-        title: "Potongan Lain",
+        path: "/app/potongan-lain-lain",
+        title: "Potongan Lain Lain ",
         element: (
           <ProtectedRoute>
             <PotonganLainLain />

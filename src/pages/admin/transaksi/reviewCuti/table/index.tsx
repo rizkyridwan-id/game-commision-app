@@ -78,7 +78,7 @@ const TableReviewCuti = () => {
     <TableMaster
       dataSource={dataReviewCuti.data}
       columns={columns}
-      rowKey={"kode_pegawai"}
+      rowKey={"_id"}
       scrollX
       width={800}
       disabledSearch
