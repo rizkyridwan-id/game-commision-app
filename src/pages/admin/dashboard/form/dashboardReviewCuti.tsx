@@ -36,7 +36,11 @@ const DashbaordReviewCuti = () => {
     },
   ];
   useEffect(() => {
-    dispatch(actionTransaksi.getReviewPengajuanCuti());
+    dispatch(
+      actionTransaksi.getReviewPengajuanCuti({
+        namaForm: "DASHBOARD",
+      })
+    );
   }, [dispatch]);
 
   const dataReviewCuti = useAppSelector(

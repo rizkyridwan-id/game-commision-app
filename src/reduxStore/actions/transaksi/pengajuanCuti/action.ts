@@ -35,7 +35,11 @@ export const getPengajuanCuti = (row?: SearchInterface): AppThunk => {
     } catch (error) {
       dispatch(getPengajuanCutiAction([], 0));
       dispatch(utilityActions.stopLoading());
-      NotifInfo(`${error}`);
+      if (row?.namaForm === "Data Pengajuan Cuti") {
+        NotifInfo(`Data Pengajuan Cuti Kosong`);
+      } else {
+        NotifInfo(`${error}`);
+      }
     }
   };
 };

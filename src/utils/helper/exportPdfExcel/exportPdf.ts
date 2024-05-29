@@ -41,13 +41,11 @@ const ExportPDF = <T>({
   // Teks di kanan
   doc.text(title, widthPortrait - 15, 18, { align: "right" });
   if (date) {
-    const titleWidth = doc.getTextWidth(title);
-    const startX = widthPortrait - 15 - titleWidth;
     doc.text(
       `Tanggal : ${convertDate(String(date?.start_date || date?.tgl_system), true)} ${
         date?.end_date ? `S/D ${convertDate(String(date?.end_date), true)}` : ""
       }`,
-      startX + (date?.end_date ? 48 : 35),
+      widthPortrait - 15,
       22,
       { align: "right" }
     );

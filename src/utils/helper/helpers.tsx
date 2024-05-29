@@ -629,6 +629,10 @@ export function getBgColor({ type, status }: StatusInput): string {
         return "#D5E7D4";
       } else if (status === "LATE") {
         return "#F7CECC";
+      } else if (status === "CUTI") {
+        return "#FFDA78";
+      } else if (status === "LIBUR") {
+        return "#FFFFFF";
       } else {
         return "#F7CECC";
       }
@@ -637,6 +641,10 @@ export function getBgColor({ type, status }: StatusInput): string {
         return "#D5E7D4";
       } else if (status === "EARLY") {
         return "#ebc9b2";
+      } else if (status === "CUTI") {
+        return "#FFDA78";
+      } else if (status === "LIBUR") {
+        return "#FFFFFF";
       } else {
         return "#F7CECC";
       }
@@ -645,6 +653,10 @@ export function getBgColor({ type, status }: StatusInput): string {
         return "#D5E7D4";
       } else if (status === "OVERTIME") {
         return "#FFE6CC";
+      } else if (status === "CUTI") {
+        return "#FFDA78";
+      } else if (status === "LIBUR") {
+        return "#FFFFFF";
       } else {
         return "#F7CECC";
       }

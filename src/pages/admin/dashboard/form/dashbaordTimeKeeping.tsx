@@ -136,7 +136,9 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
       change("dashboardTimeKeeping", "kode_toko", dataToko?.data[0]?.kode_toko)
     );
 
-    dispatch(proses.cariLaporan("DASHBOARD"));
+    setTimeout(() => {
+      dispatch(proses.cariLaporan("DASHBOARD"));
+    }, 300);
   };
 
   const cariData = () => {

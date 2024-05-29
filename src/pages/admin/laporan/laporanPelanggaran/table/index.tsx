@@ -1,13 +1,13 @@
 import { TableMaster } from "@/components";
-import { ColumnInterFace, PengajuanCutiInterFace } from "@/interface";
+import { ColumnInterFace, PelanggaranPegawaiInterFace } from "@/interface";
 import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
 import { ButtonCustom } from "@/utils";
 import { useDispatch } from "react-redux";
-import { reduxLaporanPengajuanCuti } from "../redux";
+import { reduxLaporanPelanggaranPegawai } from "../redux";
 import { useEffect } from "react";
 
-const TableLporanPenhajuanCuti = () => {
-  const columns: ColumnInterFace<PengajuanCutiInterFace>[] = [
+const TableLporanPelanggaran = () => {
+  const columns: ColumnInterFace<PelanggaranPegawaiInterFace>[] = [
     {
       title: "Tanggal",
       dataIndex: "tgl_system",
@@ -24,47 +24,23 @@ const TableLporanPenhajuanCuti = () => {
       key: "nama_pegawai",
     },
     {
-      title: "Cuti Dari",
-      dataIndex: "leave_start_date",
-      key: "leave_start_date",
+      title: "Kode Toko",
+      dataIndex: "kode_toko",
+      key: "kode_toko",
     },
     {
-      title: "Cuti Sampai",
-      dataIndex: "leave_end_date",
-      key: "leave_end_date",
-    },
-    {
-      title: "Alasan Cuti",
-      dataIndex: "leave_description",
-      key: "leave_description",
-    },
-    {
-      title: "Tanggal Valid",
-      dataIndex: "tgl_validasi",
-      key: "tgl_validasi",
-    },
-    {
-      title: "Valid By",
-      dataIndex: "validasi_by",
-      key: "validasi_by",
-    },
-    {
-      title: "Tolak By",
-      dataIndex: "validasi_by",
-      key: "validasi_by",
-    },
-    {
-      title: "Alasan Tolak",
-      dataIndex: "reject_description",
-      key: "reject_description",
+      title: "Deskripsi",
+      dataIndex: "deskripsi",
+      key: "deskripsi",
     },
   ];
   const datatmp = useAppSelector(
     (state) => state.utility.getDataTmp.data || []
-  ) as PengajuanCutiInterFace[];
+  ) as PelanggaranPegawaiInterFace[];
 
   const dispatch = useDispatch<AppDispatch>();
-  const proses = reduxLaporanPengajuanCuti();
+  const proses = reduxLaporanPelanggaranPegawai();
+
   useEffect(() => {
     dispatch(simpanDataTmp({ data: [] }));
     return () => {
@@ -105,4 +81,4 @@ const TableLporanPenhajuanCuti = () => {
   );
 };
 
-export default TableLporanPenhajuanCuti;
+export default TableLporanPelanggaran;

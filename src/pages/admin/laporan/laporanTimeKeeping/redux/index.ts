@@ -26,6 +26,7 @@ export const reduxLaporanTimeKeeping = () => {
   const cariLaporan = (type: string): AppThunk => {
     return async (dispatch: AppDispatch, getState) => {
       const typeAkses = type === "DASHBOARD" ? true : false;
+
       try {
         const state = getState();
         const formValues = (
@@ -51,6 +52,7 @@ export const reduxLaporanTimeKeeping = () => {
         if (response.data.length === 0) {
           dispatch(
             utilityActions.setLaporanKosong<IReportTimeKeeping[]>(
+              "LaporanTimeKeeping",
               `${typeAkses ? "Data" : "Laporan"} Time Keeping Tidak Tersedia`
             )
           );

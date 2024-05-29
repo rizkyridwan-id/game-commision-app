@@ -15,6 +15,7 @@ export interface SearchInterface {
   status_valid?: boolean;
   end_date?: string;
   start_date?: string;
+  namaForm?: string;
 }
 interface CustomTablePaginationConfig extends TablePaginationConfig {
   q?: string;

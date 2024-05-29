@@ -14,7 +14,11 @@ const TabelPengajuanCuti = () => {
   const helperRedux = utilityController();
 
   useEffect(() => {
-    dispatch(actionTransaksi.getPengajuanCuti());
+    dispatch(
+      actionTransaksi.getPengajuanCuti({
+        namaForm: "Data Pengajuan Cuti",
+      })
+    );
   }, [dispatch]);
 
   const columnsTabelPengajuanCuti: ColumnInterFace<PengajuanCutiInterFace>[] = [
