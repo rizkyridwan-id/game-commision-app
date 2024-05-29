@@ -8,6 +8,7 @@ import {
   DataPegawaiState,
   DataTokoState,
   DataUserState,
+  KasBonState,
   ParameterBonusSalesState,
   ParameterCutiState,
   ParameterKonversiCutiState,
@@ -54,5 +55,6 @@ export interface RootState<T> {
     dataPengajuanCuti: PengajuanCutiState;
     reviewPengajuanCuti: ReviewPengajuanCutiState;
     pelanggaranPegawaiReducer: PelanggaranPegawaiState;
+    kasBonReducer: KasBonState;
   };
 }

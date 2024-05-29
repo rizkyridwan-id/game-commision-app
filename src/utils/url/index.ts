@@ -29,12 +29,14 @@ const urlApi = {
   transaksi: {
     cuti: "cuti-request",
     pelanggaranPegawai: "pelanggaran-pegawai",
+    kasbon: "kasbon",
   },
 
   report: {
     timeKeeping: "time-keeping/report/pegawai-time-keeping",
     cuti: "cuti-request/report/pengajuan-cuti",
     pelanggaranPegawai: "pelanggaran-pegawai/report",
+    kasbon: "kasbon/report",
   },
   login: "auth/login",
   dashboard: {

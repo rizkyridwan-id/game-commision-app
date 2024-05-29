@@ -47,7 +47,7 @@ const TablePelanggaranPegawai = () => {
     ];
 
   const dataPelangaranPegawai = useAppSelector(
-    (state) => state.transaksi.pelanggaranPegawaiReducer
+    (state) => state.transaksi.pelanggaranPegawai
   );
   return (
     <TableMaster
