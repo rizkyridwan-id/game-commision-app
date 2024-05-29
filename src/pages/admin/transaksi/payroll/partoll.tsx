@@ -1,5 +1,4 @@
 import { PanelContent } from "@/components";
-import { PayRollInterface } from "@/interface";
 import {
   AppDispatch,
   actionMaster,
@@ -17,8 +16,9 @@ import { ConfigProps, Field, InjectedFormProps, reduxForm } from "redux-form";
 import { payrolRedux } from "./redux";
 import { GetPayrollPegawaiSummaryDtoProps } from "./dto";
 import { useEffect } from "react";
+import { PayrollInterFace } from "@/interface";
 
-const Payroll = (props: InjectedFormProps<PayRollInterface>) => {
+const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
   const { handleSubmit, pristine, submitting } = props;
   const dispatch = useDispatch<AppDispatch>();
   const proses = payrolRedux();
@@ -180,9 +180,9 @@ const Payroll = (props: InjectedFormProps<PayRollInterface>) => {
   );
 };
 
-const config: ConfigProps<PayRollInterface> = {
+const config: ConfigProps<PayrollInterFace> = {
   form: "FormPayroll",
   enableReinitialize: true,
 };
 
-export default reduxForm<PayRollInterface>(config)(Payroll);
+export default reduxForm<PayrollInterFace>(config)(Payroll);

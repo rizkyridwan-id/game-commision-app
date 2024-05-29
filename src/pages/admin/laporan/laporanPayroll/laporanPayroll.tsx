@@ -12,18 +12,21 @@ import {
   reduxForm,
 } from "redux-form";
 import { validatePayroll } from "./validate";
+import TableLporanPayroll from "./table";
+import { reduxLaporanPayroll } from "./redux";
 
 const LaporanPayroll = (props: InjectedFormProps<FormFilterLaporanDto>) => {
   const { handleSubmit } = props;
   const dispatch = useDispatch<AppDispatch>();
+  const proses = reduxLaporanPayroll();
 
   useEffect(() => {
-    dispatch(change("LaporanPayroll", "start_date", today.slice(0, 7)));
-    dispatch(change("LaporanPayroll", "end_date", today.slice(0, 7)));
+    dispatch(change("LaporanPayroll", "start_period", today.slice(0, 7)));
+    dispatch(change("LaporanPayroll", "end_period", today.slice(0, 7)));
     dispatch(actionMaster.getDataToko());
   }, [dispatch]);
   const filterLaporan = () => {
-    // dispatch(proses.cariLaporan());
+    dispatch(proses.cariLaporan());
   };
   const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
 
@@ -48,7 +51,7 @@ const LaporanPayroll = (props: InjectedFormProps<FormFilterLaporanDto>) => {
           <div className="col-3">
             <Field
               label="Bulan Awal"
-              name="start_date"
+              name="start_period"
               type="month"
               component={ReanderField}
             />
@@ -56,7 +59,7 @@ const LaporanPayroll = (props: InjectedFormProps<FormFilterLaporanDto>) => {
           <div className="col-3">
             <Field
               label="Bulan Akhir"
-              name="end_date"
+              name="end_period"
               type="month"
               component={ReanderField}
             />
@@ -74,6 +77,7 @@ const LaporanPayroll = (props: InjectedFormProps<FormFilterLaporanDto>) => {
           </div>
         </div>
       </form>
+      <TableLporanPayroll />
     </PanelContent>
   );
 };

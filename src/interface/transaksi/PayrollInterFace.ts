@@ -1,5 +1,6 @@
-export interface PayRollInterface {
+export interface PayrollInterFace {
   kode_toko: string; // Store code with specific string values
+  nama_pegawai: string; // Employee code
   kode_pegawai: string; // Employee code
   jabatan: string; // Job title
   periode: string; // Payroll period (e.g., "Mei-2024")
