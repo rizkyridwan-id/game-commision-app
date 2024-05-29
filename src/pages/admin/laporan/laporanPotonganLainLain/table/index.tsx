@@ -1,10 +1,9 @@
 import { TableMaster } from "@/components";
 import { ColumnInterFace, PotonganLainInterFace } from "@/interface";
-import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
+import { AppDispatch, useAppSelector } from "@/reduxStore";
 import { ButtonCustom } from "@/utils";
 import { useDispatch } from "react-redux";
 import { reduxLaporanPotonganLainLain } from "../redux";
-import { useEffect } from "react";
 
 const TableLporanPotonganLain = () => {
   const columnsTabelPotonganLainLain: ColumnInterFace<PotonganLainInterFace>[] =
@@ -38,7 +37,7 @@ const TableLporanPotonganLain = () => {
         dataIndex: "saldo_rp",
         key: "saldo_rp",
         render: (text: number) => {
-          return text.toLocaleString("kr-ko");
+          return Number(text || 0).toLocaleString("kr-ko");
         },
       },
       {
@@ -46,7 +45,7 @@ const TableLporanPotonganLain = () => {
         dataIndex: "cicil_rp",
         key: "cicil_rp",
         render: (text: number) => {
-          return text.toLocaleString("kr-ko");
+          return Number(text || 0).toLocaleString("kr-ko");
         },
       },
       {
@@ -54,7 +53,7 @@ const TableLporanPotonganLain = () => {
         dataIndex: "total_rp",
         key: "total_rp",
         render: (text: number) => {
-          return text.toLocaleString("kr-ko");
+          return Number(text || 0).toLocaleString("kr-ko");
         },
       },
       {
@@ -69,16 +68,11 @@ const TableLporanPotonganLain = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const proses = reduxLaporanPotonganLainLain();
-  useEffect(() => {
-    dispatch(simpanDataTmp({ data: [] }));
-    return () => {
-      dispatch(simpanDataTmp({ data: [] }));
-    };
-  }, [dispatch]);
+
   return (
     <div className="row">
       <TableMaster
-        dataSource={datatmp}
+        dataSource={datatmp.length > 0 ? datatmp : []}
         columns={columnsTabelPotonganLainLain}
         rowKey={"kode_pegawai"}
         scrollX

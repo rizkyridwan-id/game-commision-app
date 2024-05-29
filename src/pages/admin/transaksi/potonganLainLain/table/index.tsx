@@ -55,7 +55,7 @@ const TabelPotonganLainLain = () => {
         dataIndex: "saldo_rp",
         key: "saldo_rp",
         render: (text: number) => {
-          return text.toLocaleString("kr-ko");
+          return Number(text || 0).toLocaleString("kr-ko");
         },
       },
       {
@@ -63,7 +63,7 @@ const TabelPotonganLainLain = () => {
         dataIndex: "cicil_rp",
         key: "cicil_rp",
         render: (text: number) => {
-          return text.toLocaleString("kr-ko");
+          return Number(text || 0).toLocaleString("kr-ko");
         },
       },
       {
@@ -71,7 +71,7 @@ const TabelPotonganLainLain = () => {
         dataIndex: "total_rp",
         key: "total_rp",
         render: (text: number) => {
-          return text.toLocaleString("kr-ko");
+          return Number(text || 0).toLocaleString("kr-ko");
         },
       },
       {

@@ -25,7 +25,7 @@ const TableParameterBonusSales = () => {
         dataIndex: "bonus_beli",
         key: "bonus_beli",
         render: (cell: number) => {
-          return cell?.toLocaleString("kr-ko");
+          return <div>{Number(cell || 0)?.toLocaleString("kr-ko")}</div>;
         },
       },
       {
@@ -33,7 +33,7 @@ const TableParameterBonusSales = () => {
         dataIndex: "bonus_jual",
         key: "bonus_jual",
         render: (cell: number) => {
-          return cell?.toLocaleString("kr-ko");
+          return <div>{Number(cell || 0)?.toLocaleString("kr-ko")}</div>;
         },
       },
       {
@@ -41,7 +41,7 @@ const TableParameterBonusSales = () => {
         dataIndex: "bonus_hutang",
         key: "bonus_hutang",
         render: (cell: number) => {
-          return <div>{cell?.toLocaleString("kr-ko")}</div>;
+          return <div>{Number(cell || 0)?.toLocaleString("kr-ko")}</div>;
         },
       },
       {

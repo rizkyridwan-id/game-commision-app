@@ -30,7 +30,7 @@ const TableTargetToko = () => {
       key: "target",
       align: "right",
       render: (cell: number) => {
-        return cell?.toLocaleString("kr-ko");
+        return Number(cell || 0)?.toLocaleString("kr-ko");
       },
     },
 

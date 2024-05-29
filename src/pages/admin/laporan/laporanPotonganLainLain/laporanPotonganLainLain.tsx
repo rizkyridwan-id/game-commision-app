@@ -1,6 +1,11 @@
 import { PanelContent } from "@/components";
 import { FormFilterLaporanDto } from "@/interface";
-import { AppDispatch, actionMaster, useAppSelector } from "@/reduxStore";
+import {
+  AppDispatch,
+  actionMaster,
+  simpanDataTmp,
+  useAppSelector,
+} from "@/reduxStore";
 import { ButtonCustom, ReanderField, RenderSelect, today } from "@/utils";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -26,6 +31,10 @@ const LaporanPotonganLainLain = (
     dispatch(change("LaporanPotonganLainLain", "start_date", today));
     dispatch(change("LaporanPotonganLainLain", "end_date", today));
     dispatch(actionMaster.getDataToko());
+    dispatch(simpanDataTmp({ data: [] }));
+    return () => {
+      dispatch(simpanDataTmp({ data: [] }));
+    };
   }, [dispatch]);
   const filterLaporan = () => {
     dispatch(proses.cariLaporan());

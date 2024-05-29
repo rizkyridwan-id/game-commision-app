@@ -115,7 +115,7 @@ const TableDataPegawai = () => {
       dataIndex: "gaji_pokok",
       key: "gaji_pokok",
       render(text: number) {
-        return <div> {text.toLocaleString("kr-ko")} </div>;
+        return <div>{Number(text || 0)?.toLocaleString("kr-ko")}</div>;
       },
     },
     {
@@ -123,7 +123,7 @@ const TableDataPegawai = () => {
       dataIndex: "tunjangan_jabatan",
       key: "tunjangan_jabatan",
       render(text: number) {
-        return <div> {text.toLocaleString("kr-ko")} </div>;
+        return <div>{Number(text || 0)?.toLocaleString("kr-ko")}</div>;
       },
     },
     {
