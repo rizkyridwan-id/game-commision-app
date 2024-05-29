@@ -1,35 +1,22 @@
-const fs = require("fs");
-const path = require("path");
-const JavaScriptObfuscator = require("javascript-obfuscator");
+import fs from "fs";
+import path from "path";
+import JavaScriptObfuscator from "javascript-obfuscator";
 
 const settings = {
   compact: true,
-  controlFlowFlattening: true,
   controlFlowFlatteningThreshold: 0.75,
   numbersToExpressions: true,
   simplify: true,
   shuffleStringArray: true,
   splitStrings: true,
   stringArray: true,
-  //   stringArrayEncoding: "base64",
   stringArrayThreshold: 0.75,
-  transformObjectKeys: true,
-  unicodeEscapeSequence: true,
+  stringArrayEncoding: ["base64"], // Tambahkan pengaturan ini untuk Base64 encoding
+  transformObjectKeys: false,
+  unicodeEscapeSequence: false,
 };
-
-function obfuscateDir(dirPath) {
-  let dirents = fs.readdirSync(dirPath, {
-    encoding: "utf8",
-    withFileTypes: true,
-  });
-  for (let i = 0; i < dirents.length; i++) {
-    let dirent = dirents[i];
-    if (dirent.isDirectory()) {
-      obfuscateDir(path.join(dirPath, dirent.name));
-      continue;
-    }
-    if (path.extname(dirent.name) !== ".js") continue;
-    const filePath = path.join(dirPath, dirent.name);
+function obfuscateFile(filePath) {
+  try {
     const content = fs.readFileSync(filePath, { encoding: "utf8" });
     const obfuscator = JavaScriptObfuscator.obfuscate(content, settings);
     const obfuscatedCode = obfuscator.getObfuscatedCode();
@@ -38,8 +25,40 @@ function obfuscateDir(dirPath) {
       encoding: "utf8",
       flag: "w+",
     });
-    console.log("🤖 🤖 🤖 Done!");
+    console.log(`🤖 Done obfuscating: ${filePath}`);
+  } catch (error) {
+    console.error(`Error obfuscating file: ${filePath}`, error);
   }
 }
 
-obfuscateDir(path.join(__dirname, "../build"));
+function obfuscateDir(dirPath) {
+  try {
+    const dirents = fs.readdirSync(dirPath, {
+      encoding: "utf8",
+      withFileTypes: true,
+    });
+
+    for (const dirent of dirents) {
+      if (dirent.isDirectory()) {
+        obfuscateDir(path.join(dirPath, dirent.name));
+      } else if (path.extname(dirent.name) === ".js") {
+        const filePath = path.join(dirPath, dirent.name);
+        obfuscateFile(filePath);
+      }
+    }
+  } catch (error) {
+    console.error(`Error reading directory: ${dirPath}`, error);
+  }
+}
+
+// Use import.meta.url to get the current module's URL
+const currentModuleUrl = new URL(import.meta.url);
+const currentModuleDir = path.dirname(currentModuleUrl.pathname);
+
+const buildDir = path.join(currentModuleDir, "../build");
+
+if (fs.existsSync(buildDir)) {
+  obfuscateDir(buildDir);
+} else {
+  console.error(`Build directory not found: ${buildDir}`);
+}
