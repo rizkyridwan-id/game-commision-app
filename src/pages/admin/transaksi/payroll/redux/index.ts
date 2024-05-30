@@ -10,6 +10,7 @@ import {
   VITE_APP_KODE_TOKO,
   convertDate,
   getData,
+  isPusat,
   postData,
   timeout,
   today,
@@ -63,9 +64,11 @@ export const payrolRedux = () => {
       const formData = getState()?.form.FormPayroll
         ?.values as FormPayrollInterFace;
 
-      if (!formData.kode_toko) {
-        NotifInfo("Kode Toko Harus Di Pilih");
-        return false;
+      if (isPusat) {
+        if (!formData.kode_toko) {
+          NotifInfo("Kode Toko Harus Di Pilih");
+          return false;
+        }
       }
 
       try {
@@ -75,7 +78,7 @@ export const payrolRedux = () => {
           {
             kode_pegawai: formData.kode_pegawai,
             periode: today.slice(0, 7),
-            kode_toko: formData.kode_toko,
+            kode_toko: formData.kode_toko || `${VITE_APP_KODE_TOKO}`,
           }
         );
 

@@ -6,7 +6,13 @@ import {
   simpanDataTmp,
   utilityActions,
 } from "@/reduxStore";
-import { NotifSuccess, convertDate, getData, urlApi } from "@/utils";
+import {
+  NotifSuccess,
+  VITE_APP_KODE_TOKO,
+  convertDate,
+  getData,
+  urlApi,
+} from "@/utils";
 import LaporanTimeKeepingPdfExcel from "../report";
 import { LaporanTimeKeepingDto } from "../dto";
 
@@ -39,7 +45,7 @@ export const reduxLaporanTimeKeeping = () => {
 
         const newData = {
           tgl_system: convertDate(formValues.tgl_system),
-          kode_toko: formValues.kode_toko,
+          kode_toko: formValues.kode_toko || `${VITE_APP_KODE_TOKO}`,
           type_shift:
             formValues.type_shift === "SEMUA"
               ? undefined

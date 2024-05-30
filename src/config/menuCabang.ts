@@ -13,28 +13,24 @@ const MenuCabang = [
   },
   {
     path: "#",
-    icon: "fa fa-business-time",
-    title: "Time Keeping",
-    is_show: false,
-    children: [
-      { path: "#", title: "Time Keeping Kehadiran", is_show: false },
-      { path: "#", title: "Time Keeping Break", is_show: false },
-      { path: "#", title: "Time Keeping Istirahat", is_show: false },
-      { path: "#", title: "Time Keeping Sholat", is_show: false },
-    ],
-  },
-  {
-    path: "#",
     icon: "fa fa-calendar-check",
     title: "Transaksi",
     is_show: false,
     children: [
-      { path: "#", title: "Pengajuan Cuti", is_show: false },
-      { path: "#", title: "Review Cuti", is_show: false },
-      { path: "#", title: "Kas Bon", is_show: false },
-      { path: "#", title: "Potongan Lain", is_show: false },
-      { path: "#", title: "Pelanggaran Pegawai", is_show: false },
-      { path: "#", title: "Payroll", is_show: false },
+      { path: "/app/pengajuan-cuti", title: "Pengajuan Cuti", is_show: false },
+      { path: "/app/review-cuti", title: "Review Cuti", is_show: false },
+      { path: "/app/kas-bon", title: "Kas Bon", is_show: false },
+      {
+        path: "/app/potongan-lain-lain",
+        title: "Potongan Lain Lain",
+        is_show: false,
+      },
+      {
+        path: "/app/pelanggaran-pegawai",
+        title: "Pelanggaran Pegawai",
+        is_show: false,
+      },
+      { path: "/app/payroll", title: "Payroll", is_show: false },
     ],
   },
 ];

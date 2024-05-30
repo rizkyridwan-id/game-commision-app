@@ -7,6 +7,7 @@ import {
 import {
   NotifInfo,
   NotifSuccess,
+  VITE_APP_KODE_TOKO,
   deleteData,
   postData,
   putData,
@@ -49,6 +50,7 @@ export const datauserController = () => {
         await postData<DataUserInterFace>(urlApi.dataMaster.user, {
           ...data,
           hak_akses_json: JSON.stringify(hakAkses),
+          kode_toko: `${VITE_APP_KODE_TOKO}`,
         });
         dispatch(actionMaster.getDataUser());
         NotifSuccess("Data Berhasil Disimpan");
@@ -77,6 +79,7 @@ export const datauserController = () => {
           {
             ...data,
             hak_akses_json: JSON.stringify(hakAkses),
+            kode_toko: `${VITE_APP_KODE_TOKO}`,
           }
         );
         dispatch(actionMaster.getDataUser());

@@ -37,24 +37,6 @@ export interface DataUserInterFace {
    * @example "admin"
    */
   level: string;
-}
 
-// Contoh pembuatan objek DataUserInterFace
-export const contohDataUserInterFace: DataUserInterFace[] = [
-  {
-    _id: "664ae9bfff589214d3e53090",
-    user_id: "USR001",
-    user_name: "johndoe",
-    password: "securepassword123",
-    hak_akses_json: '{"read": true, "write": false, "delete": false}',
-    level: "ADMIN",
-  },
-  {
-    _id: "664ae9bfff589214d3e53090",
-    user_id: "USR002",
-    user_name: "sam",
-    password: "password",
-    hak_akses_json: '{"read": true, "write": false, "delete": false}',
-    level: "ADMIN",
-  },
-];
+  kode_toko: string;
+}

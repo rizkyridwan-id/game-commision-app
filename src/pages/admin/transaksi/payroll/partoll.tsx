@@ -1,16 +1,6 @@
-import { PanelContent } from "@/components";
-import {
-  AppDispatch,
-  actionMaster,
-  simpanDataTmp,
-  useAppSelector,
-} from "@/reduxStore";
-import {
-  ButtonCustom,
-  ReanderField,
-  RenderNumber,
-  RenderSelect,
-} from "@/utils";
+import { PanelContent, TokoCabangSelector } from "@/components";
+import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
+import { ButtonCustom, ReanderField, RenderNumber } from "@/utils";
 import { useDispatch } from "react-redux";
 import { ConfigProps, Field, InjectedFormProps, reduxForm } from "redux-form";
 import { payrolRedux } from "./redux";
@@ -35,33 +25,17 @@ const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
     datatmp?.status_kehadiran?.is_late_weekly === false;
 
   useEffect(() => {
-    dispatch(actionMaster.getDataToko());
     dispatch(simpanDataTmp({ data: [] }));
     return () => {
       dispatch(simpanDataTmp({ data: [] }));
     };
   }, [dispatch]);
 
-  const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
-
   return (
     <PanelContent title="Payroll">
       <form onSubmit={handleSubmit(simpan)}>
         <div className="row">
-          <div className="col-3">
-            <Field
-              label="Kode Toko"
-              name="kode_toko"
-              options={dataToko.data.map((list) => {
-                return {
-                  value: list.kode_toko,
-                  label: list.kode_toko,
-                };
-              })}
-              placeholder="Pilih Kode Toko"
-              component={RenderSelect}
-            />
-          </div>
+          <TokoCabangSelector className="col-3" />
           <div className="col-3">
             <Field
               label="Kode Pegawai"

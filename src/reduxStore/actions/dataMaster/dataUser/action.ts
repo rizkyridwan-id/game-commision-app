@@ -6,7 +6,7 @@ import {
   DataUserType,
   utilityActions,
 } from "../../../index";
-import { NotifInfo, getData, urlApi } from "@/utils";
+import { NotifInfo, VITE_APP_KODE_TOKO, getData, urlApi } from "@/utils";
 
 export const fetchDataUser = (
   data: DataUserInterFace[],
@@ -27,9 +27,7 @@ export const getDataUser = (row?: SearchInterface): AppThunk => {
         limit: row?.limit,
       };
 
-      if (row?.q !== undefined) {
-        params.q = row.q || "";
-      }
+      params.kode_toko = `${VITE_APP_KODE_TOKO}`;
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<DataUserInterFace[]>(

@@ -1,10 +1,9 @@
-import { PanelContent, TableMaster } from "@/components";
+import { PanelContent, TableMaster, TokoCabangSelector } from "@/components";
 import { ColumnInterFace, IReportTimeKeeping } from "@/interface";
-import { AppDispatch, actionMaster, useAppSelector } from "@/reduxStore";
+import { AppDispatch, useAppSelector } from "@/reduxStore";
 import {
   ButtonCustom,
   ReanderField,
-  RenderSelect,
   getBgColor,
   timeout,
   today,
@@ -122,19 +121,14 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
     },
   ];
 
-  const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
   const proses = reduxLaporanTimeKeeping();
   useEffect(() => {
-    dispatch(actionMaster.getDataToko());
     getData();
   }, [dispatch]);
 
   const getData = async () => {
     await timeout(1000);
     dispatch(change("dashboardTimeKeeping", "tgl_system", today));
-    dispatch(
-      change("dashboardTimeKeeping", "kode_toko", dataToko?.data[0]?.kode_toko)
-    );
 
     setTimeout(() => {
       dispatch(proses.cariLaporan("DASHBOARD"));
@@ -153,20 +147,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
     <PanelContent title="Dashboard Time Keeping">
       <form onSubmit={handleSubmit(cariData)}>
         <div className="row">
-          <div className="col-4">
-            <Field
-              label="Kode Toko"
-              name="kode_toko"
-              component={RenderSelect}
-              placeholder="Pilih Kode Toko"
-              options={dataToko.data.map((list) => {
-                return {
-                  value: list.kode_toko,
-                  label: list.kode_toko,
-                };
-              })}
-            />
-          </div>
+          <TokoCabangSelector className="col-4" />
           <div className="col-4">
             <Field
               label="Tanggal"
