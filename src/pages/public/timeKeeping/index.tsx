@@ -130,7 +130,7 @@ const TimeKeeping = () => {
         tgl_system: today,
       };
       await postData(url, dataBody);
-      playSound(ok);
+      // playSound(ok);
       NotifSuccess(`Time Keeping ${menu} berhasil`);
       setInput({
         pin: "",
@@ -140,6 +140,7 @@ const TimeKeeping = () => {
       dispatch(change("timeKeeping", "pin", ""));
       dispatch(change("timeKeeping", "kode_pegawai", ""));
       dispatch(utilityActions.stopLoading());
+      speak(`OK, Time Keeping ${menu} berhasil`);
     } catch (error) {
       speak(`${error}`);
       NotifInfo(`${error}`);
@@ -154,19 +155,19 @@ const TimeKeeping = () => {
       socket.emit("join-room", `${VITE_APP_KODE_TOKO}`);
       socket.on("fingerprint-validation", (data: SocketData) => {
         if (data.is_valid) {
+          playSound(ok);
           NotificationSwal({
             title: `Fingerprint Time Keeping <b>${menu}</b> Berhasil`,
             html: ``,
             icon: "success",
           });
-          playSound(ok);
         } else {
+          playSound(tryagain);
           NotificationSwal({
             title: `Fingerprint Time Keeping <b>${menu}</b> Gagal`,
             html: ``,
             icon: "error",
           });
-          playSound(tryagain);
         }
       });
     });

@@ -32,6 +32,7 @@ import {
   LaporanPotonganLainLain,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
+import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
 
 const AppRoute = [
   {
@@ -262,6 +263,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <Payroll />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/sinkron-data-pegawai",
+        title: "Sinkron Data Pegawai",
+        element: (
+          <ProtectedRoute>
+            <SinkronDataPegawai />
           </ProtectedRoute>
         ),
       },

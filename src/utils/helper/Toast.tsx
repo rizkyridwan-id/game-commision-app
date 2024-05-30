@@ -67,6 +67,7 @@ export const NotificationSwal = (props: showConfirmation): Promise<boolean> => {
       title: title,
       text: textBody,
       html: html,
+      timer: 3000,
       icon: icon as SweetAlertResult["value"], // Assume iconInfo is a valid SweetAlert icon type
     }).then((result) => {
       if (result.isConfirmed) {

@@ -16,6 +16,7 @@ const urlApi = {
   },
   externalApi: {
     dataSales: "external/sales",
+    omzetSales: "external/sales/monthly-omzet",
   },
   timeKeeping: {
     kehadiran: "time-keeping/service/absen-kehadiran",
@@ -33,6 +34,7 @@ const urlApi = {
     payroll: "payroll",
     payrollSummary: "payroll/pegawai-summary",
     potonganLain: "potongan-lain-lain",
+    omzetSales: "omzet-sales/bulk",
   },
 
   report: {

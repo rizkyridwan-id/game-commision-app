@@ -77,6 +77,11 @@ const MenuPusat = [
         is_show: false,
       },
       { path: "/app/payroll", title: "Payroll", is_show: false },
+      {
+        path: "/app/sinkron-data-pegawai",
+        title: "Sinkron Data Pegawai",
+        is_show: false,
+      },
     ],
   },
   {

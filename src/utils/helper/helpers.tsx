@@ -34,7 +34,7 @@ interface LoadingContentProps {
   loading?: boolean;
 }
 
-export const isPusat = VITE_APP_KODE_TOKO === "PUSAT" ? true : false;
+export const isPusat = VITE_APP_VERSION === "PUSAT" ? true : false;
 
 export const filterKodeToko = (kodeToko: string) => {
   const datatoko = getItem<DataTokoInterFace[]>("dataToko").find(
