@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import logger from "./logger"; // Import logger global
 import { VITE_APP_BE, generateSignature, getItem } from "@/utils";
-import { UserLoginInterFace } from "@/interface";
+import { ApiResponse, UserLoginInterFace } from "@/interface";
 
-class BaseRepository<T> {
+class BaseRepository {
   protected http: AxiosInstance;
 
   constructor() {
@@ -33,10 +33,13 @@ class BaseRepository<T> {
     return config;
   }
 
-  async get<U = T>(endpoint: string, params?: any): Promise<U> {
+  async get<T>(
+    endpoint: string,
+    params?: Record<string, number | string | boolean | undefined>
+  ): Promise<ApiResponse<T>> {
     try {
       const config = this.getConfig(params);
-      const response = await this.http.get<U>(endpoint, config);
+      const response = await this.http.get(endpoint, config);
       logger.log(`GET ${endpoint} berhasil`);
       return response.data;
     } catch (error) {
@@ -45,9 +48,9 @@ class BaseRepository<T> {
     }
   }
 
-  async post<U = T>(endpoint: string, data: any): Promise<U> {
+  async post<T>(endpoint: string, data?: T): Promise<ApiResponse<T>> {
     try {
-      const response = await this.http.post<U>(endpoint, data);
+      const response = await this.http.post(endpoint, data);
       logger.log(`POST ${endpoint} berhasil`);
       return response.data;
     } catch (error) {

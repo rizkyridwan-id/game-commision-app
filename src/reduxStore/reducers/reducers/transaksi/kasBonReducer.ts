@@ -4,7 +4,7 @@ const initialState: KasBonState = {
   data: [],
   total: 0,
 };
-const KasBonReducer = (
+const kasBonReducer = (
   state: KasBonState = initialState,
   action: KasBonAction
 ) => {
@@ -21,4 +21,4 @@ const KasBonReducer = (
   }
 };
 
-export default KasBonReducer;
+export default kasBonReducer;
