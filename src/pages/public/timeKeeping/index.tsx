@@ -6,7 +6,6 @@ import {
   KeyboardWrapper,
   NotifInfo,
   NotifSuccess,
-  NotificationSwal,
   NumberOnly,
   ReanderField,
   VITE_APP_BE,
@@ -26,7 +25,6 @@ import { SocketData } from "@/interface";
 import tryagain from "./audio/tryagain.mp3";
 import beep from "./audio/beep.mp3";
 import trash from "./audio/trash.mp3";
-import ok from "./audio/ok.mp3";
 
 type MenuType = "Kehadiran" | "Istirahat" | "Break" | "Sholat";
 
@@ -110,7 +108,7 @@ const TimeKeeping = () => {
     }
   };
 
-  const prosesAbsen = async () => {
+  const prosesAbsen = async (data?: SocketData) => {
     try {
       let url = "";
       if (menu === "Kehadiran") {
@@ -124,13 +122,14 @@ const TimeKeeping = () => {
       }
 
       const dataBody = {
-        kode_pegawai: input.kode_pegawai,
+        kode_pegawai: input.kode_pegawai || data?.kode_pegawai,
         kode_toko: VITE_APP_KODE_TOKO,
-        jam: `${hours}:${minutes}`,
+        jam: `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`,
         tgl_system: today,
       };
       await postData(url, dataBody);
       // playSound(ok);
+      speak(`OK, Time Keeping ${menu} berhasil`);
       NotifSuccess(`Time Keeping ${menu} berhasil`);
       setInput({
         pin: "",
@@ -140,7 +139,6 @@ const TimeKeeping = () => {
       dispatch(change("timeKeeping", "pin", ""));
       dispatch(change("timeKeeping", "kode_pegawai", ""));
       dispatch(utilityActions.stopLoading());
-      speak(`OK, Time Keeping ${menu} berhasil`);
     } catch (error) {
       speak(`${error}`);
       NotifInfo(`${error}`);
@@ -155,25 +153,10 @@ const TimeKeeping = () => {
       socket.emit("join-room", `${VITE_APP_KODE_TOKO}`);
       socket.on("fingerprint-validation", (data: SocketData) => {
         if (data.is_valid) {
-          // console.log(data);
-          NotificationSwal({
-            title: `Fingerprint Time Keeping <b>${menu}</b> Berhasil`,
-            html: ``,
-            icon: "success",
-          })
-            .then(() => {
-              prosesAbsenFingerPrint(data);
-            })
-            .catch(() => {
-              prosesAbsenFingerPrint(data);
-            });
+          prosesAbsen(data);
         } else {
           playSound(tryagain);
-          NotificationSwal({
-            title: `Fingerprint Time Keeping <b>${menu}</b> Gagal`,
-            html: ``,
-            icon: "error",
-          });
+          NotifInfo(`Fingerprint Time Keeping ${menu} Gagal`);
         }
       });
     });
@@ -182,33 +165,6 @@ const TimeKeeping = () => {
     };
   }, [menu]);
 
-  const prosesAbsenFingerPrint = async (data: SocketData) => {
-    try {
-      let url = "";
-      if (menu === "Kehadiran") {
-        url = urlApi.timeKeeping.kehadiran;
-      } else if (menu === "Break") {
-        url = urlApi.timeKeeping.break;
-      } else if (menu === "Istirahat") {
-        url = urlApi.timeKeeping.istirahat;
-      } else {
-        url = urlApi.timeKeeping.sholat;
-      }
-
-      const dataBody = {
-        kode_pegawai: data.kode_pegawai,
-        kode_toko: VITE_APP_KODE_TOKO,
-        jam: `${hours}:${minutes}`,
-        tgl_system: today,
-      };
-      await postData(url, dataBody);
-      playSound(ok);
-      NotifSuccess(`Time Keeping ${menu} berhasil`);
-    } catch (error) {
-      speak(`${error}`);
-      NotifInfo(`${error}`);
-    }
-  };
   const pindahMenu = (namaMenu: MenuType) => {
     setMenu(namaMenu);
     setInput({
