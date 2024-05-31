@@ -14,8 +14,8 @@ const TableLporanGlobalPayroll = () => {
     },
     {
       title: "Gaji Pokok",
-      dataIndex: "gaji_pokok",
-      key: "gaji_pokok",
+      dataIndex: "gaji_pokok3",
+      key: "gaji_pokok3",
       render: (cell: number) => {
         return Number(cell || 0).toLocaleString("kr-ko");
       },
