@@ -258,9 +258,15 @@ export const addTgl = (date: Date, day: number) => {
 };
 
 export const playSound = (src: string): void => {
-  const sound = new Audio();
-  sound.src = src;
-  sound.play();
+  try {
+    const sound = new Audio();
+    sound.src = src;
+    sound.play().catch((error) => {
+      console.error("Error playing sound:", error);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const pembulatan = (harga: number) => {

@@ -23,10 +23,10 @@ import { Link } from "react-router-dom";
 import { TypeInputOnChangeValue } from "@/interface";
 import { io } from "socket.io-client";
 import { SocketData } from "@/interface";
-import ok from "./audio/ok.mp3";
 import tryagain from "./audio/tryagain.mp3";
 import beep from "./audio/beep.mp3";
 import trash from "./audio/trash.mp3";
+import ok from "./audio/ok.mp3";
 
 type MenuType = "Kehadiran" | "Istirahat" | "Break" | "Sholat";
 
@@ -155,12 +155,18 @@ const TimeKeeping = () => {
       socket.emit("join-room", `${VITE_APP_KODE_TOKO}`);
       socket.on("fingerprint-validation", (data: SocketData) => {
         if (data.is_valid) {
-          playSound(ok);
+          // console.log(data);
           NotificationSwal({
             title: `Fingerprint Time Keeping <b>${menu}</b> Berhasil`,
             html: ``,
             icon: "success",
-          });
+          })
+            .then(() => {
+              prosesAbsenFingerPrint(data);
+            })
+            .catch(() => {
+              prosesAbsenFingerPrint(data);
+            });
         } else {
           playSound(tryagain);
           NotificationSwal({
@@ -176,6 +182,33 @@ const TimeKeeping = () => {
     };
   }, [menu]);
 
+  const prosesAbsenFingerPrint = async (data: SocketData) => {
+    try {
+      let url = "";
+      if (menu === "Kehadiran") {
+        url = urlApi.timeKeeping.kehadiran;
+      } else if (menu === "Break") {
+        url = urlApi.timeKeeping.break;
+      } else if (menu === "Istirahat") {
+        url = urlApi.timeKeeping.istirahat;
+      } else {
+        url = urlApi.timeKeeping.sholat;
+      }
+
+      const dataBody = {
+        kode_pegawai: data.kode_pegawai,
+        kode_toko: VITE_APP_KODE_TOKO,
+        jam: `${hours}:${minutes}`,
+        tgl_system: today,
+      };
+      await postData(url, dataBody);
+      playSound(ok);
+      NotifSuccess(`Time Keeping ${menu} berhasil`);
+    } catch (error) {
+      speak(`${error}`);
+      NotifInfo(`${error}`);
+    }
+  };
   const pindahMenu = (namaMenu: MenuType) => {
     setMenu(namaMenu);
     setInput({

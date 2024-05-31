@@ -7,3 +7,4 @@ export * from "./timeKeeping";
 export * from "./external";
 export * from "./transaksi";
 export * from "./dashboard";
+export * from "./report";

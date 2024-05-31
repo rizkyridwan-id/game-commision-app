@@ -44,6 +44,7 @@ const urlApi = {
     kasbon: "kasbon/report",
     potonganLain: "potongan-lain-lain/report",
     payroll: "payroll/report",
+    globalPayroll: "payroll/report-global",
   },
   login: "auth/login",
   dashboard: {

@@ -21,15 +21,7 @@ const TableParameterBonusSales = () => {
   const columnsTableParameterBonusSales: ColumnInterFace<ParameterBonusSalesInterFace>[] =
     [
       {
-        title: "Bonus Beli",
-        dataIndex: "bonus_beli",
-        key: "bonus_beli",
-        render: (cell: number) => {
-          return <div>{Number(cell || 0)?.toLocaleString("kr-ko")}</div>;
-        },
-      },
-      {
-        title: "Bonus Beli",
+        title: "Bonus Jual",
         dataIndex: "bonus_jual",
         key: "bonus_jual",
         render: (cell: number) => {
@@ -38,6 +30,15 @@ const TableParameterBonusSales = () => {
       },
       {
         title: "Bonus Beli",
+        dataIndex: "bonus_beli",
+        key: "bonus_beli",
+        render: (cell: number) => {
+          return <div>{Number(cell || 0)?.toLocaleString("kr-ko")}</div>;
+        },
+      },
+
+      {
+        title: "Bonus Hutang",
         dataIndex: "bonus_hutang",
         key: "bonus_hutang",
         render: (cell: number) => {

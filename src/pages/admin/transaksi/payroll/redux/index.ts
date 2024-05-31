@@ -38,13 +38,13 @@ export const payrolRedux = () => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
         await postData(urlApi.transaksi.payroll, {
-          kode_toko: VITE_APP_KODE_TOKO,
+          kode_toko: formData.kode_toko,
           kode_pegawai: formData.kode_pegawai,
           periode: today.slice(0, 7),
           bonus_target: formData.bonus_sales,
-          bonus_absen: formData.bonus_absen,
-          bonus_jabatan: formData.bonus_jabatan,
-          kasbon: feedBackData.potongan.kasbon,
+          bonus_absen: formData.bonus_absen || 0,
+          bonus_jabatan: formData.bonus_jabatan || 0,
+          kasbon: feedBackData.potongan.kasbon || 0,
           potongan_lain: feedBackData.potongan.potongan_lain,
           grand_total: formData.total_gajih,
         });

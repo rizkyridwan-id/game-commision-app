@@ -11,19 +11,23 @@ import {
   change,
   reduxForm,
 } from "redux-form";
+import { validateLaporanGlobalPayroll } from "./validate";
+import TableLporanGlobalPayroll from "./table";
+import { reduxLaporanGlobalPayroll } from "./redux";
 
 const LaporanGlobalPayroll = (
   props: InjectedFormProps<FormFilterLaporanDto>
 ) => {
   const { handleSubmit } = props;
   const dispatch = useDispatch<AppDispatch>();
+  const proses = reduxLaporanGlobalPayroll();
 
   useEffect(() => {
-    dispatch(change("LaporanGlobalPayroll", "tgl_from", today));
-    dispatch(change("LaporanGlobalPayroll", "tgl_to", today));
+    dispatch(change("LaporanGlobalPayroll", "start_period", today.slice(0, 7)));
+    dispatch(change("LaporanGlobalPayroll", "end_period", today.slice(0, 7)));
   }, [dispatch]);
   const filterLaporan = () => {
-    // dispatch(proses.cariLaporan());
+    dispatch(proses.cariLaporan());
   };
 
   return (
@@ -33,16 +37,16 @@ const LaporanGlobalPayroll = (
           <div className="col-4">
             <Field
               label="Tanggal Awal"
-              name="tgl_from"
-              type="date"
+              name="start_period"
+              type="month"
               component={ReanderField}
             />
           </div>
           <div className="col-4">
             <Field
               label="Tanggal Akhir"
-              name="tgl_to"
-              type="date"
+              name="end_period"
+              type="month"
               component={ReanderField}
             />
           </div>
@@ -59,6 +63,7 @@ const LaporanGlobalPayroll = (
           </div>
         </div>
       </form>
+      <TableLporanGlobalPayroll />
     </PanelContent>
   );
 };
@@ -66,6 +71,7 @@ const LaporanGlobalPayroll = (
 const config: ConfigProps<FormFilterLaporanDto> = {
   form: "LaporanGlobalPayroll",
   enableReinitialize: true,
+  validate: validateLaporanGlobalPayroll,
 };
 
 export default reduxForm<FormFilterLaporanDto>(config)(LaporanGlobalPayroll);

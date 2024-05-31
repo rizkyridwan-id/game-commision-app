@@ -1,2 +1,2 @@
-import Payroll from "./partoll";
+import Payroll from "./paryoll";
 export { Payroll };

@@ -38,7 +38,7 @@ const TableLporanKasBon = () => {
       dataIndex: "total_kasbon",
       key: "total_kasbon",
       render: (cell: number) => {
-        return cell.toLocaleString("kr-ko");
+        return Number(cell || 0).toLocaleString("kr-ko");
       },
     },
   ];
