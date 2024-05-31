@@ -15,6 +15,8 @@ interface GlobalConfig {
   VITE_APP_FIREBASE_NAME?: string;
   VITE_APP_KODE_TOKO?: string;
   VITE_APP_VERSION?: string;
+  VITE_APP_ALAMAT_TOKO?: string;
+  VITE_APP_NAMA_TOKO?: string;
 }
 
 let globalConfigEnv: string = "";
@@ -29,6 +31,10 @@ export const VITE_APP_FIREBASE_NAME: string | undefined =
   globalConfig.VITE_APP_FIREBASE_NAME;
 export const VITE_APP_VERSION: string | undefined =
   globalConfig.VITE_APP_VERSION;
+export const VITE_APP_NAMA_TOKO: string | undefined =
+  globalConfig.VITE_APP_NAMA_TOKO;
+export const VITE_APP_ALAMAT_TOKO: string | undefined =
+  globalConfig.VITE_APP_ALAMAT_TOKO;
 
 interface LoadingContentProps {
   loading?: boolean;

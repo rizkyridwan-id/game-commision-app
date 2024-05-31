@@ -36,7 +36,11 @@ export const getPelanggaranPegawai = (row?: SearchInterface): AppThunk => {
     } catch (error) {
       dispatch(getPelanggaranPegawaiAction([], 0));
       dispatch(utilityActions.stopLoading());
-      NotifInfo(`${error}`);
+      if (row?.namaForm === "DataPelanggaran") {
+        NotifInfo(`Data Pelanggaran Pegawai Kosong`);
+      } else {
+        NotifInfo(`${error}`);
+      }
     }
   };
 };

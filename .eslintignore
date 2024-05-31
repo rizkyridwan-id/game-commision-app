@@ -9,4 +9,5 @@ vite.config.ts
 public/envconfig.js
 script/update-version.js
 script/obfuscate.js
+script/update-env.js
 tailwind.config.js

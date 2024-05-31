@@ -52,6 +52,7 @@ export const payrolRedux = () => {
         dispatch(utilityActions.stopLoading());
         NotifSuccess("Data Berhasil Disimpan");
         dispatch(reset("FormPayroll"));
+        dispatch(simpanDataTmp({ data: [] }));
       } catch (error) {
         NotifInfo(`${error}`);
         dispatch(utilityActions.stopLoading());

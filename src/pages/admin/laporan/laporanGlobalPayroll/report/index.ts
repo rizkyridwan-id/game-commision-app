@@ -4,7 +4,11 @@ import {
   JenisLaporanType,
   ColumnGenarator,
 } from "@/interface";
-import { ExportPdfExcel } from "@/utils";
+import {
+  ExportPdfExcel,
+  VITE_APP_ALAMAT_TOKO,
+  VITE_APP_NAMA_TOKO,
+} from "@/utils";
 
 const LaporanGlobalPayrollPdfExcel = (
   data: ReportPayrollGlobalDtoProps[],
@@ -111,8 +115,8 @@ const LaporanGlobalPayrollPdfExcel = (
       };
     }),
     dataToko: {
-      alamat_toko: String(" "),
-      nama_toko: String(" "),
+      alamat_toko: String(VITE_APP_ALAMAT_TOKO),
+      nama_toko: String(VITE_APP_NAMA_TOKO),
     },
     columns: columns,
     grouping: [],

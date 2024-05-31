@@ -14,7 +14,9 @@ const TablePelanggaranPegawai = () => {
   const helperRedux = utilityController();
 
   useEffect(() => {
-    dispatch(actionTransaksi.getPelanggaranPegawai());
+    dispatch(
+      actionTransaksi.getPelanggaranPegawai({ namaForm: "DataPelanggaran" })
+    );
   }, [dispatch]);
 
   const columnsTablePelanggaranPegawai: ColumnInterFace<PelanggaranPegawaiInterFace>[] =

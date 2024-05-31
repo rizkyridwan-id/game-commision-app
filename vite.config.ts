@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import viteCompression from "vite-plugin-compression";
 import * as path from "path";
 import EnvironmentPlugin from "vite-plugin-environment";
-
+import dotenv from "dotenv";
+dotenv.config();
 export default defineConfig(({ command, mode }) => {
   const timestamp = new Date().getTime();
 
@@ -13,6 +14,9 @@ export default defineConfig(({ command, mode }) => {
       viteCompression(),
       EnvironmentPlugin("all", { prefix: "VITE_APP_" }),
     ],
+    define: {
+      "process.env": process.env,
+    },
     cacheControl: "max-age=3600",
     resolve: {
       alias: {
