@@ -2,11 +2,12 @@ import { PanelContent, TokoCabangSelector } from "@/components";
 import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
 import { ButtonCustom, ReanderField, RenderNumber } from "@/utils";
 import { useDispatch } from "react-redux";
-import { ConfigProps, Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { payrolRedux } from "./redux";
 import { GetPayrollPegawaiSummaryDtoProps } from "./dto";
 import { useEffect } from "react";
 import { PayrollInterFace } from "@/interface";
+import { validatePayroll } from "./validate";
 
 const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
   const { handleSubmit, pristine, submitting } = props;
@@ -165,9 +166,7 @@ const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
   );
 };
 
-const config: ConfigProps<PayrollInterFace> = {
+export default reduxForm<PayrollInterFace>({
   form: "FormPayroll",
-  enableReinitialize: true,
-};
-
-export default reduxForm<PayrollInterFace>(config)(Payroll);
+  validate: validatePayroll,
+})(Payroll);

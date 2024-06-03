@@ -157,13 +157,13 @@ export const payrolRedux = () => {
         .data as unknown as GetPayrollPegawaiSummaryDtoProps;
 
       const totalGajih =
-        feedBackData.gaji_pokok +
-        feedBackData.tunjangan_jabatan +
-        feedBackData.bonus_sales +
-        Number(formData.bonus_absen || 0) +
-        Number(formData.bonus_jabatan || 0) -
-        feedBackData.potongan.kasbon -
-        feedBackData.potongan.potongan_lain;
+        Number(feedBackData?.gaji_pokok || 0) +
+        Number(feedBackData?.tunjangan_jabatan || 0) +
+        Number(feedBackData?.bonus_sales || 0) +
+        Number(formData?.bonus_absen || 0) +
+        Number(formData?.bonus_jabatan || 0) -
+        Number(feedBackData.potongan?.kasbon || 0) -
+        Number(feedBackData.potongan?.potongan_lain || 0);
 
       dispatch(change("FormPayroll", "total_gajih", totalGajih));
     };

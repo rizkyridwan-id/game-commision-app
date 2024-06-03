@@ -2244,7 +2244,7 @@ progress {
   opacity: 1;
 }
 .form-control:disabled {
-  background-color: var(--bs-component-disabled-bg);
+  background-color: var(--bs-component-disabled-bg) !important;
   opacity: 1;
 }
 .form-control::file-selector-button {
