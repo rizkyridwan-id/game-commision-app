@@ -115,6 +115,13 @@ export const payrolRedux = () => {
                 response.data.potongan.potongan_lain
             )
           );
+          dispatch(
+            change(
+              "FormPayroll",
+              "tunjangan_jabatan",
+              response.data.tunjangan_jabatan
+            )
+          );
 
           dispatch(hitungGajih());
           dispatch(utilityActions.stopLoading());

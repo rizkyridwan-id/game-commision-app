@@ -71,6 +71,17 @@ const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
           </div>
           <div className="col-3">
             <Field
+              label="Tunjangan Jabatan"
+              name="tunjangan_jabatan"
+              type="text"
+              placeholder="Tunjangan Jabatan"
+              readOnly
+              isRp
+              component={RenderNumber}
+            />
+          </div>
+          <div className="col-3">
+            <Field
               label="Gaji Pokok"
               name="gaji_pokok"
               type="text"
