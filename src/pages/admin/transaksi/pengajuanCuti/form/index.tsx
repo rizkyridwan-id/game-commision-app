@@ -25,6 +25,7 @@ import { PengajuanCutiInterFace } from "@/interface";
 import { pengajuanCutiRedux } from "../redux";
 import { useDispatch } from "react-redux";
 import { KodePegawaiSelector } from "@/components";
+import { validatePengajuanCuti } from "../validate";
 type FormProps = {
   isEdit: boolean;
 };
@@ -139,6 +140,7 @@ const connector = connect(mapState);
 const config: ConfigProps<PengajuanCutiInterFace, FormProps> = {
   form: "FormPengajuanCuti",
   enableReinitialize: true,
+  validate: validatePengajuanCuti,
 };
 
 export default connector(
