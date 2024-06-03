@@ -318,6 +318,14 @@ const FormDataUser = (
                       value: "OWN",
                       label: "OWNER",
                     },
+                    {
+                      value: "MANAGER",
+                      label: "MANAGER",
+                    },
+                    {
+                      value: "HRD",
+                      label: "HRD",
+                    },
                   ]}
                 />
               </div>
