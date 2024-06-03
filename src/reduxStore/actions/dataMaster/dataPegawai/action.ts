@@ -1,6 +1,12 @@
 import { PegawaiInterface, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
-import { NotifInfo, getData, urlApi } from "@/utils";
+import {
+  NotifInfo,
+  VITE_APP_KODE_TOKO,
+  getData,
+  isPusat,
+  urlApi,
+} from "@/utils";
 import { DataPegawaiAction, DataPegawaiType } from "./type";
 
 export const getDataPegawaiAction = (
@@ -22,8 +28,8 @@ export const getDataPegawai = (row?: SearchInterface): AppThunk => {
         limit: row?.limit,
       };
 
-      if (row?.q !== undefined) {
-        params.q = row.q || "";
+      if (!isPusat) {
+        params.kode_toko = `${VITE_APP_KODE_TOKO}`;
       }
 
       dispatch(utilityActions.setLoading({ table: true }));

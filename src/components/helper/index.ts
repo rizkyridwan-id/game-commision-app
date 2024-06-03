@@ -1,2 +1,3 @@
+import KodePegawaiSelector from "./KodePegawaiSelector";
 import TokoCabangSelector from "./TokoCabangSelector";
-export { TokoCabangSelector };
+export { TokoCabangSelector, KodePegawaiSelector };

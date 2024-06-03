@@ -24,6 +24,7 @@ import { PengajuanCutiInterFace } from "@/interface";
 
 import { pengajuanCutiRedux } from "../redux";
 import { useDispatch } from "react-redux";
+import { KodePegawaiSelector } from "@/components";
 type FormProps = {
   isEdit: boolean;
 };
@@ -52,7 +53,7 @@ const FormPengajuanCuti = (
     <form onSubmit={handleSubmit(simpan)}>
       <Field name="_id" type="hidden" component={HiddenField} />
       <div className="row">
-        <div className={"col-6"}>
+        {/* <div className={"col-6"}>
           <Field
             label="Kode Pegawai"
             id="kode_pegawai"
@@ -61,7 +62,8 @@ const FormPengajuanCuti = (
             placeholder="Masukan Kode Pegawai"
             component={ReanderField}
           />
-        </div>
+        </div> */}
+        <KodePegawaiSelector className="col-6" namaForm="FormPengajuanCuti" />
         {/* <div className={"col-6"}>
           <Field
             label="Kode Toko"

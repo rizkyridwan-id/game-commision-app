@@ -12,7 +12,12 @@ import { ButtonCustom, ButtonDelete, convertDate } from "@/utils";
 import { useEffect } from "react";
 import { dataPegawaiRedux } from "../redux";
 
-const TableDataPegawai = () => {
+interface Props {
+  form?: string;
+  changeKodePegawai?: (value: PegawaiInterface[]) => void | undefined;
+}
+const TableDataPegawai = (props: Props) => {
+  const { form, changeKodePegawai } = props;
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
   const proses = dataPegawaiRedux();
@@ -139,15 +144,34 @@ const TableDataPegawai = () => {
   ];
 
   const dataPegawai = useAppSelector((state) => state.dataMaster.dataPegawai);
-
+  const rowSelection = {
+    onChange: (
+      _selectedRowKeys: React.Key[],
+      selectedRows: PegawaiInterface[]
+    ) => {
+      if (selectedRows) {
+        changeKodePegawai?.(selectedRows);
+      }
+    },
+    getCheckboxProps: (record: PegawaiInterface) => ({
+      disabled: record.kode_pegawai === "Disabled User", // Column configuration not to be checked
+      name: record.kode_pegawai,
+    }),
+  };
   return (
     <TableMaster
-      addButtonTitle="Tambah Data"
+      addButtonTitle={form === "pencarian_pegawai" ? undefined : "Tambah Data"}
       dataSource={dataPegawai.data}
-      columns={columnsTablePegawai}
+      columns={columnsTablePegawai.filter((column) => {
+        if (form === "pencarian_pegawai" && column.key === "actions") {
+          return false; // Skip the "Actions" column
+        }
+        return true; // Include all other columns
+      })}
       rowKey={"kode_pegawai"}
       scrollX
       width={2000}
+      rowSelection={form && { type: "radio", ...rowSelection }}
       onAddButtonClick={() =>
         dispatch(
           helperRedux.showModal({

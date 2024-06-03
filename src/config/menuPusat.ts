@@ -63,19 +63,19 @@ const MenuPusat = [
     title: "Transaksi",
     is_show: false,
     children: [
-      { path: "/app/pengajuan-cuti", title: "Pengajuan Cuti", is_show: false },
-      { path: "/app/review-cuti", title: "Review Cuti", is_show: false },
-      { path: "/app/kas-bon", title: "Kas Bon", is_show: false },
-      {
-        path: "/app/potongan-lain-lain",
-        title: "Potongan Lain Lain",
-        is_show: false,
-      },
-      {
-        path: "/app/pelanggaran-pegawai",
-        title: "Pelanggaran Pegawai",
-        is_show: false,
-      },
+      // { path: "/app/pengajuan-cuti", title: "Pengajuan Cuti", is_show: false },
+      // { path: "/app/review-cuti", title: "Review Cuti", is_show: false },
+      // { path: "/app/kas-bon", title: "Kas Bon", is_show: false },
+      // {
+      //   path: "/app/potongan-lain-lain",
+      //   title: "Potongan Lain Lain",
+      //   is_show: false,
+      // },
+      // {
+      //   path: "/app/pelanggaran-pegawai",
+      //   title: "Pelanggaran Pegawai",
+      //   is_show: false,
+      // },
       { path: "/app/payroll", title: "Payroll", is_show: false },
       {
         path: "/app/sinkron-data-pegawai",
