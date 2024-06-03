@@ -24,6 +24,8 @@ export interface IFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   minLength?: number;
   maxLength?: number;
+  min?: number | string;
+  max?: number | string;
   noUpperCase?: string;
   placeholder?: string;
   customeCss?: string;

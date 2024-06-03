@@ -55,21 +55,21 @@ const FormShiftKerja = (
         </div>
         <div className={"col-6"}>
           <Field
-            label="Dari Jam Datang"
+            label="Jam Masuk"
             id="start_time"
             name="start_time"
             type="time"
-            placeholder="Masukan Dari Jam Datang"
+            placeholder="Masukan Jam Masuk"
             component={ReanderField}
           />
         </div>
         <div className={"col-6"}>
           <Field
-            label="Sampai Jam Datang"
+            label="Jam Maxsimal Masuk"
             id="due_time"
             name="due_time"
             type="time"
-            placeholder="Masukan Sampai Jam Datang"
+            placeholder="Masukan Jam Maxsimal Masuk"
             component={ReanderField}
           />
         </div>

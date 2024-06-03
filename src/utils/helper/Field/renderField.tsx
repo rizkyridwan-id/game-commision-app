@@ -11,6 +11,8 @@ const ReanderField: React.FC<IFieldProps> = ({
   id,
   ref,
   customeCss,
+  min,
+  max,
   minLength,
   maxLength,
   stylelabel,
@@ -95,6 +97,8 @@ const ReanderField: React.FC<IFieldProps> = ({
           readOnly={readOnly}
           minLength={minLength}
           maxLength={maxLength}
+          min={min}
+          max={max}
           placeholder={placeholder}
           style={{
             textTransform: noUpperCase ? "none" : "uppercase",
