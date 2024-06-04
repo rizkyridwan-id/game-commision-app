@@ -134,6 +134,7 @@ export const payrolRedux = () => {
         dispatch(change("FormPayroll", "bonus_sales", ""));
         dispatch(change("FormPayroll", "potongan", ""));
         dispatch(change("FormPayroll", "total_gajih", ""));
+        dispatch(change("FormPayroll", "tunjangan_jabatan", ""));
 
         dispatch(
           simpanDataTmp({

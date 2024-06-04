@@ -42,21 +42,33 @@ const TableLporanPenhajuanCuti = () => {
       title: "Tanggal Valid",
       dataIndex: "tgl_validasi",
       key: "tgl_validasi",
+      render(text, record) {
+        return record.status_validasi !== "OPEN" ? text : "";
+      },
     },
     {
       title: "Valid By",
       dataIndex: "validasi_by",
       key: "validasi_by",
+      render(text, record) {
+        return record.status_validasi === "APPROVE" ? text : "";
+      },
     },
     {
       title: "Tolak By",
       dataIndex: "validasi_by",
       key: "validasi_by",
+      render(text, record) {
+        return record.status_validasi === "REJECT" ? text : "";
+      },
     },
     {
       title: "Alasan Tolak",
       dataIndex: "reject_description",
       key: "reject_description",
+      render(text, record) {
+        return record.status_validasi === "REJECT" ? text : "";
+      },
     },
   ];
   const datatmp = useAppSelector(
@@ -76,7 +88,7 @@ const TableLporanPenhajuanCuti = () => {
       <TableMaster
         dataSource={datatmp}
         columns={columns}
-        rowKey={"kode_pegawai"}
+        rowKey={"_id"}
         scrollX
       />
       {datatmp?.length !== 0 && (

@@ -14,6 +14,7 @@ export interface PengajuanCutiInterFace {
   tgl_system: string; // ISO 8601 date string
   tgl_validasi: string; // ISO 8601 date string
   validasi_by: string; // ISO 8601 date string
+  tolak_by: string; // ISO 8601 date string
   reject_description: string;
   _id: string;
 }

@@ -72,7 +72,7 @@ const LaporanPengajuanCutiPdfExcel = (
     },
     {
       label: "Tolak By",
-      key: "validasi_by",
+      key: "tolak_by",
       options: {
         halign: "center",
       },
@@ -98,6 +98,11 @@ const LaporanPengajuanCutiPdfExcel = (
       return {
         ...list,
         no: index + 1,
+        tgl_validasi: list.status_validasi !== "OPEN" ? list.tgl_validasi : "",
+        validasi_by: list.status_validasi === "APPROVE" ? list.validasi_by : "",
+        tolak_by: list.status_validasi === "REJECT" ? list.validasi_by : "",
+        reject_description:
+          list.status_validasi === "REJECT" ? list.reject_description : "",
       };
     }),
     dataToko: {

@@ -60,6 +60,8 @@ export const reduxLaporanPengajuanCuti = () => {
         NotifSuccess(`Laporan Pengajuan Cuti Tersedia`);
         dispatch(utilityActions.stopLoading());
       } catch (error) {
+        dispatch(simpanDataTmp({ data: [] }));
+
         dispatch(
           utilityActions.setLaporanKosong<PengajuanCutiInterFace[]>(
             `Laporan Pengajuan Cuti Tidak Tersedia`,

@@ -1,6 +1,6 @@
 import { PanelContent, TableMaster } from "@/components";
 import { ColumnInterFace, PegawaiInterface } from "@/interface";
-import { VITE_APP_KODE_TOKO, getData, today, urlApi } from "@/utils";
+import { VITE_APP_KODE_TOKO, getData, isPusat, today, urlApi } from "@/utils";
 import { useEffect, useState } from "react";
 import { reduxForm } from "redux-form";
 
@@ -38,7 +38,7 @@ const DashbaordUlangTahun = () => {
     try {
       const response = await getData<PegawaiInterface[]>(urlApi.dashboard.hbd, {
         tgl_system: today,
-        kode_toko: `${VITE_APP_KODE_TOKO}`,
+        kode_toko: isPusat ? undefined : `${VITE_APP_KODE_TOKO}`,
       });
       setData(response.data);
     } catch (error) {
