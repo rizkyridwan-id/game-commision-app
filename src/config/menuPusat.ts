@@ -3,7 +3,7 @@ const MenuPusat = [
     path: "/app/dashboard",
     icon: "fa fa-home",
     title: "Dashboard",
-    is_show: false,
+    is_show: true,
   },
   {
     path: "#",

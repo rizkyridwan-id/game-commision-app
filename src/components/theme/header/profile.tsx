@@ -1,4 +1,5 @@
 import { AppDispatch, helperActions, utilityActions } from "@/reduxStore";
+import { userData } from "@/utils";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +43,7 @@ const DropdownProfile = () => {
           aria-expanded={dropdownOpen}
           className="navbar-link dropdown-toggle d-flex align-items-center"
         >
-          <div className="avatar">S</div> &nbsp;
+          <div className="avatar">{userData.user_id?.slice(0, 1)}</div> &nbsp;
           <span>
             <b className="caret"></b>
           </span>

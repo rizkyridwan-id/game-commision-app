@@ -21,10 +21,10 @@ export const reduxLogin = (): AppThunk => {
 
       setItem("userdata", response.data);
 
-      if (response.data.level !== "SU" && response.data.level !== "OWNER") {
-        await getHakAkses(response.data);
-      } else {
+      if (response.data.level === "SU" || response.data.level === "OWNER") {
         setItem("hakAkses", Menu);
+      } else {
+        await getHakAkses(response.data);
       }
 
       setTimeout(() => {
