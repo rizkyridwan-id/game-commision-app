@@ -62,7 +62,7 @@ const TableLaporanTimeKeeping = (
                   ? columnsTableBreak
                   : columnsTableSholat
           }
-          rowKey={"kode_pegawai"}
+          rowKey={"_id"}
         />
       </div>
       {datatmp?.length !== 0 && (

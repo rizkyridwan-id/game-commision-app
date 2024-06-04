@@ -74,7 +74,7 @@ const TableLporanPotonganLain = () => {
       <TableMaster
         dataSource={datatmp.length > 0 ? datatmp : []}
         columns={columnsTabelPotonganLainLain}
-        rowKey={"kode_pegawai"}
+        rowKey={"_id"}
         scrollX
       />
       {datatmp?.length !== 0 && (

@@ -168,7 +168,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
       <TableMaster
         dataSource={datatmp || []}
         columns={columns}
-        rowKey={"kode_pegawai"}
+        rowKey={"_id"}
         scrollX
         width={800}
         disabledSearch

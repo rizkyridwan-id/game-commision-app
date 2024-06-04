@@ -54,7 +54,7 @@ const TableLporanKasBon = () => {
       <TableMaster
         dataSource={datatmp}
         columns={columnsTableKasbon}
-        rowKey={"kode_pegawai"}
+        rowKey={"_id"}
         scrollX
       />
       {datatmp?.length !== 0 && (

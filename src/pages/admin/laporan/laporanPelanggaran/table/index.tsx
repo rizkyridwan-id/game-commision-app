@@ -52,7 +52,7 @@ const TableLporanPelanggaran = () => {
       <TableMaster
         dataSource={datatmp}
         columns={columns}
-        rowKey={"kode_pegawai"}
+        rowKey={"_id"}
         scrollX
       />
       {datatmp?.length !== 0 && (
