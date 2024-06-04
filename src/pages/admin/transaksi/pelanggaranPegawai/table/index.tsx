@@ -8,6 +8,7 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, PelanggaranPegawaiInterFace } from "@/interface";
 import { useEffect } from "react";
+import { Button } from "antd";
 
 const TablePelanggaranPegawai = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -46,6 +47,31 @@ const TablePelanggaranPegawai = () => {
         dataIndex: "deskripsi",
         key: "deskripsi",
       },
+
+      {
+        title: "Action",
+        key: "action",
+        align: "center",
+        render: (_cell, row) => (
+          <div className="text-center">
+            <Button
+              type="primary"
+              onClick={() =>
+                dispatch(
+                  helperRedux.showModal({
+                    isEdit: true,
+                    title: "Edit Data",
+                    namaForm: "FormPelanggaranPegawai",
+                    data: row,
+                  })
+                )
+              }
+            >
+              <i className="fa fa-edit"></i>
+            </Button>
+          </div>
+        ),
+      },
     ];
 
   const dataPelangaranPegawai = useAppSelector(
@@ -62,7 +88,7 @@ const TablePelanggaranPegawai = () => {
           helperRedux.showModal({
             isEdit: false,
             title: "Tambah Data",
-            namaForm: "FormDataJabatan",
+            namaForm: "FormPelanggaranPegawai",
           })
         )
       }

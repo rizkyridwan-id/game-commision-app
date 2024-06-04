@@ -50,6 +50,7 @@ const FormPelanggaranPegawai = (
             id="kode_pegawai"
             name="kode_pegawai"
             type="text"
+            readOnly={isEdit}
             placeholder="Masukan Target"
             component={ReanderField}
           />
@@ -60,6 +61,7 @@ const FormPelanggaranPegawai = (
             label="Tanggal"
             name="tgl_system"
             type="date"
+            readOnly={isEdit}
             placeholder="Masukan Tanggal"
             component={ReanderField}
           />
@@ -85,9 +87,11 @@ const FormPelanggaranPegawai = (
 
 const mapState = (state: RootState<PelanggaranPegawaiInterFace>) => {
   if (state?.utility?.getModal?.isEdit === true) {
+    // console.log(state?.utility?.getModal?.data);
     return {
       isEdit: state?.utility?.getModal?.isEdit,
       initialValues: {
+        _id: state?.utility?.getModal?.data?._id,
         kode_pegawai: state?.utility?.getModal?.data?.kode_pegawai,
         tgl_system: state?.utility?.getModal?.data?.tgl_system,
         deskripsi: state?.utility?.getModal?.data?.deskripsi,
