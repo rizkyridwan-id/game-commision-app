@@ -77,8 +77,7 @@ const LaporanKasBonCutiPdfExcel = (
     columns: columns,
     grouping: [],
     grandTotalSetting: {
-      colSpan: 6,
-      disableGrandTotal: true,
+      colSpan: 4,
     },
   });
 };
