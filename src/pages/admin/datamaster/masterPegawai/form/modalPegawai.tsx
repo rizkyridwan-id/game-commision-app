@@ -180,29 +180,41 @@ const ModalPegawai = (
         </div>
         <div className="col-3">
           <Field
-            label="Jam Istirahat"
+            label="Lama Istirahat"
             id="daily_rest_minute"
             name="daily_rest_minute"
-            placeholder="Masukan Jam Istirahat"
-            component={RenderNumber}
+            placeholder="Masukan Lama Istirahat"
+            component={ReanderField}
+            normalize={NumberOnly}
+            right
+            inputGroup
+            textIconGroup="Menit"
           />
         </div>
         <div className="col-3">
           <Field
-            label="Jam Sholat"
+            label="Lama Sholat"
             id="daily_sholat_minute"
             name="daily_sholat_minute"
-            placeholder="Masukan Jam Sholat"
-            component={RenderNumber}
+            placeholder="Masukan Lama Sholat"
+            component={ReanderField}
+            normalize={NumberOnly}
+            right
+            inputGroup
+            textIconGroup="Menit"
           />
         </div>
         <div className="col-3">
           <Field
-            label="Jam Break"
+            label="Lama Break"
             id="daily_break_minute"
             name="daily_break_minute"
-            placeholder="Masukan Jam Break"
-            component={RenderNumber}
+            placeholder="Masukan Lama Break"
+            component={ReanderField}
+            normalize={NumberOnly}
+            right
+            inputGroup
+            textIconGroup="Menit"
           />
         </div>
         <div className="col-3">

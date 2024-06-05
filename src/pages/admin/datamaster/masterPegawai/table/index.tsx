@@ -96,17 +96,17 @@ const TableDataPegawai = (props: Props) => {
       key: "type_shift",
     },
     {
-      title: "Jam Istirahat",
+      title: "Lama Istirahat",
       dataIndex: "daily_rest_minute",
       key: "daily_rest_minute",
     },
     {
-      title: "Jam Sholat",
+      title: "Lama Sholat",
       dataIndex: "daily_sholat_minute",
       key: "daily_sholat_minute",
     },
     {
-      title: "Jam Break",
+      title: "Lama Break",
       dataIndex: "daily_break_minute",
       key: "daily_break_minute",
     },

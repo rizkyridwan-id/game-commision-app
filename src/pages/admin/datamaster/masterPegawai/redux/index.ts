@@ -38,7 +38,12 @@ export const dataPegawaiRedux = () => {
     return async (dispatch: AppDispatch) => {
       try {
         dispatch(utilityActions.setLoading({ screen: true }));
-        await postData<PegawaiInterface>(urlApi.dataMaster.pegawai, data);
+        await postData<PegawaiInterface>(urlApi.dataMaster.pegawai, {
+          ...data,
+          daily_sholat_minute: +data.daily_sholat_minute,
+          daily_rest_minute: +data.daily_rest_minute,
+          daily_break_minute: +data.daily_break_minute,
+        });
         NotifSuccess("Data Berhasil Disimpan");
         dispatch(actionMaster.getDataPegawai());
         dispatch(utilityActions.stopLoading());
