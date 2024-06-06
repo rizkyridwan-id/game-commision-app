@@ -4,7 +4,7 @@ import {
   JenisLaporanType,
   ColumnGenarator,
 } from "@/interface";
-import { ExportPdfExcel, filterKodeToko } from "@/utils";
+import { ExportPdfExcel, convertDate, filterKodeToko } from "@/utils";
 
 const LaporanPelangganPegawaiPdfExcel = (
   data: PelanggaranPegawaiInterFace[],
@@ -63,6 +63,7 @@ const LaporanPelangganPegawaiPdfExcel = (
       return {
         ...list,
         no: index + 1,
+        tgl_system: convertDate(`${list.tgl_system}`, true),
       };
     }),
     dataToko: {

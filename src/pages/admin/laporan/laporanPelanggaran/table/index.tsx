@@ -1,7 +1,7 @@
 import { TableMaster } from "@/components";
 import { ColumnInterFace, PelanggaranPegawaiInterFace } from "@/interface";
 import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
-import { ButtonCustom } from "@/utils";
+import { ButtonCustom, convertDate } from "@/utils";
 import { useDispatch } from "react-redux";
 import { reduxLaporanPelanggaranPegawai } from "../redux";
 import { useEffect } from "react";
@@ -12,6 +12,9 @@ const TableLporanPelanggaran = () => {
       title: "Tanggal",
       dataIndex: "tgl_system",
       key: "tgl_system",
+      render(text) {
+        return convertDate(text, true);
+      },
     },
     {
       title: "Kode Pegawai",
