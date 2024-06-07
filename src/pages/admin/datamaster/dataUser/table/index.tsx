@@ -7,8 +7,7 @@ import {
   utilityController,
 } from "@/reduxStore";
 import { ColumnInterFace, DataUserInterFace } from "@/interface";
-import { Button } from "antd";
-import { ButtonDelete } from "@/utils";
+import { ButtonCustom, ButtonDelete } from "@/utils";
 import { useEffect } from "react";
 import { datauserController } from "../redux";
 
@@ -44,8 +43,9 @@ const TableDataUser = () => {
       align: "center",
       render: (_cell, row) => (
         <div className="text-center">
-          <Button
-            type="primary"
+          <ButtonCustom
+            color="primary"
+            tooltipText="Edit Data"
             onClick={() =>
               dispatch(
                 helperRedux.showModal({
@@ -58,9 +58,10 @@ const TableDataUser = () => {
             }
           >
             <i className="fa fa-edit"></i>
-          </Button>
+          </ButtonCustom>
           &nbsp;
           <ButtonDelete
+            tooltipText="Hapus Data"
             prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
           />
         </div>

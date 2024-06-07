@@ -5,6 +5,7 @@ const urlApi = {
     jabatan: "jabatan",
     hariLibur: "hari-libur",
     pegawai: "pegawai",
+    updatePinPegawai: "pegawai/service/change-pin",
   },
   paramter: {
     bonusSales: "parameter-bonus-sales",

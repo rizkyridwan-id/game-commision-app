@@ -1,9 +1,10 @@
 import { Col, Input, Row, TablePaginationConfig } from "antd";
-import { Button, Table } from "@/package";
+import { Table } from "@/package";
 import { useAppSelector } from "@/reduxStore";
 import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { TableMasterProps } from "@/interface";
+import { ButtonCustom } from "@/utils";
 
 const TableMaster = (props: TableMasterProps) => {
   const {
@@ -84,14 +85,18 @@ const TableMaster = (props: TableMasterProps) => {
       </Col>
       <Col span={18} className="text-end">
         {addButtonTitle && (
-          <Button type="primary" onClick={onAddButtonClick}>
+          <ButtonCustom color="primary" onClick={onAddButtonClick}>
             {addButtonTitle}
-          </Button>
+          </ButtonCustom>
         )}
         {addButtonTitle2 && (
-          <Button type="primary" className="ml-2" onClick={onAddButtonClick2}>
+          <ButtonCustom
+            color="primary"
+            className="ml-2"
+            onClick={onAddButtonClick2}
+          >
             {addButtonTitle2}
-          </Button>
+          </ButtonCustom>
         )}
       </Col>
       <Col span={24} className="mt-4">

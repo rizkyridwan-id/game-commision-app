@@ -9,7 +9,7 @@ import {
 import { ColumnInterFace, ParameterKonversiCutiInterFace } from "@/interface";
 import { useEffect } from "react";
 
-import { Button } from "antd";
+import { ButtonCustom } from "@/utils";
 
 const TableKonversiCuti = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,8 +36,9 @@ const TableKonversiCuti = () => {
         align: "center",
         render: (_cell, row) => (
           <div className="text-center">
-            <Button
-              type="primary"
+            <ButtonCustom
+              color="primary"
+              tooltipText="Edit Data"
               onClick={() =>
                 dispatch(
                   helperRedux.showModal({
@@ -50,7 +51,7 @@ const TableKonversiCuti = () => {
               }
             >
               <i className="fa fa-edit"></i>
-            </Button>
+            </ButtonCustom>
           </div>
         ),
       },

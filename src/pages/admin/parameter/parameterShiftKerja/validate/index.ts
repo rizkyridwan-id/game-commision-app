@@ -16,6 +16,12 @@ export const validateParameterShiftKerja = (
     errors.work_end_time = "Jam Pulang harus diisi";
   }
 
+  if (values.due_time) {
+    if (values.due_time === values.start_time) {
+      errors.due_time = "Sampai Jam Datang tidak boleh sama dengan Jam Datang";
+    }
+  }
+
   // if (values.start_time && values.due_time) {
   //   const startTime = new Date(`1970-01-01T${values.start_time}:00`);
   //   const dueTime = new Date(`1970-01-01T${values.due_time}:00`);

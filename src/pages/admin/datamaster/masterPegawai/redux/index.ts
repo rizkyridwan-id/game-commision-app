@@ -63,7 +63,12 @@ export const dataPegawaiRedux = () => {
         dispatch(utilityActions.setLoading({ screen: true }));
         await putData<PegawaiInterface>(
           `${urlApi.dataMaster.pegawai}/${data._id}`,
-          data
+          {
+            ...data,
+            daily_sholat_minute: +data.daily_sholat_minute,
+            daily_rest_minute: +data.daily_rest_minute,
+            daily_break_minute: +data.daily_break_minute,
+          }
         );
         NotifSuccess("Data Berhasil Diedit");
         dispatch(actionMaster.getDataPegawai());
@@ -159,10 +164,31 @@ export const dataPegawaiRedux = () => {
     };
   };
 
+  const updatePin = (): AppThunk => {
+    return async (dispatch, getState) => {
+      try {
+        const state = getState();
+        const formValue = state.form.ModalUpdatePin?.values as PegawaiInterface;
+        dispatch(utilityActions.setLoading({ screen: true }));
+        await postData(urlApi.dataMaster.updatePinPegawai, {
+          kode_pegawai: formValue.kode_pegawai,
+          pin: formValue.pin,
+        });
+        NotifSuccess("Ganti Pin Berhasil");
+        dispatch(utilityActions.stopLoading());
+        dispatch(utilityActions.hideModal());
+      } catch (error) {
+        dispatch(utilityActions.stopLoading());
+        NotifInfo(`${error}`);
+      }
+    };
+  };
+
   return {
     prosesData,
     removeData,
     cariDataSales,
+    updatePin,
     showFingerPrint,
   };
 };

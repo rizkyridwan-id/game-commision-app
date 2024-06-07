@@ -142,7 +142,14 @@ const TimeKeeping = () => {
     } catch (error) {
       speak(`${error}`);
       NotifInfo(`${error}`);
+      setInput({
+        pin: "",
+        kode_pegawai: "",
+      });
+      dispatch(change("timeKeeping", "pin", ""));
+      dispatch(change("timeKeeping", "kode_pegawai", ""));
       dispatch(utilityActions.stopLoading());
+      setFocusField("kode_pegawai");
     }
   };
 

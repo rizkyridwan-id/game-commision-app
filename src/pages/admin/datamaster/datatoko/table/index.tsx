@@ -51,6 +51,7 @@ const TableDataToko = () => {
       render: (_cell, row) => (
         <div className="text-center">
           <ButtonDelete
+            tooltipText="Hapus Data"
             prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
           />
         </div>

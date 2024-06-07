@@ -7,9 +7,8 @@ import {
   utilityController,
 } from "@/reduxStore";
 import { ColumnInterFace, HariLiburInterFace } from "@/interface";
-import { Button } from "antd";
 import { useEffect } from "react";
-import { ButtonDelete, convertDate } from "@/utils";
+import { ButtonCustom, ButtonDelete, convertDate } from "@/utils";
 import { dataHariLiburRedux } from "../redux";
 
 const TableHariLibur = () => {
@@ -41,8 +40,9 @@ const TableHariLibur = () => {
       align: "center",
       render: (_cell, row) => (
         <div className="text-center">
-          <Button
-            type="primary"
+          <ButtonCustom
+            color="primary"
+            tooltipText="Edit Data"
             onClick={() =>
               dispatch(
                 helperRedux.showModal({
@@ -55,9 +55,10 @@ const TableHariLibur = () => {
             }
           >
             <i className="fa fa-edit"></i>
-          </Button>
+          </ButtonCustom>
           &nbsp;
           <ButtonDelete
+            tooltipText="Hapus Data"
             prosesDelete={() => dispatch(reduxUser.removeData(row._id))}
           />
         </div>

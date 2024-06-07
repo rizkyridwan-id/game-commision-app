@@ -1,10 +1,12 @@
-import { Button, Popconfirm } from "antd";
+import { Popconfirm, Tooltip } from "antd";
 import { useAppSelector } from "../../reduxStore";
 import { useState } from "react";
+import { ButtonCustom } from "./Button";
 
 interface Props {
   prosesDelete: () => void;
   disabled?: boolean;
+  tooltipText?: string;
 }
 
 const ButtonDelete = (props: Props) => {
@@ -12,23 +14,26 @@ const ButtonDelete = (props: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Popconfirm
-      title="Konfirmasi Hapus Data ! "
-      description="Yakin Ingin Menghapus Data Ini ?"
-      open={open}
-      onConfirm={() => props.prosesDelete()}
-      okButtonProps={{ loading: utility.getLoading.button }}
-      onCancel={() => setOpen(false)}
-    >
-      <Button
-        disabled={props.disabled}
-        type="primary"
-        danger
-        onClick={() => setOpen(true)}
-      >
-        <i className="fa fa-trash"></i>
-      </Button>
-    </Popconfirm>
+    <Tooltip title={props.tooltipText}>
+      <span>
+        <Popconfirm
+          title="Konfirmasi Hapus Data ! "
+          description="Yakin Ingin Menghapus Data Ini ?"
+          open={open}
+          onConfirm={() => props.prosesDelete()}
+          okButtonProps={{ loading: utility.getLoading.button }}
+          onCancel={() => setOpen(false)}
+        >
+          <ButtonCustom
+            disabled={props.disabled}
+            color="red"
+            onClick={() => setOpen(true)}
+          >
+            <i className="fa fa-trash"></i>
+          </ButtonCustom>
+        </Popconfirm>
+      </span>
+    </Tooltip>
   );
 };
 

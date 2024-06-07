@@ -7,7 +7,6 @@ import {
   utilityController,
 } from "@/reduxStore";
 import { ColumnInterFace, PegawaiInterface } from "@/interface";
-import { Button } from "antd";
 import { ButtonCustom, ButtonDelete, convertDate } from "@/utils";
 import { useEffect } from "react";
 import { dataPegawaiRedux } from "../redux";
@@ -32,8 +31,9 @@ const TableDataPegawai = (props: Props) => {
       align: "center",
       render: (_cell, row) => (
         <div className="text-center">
-          <Button
-            type="primary"
+          <ButtonCustom
+            color="primary"
+            tooltipText="Edit Data Pegawai"
             onClick={() =>
               dispatch(
                 helperRedux.showModal({
@@ -46,19 +46,40 @@ const TableDataPegawai = (props: Props) => {
             }
           >
             <i className="fa fa-edit"></i>
-          </Button>
+          </ButtonCustom>
           &nbsp;
           <ButtonCustom
             type="button"
             color="yellow"
+            tooltipText="Edit Fingerprint"
             onClick={() => dispatch(proses.showFingerPrint(row))}
           >
             <i className="fa fa-fingerprint"></i>
           </ButtonCustom>
           &nbsp;
+          <ButtonCustom
+            type="button"
+            color="black"
+            tooltipText="Update Pin"
+            onClick={() =>
+              dispatch(
+                helperRedux.showModal({
+                  isEdit: false,
+                  title: "Update Pin",
+                  namaForm: "FormUpdatePin",
+                  data: row,
+                })
+              )
+            }
+          >
+            <i className="fa fa-key"></i>
+          </ButtonCustom>
+          &nbsp;
           <ButtonDelete
+            tooltipText="Hapus Data"
             prosesDelete={() => dispatch(proses.removeData(row._id))}
           />
+          &nbsp;
         </div>
       ),
     },

@@ -8,7 +8,7 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, ParameterCutiInterFace } from "@/interface";
 import { useEffect } from "react";
-import { Button } from "antd";
+import { ButtonCustom } from "@/utils";
 
 const TableParameterCuti = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,8 +30,9 @@ const TableParameterCuti = () => {
       align: "center",
       render: (_cell, row) => (
         <div className="text-center">
-          <Button
-            type="primary"
+          <ButtonCustom
+            color="primary"
+            tooltipText="Edit Data"
             onClick={() =>
               dispatch(
                 helperRedux.showModal({
@@ -44,7 +45,7 @@ const TableParameterCuti = () => {
             }
           >
             <i className="fa fa-edit"></i>
-          </Button>
+          </ButtonCustom>
         </div>
       ),
     },

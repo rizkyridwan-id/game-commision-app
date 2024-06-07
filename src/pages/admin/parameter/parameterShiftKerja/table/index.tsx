@@ -8,7 +8,7 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, ParameterShiftKerjaInterFace } from "@/interface";
 import { useEffect } from "react";
-import { Button } from "antd";
+import { ButtonCustom } from "@/utils";
 
 const TableParameterShiftKerja = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,8 +50,9 @@ const TableParameterShiftKerja = () => {
         align: "center",
         render: (_cell, row) => (
           <div className="text-center">
-            <Button
-              type="primary"
+            <ButtonCustom
+              color="primary"
+              tooltipText="Edit Data"
               onClick={() =>
                 dispatch(
                   helperRedux.showModal({
@@ -64,7 +65,7 @@ const TableParameterShiftKerja = () => {
               }
             >
               <i className="fa fa-edit"></i>
-            </Button>
+            </ButtonCustom>
           </div>
         ),
       },
