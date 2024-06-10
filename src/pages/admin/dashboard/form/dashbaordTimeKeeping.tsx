@@ -66,7 +66,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
       },
     },
     {
-      title: "Break",
+      title: "Break / Menit",
       dataIndex: "total_break",
       key: "total_break",
       render: (text, row: IReportTimeKeeping) => {
@@ -84,7 +84,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
       },
     },
     {
-      title: "Istirahat",
+      title: "Istirahat / Menit",
       dataIndex: "total_istirahat",
       key: "total_istirahat",
       render: (text, row: IReportTimeKeeping) => {
@@ -102,7 +102,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
       },
     },
     {
-      title: "Sholat",
+      title: "Sholat / Menit",
       dataIndex: "total_sholat",
       key: "total_sholat",
       render: (text, row: IReportTimeKeeping) => {

@@ -100,6 +100,16 @@ export const payrolRedux = () => {
               Number(response.data.gaji_pokok)
             )
           );
+
+          const notes: HTMLElement | null =
+            document.getElementById("notes-bonus-sales");
+          if (notes) {
+            if (Number(response.data.bonus_sales) === 0) {
+              notes.className = "d-block text-danger";
+            } else {
+              notes.className = "d-none";
+            }
+          }
           dispatch(
             change(
               "FormPayroll",

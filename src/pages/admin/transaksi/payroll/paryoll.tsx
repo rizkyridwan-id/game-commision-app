@@ -102,6 +102,10 @@ const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
               isRp
               component={RenderNumber}
             />
+            <p className="text-danger d-none" id="notes-bonus-sales">
+              {" "}
+              <i>Note : Bonus Sales Tidak Mencapai Target</i>
+            </p>
           </div>
           <div className="col-3">
             <Field
