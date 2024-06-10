@@ -57,16 +57,9 @@ const LaporanPPayrollPdfExcel = (
         format: "RP",
       },
     },
+
     {
-      label: "Potongan Lain",
-      key: "potongan_lain",
-      options: {
-        halign: "right",
-        format: "RP",
-      },
-    },
-    {
-      label: "Bonus Target",
+      label: "Bonus Sales",
       key: "bonus_target",
       options: {
         halign: "right",
@@ -81,10 +74,34 @@ const LaporanPPayrollPdfExcel = (
         format: "RP",
       },
     },
+    {
+      label: "Bonus Jabatan",
+      key: "bonus_jabatan",
+      options: {
+        halign: "right",
+        format: "RP",
+      },
+    },
 
     {
       label: "Tunjangan Jabatan",
       key: "tunjangan_jabatan",
+      options: {
+        halign: "right",
+        format: "RP",
+      },
+    },
+    {
+      label: "Kasbon",
+      key: "kasbon",
+      options: {
+        halign: "right",
+        format: "RP",
+      },
+    },
+    {
+      label: "Potongan Lain",
+      key: "potongan_lain",
       options: {
         halign: "right",
         format: "RP",

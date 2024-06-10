@@ -47,22 +47,9 @@ const TableLporanPayroll = () => {
         );
       },
     },
+
     {
-      title: "Potongan Lain",
-      dataIndex: "potongan_lain",
-      key: "potongan_lain",
-      align: "right",
-      render: (cell: number) => {
-        return (
-          <div className="text-end">
-            {" "}
-            {Number(cell || 0).toLocaleString("kr-ko")}
-          </div>
-        );
-      },
-    },
-    {
-      title: "Bonus Target",
+      title: "Bonus Sales",
       dataIndex: "bonus_target",
       key: "bonus_target",
       align: "right",
@@ -89,11 +76,53 @@ const TableLporanPayroll = () => {
         );
       },
     },
+    {
+      title: "Bonus Jabatan",
+      dataIndex: "bonus_jabatan",
+      key: "bonus_jabatan",
+      align: "right",
+      render: (cell: number) => {
+        return (
+          <div className="text-end">
+            {" "}
+            {Number(cell || 0).toLocaleString("kr-ko")}
+          </div>
+        );
+      },
+    },
 
     {
       title: "Tunjangan",
       dataIndex: "tunjangan_jabatan",
       key: "tunjangan_jabatan",
+      align: "right",
+      render: (cell: number) => {
+        return (
+          <div className="text-end">
+            {" "}
+            {Number(cell || 0).toLocaleString("kr-ko")}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Potongan Lain",
+      dataIndex: "potongan_lain",
+      key: "potongan_lain",
+      align: "right",
+      render: (cell: number) => {
+        return (
+          <div className="text-end">
+            {" "}
+            {Number(cell || 0).toLocaleString("kr-ko")}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Kasbon",
+      dataIndex: "kasbon",
+      key: "kasbon",
       align: "right",
       render: (cell: number) => {
         return (

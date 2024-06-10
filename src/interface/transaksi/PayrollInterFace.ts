@@ -8,6 +8,7 @@ export interface PayrollInterFace {
   tunjangan_jabatan: number; // Position allowance
   bonus_target: number; // Target bonus
   bonus_absen: number; // Attendance bonus
+  bonus_jabatan: number; // Attendance bonus
   kasbon: number; // Advance (debt)
   potongan_lain: number; // Other deductions
   grand_total: number; // Grand total
