@@ -103,11 +103,22 @@ export const payrolRedux = () => {
 
           const notes: HTMLElement | null =
             document.getElementById("notes-bonus-sales");
+          const notesJabatan: HTMLElement | null = document.getElementById(
+            "notes-bonus-jabatan"
+          );
           if (notes) {
             if (Number(response.data.bonus_sales) === 0) {
               notes.className = "d-block text-danger";
             } else {
               notes.className = "d-none";
+            }
+          }
+
+          if (notesJabatan) {
+            if (Number(response.data.bonus_sales) === 0) {
+              notesJabatan.className = "d-block text-danger";
+            } else {
+              notesJabatan.className = "d-none";
             }
           }
           dispatch(
