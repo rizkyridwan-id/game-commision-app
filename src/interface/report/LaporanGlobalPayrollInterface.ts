@@ -3,6 +3,7 @@ export interface ReportPayrollGlobalDtoProps {
   gaji_pokok: number;
   tunjangan_jabatan: number;
   bonus_sales: number;
+  bonus_target: number;
   bonus_absen: number;
   bonus_jabatan: number;
   kasbon: number;

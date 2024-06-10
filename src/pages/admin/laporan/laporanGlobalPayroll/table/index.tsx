@@ -31,8 +31,8 @@ const TableLporanGlobalPayroll = () => {
 
     {
       title: "Bonus Sales",
-      dataIndex: "bonus_sales",
-      key: "bonus_sales",
+      dataIndex: "bonus_target",
+      key: "bonus_target",
       render: (cell: number) => {
         return Number(cell || 0).toLocaleString("kr-ko");
       },

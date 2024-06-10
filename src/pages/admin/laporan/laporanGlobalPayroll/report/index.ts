@@ -41,7 +41,7 @@ const LaporanGlobalPayrollPdfExcel = (
     },
     {
       label: "Bonus Sales",
-      key: "bonus_sales",
+      key: "bonus_target",
       options: {
         halign: "right",
         format: "RP",
