@@ -48,7 +48,6 @@ export const ExportPdfExcel = <T>({
       grandTotalSetting,
       dataToko,
     });
-    // Catatan: Implementasi ekspor ke Excel dapat ditambahkan di sini jika diperlukan.
   } else {
     // Ekspor ke Excel
     ExportExcel({
