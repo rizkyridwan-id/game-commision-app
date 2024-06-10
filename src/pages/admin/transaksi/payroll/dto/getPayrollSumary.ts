@@ -14,4 +14,5 @@ export interface GetPayrollPegawaiSummaryDtoProps {
     potongan_lain: number;
   };
   konversi_cuti: number;
+  is_target_toko_reached: boolean;
 }

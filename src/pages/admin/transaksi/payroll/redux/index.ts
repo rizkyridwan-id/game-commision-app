@@ -115,7 +115,7 @@ export const payrolRedux = () => {
           }
 
           if (notesJabatan) {
-            if (Number(response.data.bonus_sales) === 0) {
+            if (response.data.is_target_toko_reached === false) {
               notesJabatan.className = "d-block text-danger";
             } else {
               notesJabatan.className = "d-none";
@@ -143,6 +143,7 @@ export const payrolRedux = () => {
               response.data.tunjangan_jabatan
             )
           );
+          dispatch(change("FormPayroll", "bonus_absen", 0));
 
           dispatch(hitungGajih());
           dispatch(utilityActions.stopLoading());
