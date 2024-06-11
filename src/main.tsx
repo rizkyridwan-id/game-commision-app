@@ -6,6 +6,7 @@ import { BrowserRouter, useRoutes } from "react-router-dom";
 
 import "./index.css";
 import { AppRoute } from "@components";
+import { VITE_APP_BASE_URL } from "./utils/index.ts";
 
 function App() {
   const element = useRoutes(AppRoute);
@@ -15,7 +16,7 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
+      <BrowserRouter basename={VITE_APP_BASE_URL || ""}>
         <App />
       </BrowserRouter>
     </PersistGate>

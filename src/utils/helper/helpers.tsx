@@ -17,6 +17,7 @@ interface GlobalConfig {
   VITE_APP_VERSION?: string;
   VITE_APP_ALAMAT_TOKO?: string;
   VITE_APP_NAMA_TOKO?: string;
+  VITE_APP_BASE_URL?: string;
 }
 
 let globalConfigEnv: string = "";
@@ -35,6 +36,8 @@ export const VITE_APP_NAMA_TOKO: string | undefined =
   globalConfig.VITE_APP_NAMA_TOKO;
 export const VITE_APP_ALAMAT_TOKO: string | undefined =
   globalConfig.VITE_APP_ALAMAT_TOKO;
+export const VITE_APP_BASE_URL: string | undefined =
+  globalConfig.VITE_APP_BASE_URL;
 
 interface LoadingContentProps {
   loading?: boolean;
