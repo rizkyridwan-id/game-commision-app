@@ -53,10 +53,8 @@ export const filterKodeToko = (kodeToko: string) => {
 };
 
 export const speak = (text: string): void => {
-  // Create a SpeechSynthesisUtterance
   const utterance = new SpeechSynthesisUtterance(text);
 
-  // Ensure voices are loaded
   const loadVoices = (): Promise<SpeechSynthesisVoice[]> => {
     return new Promise((resolve) => {
       let voices = speechSynthesis.getVoices();

@@ -37,6 +37,7 @@ interface showConfirmation {
   textBody?: string;
   icon: string;
   html?: string;
+  time?: number;
 }
 export const showConfirmation = (props: showConfirmation): Promise<boolean> => {
   const { title, textBody, html, icon } = props;
@@ -61,13 +62,13 @@ export const showConfirmation = (props: showConfirmation): Promise<boolean> => {
   });
 };
 export const NotificationSwal = (props: showConfirmation): Promise<boolean> => {
-  const { title, textBody, html, icon } = props;
+  const { title, textBody, html, icon, time } = props;
   return new Promise((resolve, reject) => {
     Swal.fire({
       title: title,
       text: textBody,
       html: html,
-      timer: 3000,
+      timer: time,
       icon: icon as SweetAlertResult["value"], // Assume iconInfo is a valid SweetAlert icon type
     }).then((result) => {
       if (result.isConfirmed) {

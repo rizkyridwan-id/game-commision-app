@@ -1,8 +1,9 @@
 import { PegawaiInterface } from "@/interface";
 import { SocketData } from "@/interface";
-import { useAppSelector } from "@/reduxStore";
-import { VITE_APP_BE } from "@/utils";
+import { AppDispatch, useAppSelector, utilityActions } from "@/reduxStore";
+import { VITE_APP_BE, timeout } from "@/utils";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 
 const ModalFingerPrnit = () => {
@@ -10,6 +11,7 @@ const ModalFingerPrnit = () => {
     ?.data as PegawaiInterface;
 
   const [statusFingerPrint, setstatusFingerPrint] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (dataPegawai.kode_toko && dataPegawai.kode_pegawai) {
@@ -20,10 +22,11 @@ const ModalFingerPrnit = () => {
           "join-room",
           `${dataPegawai.kode_toko}~${dataPegawai.kode_pegawai}`
         );
-        socket.on("fingerprint-register", (data: SocketData) => {
-          console.log(data);
+        socket.on("fingerprint-register", async (data: SocketData) => {
           if (data.is_valid) {
             setstatusFingerPrint(true);
+            await timeout(1000);
+            dispatch(utilityActions.hideModal());
           } else {
             setstatusFingerPrint(false);
           }

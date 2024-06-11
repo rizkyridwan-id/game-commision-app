@@ -5,11 +5,12 @@ import { Field, change, reduxForm } from "redux-form";
 import {
   KeyboardWrapper,
   NotifInfo,
-  NotifSuccess,
+  NotificationSwal,
   NumberOnly,
   ReanderField,
   VITE_APP_BE,
   VITE_APP_KODE_TOKO,
+  getData,
   playSound,
   postData,
   setFocusField,
@@ -19,7 +20,7 @@ import {
   urlApi,
 } from "@/utils";
 import { Link } from "react-router-dom";
-import { TypeInputOnChangeValue } from "@/interface";
+import { PegawaiInterface, TypeInputOnChangeValue } from "@/interface";
 import { io } from "socket.io-client";
 import { SocketData } from "@/interface";
 import tryagain from "./audio/tryagain.mp3";
@@ -121,16 +122,37 @@ const TimeKeeping = () => {
         url = urlApi.timeKeeping.sholat;
       }
 
+      const jam = `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`;
       const dataBody = {
         kode_pegawai: input.kode_pegawai || data?.kode_pegawai,
         kode_toko: VITE_APP_KODE_TOKO,
-        jam: `${new Date().getHours().toString().padStart(2, "0")}:${new Date().getMinutes().toString().padStart(2, "0")}`,
+        jam: `${jam}`,
         tgl_system: today,
       };
       await postData(url, dataBody);
+      const dataPegawai = await getData<PegawaiInterface>(
+        urlApi.dataMaster.pegawai,
+        {
+          kode_pegawai: dataBody.kode_pegawai,
+          first: true,
+        }
+      );
       // playSound(ok);
-      speak(`OK, Time Keeping ${menu} berhasil`);
-      NotifSuccess(`Time Keeping ${menu} berhasil`);
+      speak(
+        `OK, ${dataPegawai.data.nama_pegawai}, Time Keeping ${menu} berhasil`
+      );
+      // NotifSuccess(
+      //   `${dataPegawai.data.nama_pegawai}. Time Keeping ${menu} berhasil`
+      // );
+      dispatch(utilityActions.stopLoading());
+      NotificationSwal({
+        title: `Time Keeping <b>${menu}</b> Berhasil`,
+        html: `Kode Pegawai  <b>${dataPegawai.data.kode_pegawai}</b><br/>Nama  <b>${dataPegawai.data.nama_pegawai}</b> <br/>Jam : ${jam}`,
+        icon: "success",
+        time: 5000,
+      })
+        .then(() => {})
+        .catch(() => {});
       setInput({
         pin: "",
         kode_pegawai: "",
@@ -138,7 +160,6 @@ const TimeKeeping = () => {
       setFocus("kode_pegawai");
       dispatch(change("timeKeeping", "pin", ""));
       dispatch(change("timeKeeping", "kode_pegawai", ""));
-      dispatch(utilityActions.stopLoading());
     } catch (error) {
       speak(`${error}`);
       NotifInfo(`${error}`);
