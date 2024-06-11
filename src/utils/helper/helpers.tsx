@@ -70,11 +70,9 @@ export const speak = (text: string): void => {
   };
 
   loadVoices().then((voices) => {
-    // Filter voices for Indonesian language
     const indonesianVoices = voices.filter((voice) => voice.lang === "id-ID");
-
     if (indonesianVoices.length > 0) {
-      utterance.voice = indonesianVoices[0]; // Choose the first Indonesian voice
+      utterance.voice = indonesianVoices[1];
     } else {
       console.warn("No Indonesian voice found");
     }
