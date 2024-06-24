@@ -1,9 +1,10 @@
 import { TableMaster } from "@/components";
 import { ColumnInterFace, ReportPayrollGlobalDtoProps } from "@/interface";
-import { AppDispatch, useAppSelector } from "@/reduxStore";
+import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
 import { ButtonCustom } from "@/utils";
 import { useDispatch } from "react-redux";
 import { reduxLaporanGlobalPayroll } from "../redux";
+import { useEffect } from "react";
 
 const TableLporanGlobalPayroll = () => {
   const columnsTableKasbon: ColumnInterFace<ReportPayrollGlobalDtoProps>[] = [
@@ -92,6 +93,13 @@ const TableLporanGlobalPayroll = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const proses = reduxLaporanGlobalPayroll();
+
+  useEffect(() => {
+    dispatch(simpanDataTmp({ data: [] }));
+    return () => {
+      dispatch(simpanDataTmp({ data: [] }));
+    };
+  }, [dispatch]);
 
   return (
     <div className="row mt-4">

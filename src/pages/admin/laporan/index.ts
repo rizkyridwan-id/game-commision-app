@@ -5,3 +5,4 @@ export * from "./laporanPelanggaran";
 export * from "./laporanPengajuanCuti";
 export * from "./laporanPotonganLainLain";
 export * from "./laporanTimeKeeping";
+export * from "./laporanDataPegawai";

@@ -3,6 +3,11 @@
  */
 export interface PegawaiInterface {
   /**
+   * No Urut.
+   * @example "1"
+   */
+  no?: number;
+  /**
    * Kode unik untuk setiap karyawan.
    * @example "001123123123"
    */

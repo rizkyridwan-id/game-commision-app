@@ -121,6 +121,11 @@ const MenuPusat = [
         title: "Laporan Global Payroll",
         is_show: false,
       },
+      {
+        path: "/app/laporan-data-pegawai",
+        title: "Laporan Data Pegawai",
+        is_show: false,
+      },
     ],
   },
 ];

@@ -30,6 +30,7 @@ import {
   ReviewCuti,
   TimeKeeping,
   LaporanPotonganLainLain,
+  LaporanDataPegawai,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
@@ -290,6 +291,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <LaporanTimeKeeping />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-data-pegawai",
+        title: "Laporan Data Pegawai",
+        element: (
+          <ProtectedRoute>
+            <LaporanDataPegawai />
           </ProtectedRoute>
         ),
       },
