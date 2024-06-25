@@ -1,4 +1,6 @@
 import { DataSalesInterFace, PegawaiInterface } from "@/interface";
+import { CetakDataMemberInterFace } from "@/pages/admin/utility/cetakMember/dto/cetakDataMember";
+import { CetakPdf } from "@/pages/admin/utility/settingMember";
 import {
   AppDispatch,
   AppThunk,
@@ -184,11 +186,38 @@ export const dataPegawaiRedux = () => {
     };
   };
 
+  const cetakMember = (data: PegawaiInterface): AppThunk => {
+    return async (dispatch) => {
+      try {
+        dispatch(utilityActions.setLoading({ screen: true }));
+        const result = await getData<CetakDataMemberInterFace>(
+          urlApi.utility.memberCard,
+          {
+            kode_pegawai: data.kode_pegawai,
+          }
+        );
+        // console.log(result);
+        CetakPdf<PegawaiInterface>({
+          title: "Cetak Kartu Pegawai",
+          data: {
+            nota: [result.data.dataPegawai],
+            notasetting: result.data.kartuPegawai,
+          },
+        });
+        dispatch(utilityActions.stopLoading());
+      } catch (error) {
+        dispatch(utilityActions.stopLoading());
+        console.log(error);
+      }
+    };
+  };
+
   return {
     prosesData,
     removeData,
     cariDataSales,
     updatePin,
+    cetakMember,
     showFingerPrint,
   };
 };

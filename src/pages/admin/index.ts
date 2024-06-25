@@ -8,3 +8,4 @@ export * from "./parameter";
 export * from "./dataTimeKeeping";
 export * from "./laporan";
 export * from "./transaksi";
+export * from "./utility";

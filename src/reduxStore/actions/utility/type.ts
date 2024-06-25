@@ -10,6 +10,7 @@ export const AppActionTypes = {
   SIMPAN_DATA_TMP: "SIMPAN_DATA_TMP",
   SHOW_BUTTON_DELETE: "SHOW_BUTTON_DELETE",
   SCREEN_SIZE: "SCREEN_SIZE",
+  DATA_NOTA: "DATA_NOTA",
 } as const;
 
 export interface ScreenSizeAction
@@ -54,11 +55,17 @@ export interface LoadingTabelAction
   extends Action<typeof AppActionTypes.LOADING_TABEL> {
   payload: boolean;
 }
+export interface NotaAction<T> extends Action<typeof AppActionTypes.DATA_NOTA> {
+  payload: NotaData<T>;
+}
 
 export interface LoadingData {
   table?: boolean;
   button?: boolean;
   screen?: boolean;
+}
+export interface NotaData<T> {
+  data?: T;
 }
 export interface ModalData<T> {
   isModalShow: boolean;
@@ -81,6 +88,7 @@ export interface UtilityState<T> {
   getModal: ModalData<T>;
   hideModal: ModalData<T>;
   getDataTmp: DataTmp<T>;
+  getNota: NotaData<T>;
 }
 
 export type AppActionUtility<T> =
@@ -92,4 +100,5 @@ export type AppActionUtility<T> =
   | ShowButtonDelete
   | ScreenSizeAction
   | SimpanDataTmpAction<T>
+  | NotaAction<T>
   | LoadingTabelAction;

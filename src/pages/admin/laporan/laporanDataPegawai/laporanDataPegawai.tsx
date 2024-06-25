@@ -1,5 +1,5 @@
 import { PanelContent } from "@/components";
-import { LaporanDataPegawaiDto } from "./dtto";
+import { LaporanDataPegawaiDto } from "./dto";
 import {
   ConfigProps,
   Field,

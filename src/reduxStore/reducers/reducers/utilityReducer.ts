@@ -22,11 +22,13 @@ function initialState<T>(): UtilityState<T> {
       namaForm: "",
       title: "",
     },
-
     setLoadingTabel: false,
     getShowButtonDelete: false,
     getDataEdit: [],
     getDataTmp: {
+      data: [] as T,
+    },
+    getNota: {
       data: [] as T,
     },
 
@@ -44,6 +46,7 @@ const utility = <T>(
         ...state,
         getShowButtonDelete: action.payload,
       };
+
     case AppActionTypes.LOADING_TABEL:
       return {
         ...state,
@@ -81,6 +84,12 @@ const utility = <T>(
         ...state,
         getScreenSize: action.payload,
       };
+    case AppActionTypes.DATA_NOTA:
+      return {
+        ...state,
+        getNota: action.payload,
+      };
+
     default:
       return state;
   }

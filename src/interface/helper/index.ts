@@ -13,3 +13,4 @@ export * from "./socket-interface";
 export * from "./filter-laporan-dto";
 export * from "./export-pdf-excel-interface";
 export * from "./dataSystem-interface";
+export * from "./nota-interface";

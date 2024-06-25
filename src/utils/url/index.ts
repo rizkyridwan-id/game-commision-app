@@ -52,6 +52,10 @@ const urlApi = {
     hbd: "dashboard/member-hbd",
     cuti: "dashboard/unreviewed-cuti-request",
   },
+
+  utility: {
+    memberCard: "member-card/cetak",
+  },
 };
 
 export { urlApi };

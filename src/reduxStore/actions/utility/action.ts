@@ -7,6 +7,8 @@ import {
   LoadingData,
   LoadingTabelAction,
   ModalData,
+  NotaAction,
+  NotaData,
   ScreenSizeAction,
   SetIsEditAction,
   SetLoadingAction,
@@ -98,10 +100,19 @@ const setLaporanKosong = <T>(
   };
 };
 
+const setDataNota = <T>(data: NotaData<T>): AppThunk => {
+  return async (dispatch: Dispatch<NotaAction<T>>) => {
+    dispatch({
+      type: AppActionTypes.DATA_NOTA,
+      payload: data,
+    });
+  };
+};
 const utilityActions = {
   simpanDataTmp,
   setLaporanKosong,
   getDataEdit,
+  setDataNota,
   setLoading,
   isEdit,
   showModal,

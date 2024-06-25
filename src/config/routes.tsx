@@ -31,6 +31,8 @@ import {
   TimeKeeping,
   LaporanPotonganLainLain,
   LaporanDataPegawai,
+  SettingMember,
+  CetakMember,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
@@ -300,6 +302,24 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <LaporanDataPegawai />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/setting-member",
+        title: "Setting Member",
+        element: (
+          <ProtectedRoute>
+            <SettingMember />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/cetak-member",
+        title: "Cetak Member",
+        element: (
+          <ProtectedRoute>
+            <CetakMember />
           </ProtectedRoute>
         ),
       },

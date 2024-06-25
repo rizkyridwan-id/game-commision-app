@@ -128,6 +128,24 @@ const MenuPusat = [
       },
     ],
   },
+  {
+    path: "#",
+    icon: "fa fa-folder-open",
+    title: "Utility",
+    is_show: false,
+    children: [
+      {
+        path: "/app/setting-member",
+        title: "Setting Member",
+        is_show: false,
+      },
+      {
+        path: "/app/cetak-member",
+        title: "Cetak Member",
+        is_show: false,
+      },
+    ],
+  },
 ];
 
 export default MenuPusat;

@@ -30,57 +30,71 @@ const TableDataPegawai = (props: Props) => {
       key: "actions",
       align: "center",
       render: (_cell, row) => (
-        <div className="text-center">
-          <ButtonCustom
-            color="primary"
-            tooltipText="Edit Data Pegawai"
-            onClick={() =>
-              dispatch(
-                helperRedux.showModal({
-                  isEdit: true,
-                  title: "Edit Data",
-                  namaForm: "FormPegawai",
-                  data: row,
-                })
-              )
-            }
-          >
-            <i className="fa fa-edit"></i>
-          </ButtonCustom>
-          &nbsp;
-          <ButtonCustom
-            type="button"
-            color="yellow"
-            tooltipText="Edit Fingerprint"
-            onClick={() => dispatch(proses.showFingerPrint(row))}
-          >
-            <i className="fa fa-fingerprint"></i>
-          </ButtonCustom>
-          &nbsp;
-          <ButtonCustom
-            type="button"
-            color="black"
-            tooltipText="Update Pin"
-            onClick={() =>
-              dispatch(
-                helperRedux.showModal({
-                  isEdit: false,
-                  title: "Update Pin",
-                  namaForm: "FormUpdatePin",
-                  data: row,
-                })
-              )
-            }
-          >
-            <i className="fa fa-key"></i>
-          </ButtonCustom>
-          &nbsp;
-          <ButtonDelete
-            tooltipText="Hapus Data"
-            prosesDelete={() => dispatch(proses.removeData(row._id))}
-          />
-          &nbsp;
-        </div>
+        <>
+          {form === "CetakKartuPegawai" ? (
+            <>
+              <ButtonCustom
+                color="primary"
+                tooltipText="Cetak Kartu Pegawai"
+                onClick={() => dispatch(proses.cetakMember(row))}
+              >
+                <i className="fa fa-print"></i>
+              </ButtonCustom>
+            </>
+          ) : (
+            <div className="text-center">
+              <ButtonCustom
+                color="primary"
+                tooltipText="Edit Data Pegawai"
+                onClick={() =>
+                  dispatch(
+                    helperRedux.showModal({
+                      isEdit: true,
+                      title: "Edit Data",
+                      namaForm: "FormPegawai",
+                      data: row,
+                    })
+                  )
+                }
+              >
+                <i className="fa fa-edit"></i>
+              </ButtonCustom>
+              &nbsp;
+              <ButtonCustom
+                type="button"
+                color="yellow"
+                tooltipText="Edit Fingerprint"
+                onClick={() => dispatch(proses.showFingerPrint(row))}
+              >
+                <i className="fa fa-fingerprint"></i>
+              </ButtonCustom>
+              &nbsp;
+              <ButtonCustom
+                type="button"
+                color="black"
+                tooltipText="Update Pin"
+                onClick={() =>
+                  dispatch(
+                    helperRedux.showModal({
+                      isEdit: false,
+                      title: "Update Pin",
+                      namaForm: "FormUpdatePin",
+                      data: row,
+                    })
+                  )
+                }
+              >
+                <i className="fa fa-key"></i>
+              </ButtonCustom>
+              &nbsp;
+              <ButtonDelete
+                tooltipText="Hapus Data"
+                prosesDelete={() => dispatch(proses.removeData(row._id))}
+              />
+              &nbsp;
+            </div>
+          )}
+        </>
       ),
     },
     {
@@ -181,7 +195,11 @@ const TableDataPegawai = (props: Props) => {
   };
   return (
     <TableMaster
-      addButtonTitle={form === "pencarian_pegawai" ? undefined : "Tambah Data"}
+      addButtonTitle={
+        form === "pencarian_pegawai" || form === "CetakKartuPegawai"
+          ? undefined
+          : "Tambah Data"
+      }
       dataSource={dataPegawai.data}
       columns={columnsTablePegawai.filter((column) => {
         if (form === "pencarian_pegawai" && column.key === "actions") {
@@ -192,7 +210,9 @@ const TableDataPegawai = (props: Props) => {
       rowKey={"kode_pegawai"}
       scrollX
       width={2000}
-      rowSelection={form && { type: "radio", ...rowSelection }}
+      rowSelection={
+        form === "pencarian_pegawai" && { type: "radio", ...rowSelection }
+      }
       onAddButtonClick={() =>
         dispatch(
           helperRedux.showModal({

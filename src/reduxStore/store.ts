@@ -17,7 +17,7 @@ const dataTransform: Transform<RootState<string>, RootState<string>> = {
 };
 
 const persistConfig = {
-  blacklist: ["form", "theme", "utility", "dataMaster"],
+  blacklist: ["form", "utility", "dataMaster"],
   key: "root",
   storage: indexedDBStorage,
   transforms: [dataTransform], // Gunakan transform yang telah dibuat
