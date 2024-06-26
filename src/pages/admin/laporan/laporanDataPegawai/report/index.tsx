@@ -46,7 +46,7 @@ const LaporanDataPegawaiPdfExcel = (
       },
     },
     {
-      label: "JABATAM",
+      label: "JABATAN",
       key: "jabatan",
       options: {
         halign: "left",
