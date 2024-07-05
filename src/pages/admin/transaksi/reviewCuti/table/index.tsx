@@ -42,6 +42,11 @@ const TableReviewCuti = () => {
       key: "kode_toko",
     },
     {
+      title: "Status",
+      dataIndex: "status_validasi",
+      key: "status_validasi",
+    },
+    {
       title: "Action",
       key: "actions",
       render: (_cell: string, row: PengajuanCutiInterFace) => {

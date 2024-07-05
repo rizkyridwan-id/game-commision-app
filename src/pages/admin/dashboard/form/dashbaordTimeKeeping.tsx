@@ -43,7 +43,8 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
               }),
             },
           },
-          children: <div>{text}</div>,
+          // children: <div>{text}</div>,
+          children: <div>{row.status_datang === "LIBUR" ? "LIBUR" : text}</div>,
         };
       },
     },
@@ -61,7 +62,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
               }),
             },
           },
-          children: <div>{text}</div>,
+          children: <div>{row.status_pulang === "LIBUR" ? "LIBUR" : text}</div>,
         };
       },
     },
@@ -79,7 +80,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
               }),
             },
           },
-          children: <div>{text}</div>,
+          children: <div>{row.status_break === "LIBUR" ? "LIBUR" : text}</div>,
         };
       },
     },
@@ -97,7 +98,10 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
               }),
             },
           },
-          children: <div>{text}</div>,
+          // children: <div>{text}</div>,
+          children: (
+            <div>{row.status_istirahat === "LIBUR" ? "LIBUR" : text}</div>
+          ),
         };
       },
     },
@@ -115,7 +119,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
               }),
             },
           },
-          children: <div>{text}</div>,
+          children: <div>{row.status_sholat === "LIBUR" ? "LIBUR" : text}</div>,
         };
       },
     },
@@ -128,7 +132,8 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
 
   const getData = async () => {
     await timeout(1000);
-    dispatch(change("dashboardTimeKeeping", "tgl_system", today));
+    dispatch(change("dashboardTimeKeeping", "start_date", today));
+    dispatch(change("dashboardTimeKeeping", "end_date", today));
 
     setTimeout(() => {
       dispatch(proses.cariLaporan("DASHBOARD"));
@@ -147,17 +152,26 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
     <PanelContent title="Dashboard Time Keeping">
       <form onSubmit={handleSubmit(cariData)}>
         <div className="row">
-          <TokoCabangSelector className="col-4" />
-          <div className="col-4">
+          <TokoCabangSelector className="col-3" />
+          <div className="col-3">
             <Field
-              label="Tanggal"
-              name="tgl_system"
+              label="Tgl Awal"
+              name="start_date"
               component={ReanderField}
               placeholder="Pilih Tanggal"
               type="date"
             />
           </div>
-          <div className="col-4 mt-4">
+          <div className="col-3">
+            <Field
+              label="Tgl Akhir"
+              name="end_date"
+              component={ReanderField}
+              placeholder="Pilih Tanggal"
+              type="date"
+            />
+          </div>
+          <div className="col-3 mt-4">
             <ButtonCustom block type="submit" color="primary">
               Cari Data
             </ButtonCustom>

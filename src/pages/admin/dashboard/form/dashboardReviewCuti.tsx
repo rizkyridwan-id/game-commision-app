@@ -39,6 +39,7 @@ const DashbaordReviewCuti = () => {
     dispatch(
       actionTransaksi.getReviewPengajuanCuti({
         namaForm: "DASHBOARD",
+        status_validasi: "OPEN",
       })
     );
   }, [dispatch]);

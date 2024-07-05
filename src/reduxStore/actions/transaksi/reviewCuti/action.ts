@@ -1,6 +1,6 @@
 import { PengajuanCutiInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
-import { NotifInfo, getData, today, urlApi } from "@/utils";
+import { NotifInfo, convertDate, getData, today, urlApi } from "@/utils";
 import { ReviewPengajuanCutiAction, ReviewPengajuanCutiType } from "./type";
 
 export const getReviewPengajuanCutiAction = (
@@ -22,15 +22,19 @@ export const getReviewPengajuanCuti = (row?: SearchInterface): AppThunk => {
         limit: row?.limit,
       };
 
-      params.start_date = row?.start_date || today;
-      params.end_date = row?.end_date || today;
-      // params.kode_toko = VITE_APP_KODE_TOKO;
+      params.start_date = convertDate(row?.start_date || today);
+      params.end_date = convertDate(row?.end_date || today);
+      params.status_validasi = row?.status_validasi;
+      params.kode_toko = row?.kode_toko;
 
       dispatch(utilityActions.setLoading({ table: true }));
       const response = await getData<PengajuanCutiInterFace[]>(
         urlApi.dashboard.cuti,
         params
       );
+      if (response.data.length === 0) {
+        NotifInfo("Data Review Cuti Tidak Tersedia");
+      }
       dispatch(getReviewPengajuanCutiAction(response.data, response.count));
       dispatch(utilityActions.stopLoading());
     } catch (error) {
