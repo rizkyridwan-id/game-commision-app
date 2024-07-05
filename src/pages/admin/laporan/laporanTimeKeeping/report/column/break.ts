@@ -3,6 +3,7 @@ import {
   ColumnInterFace,
   IReportTimeKeeping,
 } from "@/interface";
+import { replaceUnderscoresWithSpaces } from "@/utils";
 
 export const columnsBreak: ColumnGenarator<IReportTimeKeeping>[] = [
   {
@@ -44,6 +45,11 @@ export const columnsBreak: ColumnGenarator<IReportTimeKeeping>[] = [
 
 export const columnsTableBreak: ColumnInterFace<IReportTimeKeeping>[] = [
   {
+    title: "Tanggal",
+    dataIndex: "tgl_system",
+    key: "tgl_system",
+  },
+  {
     title: "Kode Pegawai",
     dataIndex: "kode_pegawai",
     key: "kode_pegawai",
@@ -72,5 +78,8 @@ export const columnsTableBreak: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Staus",
     dataIndex: "status_break",
     key: "status_break",
+    render(cell: string) {
+      return replaceUnderscoresWithSpaces(cell);
+    },
   },
 ];

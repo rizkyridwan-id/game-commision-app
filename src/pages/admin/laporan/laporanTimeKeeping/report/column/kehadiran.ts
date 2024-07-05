@@ -3,6 +3,7 @@ import {
   ColumnInterFace,
   IReportTimeKeeping,
 } from "@/interface";
+import { replaceUnderscoresWithSpaces } from "@/utils";
 
 export const columnsPdfExcelKehadiran: ColumnGenarator<IReportTimeKeeping>[] = [
   {
@@ -51,6 +52,11 @@ export const columnsPdfExcelKehadiran: ColumnGenarator<IReportTimeKeeping>[] = [
 
 export const columnsTableKehadiran: ColumnInterFace<IReportTimeKeeping>[] = [
   {
+    title: "Tanggal",
+    dataIndex: "tgl_system",
+    key: "tgl_system",
+  },
+  {
     title: "Kode Pegawai",
     dataIndex: "kode_pegawai",
     key: "kode_pegawai",
@@ -74,10 +80,16 @@ export const columnsTableKehadiran: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Staus Datang",
     dataIndex: "status_datang",
     key: "status_datang",
+    render(cell: string) {
+      return replaceUnderscoresWithSpaces(cell);
+    },
   },
   {
     title: "Staus Pulang",
     dataIndex: "status_pulang",
     key: "status_pulang",
+    render(cell: string) {
+      return replaceUnderscoresWithSpaces(cell);
+    },
   },
 ];

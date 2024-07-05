@@ -3,6 +3,7 @@ import {
   ColumnInterFace,
   IReportTimeKeeping,
 } from "@/interface";
+import { replaceUnderscoresWithSpaces } from "@/utils";
 
 export const columnsPdfExcelSholat: ColumnGenarator<IReportTimeKeeping>[] = [
   {
@@ -43,6 +44,11 @@ export const columnsPdfExcelSholat: ColumnGenarator<IReportTimeKeeping>[] = [
 ];
 export const columnsTableSholat: ColumnInterFace<IReportTimeKeeping>[] = [
   {
+    title: "Tanggal",
+    dataIndex: "tgl_system",
+    key: "tgl_system",
+  },
+  {
     title: "Kode Pegawai",
     dataIndex: "kode_pegawai",
     key: "kode_pegawai",
@@ -71,5 +77,8 @@ export const columnsTableSholat: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Staus",
     dataIndex: "status_sholat",
     key: "status_sholat",
+    render(cell: string) {
+      return replaceUnderscoresWithSpaces(cell);
+    },
   },
 ];

@@ -44,7 +44,9 @@ export const reduxLaporanTimeKeeping = () => {
         dispatch(utilityActions.setLoading({ screen: true }));
 
         const newData = {
-          tgl_system: convertDate(formValues.tgl_system),
+          // tgl_system: convertDate(formValues.tgl_system),
+          start_date: convertDate(formValues.start_date),
+          end_date: convertDate(formValues.end_date),
           kode_toko: formValues.kode_toko || `${VITE_APP_KODE_TOKO}`,
           type_shift:
             formValues.type_shift === "SEMUA"

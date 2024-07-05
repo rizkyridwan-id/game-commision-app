@@ -26,7 +26,8 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(change("LaporanTimeKeeping", "tgl_system", today));
+    dispatch(change("LaporanTimeKeeping", "start_date", today));
+    dispatch(change("LaporanTimeKeeping", "end_date", today));
     dispatch(change("LaporanTimeKeeping", "type_shift", "SEMUA"));
     dispatch(change("LaporanTimeKeeping", "type_time_keeping", "KEHADIRAN"));
     dispatch(actionMaster.getDataToko());
@@ -48,8 +49,16 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
         <div className="row">
           <div className="col-3">
             <Field
-              label="Tanggal"
-              name="tgl_system"
+              label="Tanggal Awal"
+              name="start_date"
+              type="date"
+              component={ReanderField}
+            />
+          </div>
+          <div className="col-3">
+            <Field
+              label="Tanggal Akhir"
+              name="end_date"
               type="date"
               component={ReanderField}
             />

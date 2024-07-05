@@ -614,6 +614,10 @@ export const TextFile = (nama_file: string): void => {
 export const timeout = (time: number = 100): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
+export const replaceUnderscoresWithSpaces = (text: string) => {
+  return text.replaceAll("_", " ");
+};
+
 export const removeWindowClass = (classList: string) => {
   const window: HTMLElement | null =
     document && document.getElementById("root");

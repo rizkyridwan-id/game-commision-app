@@ -1,7 +1,7 @@
 import { TableMaster } from "@/components";
 import { ColumnInterFace, TimeKeepingKehadiranInterFace } from "@/interface";
 import { AppDispatch, getDataTimeKeeping, useAppSelector } from "@/reduxStore";
-import { today } from "@/utils";
+import { replaceUnderscoresWithSpaces, today } from "@/utils";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -23,26 +23,41 @@ const TableDataTimeKeeping = () => {
       title: "Status Break",
       dataIndex: "status_break",
       key: "status_break",
+      render(cell: string) {
+        return <div> {replaceUnderscoresWithSpaces(cell)}</div>;
+      },
     },
     {
       title: "Status Datang",
       dataIndex: "status_datang",
       key: "status_datang",
+      render(cell: string) {
+        return <div> {replaceUnderscoresWithSpaces(cell)}</div>;
+      },
     },
     {
       title: "Status Istirahat",
       dataIndex: "status_istirahat",
       key: "status_istirahat",
+      render(cell: string) {
+        return <div> {replaceUnderscoresWithSpaces(cell)}</div>;
+      },
     },
     {
       title: "Status Pulang",
       dataIndex: "status_pulang",
       key: "status_pulang",
+      render(cell: string) {
+        return <div> {replaceUnderscoresWithSpaces(cell)}</div>;
+      },
     },
     {
       title: "Status Sholat",
       dataIndex: "status_sholat",
       key: "status_sholat",
+      render(cell: string) {
+        return <div> {replaceUnderscoresWithSpaces(cell)}</div>;
+      },
     },
   ];
 
