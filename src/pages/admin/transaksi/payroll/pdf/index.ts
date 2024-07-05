@@ -8,11 +8,11 @@ export const cetakSlipGajih = (data: FormPayrollInterFace) => {
     orientation: "landscape",
     unit: "mm",
     format: "a5",
-    encryption: {
-      userPassword: `${data.tgl_lahir || "helpdesknagatechberasputih"}`,
-      ownerPassword: "helpdesknagatechberasputih",
-      userPermissions: ["print", "modify", "copy", "annot-forms"],
-    },
+    // encryption: {
+    //   userPassword: `${data.tgl_lahir || "helpdesknagatechberasputih"}`,
+    //   ownerPassword: "helpdesknagatechberasputih",
+    //   userPermissions: ["print", "modify", "copy", "annot-forms"],
+    // },
   });
 
   const datatoko = filterKodeToko(`${VITE_APP_KODE_TOKO}`);

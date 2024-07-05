@@ -47,7 +47,7 @@ const DashbaordReviewCuti = () => {
     (state) => state.transaksi.reviewPengajuanCuti
   );
   return (
-    <PanelContent title="Dashboard Review Cuti">
+    <PanelContent title="Dashboard Pengajuan Cuti">
       <TableMaster
         dataSource={dataReviewCuti.data}
         columns={columns}

@@ -147,31 +147,31 @@ const ModalPegawai = (
             placeholder="Masukan Hari Libur"
             options={[
               {
-                value: "SUNDAY",
+                value: "MINGGU",
                 label: "MINGGU",
               },
               {
-                value: "MONDAY",
+                value: "SENIN",
                 label: "SENIN",
               },
               {
-                value: "TUESDAY",
+                value: "SELASA",
                 label: "SELASA",
               },
               {
-                value: "WEDNESDAY",
+                value: "RABU",
                 label: "RABU",
               },
               {
-                value: "THURSDAY",
+                value: "KAMIS",
                 label: "KAMIS",
               },
               {
-                value: "FRIDAY",
+                value: "JUMAT",
                 label: "JUMAT",
               },
               {
-                value: "SATURDAY",
+                value: "SABTU",
                 label: "SABTU",
               },
             ]}

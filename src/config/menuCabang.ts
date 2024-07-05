@@ -12,6 +12,12 @@ const MenuCabang = [
     is_show: false,
   },
   {
+    path: "/app/time-keeping",
+    icon: "fa fa-business-time",
+    title: "Time Keeping",
+    is_show: false,
+  },
+  {
     path: "#",
     icon: "fa fa-calendar-check",
     title: "Transaksi",
