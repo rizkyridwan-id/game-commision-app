@@ -10,13 +10,24 @@ import {
 } from "@/utils";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Field, InjectedFormProps, change, reduxForm } from "redux-form";
+import {
+  ConfigProps,
+  Field,
+  InjectedFormProps,
+  change,
+  reduxForm,
+} from "redux-form";
 import { reduxLaporanTimeKeeping } from "../../laporan/laporanTimeKeeping/redux";
 
-const DashbaordTimeKeeping = (props: InjectedFormProps) => {
+type FormProps = {
+  title: string;
+};
+const DashbaordTimeKeeping = (
+  props: InjectedFormProps<IReportTimeKeeping, FormProps, string> & FormProps
+) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { handleSubmit } = props;
+  const { handleSubmit, title } = props;
 
   const columns: ColumnInterFace<IReportTimeKeeping>[] = [
     {
@@ -149,7 +160,7 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
   ) as IReportTimeKeeping[];
 
   return (
-    <PanelContent title="Dashboard Time Keeping">
+    <PanelContent title={`${title || "Dashboard Time Keeping"}`}>
       <form onSubmit={handleSubmit(cariData)}>
         <div className="row">
           <TokoCabangSelector className="col-3" />
@@ -191,6 +202,10 @@ const DashbaordTimeKeeping = (props: InjectedFormProps) => {
   );
 };
 
-export default reduxForm({
+const config: ConfigProps<IReportTimeKeeping, FormProps> = {
   form: "dashboardTimeKeeping",
-})(DashbaordTimeKeeping);
+  enableReinitialize: true,
+};
+export default reduxForm<IReportTimeKeeping, FormProps>(config)(
+  DashbaordTimeKeeping
+);

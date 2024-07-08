@@ -1,12 +1,7 @@
-import { PanelContent } from "@/components";
-import TableDataTimeKeeping from "./table";
+import DashbaordTimeKeeping from "../dashboard/form/dashbaordTimeKeeping";
 
 const DataTimeKeeping = () => {
-  return (
-    <PanelContent title="Data Time Keeping Kehadiran">
-      <TableDataTimeKeeping />
-    </PanelContent>
-  );
+  return <DashbaordTimeKeeping title="Data Time Keeping" />;
 };
 
 export default DataTimeKeeping;

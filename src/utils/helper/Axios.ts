@@ -23,9 +23,9 @@ export interface ErrorResponse {
   message: string;
 }
 
-// const errorRegex =
-//   /Unauthorized|Invalid token|Invalid signature|Token Tidak Ditemukan/i;
-const errorRegex = /Invalid signature/i;
+const errorRegex =
+  /Unauthorized|Invalid token|Invalid signature|Token Tidak Ditemukan/i;
+// const errorRegex = /Invalid signature/i;
 
 const getNewRefresToken = async () => {
   const userData: UserLoginInterFace = getItem<UserLoginInterFace>("userdata");
@@ -126,7 +126,7 @@ export async function getData<T>(
 
 export async function postData<T>(
   endpoint: string,
-  data?: T
+  data?: any
 ): Promise<ApiResponse<T>> {
   const url = `${VITE_APP_BE}/${endpoint}`;
   const timestamp = new Date().toISOString();
@@ -192,7 +192,7 @@ export async function postData<T>(
 }
 export async function putData<T>(
   endpoint: string,
-  data: T
+  data: any
 ): Promise<ApiResponse<T>> {
   const url = `${VITE_APP_BE}/${endpoint}`;
   const timestamp = new Date().toISOString();
