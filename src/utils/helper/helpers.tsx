@@ -618,6 +618,11 @@ export const replaceUnderscoresWithSpaces = (text: string) => {
   return text.replaceAll("_", " ");
 };
 
+export const addDays = (date: Date, days: number): Date => {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+};
 export const removeWindowClass = (classList: string) => {
   const window: HTMLElement | null =
     document && document.getElementById("root");

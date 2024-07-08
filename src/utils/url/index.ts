@@ -30,6 +30,7 @@ const urlApi = {
 
   transaksi: {
     cuti: "cuti-request",
+    batalcuti: "cuti-request/batal-cuti",
     pelanggaranPegawai: "pelanggaran-pegawai",
     kasbon: "kasbon",
     payroll: "payroll",

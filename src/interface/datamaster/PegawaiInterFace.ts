@@ -25,6 +25,12 @@ export interface PegawaiInterface {
   nama_pegawai: string;
 
   /**
+   * Cuti Terpakai
+   * @example "0"
+   */
+  cuti_terpakai: number;
+
+  /**
    * Tanggal lahir karyawan dalam format string.
    * @example "24-10-1992"
    */
@@ -113,6 +119,7 @@ export const contohKaryawan: PegawaiInterface = {
   hari_libur: "SENIN",
   type_shift: "1/2/3",
   daily_rest_minute: 30,
+  cuti_terpakai: 0,
   daily_sholat_minute: 15,
   daily_break_minute: 10,
   cuti_tahunan: 7,

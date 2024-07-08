@@ -8,10 +8,13 @@ import {
 } from "@/reduxStore";
 import { ColumnInterFace, PengajuanCutiInterFace } from "@/interface";
 import { useEffect } from "react";
+import { ButtonDelete } from "@/utils";
+import { pengajuanCutiRedux } from "../redux";
 
 const TabelPengajuanCuti = () => {
   const dispatch = useDispatch<AppDispatch>();
   const helperRedux = utilityController();
+  const service = pengajuanCutiRedux();
 
   useEffect(() => {
     dispatch(
@@ -23,10 +26,35 @@ const TabelPengajuanCuti = () => {
 
   const columnsTabelPengajuanCuti: ColumnInterFace<PengajuanCutiInterFace>[] = [
     {
+      title: "Actions",
+      key: "actions",
+      align: "center",
+      render: (_cell, row) => (
+        <div className="text-center">
+          <ButtonDelete
+            disabled={row.status_validasi !== "OPEN" ? true : false}
+            tooltipText="Batal Cuti"
+            prosesDelete={() => dispatch(service.batalCuti(row))}
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Status Validasi",
+      dataIndex: "status_validasi",
+      key: "status_validasi",
+    },
+    {
       title: "Kode Pegawai",
       dataIndex: "kode_pegawai",
       key: "kode_pegawai",
     },
+    {
+      title: "Nama Pegawai",
+      dataIndex: "nama_pegawai",
+      key: "nama_pegawai",
+    },
+
     {
       title: "Tanggal Pengajuan Cuti",
       dataIndex: "tgl_system",
@@ -61,6 +89,8 @@ const TabelPengajuanCuti = () => {
       dataSource={dataCuti.data || []}
       columns={columnsTabelPengajuanCuti}
       rowKey={"_id"}
+      scrollX
+      width={1500}
       onAddButtonClick={() =>
         dispatch(
           helperRedux.showModal({

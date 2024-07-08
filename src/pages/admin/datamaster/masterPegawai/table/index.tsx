@@ -151,6 +151,11 @@ const TableDataPegawai = (props: Props) => {
       key: "cuti_tahunan",
     },
     {
+      title: "Cuti Terpakai",
+      dataIndex: "cuti_terpakai",
+      key: "cuti_terpakai",
+    },
+    {
       title: "Gajih Pokok",
       dataIndex: "gaji_pokok",
       key: "gaji_pokok",

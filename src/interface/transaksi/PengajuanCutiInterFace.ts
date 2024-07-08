@@ -11,6 +11,8 @@ export interface PengajuanCutiInterFace {
   leave_end_date: string; // ISO 8601 date string
   leave_start_date: string; // ISO 8601 date string
   status_validasi: string;
+  cuti_terpakai: number;
+  cuti_tahunan: number;
   tgl_system: string; // ISO 8601 date string
   tgl_validasi: string; // ISO 8601 date string
   validasi_by: string; // ISO 8601 date string

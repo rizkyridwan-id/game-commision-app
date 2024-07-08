@@ -10,16 +10,20 @@ import { AppDispatch } from "@/reduxStore";
 interface Props {
   className?: string;
   namaForm: string;
+  onClick?: (e: PegawaiInterface[]) => void;
   //   onChange?: (e: TypeInputOnChangeValue) => void | undefined;
 }
 const KodePegawaiSelector = (props: Props) => {
-  const { className, namaForm } = props;
+  const { className, namaForm, onClick } = props;
   const dispatch = useDispatch<AppDispatch>();
 
   const [modal, setModal] = useState(false);
 
   const setValue = (value: PegawaiInterface[]) => {
     dispatch(change(namaForm, "kode_pegawai", value[0].kode_pegawai));
+    if (onClick) {
+      onClick(value);
+    }
     setModal(false);
   };
 

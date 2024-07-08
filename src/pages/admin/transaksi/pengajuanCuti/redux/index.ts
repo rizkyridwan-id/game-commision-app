@@ -92,8 +92,29 @@ export const pengajuanCutiRedux = () => {
     };
   };
 
+  const batalCuti = (data: PengajuanCutiInterFace): AppThunk => {
+    return async (dispatch: AppDispatch) => {
+      dispatch(utilityActions.setLoading({ screen: true }));
+
+      try {
+        await postData(urlApi.transaksi.batalcuti, {
+          kode_toko: data.kode_toko,
+          kode_pegawai: data.kode_pegawai,
+          tgl_cuti: data.tgl_system,
+        });
+        dispatch(utilityActions.stopLoading());
+        NotifSuccess("Cuti Berhasil di batal");
+        dispatch(actionTransaksi.getPengajuanCuti());
+      } catch (error) {
+        NotifInfo(`${error}`);
+        dispatch(utilityActions.stopLoading());
+      }
+    };
+  };
+
   return {
     prosesData,
     removeData,
+    batalCuti,
   };
 };

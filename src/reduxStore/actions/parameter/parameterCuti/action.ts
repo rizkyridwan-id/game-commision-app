@@ -1,10 +1,10 @@
-import { ParameterTargetInterFace, SearchInterface } from "@/interface";
+import { ParameterCutiInterFace, SearchInterface } from "@/interface";
 import { AppDispatch, AppThunk, utilityActions } from "../../../index";
 import { NotifInfo, getData, urlApi } from "@/utils";
 import { ParameterCutiAction, ParameterCutiType } from "./type";
 
 export const getParameterCutiAction = (
-  data: ParameterTargetInterFace[],
+  data: ParameterCutiInterFace[],
   total: number
 ): ParameterCutiAction => ({
   type: ParameterCutiType.GET_PARAMETER_CUTI,
@@ -27,7 +27,7 @@ export const getParameterCuti = (row?: SearchInterface): AppThunk => {
       }
 
       dispatch(utilityActions.setLoading({ table: true }));
-      const response = await getData<ParameterTargetInterFace[]>(
+      const response = await getData<ParameterCutiInterFace[]>(
         urlApi.paramter.parameterCuti,
         params
       );

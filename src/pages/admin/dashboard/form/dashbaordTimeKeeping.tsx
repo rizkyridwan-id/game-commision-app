@@ -20,7 +20,7 @@ import {
 import { reduxLaporanTimeKeeping } from "../../laporan/laporanTimeKeeping/redux";
 
 type FormProps = {
-  title: string;
+  title?: string;
 };
 const DashbaordTimeKeeping = (
   props: InjectedFormProps<IReportTimeKeeping, FormProps, string> & FormProps

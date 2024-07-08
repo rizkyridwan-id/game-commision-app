@@ -53,6 +53,7 @@ const TableReviewCuti = () => {
         return (
           <Button
             type="primary"
+            disabled={row.status_validasi !== "OPEN" ? true : false}
             onClick={() =>
               dispatch(
                 helperRedux.showModal({

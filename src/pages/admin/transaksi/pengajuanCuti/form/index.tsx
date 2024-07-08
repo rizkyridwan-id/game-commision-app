@@ -1,11 +1,15 @@
 import {
+  actionParameter,
   AppDispatch,
   RootState,
+  useAppSelector,
   // actionMaster,
   // useAppSelector,
 } from "@/reduxStore";
 import {
+  addDays,
   ButtonCustom,
+  convertDate,
   HiddenField,
   ReanderField,
   // RenderSelect,
@@ -42,13 +46,35 @@ const FormPengajuanCuti = (
     dispatch(proses.prosesData());
   };
 
+  const dataParameter = useAppSelector(
+    (state) => state.parameter.parameterCuti
+  );
+
+  const tglDefault = addDays(
+    new Date(today),
+    Number(dataParameter.data[0].leave_request_gap_days + 1)
+  );
+
   useEffect(() => {
     setFocusField("target");
-    // dispatch(actionMaster.getDataToko());
-    dispatch(change("FormPengajuanCuti", "leave_start_date", today));
-    dispatch(change("FormPengajuanCuti", "leave_end_date", today));
+    dispatch(actionParameter.getParameterCuti());
+    setTimeout(() => {
+      dispatch(
+        change(
+          "FormPengajuanCuti",
+          "leave_start_date",
+          convertDate(String(tglDefault))
+        )
+      );
+      dispatch(
+        change(
+          "FormPengajuanCuti",
+          "leave_end_date",
+          convertDate(String(tglDefault))
+        )
+      );
+    }, 300);
   }, [dispatch]);
-  // const dataToko = useAppSelector((state) => state.dataMaster.dataToko);
 
   return (
     <form onSubmit={handleSubmit(simpan)}>
@@ -64,7 +90,22 @@ const FormPengajuanCuti = (
             component={ReanderField}
           />
         </div> */}
-        <KodePegawaiSelector className="col-6" namaForm="FormPengajuanCuti" />
+        <KodePegawaiSelector
+          className="col-6"
+          namaForm="FormPengajuanCuti"
+          onClick={(value) => {
+            dispatch(
+              change("FormPengajuanCuti", "cuti_tahunan", value[0].cuti_tahunan)
+            );
+            dispatch(
+              change(
+                "FormPengajuanCuti",
+                "cuti_terpakai",
+                value[0].cuti_terpakai
+              )
+            );
+          }}
+        />
         {/* <div className={"col-6"}>
           <Field
             label="Kode Toko"
@@ -94,6 +135,26 @@ const FormPengajuanCuti = (
             name="leave_end_date"
             type="date"
             placeholder="Masukan Cuti Dari"
+            component={ReanderField}
+          />
+        </div>
+        <div className={"col-6"}>
+          <Field
+            label="Jatah Cuti"
+            name="cuti_tahunan"
+            type="text"
+            readOnly
+            placeholder="Masukan Jatah Cuti"
+            component={ReanderField}
+          />
+        </div>
+        <div className={"col-6"}>
+          <Field
+            label="Cuti Terpakai"
+            name="cuti_terpakai"
+            type="text"
+            readOnly
+            placeholder="Masukan Cuti Terpakai"
             component={ReanderField}
           />
         </div>

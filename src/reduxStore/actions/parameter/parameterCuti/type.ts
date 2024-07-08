@@ -1,4 +1,4 @@
-import { ParameterTargetInterFace } from "@/interface";
+import { ParameterCutiInterFace } from "@/interface";
 
 export enum ParameterCutiType {
   GET_PARAMETER_CUTI = "GET_PARAMETER_CUTI",
@@ -7,13 +7,13 @@ export enum ParameterCutiType {
 export interface getParameterCutiActionType {
   type: ParameterCutiType.GET_PARAMETER_CUTI;
   payload: {
-    data: ParameterTargetInterFace[];
+    data: ParameterCutiInterFace[];
     total: number;
   };
 }
 
 export interface ParameterCutiState {
-  data: ParameterTargetInterFace[];
+  data: ParameterCutiInterFace[];
   total: number;
 }
 export type ParameterCutiAction = getParameterCutiActionType;
