@@ -18,6 +18,7 @@ import { HariLiburInterFace } from "@/interface";
 import { validateHariLibur } from "../validate";
 import { useDispatch } from "react-redux";
 import { dataHariLiburRedux } from "../redux";
+import { TokoCabangSelector } from "@/components";
 
 // import { datauserController } from "../redux";
 type FormProps = {
@@ -46,6 +47,7 @@ const FormHariLibur = (
     <form onSubmit={handleSubmit(simpan)}>
       <Field name="_id" type="hidden" component={HiddenField} />
       <div className="row">
+        <TokoCabangSelector className="col-6" />
         <div className={"col-6"}>
           <Field
             label="Tanggal Libur"
@@ -66,7 +68,7 @@ const FormHariLibur = (
           />
         </div>
 
-        <div className={`col-12 text-end mt-4`}>
+        <div className={`col-6 text-end mt-4`}>
           {isEdit && <> &nbsp;</>}
           <ButtonCustom
             disabled={pristine || submitting}

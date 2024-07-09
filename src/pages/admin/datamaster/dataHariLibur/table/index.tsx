@@ -22,6 +22,11 @@ const TableHariLibur = () => {
 
   const columnsTableHariLibur: ColumnInterFace<HariLiburInterFace>[] = [
     {
+      title: "Kode Toko",
+      dataIndex: "kode_toko",
+      key: "kode_toko",
+    },
+    {
       title: "Tanggal Libur",
       dataIndex: "tgl_libur",
       key: "tgl_libur",

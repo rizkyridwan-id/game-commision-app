@@ -618,6 +618,36 @@ export const replaceUnderscoresWithSpaces = (text: string) => {
   return text.replaceAll("_", " ");
 };
 
+export function clearAllIndexedDB(): void {
+  const dbNameToDelete = "persist";
+
+  if (!window.indexedDB) {
+    console.log("Your browser doesn't support IndexedDB.");
+    return;
+  }
+
+  indexedDB
+    .databases()
+    .then((databases: IDBDatabaseInfo[]) => {
+      databases.forEach((dbInfo) => {
+        if (dbInfo.name === dbNameToDelete) {
+          const request = indexedDB.deleteDatabase(dbInfo.name);
+          request.onsuccess = function () {
+            console.log(`Database ${dbInfo.name} deleted successfully`);
+          };
+          request.onerror = function () {
+            console.log(`Error deleting database ${dbInfo.name}`);
+          };
+          request.onblocked = function () {
+            console.log(`Deletion of database ${dbInfo.name} is blocked`);
+          };
+        }
+      });
+    })
+    .catch((error: any) => {
+      console.log(`Error fetching databases: ${error}`);
+    });
+}
 export const addDays = (date: Date, days: number): Date => {
   const result = new Date(date);
   result.setDate(result.getDate() + days);

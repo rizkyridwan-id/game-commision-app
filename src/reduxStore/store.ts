@@ -6,10 +6,9 @@ import {
   Transform,
 } from "redux-persist";
 import thunk, { ThunkMiddleware } from "redux-thunk";
-
+import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { RootAction, rootReducer, RootState } from "./index";
-import { indexedDBStorage } from "@/utils";
 
 const dataTransform: Transform<RootState<string>, RootState<string>> = {
   in: (inboundState: RootState<string>) => inboundState, // Fungsi untuk memodifikasi data saat menyimpan ke Redux Persist (tidak ada perubahan yang diperlukan)
@@ -19,7 +18,7 @@ const dataTransform: Transform<RootState<string>, RootState<string>> = {
 const persistConfig = {
   blacklist: ["form", "utility", "dataMaster"],
   key: "root",
-  storage: indexedDBStorage,
+  storage,
   transforms: [dataTransform], // Gunakan transform yang telah dibuat
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);

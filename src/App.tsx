@@ -26,6 +26,7 @@ const App = () => {
     // };
   }, []);
 
+  // console.log(helpers.getIsLogin);
   return (
     <React.Fragment>
       {helpers.getIsLogin ? (

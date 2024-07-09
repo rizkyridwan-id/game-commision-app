@@ -5,6 +5,13 @@ export interface HariLiburInterFace {
   _id: string;
 
   /**
+   * Kode Toko.
+   * Format: string
+   * @example NQC
+   */
+  kode_toko: string;
+
+  /**
    * Tanggal hari libur.
    * Format: YYYY-MM-DD
    * @example new Date("2024-05-01")
@@ -40,6 +47,7 @@ export interface HariLiburInterFace {
 // Contoh pembuatan objek HariLiburInterFace
 export const contohHariLiburInterFace: HariLiburInterFace = {
   _id: "PS)0123p131",
+  kode_toko: "NQC",
   tgl_libur: "2024-05-01",
   deskripsi: "Hari Buruh",
   status_aktif: true,

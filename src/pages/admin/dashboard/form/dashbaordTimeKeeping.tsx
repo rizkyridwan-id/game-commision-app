@@ -18,18 +18,30 @@ import {
   reduxForm,
 } from "redux-form";
 import { reduxLaporanTimeKeeping } from "../../laporan/laporanTimeKeeping/redux";
+import { validatorTgl } from "../validator";
+import { LaporanTimeKeepingDto } from "../../laporan";
 
 type FormProps = {
   title?: string;
 };
 const DashbaordTimeKeeping = (
-  props: InjectedFormProps<IReportTimeKeeping, FormProps, string> & FormProps
+  props: InjectedFormProps<LaporanTimeKeepingDto, FormProps, string> & FormProps
 ) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { handleSubmit, title } = props;
 
   const columns: ColumnInterFace<IReportTimeKeeping>[] = [
+    {
+      title: "Tanggal",
+      dataIndex: "tgl_system",
+      key: "tgl_system",
+    },
+    {
+      title: "Kode Toko",
+      dataIndex: "kode_toko",
+      key: "kode_toko",
+    },
     {
       title: "Kode Pegawai",
       dataIndex: "kode_pegawai",
@@ -202,10 +214,11 @@ const DashbaordTimeKeeping = (
   );
 };
 
-const config: ConfigProps<IReportTimeKeeping, FormProps> = {
+const config: ConfigProps<LaporanTimeKeepingDto, FormProps> = {
   form: "dashboardTimeKeeping",
   enableReinitialize: true,
+  validate: validatorTgl,
 };
-export default reduxForm<IReportTimeKeeping, FormProps>(config)(
+export default reduxForm<LaporanTimeKeepingDto, FormProps>(config)(
   DashbaordTimeKeeping
 );
