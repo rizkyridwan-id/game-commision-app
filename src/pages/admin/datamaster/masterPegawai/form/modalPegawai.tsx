@@ -21,7 +21,7 @@ import {
   useEffect,
   useState,
 } from "@/package";
-import { ConfigProps } from "redux-form";
+import { change, ConfigProps } from "redux-form";
 import { validatePegawai } from "../validate";
 import { NumberOnly } from "@/utils";
 import { DataSalesInterFace, PegawaiInterface } from "@/interface";
@@ -29,18 +29,22 @@ import { dataPegawaiRedux } from "../redux";
 
 type FormProps = {
   isEdit: boolean;
+  kode_toko?: string;
+  type_shift?: string;
 };
 
 const ModalPegawai = (
   props: InjectedFormProps<PegawaiInterface, FormProps, string> & FormProps
 ) => {
-  const { handleSubmit, pristine, submitting, isEdit } = props;
+  const { handleSubmit, pristine, submitting, isEdit, kode_toko, type_shift } =
+    props;
   const dispatch = useDispatch<AppDispatch>();
   const proses = dataPegawaiRedux();
   const simpan = async () => {
     dispatch(proses.prosesData());
   };
   const [isShowPassword, setIsShowPassword] = useState(true);
+  const [kodeToko, setKodeToko] = useState(kode_toko);
 
   useEffect(() => {
     const kode_jenis = document.getElementById("kode_jenis");
@@ -50,6 +54,10 @@ const ModalPegawai = (
 
     if (isEdit) {
       dispatch(proses.cariDataSales());
+      setTimeout(() => {
+        console.log(type_shift);
+        dispatch(change("ModalPegawai", "type_shift", type_shift));
+      }, 300);
     }
     dispatch(actionMaster.getDataJabatan());
     dispatch(actionMaster.getDataToko());
@@ -77,6 +85,40 @@ const ModalPegawai = (
   return (
     <form onSubmit={handleSubmit(simpan)}>
       <div className="row">
+        <div className="col-3">
+          <Field
+            label="Kode Toko"
+            id="kode_toko"
+            name="kode_toko"
+            options={dataToko.data.map((list) => {
+              return {
+                value: list.kode_toko,
+                label: list.kode_toko,
+              };
+            })}
+            onChange={(e: any) => {
+              setKodeToko(e);
+              dispatch(proses.cariDataSales());
+            }}
+            placeholder="Pilih Kode Toko"
+            component={RenderSelect}
+          />
+        </div>
+        <div className="col-3">
+          <Field
+            label="Kode Sales"
+            id="kode_sales"
+            name="kode_sales"
+            options={dataTmp.map((list) => {
+              return {
+                value: list.kode_sales,
+                label: list.kode_sales,
+              };
+            })}
+            placeholder="Pilih Kode Sales"
+            component={RenderSelect}
+          />
+        </div>
         <div className="col-3">
           <Field
             label="Kode Pegawai"
@@ -130,12 +172,14 @@ const ModalPegawai = (
             id="type_shift"
             name="type_shift"
             placeholder="Pilih Shift"
-            options={dataShiftKerja.data.map((list) => {
-              return {
-                value: list.type_shift,
-                label: list.type_shift,
-              };
-            })}
+            options={dataShiftKerja.data
+              .filter((it) => it.kode_toko === kodeToko)
+              .map((list) => {
+                return {
+                  value: list.type_shift,
+                  label: list.type_shift,
+                };
+              })}
             component={RenderSelect}
           />
         </div>
@@ -247,37 +291,6 @@ const ModalPegawai = (
           />
         </div>
 
-        <div className="col-3">
-          <Field
-            label="Kode Toko"
-            id="kode_toko"
-            name="kode_toko"
-            options={dataToko.data.map((list) => {
-              return {
-                value: list.kode_toko,
-                label: list.kode_toko,
-              };
-            })}
-            onChange={() => dispatch(proses.cariDataSales())}
-            placeholder="Pilih Kode Toko"
-            component={RenderSelect}
-          />
-        </div>
-        <div className="col-3">
-          <Field
-            label="Kode Sales"
-            id="kode_sales"
-            name="kode_sales"
-            options={dataTmp.map((list) => {
-              return {
-                value: list.kode_sales,
-                label: list.kode_sales,
-              };
-            })}
-            placeholder="Pilih Kode Sales"
-            component={RenderSelect}
-          />
-        </div>
         {!isEdit && (
           <div className="col-3">
             <Field
@@ -321,6 +334,8 @@ const mapState = (state: RootState<PegawaiInterface>) => {
   if (state?.utility?.getModal?.isEdit === true) {
     return {
       isEdit: state?.utility?.getModal?.isEdit,
+      kode_toko: state?.utility?.getModal?.data?.kode_toko,
+      type_shift: state?.utility?.getModal?.data?.type_shift,
       initialValues: {
         _id: state?.utility?.getModal?.data?._id,
         kode_pegawai: state?.utility?.getModal?.data?.kode_pegawai,
