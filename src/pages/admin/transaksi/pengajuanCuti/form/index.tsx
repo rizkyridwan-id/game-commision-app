@@ -52,7 +52,7 @@ const FormPengajuanCuti = (
 
   const tglDefault = addDays(
     new Date(today),
-    Number(dataParameter.data[0].leave_request_gap_days + 1)
+    Number(dataParameter.data[0]?.leave_request_gap_days || 0) + 1
   );
 
   useEffect(() => {
