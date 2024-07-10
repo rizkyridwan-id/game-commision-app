@@ -5,7 +5,8 @@ import {
   actionParameter,
   utilityActions,
 } from "@/reduxStore";
-import { NotifInfo, NotifSuccess, postData, urlApi } from "@/utils";
+import { NotifInfo, NotifSuccess, postData, putData, urlApi } from "@/utils";
+import { reset } from "redux-form";
 
 export const parameterShiftKerjaRedux = () => {
   const prosesData = (): AppThunk => {
@@ -14,7 +15,31 @@ export const parameterShiftKerjaRedux = () => {
       const formValue = state.form.FormShiftKerja
         ?.values as ParameterShiftKerjaInterFace;
 
-      dispatch(save(formValue));
+      if (state.utility.getModal.isEdit) {
+        dispatch(edit(formValue));
+      } else {
+        dispatch(save(formValue));
+      }
+    };
+  };
+
+  const edit = (data: ParameterShiftKerjaInterFace) => {
+    return async (dispatch: AppDispatch) => {
+      try {
+        dispatch(utilityActions.setLoading({ screen: true }));
+        await putData<ParameterShiftKerjaInterFace>(
+          `${urlApi.paramter.parameterShiftKerja}/${data._id}`,
+          data
+        );
+        NotifSuccess("Data Berhasil Diedit");
+        dispatch(utilityActions.stopLoading());
+        dispatch(actionParameter.getParameterShiftKerja());
+        dispatch(utilityActions.hideModal());
+        dispatch(reset("FormShiftKerja"));
+      } catch (error) {
+        NotifInfo(`${error}`);
+        dispatch(utilityActions.stopLoading());
+      }
     };
   };
 

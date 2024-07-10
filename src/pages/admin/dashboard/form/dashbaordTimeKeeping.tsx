@@ -18,7 +18,7 @@ import {
   reduxForm,
 } from "redux-form";
 import { reduxLaporanTimeKeeping } from "../../laporan/laporanTimeKeeping/redux";
-import { validatorTgl } from "../validator";
+import { ValidatorTglTimeKeeping } from "../validator";
 import { LaporanTimeKeepingDto } from "../../laporan";
 
 type FormProps = {
@@ -217,7 +217,7 @@ const DashbaordTimeKeeping = (
 const config: ConfigProps<LaporanTimeKeepingDto, FormProps> = {
   form: "dashboardTimeKeeping",
   enableReinitialize: true,
-  validate: validatorTgl,
+  validate: ValidatorTglTimeKeeping,
 };
 export default reduxForm<LaporanTimeKeepingDto, FormProps>(config)(
   DashbaordTimeKeeping

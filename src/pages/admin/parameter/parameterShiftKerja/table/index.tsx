@@ -21,6 +21,11 @@ const TableParameterShiftKerja = () => {
   const columnsTableParameterShiftKerja: ColumnInterFace<ParameterShiftKerjaInterFace>[] =
     [
       {
+        title: "Kode Toko",
+        dataIndex: "kode_toko",
+        key: "kode_toko",
+      },
+      {
         title: "Tipe Shift",
         dataIndex: "type_shift",
         key: "type_shift",

@@ -47,7 +47,7 @@ const FormHariLibur = (
     <form onSubmit={handleSubmit(simpan)}>
       <Field name="_id" type="hidden" component={HiddenField} />
       <div className="row">
-        <TokoCabangSelector className="col-6" />
+        <TokoCabangSelector disabled={isEdit} className="col-6" />
         <div className={"col-6"}>
           <Field
             label="Tanggal Libur"
@@ -93,6 +93,7 @@ const mapState = (state: RootState<HariLiburInterFace>) => {
         _id: state?.utility?.getModal?.data?._id,
         deskripsi: state?.utility?.getModal?.data?.deskripsi,
         tgl_libur: state?.utility?.getModal?.data?.tgl_libur,
+        kode_toko: state?.utility?.getModal?.data?.kode_toko,
       },
     };
   } else {

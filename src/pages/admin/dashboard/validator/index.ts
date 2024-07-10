@@ -1,7 +1,7 @@
 import { FormErrors } from "redux-form";
 import { LaporanTimeKeepingDto } from "../../laporan";
 
-export const validatorTgl = (
+export const ValidatorTglTimeKeeping = (
   values: LaporanTimeKeepingDto
 ): FormErrors<LaporanTimeKeepingDto> => {
   const errors: FormErrors<LaporanTimeKeepingDto> = {};

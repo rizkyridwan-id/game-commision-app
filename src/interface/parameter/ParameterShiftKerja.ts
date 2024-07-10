@@ -9,6 +9,11 @@ export interface ParameterShiftKerjaInterFace {
   _id: string;
 
   /**
+   * Kode toko, dapat berupa "PST", "CBS", atau "HDP".
+   * @example "1"
+   */
+  kode_toko: string;
+  /**
    * Tipe shift, dapat berupa "1", "2", atau "3".
    * @example "1"
    */
@@ -51,6 +56,7 @@ export const contohShift: ParameterShiftKerjaInterFace = {
   _id: "12345",
   type_shift: "1",
   start_time: "08:00",
+  kode_toko: "PST",
   due_time: "09:00",
   work_end_time: "17:00",
   update_by: "admin",

@@ -6,9 +6,10 @@ import { AppDispatch, actionMaster, useAppSelector } from "@/reduxStore";
 
 interface Props {
   className: string;
+  disabled?: boolean;
 }
 const TokoCabangSelector = (props: Props) => {
-  const { className } = props;
+  const { className, disabled } = props;
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const TokoCabangSelector = (props: Props) => {
           label="Kode Toko"
           name="kode_toko"
           component={RenderSelect}
+          disabled={disabled}
           placeholder="Pilih Kode Toko"
           options={dataToko.data.map((list) => {
             return {

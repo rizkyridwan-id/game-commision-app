@@ -18,6 +18,7 @@ import { ParameterShiftKerjaInterFace } from "@/interface";
 import { parameterShiftKerjaRedux } from "../redux";
 import { useDispatch } from "react-redux";
 import { validateParameterShiftKerja } from "../validate";
+import { TokoCabangSelector } from "@/components";
 type FormProps = {
   isEdit: boolean;
 };
@@ -42,6 +43,7 @@ const FormShiftKerja = (
     <form onSubmit={handleSubmit(simpan)}>
       <Field name="_id" type="hidden" component={HiddenField} />
       <div className="row">
+        <TokoCabangSelector className="col-6" />
         <div className={"col-6"}>
           <Field
             label="Type Shift"
@@ -84,7 +86,7 @@ const FormShiftKerja = (
           />
         </div>
 
-        <div className={`col-12 text-end mt-4`}>
+        <div className={`col-6 text-end mt-4`}>
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
           </ButtonCustom>
@@ -103,6 +105,7 @@ const mapState = (state: RootState<ParameterShiftKerjaInterFace>) => {
         type_shift: state?.utility?.getModal?.data?.type_shift,
         start_time: state?.utility?.getModal?.data?.start_time,
         due_time: state?.utility?.getModal?.data?.due_time,
+        kode_toko: state?.utility?.getModal?.data?.kode_toko,
         work_end_time: state?.utility?.getModal?.data?.work_end_time,
       },
     };
