@@ -1,3 +1,4 @@
+import { FormOtorisasiDto } from "@/components";
 import { ParameterShiftKerjaInterFace } from "@/interface";
 import {
   AppDispatch,
@@ -16,7 +17,15 @@ export const parameterShiftKerjaRedux = () => {
         ?.values as ParameterShiftKerjaInterFace;
 
       if (state.utility.getModal.isEdit) {
-        dispatch(edit(formValue));
+        dispatch(
+          utilityActions.showModal({
+            title: "Otorisasi",
+            isModalShow: true,
+            isEdit: false,
+            data: formValue,
+          })
+        );
+        // dispatch(edit(formValue));
       } else {
         dispatch(save(formValue));
       }
@@ -62,7 +71,31 @@ export const parameterShiftKerjaRedux = () => {
     };
   };
 
+  const cekUser = (data: FormOtorisasiDto): AppThunk => {
+    return async (dispatch: AppDispatch, getState) => {
+      try {
+        dispatch(utilityActions.setLoading({ screen: true }));
+        await postData(urlApi.otorisasi, {
+          user_id: data.user_id,
+          password: data.password,
+        });
+
+        const state = getState();
+        const formValue = state.utility.getModal
+          ?.data as unknown as ParameterShiftKerjaInterFace;
+
+        dispatch(edit(formValue));
+        dispatch(utilityActions.stopLoading());
+      } catch (error) {
+        dispatch(utilityActions.stopLoading());
+        NotifInfo(`${error || "Terjadi Kesalahan Saat Mngirim data"}`);
+      }
+    };
+  };
+
   return {
+    edit,
     prosesData,
+    cekUser,
   };
 };

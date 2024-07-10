@@ -49,6 +49,7 @@ const urlApi = {
     globalPayroll: "payroll/report-global",
   },
   login: "auth/login",
+  otorisasi: "user/otorisasi",
   dashboard: {
     hbd: "dashboard/member-hbd",
     cuti: "dashboard/unreviewed-cuti-request",
