@@ -84,7 +84,7 @@ export interface DataTmp<T> {
   data: T;
   namaForm?: string;
 }
-export interface getModule<T> {
+interface getModule<T> {
   data: T;
 }
 export interface UtilityState<T> {
