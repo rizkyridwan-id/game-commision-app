@@ -62,6 +62,9 @@ export const sinkronDataRedux = () => {
               omzet_jual_faktur: list.omzet_jual_faktur,
               omzet_jual_berat: list.omzet_jual_berat,
               omzet_jual_rupiah: list.omzet_jual_rupiah,
+              omzet_hutang_lunas_faktur: list.omzet_hutang_lunas_faktur,
+              omzet_hutang_lunas_berat: list.omzet_hutang_lunas_berat,
+              omzet_hutang_lunas_rupiah: list.omzet_hutang_lunas_rupiah,
               periode: today.slice(0, 7),
               kode_pegawai: list.kode_pegawai,
             };

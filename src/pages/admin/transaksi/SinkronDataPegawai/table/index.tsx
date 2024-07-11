@@ -62,6 +62,41 @@ const TableSinkronDataPegawai = () => {
       },
     },
     {
+      title: "Omset Hutang Rupiah",
+      dataIndex: "omzet_hutang_lunas_rupiah",
+      key: "omzet_hutang_lunas_rupiah",
+      align: "right",
+      render(text) {
+        return (
+          <div className="text-end">
+            {Number(text || 0).toLocaleString("kr-ko")}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Omset Hutang Faktur",
+      dataIndex: "omzet_hutang_lunas_faktur",
+      key: "omzet_hutang_lunas_faktur",
+      align: "right",
+      render(text) {
+        return (
+          <div className="text-end">
+            {Number(text || 0).toLocaleString("kr-ko")}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Omset Hutang Berat",
+      dataIndex: "omzet_hutang_lunas_berat",
+      key: "omzet_hutang_lunas_berat",
+      align: "right",
+      render(text) {
+        return <div className="text-end"> {Number(text || 0).toFixed(3)}</div>;
+      },
+    },
+    {
       title: "Periode",
       dataIndex: "periode",
       key: "periode",
@@ -86,7 +121,7 @@ const TableSinkronDataPegawai = () => {
           columns={columns}
           rowKey={"_id"}
           scrollX
-          width={800}
+          width={1800}
           disabledSearch
         />
       </div>

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite --host --port 3002",
+    "start": "vite --host --port 3003",
     "build": "tsc && npm run envUpdate && vite build",
     "build:prod": "tsc && npm run envUpdate && vite build && npm run obfuscate && sh ./helper/build-prod.sh",
     "lint": "eslint src --ext ts,tsx",
