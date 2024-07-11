@@ -98,10 +98,16 @@ const TableDataPegawai = (props: Props) => {
       ),
     },
     {
+      title: "Kode Toko",
+      dataIndex: "kode_toko",
+      key: "kode_toko",
+    },
+    {
       title: "Kode Pegawai",
       dataIndex: "kode_pegawai",
       key: "kode_pegawai",
     },
+
     {
       title: "Nama Pegawai",
       dataIndex: "nama_pegawai",
@@ -175,11 +181,6 @@ const TableDataPegawai = (props: Props) => {
       title: "Kode Sales",
       dataIndex: "kode_sales",
       key: "kode_sales",
-    },
-    {
-      title: "Kode Toko",
-      dataIndex: "kode_toko",
-      key: "kode_toko",
     },
   ];
 

@@ -68,8 +68,14 @@ export const payrolRedux = () => {
       if (isPusat) {
         if (!formData.kode_toko) {
           NotifInfo("Kode Toko Harus Di Pilih");
+          dispatch(change("FormPayroll", "kode_pegawai", ""));
           return false;
         }
+      }
+
+      if (!formData.kode_pegawai) {
+        NotifInfo("Kode Pegawai Harus di isii");
+        return false;
       }
 
       try {

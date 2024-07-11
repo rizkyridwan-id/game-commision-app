@@ -52,6 +52,14 @@ const TableKasbon = () => {
       key: "alasan_kasbon",
     },
     {
+      title: "Lama Cicilan",
+      dataIndex: "lama_cicilan",
+      key: "lama_cicilan",
+      render: (cell: number) => {
+        return Number(cell || 0).toLocaleString("kr-ko");
+      },
+    },
+    {
       title: "Cicil Rp",
       dataIndex: "cicil_rp",
       key: "cicil_rp",

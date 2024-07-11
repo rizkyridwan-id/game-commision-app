@@ -1,4 +1,8 @@
-import { PanelContent, TokoCabangSelector } from "@/components";
+import {
+  KodePegawaiSelector,
+  PanelContent,
+  TokoCabangSelector,
+} from "@/components";
 import { AppDispatch, simpanDataTmp, useAppSelector } from "@/reduxStore";
 import { ButtonCustom, ReanderField, RenderNumber } from "@/utils";
 import { useDispatch } from "react-redux";
@@ -37,19 +41,12 @@ const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
       <form onSubmit={handleSubmit(simpan)}>
         <div className="row">
           <TokoCabangSelector className="col-3" />
-          <div className="col-3">
-            <Field
-              label="Kode Pegawai"
-              name="kode_pegawai"
-              type="text"
-              placeholder="Masukkan Kode Pegawai"
-              component={ReanderField}
-              right
-              inputGroup
-              textIconGroup={<i className="fa fa-search"></i>}
-              handleClick={() => dispatch(proses.getPayrollSumary())}
-            />
-          </div>
+          <KodePegawaiSelector
+            className="col-3"
+            namaForm="FormPayroll"
+            onClick={() => dispatch(proses.getPayrollSumary())}
+          />
+
           <div className="col-3">
             <Field
               label="Nama Pegawai"
