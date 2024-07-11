@@ -57,6 +57,8 @@ const urlApi = {
 
   utility: {
     memberCard: "member-card/cetak",
+    getModule: "setup-system/get-module",
+    createModule: "setup-system/create-module",
   },
 };
 

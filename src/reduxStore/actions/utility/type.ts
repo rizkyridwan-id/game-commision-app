@@ -11,6 +11,7 @@ export const AppActionTypes = {
   SHOW_BUTTON_DELETE: "SHOW_BUTTON_DELETE",
   SCREEN_SIZE: "SCREEN_SIZE",
   DATA_NOTA: "DATA_NOTA",
+  GET_MODULE: "GET_MODULE",
 } as const;
 
 export interface ScreenSizeAction
@@ -50,6 +51,10 @@ export interface GetDataEditAction
   extends Action<typeof AppActionTypes.GET_DATA_EDIT> {
   payload: [];
 }
+export interface GetDataModule<T>
+  extends Action<typeof AppActionTypes.GET_MODULE> {
+  payload: getModule<T>;
+}
 
 export interface LoadingTabelAction
   extends Action<typeof AppActionTypes.LOADING_TABEL> {
@@ -79,6 +84,9 @@ export interface DataTmp<T> {
   data: T;
   namaForm?: string;
 }
+export interface getModule<T> {
+  data: T;
+}
 export interface UtilityState<T> {
   getLoading: LoadingData;
   setLoadingTabel: boolean;
@@ -89,6 +97,7 @@ export interface UtilityState<T> {
   hideModal: ModalData<T>;
   getDataTmp: DataTmp<T>;
   getNota: NotaData<T>;
+  getModule: getModule<T>;
 }
 
 export type AppActionUtility<T> =
@@ -98,6 +107,7 @@ export type AppActionUtility<T> =
   | SetIsEditAction
   | GetDataEditAction
   | ShowButtonDelete
+  | GetDataModule<T>
   | ScreenSizeAction
   | SimpanDataTmpAction<T>
   | NotaAction<T>

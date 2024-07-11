@@ -144,6 +144,11 @@ const MenuPusat = [
         title: "Cetak Member",
         is_show: false,
       },
+      {
+        path: "/app/setting-system",
+        title: "Setting System",
+        is_show: false,
+      },
     ],
   },
 ];

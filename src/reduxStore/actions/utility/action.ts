@@ -16,7 +16,8 @@ import {
   ShowModalAction,
   SimpanDataTmpAction,
 } from "./type";
-import { NotifInfo } from "@/utils";
+import { getData, NotifInfo, urlApi } from "@/utils";
+import { SystemMockupDto } from "@/pages/admin/utility/settingSystem/dto";
 
 const setLoading = (data: LoadingData): SetLoadingAction => ({
   type: AppActionTypes.IS_LOADING,
@@ -108,6 +109,34 @@ const setDataNota = <T>(data: NotaData<T>): AppThunk => {
     });
   };
 };
+
+export const getModule = (): AppThunk => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(utilityActions.setLoading({ screen: true }));
+      const response = await getData<SystemMockupDto[]>(
+        urlApi.utility.getModule
+      );
+      dispatch({
+        type: AppActionTypes.GET_MODULE,
+        payload: {
+          data: response.data,
+        },
+      });
+      dispatch(utilityActions.stopLoading());
+    } catch (error) {
+      dispatch({
+        type: AppActionTypes.GET_MODULE,
+        payload: {
+          data: [],
+        },
+      });
+      dispatch(utilityActions.stopLoading());
+      NotifInfo(`${error}`);
+    }
+  };
+};
+
 const utilityActions = {
   simpanDataTmp,
   setLaporanKosong,
@@ -121,5 +150,6 @@ const utilityActions = {
   stopLoading,
   showButtonDelete,
   setScreenSize,
+  getModule,
 };
 export default utilityActions;

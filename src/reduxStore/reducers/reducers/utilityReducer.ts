@@ -31,6 +31,9 @@ function initialState<T>(): UtilityState<T> {
     getNota: {
       data: [] as T,
     },
+    getModule: {
+      data: [] as T,
+    },
 
     getScreenSize: "lg",
   };
@@ -77,6 +80,11 @@ const utility = <T>(
       return {
         ...state,
         getDataTmp: action.payload,
+      };
+    case AppActionTypes.GET_MODULE:
+      return {
+        ...state,
+        getModule: action.payload,
       };
 
     case AppActionTypes.SCREEN_SIZE:

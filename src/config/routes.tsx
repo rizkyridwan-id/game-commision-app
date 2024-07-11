@@ -33,6 +33,7 @@ import {
   LaporanDataPegawai,
   SettingMember,
   CetakMember,
+  CreateSettingSystem,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
@@ -320,6 +321,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <CetakMember />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/setting-system",
+        title: "Setting System",
+        element: (
+          <ProtectedRoute>
+            <CreateSettingSystem />
           </ProtectedRoute>
         ),
       },
