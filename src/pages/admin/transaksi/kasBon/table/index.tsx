@@ -9,7 +9,7 @@ import {
 import { ColumnInterFace, KasBonInterFace } from "@/interface";
 import { useEffect } from "react";
 import { ButtonDelete } from "@/utils";
-import { reduxKasBon } from "../reux";
+import { reduxKasBon } from "../redux";
 
 const TableKasbon = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,6 +50,14 @@ const TableKasbon = () => {
       title: "Alasan Kasbon",
       dataIndex: "alasan_kasbon",
       key: "alasan_kasbon",
+    },
+    {
+      title: "Cicil Rp",
+      dataIndex: "cicil_rp",
+      key: "cicil_rp",
+      render: (cell: number) => {
+        return Number(cell || 0).toLocaleString("kr-ko");
+      },
     },
     {
       title: "Total Kasbon",

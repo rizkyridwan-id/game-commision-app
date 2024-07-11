@@ -49,9 +49,9 @@ const KodePegawaiSelector = (props: Props) => {
       <ModalLocal
         isOpen={modal}
         hideModal={() => setModal(false)}
-        namaForm="FormDataMemberGadai"
+        namaForm={namaForm}
         title="Cari Data Pegawai"
-        width={700}
+        width={1000}
       >
         <TableDataPegawai
           form="pencarian_pegawai"

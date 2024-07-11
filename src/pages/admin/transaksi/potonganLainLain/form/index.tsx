@@ -25,6 +25,8 @@ import { PotonganLainInterFace } from "@/interface";
 
 import { potonganLainRedux } from "../redux";
 import { useDispatch } from "react-redux";
+import { validatorPotongan } from "../validator";
+import { KodePegawaiSelector } from "@/components";
 type FormProps = {
   isEdit: boolean;
 };
@@ -52,16 +54,7 @@ const FormPotonganLain = (
     <form onSubmit={handleSubmit(simpan)}>
       <Field name="_id" type="hidden" component={HiddenField} />
       <div className="row">
-        <div className={"col-6"}>
-          <Field
-            label="Kode Pegawai"
-            id="kode_pegawai"
-            name="kode_pegawai"
-            type="text"
-            placeholder="Masukan Kode Pegawai"
-            component={ReanderField}
-          />
-        </div>
+        <KodePegawaiSelector className="col-6" namaForm="FormPotonganLain" />
         <div className={"col-6"}>
           <Field
             label="Qty Cicilan Bulan"
@@ -124,6 +117,7 @@ const connector = connect(mapState);
 const config: ConfigProps<PotonganLainInterFace, FormProps> = {
   form: "FormPotonganLain",
   enableReinitialize: true,
+  validate: validatorPotongan,
 };
 
 export default connector(

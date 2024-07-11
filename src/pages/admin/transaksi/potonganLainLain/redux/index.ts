@@ -8,6 +8,7 @@ import {
 import {
   NotifInfo,
   NotifSuccess,
+  NotificationSwal,
   VITE_APP_KODE_TOKO,
   deleteData,
   postData,
@@ -42,7 +43,12 @@ export const potonganLainRedux = () => {
         dispatch(utilityActions.hideModal());
         dispatch(reset("FormPotonganLain"));
       } catch (error) {
-        NotifInfo(`${error}`);
+        // NotifInfo(`${error}`);
+        NotificationSwal({
+          icon: "info",
+          html: `${error}`,
+          title: "Informasi",
+        });
         dispatch(utilityActions.stopLoading());
       }
     };

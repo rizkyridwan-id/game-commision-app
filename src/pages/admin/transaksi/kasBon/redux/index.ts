@@ -23,6 +23,7 @@ export const reduxKasBon = () => {
       const formValue = state.form.FormKasBon?.values as KasBonInterFace;
 
       formValue.kode_toko = `${VITE_APP_KODE_TOKO}`;
+      formValue.lama_cicilan = Number(formValue.lama_cicilan);
       if (state.utility.getModal.isEdit) {
         dispatch(edit(formValue));
       } else {

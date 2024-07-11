@@ -17,9 +17,11 @@ import {
 } from "@/package";
 import { ConfigProps, change } from "redux-form";
 
-import { reduxKasBon } from "../reux";
+import { reduxKasBon } from "../redux";
 import { useDispatch } from "react-redux";
 import { KasBonInterFace } from "@/interface";
+import { KodePegawaiSelector } from "@/components";
+import { validasiKasbon } from "../validator";
 type FormProps = {
   isEdit: boolean;
 };
@@ -28,6 +30,7 @@ const FormKasBon = (
   props: InjectedFormProps<KasBonInterFace, FormProps, string> & FormProps
 ) => {
   const { handleSubmit, isEdit } = props;
+
   const dispatch = useDispatch<AppDispatch>();
   const proses = reduxKasBon();
 
@@ -44,17 +47,20 @@ const FormKasBon = (
     <form onSubmit={handleSubmit(simpan)}>
       <Field name="_id" type="hidden" component={HiddenField} />
       <div className="row">
+        <KodePegawaiSelector className="col-6" namaForm="FormKasBon" />
         <div className={"col-6"}>
           <Field
-            label="Kode Pegawai"
-            id="kode_pegawai"
-            name="kode_pegawai"
+            label="Lama Cicilan"
+            name="lama_cicilan"
             type="text"
-            placeholder="Masukan Target"
+            placeholder="Masukan Lama Cicilan"
             component={ReanderField}
+            right
+            inputGroup
+            textIconGroup="Bulan"
           />
         </div>
-        <div className={"col-6"}>
+        <div className={"col-12"}>
           <Field
             label="Total Kasbon"
             name="total_kasbon"
@@ -105,6 +111,7 @@ const connector = connect(mapState);
 const config: ConfigProps<KasBonInterFace, FormProps> = {
   form: "FormKasBon",
   enableReinitialize: true,
+  validate: validasiKasbon,
 };
 
 export default connector(

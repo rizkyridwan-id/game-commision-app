@@ -1,10 +1,10 @@
 import { AppDispatch } from "@/reduxStore";
-import { ButtonCustom, ReanderField } from "@/utils";
-import { Field, InjectedFormProps, reduxForm, useEffect } from "@/package";
+import { ButtonCustom } from "@/utils";
+import { InjectedFormProps, reduxForm, useEffect } from "@/package";
 import { ConfigProps, change } from "redux-form";
 import { useDispatch } from "react-redux";
 import { SinkronDataPegawaiInterFace } from "@/interface";
-import { TokoCabangSelector } from "@/components";
+import { KodePegawaiSelector, TokoCabangSelector } from "@/components";
 import { validateSinkronDataPegawai } from "../validate";
 import { sinkronDataRedux } from "../redux";
 
@@ -27,15 +27,10 @@ const FormSinkronDataPegawai = (
     <form onSubmit={handleSubmit(simpan)}>
       <div className="row">
         <TokoCabangSelector className="col-4" />
-        <div className={"col-4"}>
-          <Field
-            label="Kode Pegawai"
-            name="kode_pegawai"
-            type="text"
-            placeholder="Masukan Kode Pegawai"
-            component={ReanderField}
-          />
-        </div>
+        <KodePegawaiSelector
+          className="col-4"
+          namaForm="FormSinkronDataPegawai"
+        />
         <div className={`col-4 text-end mt-4`}>
           <ButtonCustom
             disabled={pristine || submitting}
