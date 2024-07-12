@@ -63,7 +63,7 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
               component={ReanderField}
             />
           </div>
-          <div className="col-2">
+          <div className="col-3">
             <Field
               label="Kode Toko"
               name="kode_toko"
@@ -77,7 +77,7 @@ const LaporanTimeKeeping = (props: InjectedFormProps<FormFilterLaporanDto>) => {
               })}
             />
           </div>
-          <div className="col-2">
+          <div className="col-3">
             <Field
               label="Type Shift"
               name="type_shift"

@@ -70,11 +70,23 @@ export const columnsTableKehadiran: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Jam Datang",
     dataIndex: "jam_datang",
     key: "jam_datang",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_datang === "LIBUR" ||
+        row.status_datang === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_datang)
+        : row.jam_datang;
+    },
   },
   {
     title: "Jam Pulang",
     dataIndex: "jam_pulang",
     key: "jam_pulang",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_pulang === "LIBUR" ||
+        row.status_pulang === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_pulang)
+        : row.jam_pulang;
+    },
   },
   {
     title: "Staus Datang",
@@ -85,7 +97,7 @@ export const columnsTableKehadiran: ColumnInterFace<IReportTimeKeeping>[] = [
     },
   },
   {
-    title: "Staus Pulang",
+    title: "Status Pulang",
     dataIndex: "status_pulang",
     key: "status_pulang",
     render(cell: string) {

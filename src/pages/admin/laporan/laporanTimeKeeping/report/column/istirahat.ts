@@ -63,16 +63,34 @@ export const columnsTableIstirahat: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Start",
     dataIndex: "jam_istirahat_start",
     key: "jam_istirahat_start",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_istirahat === "LIBUR" ||
+        row.status_istirahat === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_istirahat)
+        : row.jam_istirahat_start;
+    },
   },
   {
     title: "Stop",
     dataIndex: "jam_istirahat_end",
     key: "jam_istirahat_end",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_istirahat === "LIBUR" ||
+        row.status_istirahat === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_istirahat)
+        : row.jam_istirahat_end;
+    },
   },
   {
     title: "Total Menit",
     dataIndex: "total_istirahat",
     key: "total_istirahat",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_istirahat === "LIBUR" ||
+        row.status_istirahat === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_istirahat)
+        : row.total_istirahat;
+    },
   },
   {
     title: "Staus",

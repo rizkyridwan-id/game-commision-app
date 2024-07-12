@@ -120,17 +120,17 @@ export interface IReportTimeKeeping {
    * Total menit yang digunakan untuk break.
    * @example 0
    */
-  total_break: number;
+  total_break: string;
 
   /**
    * Total menit yang digunakan untuk istirahat.
    * @example 0
    */
-  total_istirahat: number;
+  total_istirahat: string;
 
   /**
    * Total menit yang digunakan untuk sholat.
    * @example 0
    */
-  total_sholat: number;
+  total_sholat: string;
 }

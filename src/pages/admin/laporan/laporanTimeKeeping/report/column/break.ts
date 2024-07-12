@@ -63,16 +63,31 @@ export const columnsTableBreak: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Start",
     dataIndex: "jam_break_start",
     key: "jam_break_start",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_break === "LIBUR" || row.status_break === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_break)
+        : row.jam_break_start;
+    },
   },
   {
     title: "Stop",
     dataIndex: "jam_break_end",
     key: "jam_break_end",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_break === "LIBUR" || row.status_break === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_break)
+        : row.jam_break_end;
+    },
   },
   {
     title: "Total Menit",
     dataIndex: "total_break",
     key: "total_break",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_break === "LIBUR" || row.status_break === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_break)
+        : row.total_break;
+    },
   },
   {
     title: "Staus",

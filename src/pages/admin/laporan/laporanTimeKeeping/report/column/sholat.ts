@@ -62,16 +62,34 @@ export const columnsTableSholat: ColumnInterFace<IReportTimeKeeping>[] = [
     title: "Start",
     dataIndex: "jam_sholat_start",
     key: "jam_sholat_start",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_sholat === "LIBUR" ||
+        row.status_sholat === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_sholat)
+        : row.jam_sholat_start;
+    },
   },
   {
     title: "Stop",
     dataIndex: "jam_sholat_end",
     key: "jam_sholat_end",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_sholat === "LIBUR" ||
+        row.status_sholat === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_sholat)
+        : row.jam_break_end;
+    },
   },
   {
     title: "Total Menit",
     dataIndex: "total_sholat",
     key: "total_sholat",
+    render(_cell: string, row: IReportTimeKeeping) {
+      return row.status_sholat === "LIBUR" ||
+        row.status_sholat === "TIDAK_HADIR"
+        ? replaceUnderscoresWithSpaces(row.status_sholat)
+        : row.total_sholat;
+    },
   },
   {
     title: "Staus",
