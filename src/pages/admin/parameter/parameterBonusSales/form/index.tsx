@@ -73,8 +73,18 @@ const FormParameterBonus = (
             component={RenderNumber}
           />
         </div>
+        <div className={"col-6"}>
+          <Field
+            label="Bonus Pelunasan Hutang"
+            name="bonus_pelunasan_hutang"
+            type="text"
+            isRp
+            placeholder="Masukan Bonus Pelunasan Hutang"
+            component={RenderNumber}
+          />
+        </div>
 
-        <div className={`col-6 text-end mt-4`}>
+        <div className={`col-12 text-end mt-4`}>
           <ButtonCustom color="primary" block type="submit" className="btn-lg">
             {isEdit ? "Edit" : "Simpan "}
           </ButtonCustom>
@@ -93,6 +103,8 @@ const mapState = (state: RootState<ParameterBonusSalesInterFace>) => {
         bonus_jual: state?.utility?.getModal?.data?.bonus_jual,
         bonus_beli: state?.utility?.getModal?.data?.bonus_beli,
         bonus_hutang: state?.utility?.getModal?.data?.bonus_hutang,
+        bonus_pelunasan_hutang:
+          state?.utility?.getModal?.data?.bonus_pelunasan_hutang,
       },
     };
   } else {

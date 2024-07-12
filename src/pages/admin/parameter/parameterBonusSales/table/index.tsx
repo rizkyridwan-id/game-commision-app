@@ -46,6 +46,14 @@ const TableParameterBonusSales = () => {
         },
       },
       {
+        title: "Bonus Pelunasan Hutang",
+        dataIndex: "bonus_pelunasan_hutang",
+        key: "bonus_pelunasan_hutang",
+        render: (cell: number) => {
+          return <div>{Number(cell || 0)?.toLocaleString("kr-ko")}</div>;
+        },
+      },
+      {
         title: "Actions",
         key: "actions",
         align: "center",

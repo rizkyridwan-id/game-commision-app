@@ -27,6 +27,12 @@ export interface ParameterBonusSalesInterFace {
   bonus_hutang: number;
 
   /**
+   * Bonus yang diberikan berdasarkan hutang.
+   * @example 200
+   */
+  bonus_pelunasan_hutang: number;
+
+  /**
    * Nama pengguna yang memperbarui data bonus.
    * @example "admin"
    */
@@ -46,6 +52,7 @@ export const contohBonus: ParameterBonusSalesInterFace = {
   bonus_jual: 500,
   bonus_beli: 100,
   bonus_hutang: 200,
+  bonus_pelunasan_hutang: 200,
   update_by: "admin",
   update_date: new Date("2024-05-01T01:01:01"),
 };
