@@ -1,7 +1,7 @@
 import { AppDispatch, themesActions, utilityActions } from "@/reduxStore";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Field, change, reduxForm } from "redux-form";
+import { Field, change, reduxForm, reset } from "redux-form";
 import {
   KeyboardWrapper,
   NotifInfo,
@@ -24,8 +24,9 @@ import { PegawaiInterface, TypeInputOnChangeValue } from "@/interface";
 import { io } from "socket.io-client";
 import { SocketData } from "@/interface";
 import tryagain from "./audio/tryagain.mp3";
-import beep from "./audio/beep.mp3";
+// import beep from "./audio/beep.mp3";
 import trash from "./audio/trash.mp3";
+import { Beep } from "@/assets";
 
 type MenuType = "Kehadiran" | "Istirahat" | "Break" | "Sholat";
 
@@ -57,30 +58,15 @@ const TimeKeeping = () => {
   const hours = time.getHours().toString().padStart(2, "0");
   const minutes = time.getMinutes().toString().padStart(2, "0");
   const seconds = time.getSeconds().toString().padStart(2, "0");
-  const keyboard1 = useRef(null);
-  const keyboard2 = useRef(null);
+  const keyboardRef = useRef<any>(null);
+
   const [input, setInput] = useState({
     pin: "",
     kode_pegawai: "",
   });
-  const [focus, setFocus] = useState("kode_pegawai");
-
-  const inputKeyBoard = (e: string) => {
-    playSound(beep);
-    if (focus === "kode_pegawai") {
-      setInput({
-        ...input,
-        kode_pegawai: e,
-      });
-      dispatch(change("timeKeeping", "kode_pegawai", e));
-    } else {
-      setInput({
-        ...input,
-        pin: e,
-      });
-      dispatch(change("timeKeeping", "pin", e));
-    }
-  };
+  const [activeInput, setActiveInput] = useState<"kode_pegawai" | "pin" | null>(
+    "kode_pegawai"
+  );
 
   const cekPin = (e: string) => {
     if (e === "{enter}") {
@@ -100,6 +86,7 @@ const TimeKeeping = () => {
               speak(`${error}`);
               NotifInfo(`${error}`);
               dispatch(utilityActions.stopLoading());
+              resetForm();
             }
           })
           .catch(() => {
@@ -138,6 +125,7 @@ const TimeKeeping = () => {
         }
       );
       // playSound(ok);
+      resetForm();
       speak(
         `OK, ${dataPegawai.data.nama_pegawai}, Time Keeping ${menu} berhasil`
       );
@@ -149,28 +137,20 @@ const TimeKeeping = () => {
         title: `Time Keeping <b>${menu}</b> Berhasil`,
         html: `Kode Pegawai  <b>${dataPegawai.data.kode_pegawai}</b><br/>Nama  <b>${dataPegawai.data.nama_pegawai}</b> <br/>Jam : ${jam}`,
         icon: "success",
-        time: 5000,
+        time: 1000000,
       })
-        .then(() => {})
-        .catch(() => {});
-      setInput({
-        pin: "",
-        kode_pegawai: "",
-      });
-      setFocus("kode_pegawai");
-      dispatch(change("timeKeeping", "pin", ""));
-      dispatch(change("timeKeeping", "kode_pegawai", ""));
+        .then(() => {
+          resetForm();
+        })
+        .catch(() => {
+          resetForm();
+        });
+      resetForm();
     } catch (error) {
       speak(`${error}`);
       NotifInfo(`${error}`);
-      setInput({
-        pin: "",
-        kode_pegawai: "",
-      });
-      dispatch(change("timeKeeping", "pin", ""));
-      dispatch(change("timeKeeping", "kode_pegawai", ""));
       dispatch(utilityActions.stopLoading());
-      setFocusField("kode_pegawai");
+      resetForm();
     }
   };
 
@@ -193,6 +173,18 @@ const TimeKeeping = () => {
     };
   }, [menu]);
 
+  const resetForm = () => {
+    setInput({
+      pin: "",
+      kode_pegawai: "",
+    });
+    setFocusField("kode_pegawai");
+    setActiveInput("kode_pegawai");
+    dispatch(change("timeKeeping", "pin", ""));
+    dispatch(change("timeKeeping", "kode_pegawai", ""));
+    dispatch(reset("timeKeeping"));
+  };
+
   const pindahMenu = (namaMenu: MenuType) => {
     setMenu(namaMenu);
     setInput({
@@ -204,6 +196,24 @@ const TimeKeeping = () => {
     setTimeout(() => {
       setFocusField("kode_pegawai");
     }, 100);
+  };
+
+  const handleInputFocus = (inputName: "pin" | "kode_pegawai") => {
+    setActiveInput(inputName);
+    keyboardRef.current.setInput(input[inputName]);
+  };
+
+  const handleChange = (keyboardInput: string) => {
+    playSound(Beep);
+    setInput((prevInput) => ({
+      ...prevInput,
+      [activeInput as "pin" | "kode_pegawai"]: keyboardInput,
+    }));
+    if (activeInput === "kode_pegawai") {
+      dispatch(change("timeKeeping", "kode_pegawai", keyboardInput));
+    } else {
+      dispatch(change("timeKeeping", "pin", keyboardInput));
+    }
   };
 
   return (
@@ -296,14 +306,17 @@ const TimeKeeping = () => {
                     component={ReanderField}
                     right
                     inputGroup
-                    onFocus={() => setFocus("kode_pegawai")}
+                    onFocus={() => handleInputFocus("kode_pegawai")}
                     textIconGroup={<i className="fa fa-user"></i>}
                     onChange={(e: TypeInputOnChangeValue) => {
-                      e.target.value === "" &&
-                        setInput({
-                          pin: "",
-                          kode_pegawai: "",
-                        });
+                      const value = e.target.value;
+                      setInput((prevInput) => ({
+                        ...prevInput,
+                        kode_pegawai: value,
+                      }));
+                      if (activeInput === "kode_pegawai") {
+                        keyboardRef.current.setInput(value);
+                      }
                     }}
                     handleClick={() => setIsShowPassword(!isShowPassword)}
                   />
@@ -315,6 +328,7 @@ const TimeKeeping = () => {
                     name="pin"
                     enableenter
                     noUpperCase
+                    value={input.pin}
                     id="pin"
                     nouperCase
                     placeholder="Masukan PIN"
@@ -322,13 +336,16 @@ const TimeKeeping = () => {
                     right
                     inputGroup
                     onChange={(e: TypeInputOnChangeValue) => {
-                      e.target.value === "" &&
-                        setInput({
-                          pin: "",
-                          kode_pegawai: "",
-                        });
+                      const value = e.target.value;
+                      setInput((prevInput) => ({
+                        ...prevInput,
+                        pin: value,
+                      }));
+                      if (activeInput === "pin") {
+                        keyboardRef.current.setInput(value);
+                      }
                     }}
-                    onFocus={() => setFocus("pin")}
+                    onFocus={() => handleInputFocus("pin")}
                     textIconGroup={
                       isShowPassword ? (
                         <i className="fa-regular fa-eye-slash"></i>
@@ -341,20 +358,11 @@ const TimeKeeping = () => {
                   />
                 </div>
                 <div style={{ width: "600px" }}>
-                  {focus === "pin" && (
-                    <KeyboardWrapper
-                      keyboardRef={keyboard1}
-                      onChange={(e) => inputKeyBoard(e)}
-                      onKeyPress={(e) => cekPin(e)}
-                    />
-                  )}
-                  {focus === "kode_pegawai" && (
-                    <KeyboardWrapper
-                      keyboardRef={keyboard2}
-                      onChange={(e) => inputKeyBoard(e)}
-                      onKeyPress={(e) => cekPin(e)}
-                    />
-                  )}
+                  <KeyboardWrapper
+                    onChange={handleChange}
+                    onKeyPress={cekPin}
+                    keyboardRef={keyboardRef}
+                  />
                 </div>
               </div>
             </div>

@@ -26,7 +26,6 @@ const KeyboardWrapper: FunctionComponent<IProps> = ({
         "{enter}": "⏎",
       }}
       theme={"hg-theme-default hg-layout-default myTheme"}
-      //   onRender={() => console.log("Rendered")}
     />
   );
 };
