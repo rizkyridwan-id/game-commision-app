@@ -2,6 +2,7 @@ import parameterBonusSalesReducer from "./parameterBonusSales";
 import parameterTagetTokoReducer from "./parameterBonusSales";
 import parameterCutiReducer from "./parameterCuti";
 import parameterKonversiCutiReducer from "./parameterKonversiCuti";
+import parameterLemburReducer from "./parameterLembur";
 import parameterShiftKerjaReducer from "./parameterShiftKerja";
 import parameterTargetSalesReducer from "./parameterTargetSales";
 import parameterTargetTokoReducer from "./parameterTargetToko";
@@ -14,4 +15,5 @@ export {
   parameterCutiReducer,
   parameterTargetTokoReducer,
   parameterKonversiCutiReducer,
+  parameterLemburReducer,
 };

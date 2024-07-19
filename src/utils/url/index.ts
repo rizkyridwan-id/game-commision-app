@@ -14,6 +14,7 @@ const urlApi = {
     parameterCuti: "parameter-gap-cuti",
     parameterKonversiCuti: "parameter-konversi-cuti",
     parameterShiftKerja: "parameter-shift-kerja",
+    parameterLembur: "parameter-lembur",
   },
   externalApi: {
     dataSales: "external/sales",

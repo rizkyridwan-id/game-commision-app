@@ -12,6 +12,7 @@ import {
   ParameterBonusSalesState,
   ParameterCutiState,
   ParameterKonversiCutiState,
+  ParameterLemburState,
   ParameterShiftKerjaState,
   ParameterTargetSalesState,
   ParameterTargetTokoState,
@@ -46,6 +47,7 @@ export interface RootState<T> {
     parameterCuti: ParameterCutiState;
     parameterShiftKerja: ParameterShiftKerjaState;
     parameterKonversiCuti: ParameterKonversiCutiState;
+    parameterLembur: ParameterLemburState;
   };
 
   timeKeeping: {

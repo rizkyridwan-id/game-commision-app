@@ -29,6 +29,7 @@ import {
   pelanggaranPegawaiReducer,
   kasBonReducer,
   potonganLainReducer,
+  parameterLemburReducer,
 } from "../reducers";
 
 export const rootReducer = combineReducers({
@@ -50,6 +51,7 @@ export const rootReducer = combineReducers({
     parameterCuti: parameterCutiReducer,
     parameterShiftKerja: parameterShiftKerjaReducer,
     parameterKonversiCuti: parameterKonversiCutiReducer,
+    parameterLembur: parameterLemburReducer,
   }),
 
   timeKeeping: combineReducers({

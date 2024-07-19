@@ -34,6 +34,7 @@ import {
   SettingMember,
   CetakMember,
   CreateSettingSystem,
+  ParameterLembur,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
@@ -114,6 +115,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <ParameterBonusSales />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/parameter-lembur",
+        title: "Parameter Lembur",
+        element: (
+          <ProtectedRoute>
+            <ParameterLembur />
           </ProtectedRoute>
         ),
       },

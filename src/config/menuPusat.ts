@@ -49,6 +49,11 @@ const MenuPusat = [
         title: "Parameter Shift Kerja",
         is_show: false,
       },
+      {
+        path: "/app/parameter-lembur",
+        title: "Parameter Lembur",
+        is_show: false,
+      },
     ],
   },
   {
