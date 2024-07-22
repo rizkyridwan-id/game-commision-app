@@ -15,8 +15,8 @@ export const validateParameterLembur = (
   if (!values.jam_akhir) {
     errors.jam_akhir = "Jam Akhir harus di isi";
   }
-  if (!values.total) {
-    errors.total = "Total harus di isi";
+  if (!values.total_rp) {
+    errors.total_rp = "Total harus di isi";
   }
 
   if (values.jam_akhir < values.jam_awal) {
