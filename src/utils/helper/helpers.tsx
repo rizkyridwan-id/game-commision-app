@@ -65,6 +65,27 @@ export function calculateTotalHours(start: string, end: string): number {
 
   return diffHours;
 }
+export function calculateTotalMinutes(start: string, end: string): number {
+  // Memecah string waktu menjadi bagian jam dan menit
+  const [startHour, startMinute] = start.split(":").map(Number);
+  const [endHour, endMinute] = end.split(":").map(Number);
+
+  // Membuat objek Date untuk waktu mulai dan waktu akhir
+  const startDate = new Date();
+  startDate.setHours(startHour, startMinute, 0, 0);
+
+  const endDate = new Date();
+  endDate.setHours(endHour, endMinute, 0, 0);
+
+  // Menghitung selisih waktu dalam milidetik
+  const diffMs = endDate.getTime() - startDate.getTime();
+
+  // Mengkonversi selisih waktu dari milidetik ke menit
+  const diffMinutes = diffMs / (1000 * 60);
+
+  return diffMinutes;
+}
+
 export const filterKodeToko = (kodeToko: string) => {
   const datatoko = getItem<DataTokoInterFace[]>("dataToko").find(
     (list) => list.kode_toko === kodeToko

@@ -40,8 +40,8 @@ const TableParameterLembur = () => {
       },
       {
         title: "Total Rp",
-        dataIndex: "total",
-        key: "total",
+        dataIndex: "total_rp",
+        key: "total_rp",
         render: (cell: number) => (
           <div className="">{cell.toLocaleString("kr-ko")}</div>
         ),
@@ -71,7 +71,7 @@ const TableParameterLembur = () => {
             &nbsp;
             <ButtonDelete
               tooltipText="Hapus Data"
-              prosesDelete={() => dispatch(proses.removeData(row?._id))}
+              prosesDelete={() => dispatch(proses.removeData(row._id))}
             />
           </div>
         ),

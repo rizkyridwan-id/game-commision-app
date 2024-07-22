@@ -137,6 +137,13 @@ export const payrolRedux = () => {
           dispatch(
             change(
               "FormPayroll",
+              "bonus_lembur",
+              Number(response.data.bonus_lembur)
+            )
+          );
+          dispatch(
+            change(
+              "FormPayroll",
               "potongan",
               response.data.potongan.kasbon +
                 response.data.potongan.potongan_lain
@@ -190,6 +197,7 @@ export const payrolRedux = () => {
         Number(feedBackData?.tunjangan_jabatan || 0) +
         Number(feedBackData?.bonus_sales || 0) +
         Number(formData?.bonus_absen || 0) +
+        Number(formData?.bonus_lembur || 0) +
         Number(formData?.bonus_jabatan || 0) -
         Number(feedBackData.potongan?.kasbon || 0) -
         Number(feedBackData.potongan?.potongan_lain || 0);

@@ -3,7 +3,7 @@ export interface ParameterLemburInterFace {
   kode_toko: string;
   jam_awal: string;
   jam_akhir: string;
-  total: number;
+  total_rp: number;
   input_by: string;
   modified_by?: string;
   modified_date?: Date;

@@ -34,7 +34,7 @@ import {
   SettingMember,
   CetakMember,
   CreateSettingSystem,
-  ParameterLembur,
+  TransaksiLembur,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
@@ -118,21 +118,30 @@ const AppRoute = [
           </ProtectedRoute>
         ),
       },
-      {
-        path: "/app/parameter-lembur",
-        title: "Parameter Lembur",
-        element: (
-          <ProtectedRoute>
-            <ParameterLembur />
-          </ProtectedRoute>
-        ),
-      },
+      // {
+      //   path: "/app/parameter-lembur",
+      //   title: "Parameter Lembur",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <ParameterLembur />
+      //     </ProtectedRoute>
+      //   ),
+      // },
       {
         path: "/app/parameter-cuti",
         title: "Parameter Cuti",
         element: (
           <ProtectedRoute>
             <ParameterCuti />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/transaksi-lembur",
+        title: "Transaksi Lembur",
+        element: (
+          <ProtectedRoute>
+            <TransaksiLembur />
           </ProtectedRoute>
         ),
       },

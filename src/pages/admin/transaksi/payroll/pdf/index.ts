@@ -92,6 +92,14 @@ export const cetakSlipGajih = (data: FormPayrollInterFace) => {
   ]);
   tableBody.push([
     {
+      content: "BONUS LEMBUR",
+    },
+    {
+      content: Number(data.bonus_lembur || 0).toLocaleString("kr-ko"),
+    },
+  ]);
+  tableBody.push([
+    {
       content: "BONUS JABATAN",
     },
     {

@@ -68,8 +68,8 @@ const FormPengajuanLembur = (
         <div className={"col-6"}>
           <Field
             label="Total Rupiah"
-            id="total"
-            name="total"
+            id="total_rp"
+            name="total_rp"
             type="text"
             isRp
             placeholder="Masukan Total Rupiah"
@@ -105,7 +105,7 @@ const mapState = (state: RootState<ParameterLemburInterFace>) => {
         kode_toko: state?.utility?.getModal?.data?.kode_toko,
         jam_awal: state?.utility?.getModal?.data?.jam_awal,
         jam_akhir: state?.utility?.getModal?.data?.jam_akhir,
-        total: state?.utility?.getModal?.data?.total,
+        total_rp: state?.utility?.getModal?.data?.total_rp,
       },
     };
   } else {

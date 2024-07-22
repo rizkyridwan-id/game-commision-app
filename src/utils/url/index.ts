@@ -38,6 +38,7 @@ const urlApi = {
     payrollSummary: "payroll/pegawai-summary",
     potonganLain: "potongan-lain-lain",
     omzetSales: "omzet-sales/bulk",
+    lembur: "transaksi-lembur",
   },
 
   report: {

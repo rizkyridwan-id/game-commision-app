@@ -5,6 +5,7 @@ export interface FormPayrollInterFace {
   gajih_pokok: number;
   bonus_sales: number;
   bonus_absen: number;
+  bonus_lembur: number;
   bonus_jabatan: number;
   potongan: number;
   total_gajih: number;

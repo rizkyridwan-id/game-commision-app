@@ -49,11 +49,11 @@ const MenuPusat = [
         title: "Parameter Shift Kerja",
         is_show: false,
       },
-      {
-        path: "/app/parameter-lembur",
-        title: "Parameter Lembur",
-        is_show: false,
-      },
+      // {
+      //   path: "/app/parameter-lembur",
+      //   title: "Parameter Lembur",
+      //   is_show: false,
+      // },
     ],
   },
   {
@@ -85,6 +85,11 @@ const MenuPusat = [
       {
         path: "/app/sinkron-data-pegawai",
         title: "Sinkron Data Pegawai",
+        is_show: false,
+      },
+      {
+        path: "/app/transaksi-lembur",
+        title: "Lembur",
         is_show: false,
       },
     ],

@@ -5,6 +5,7 @@ export interface GetPayrollPegawaiSummaryDtoProps {
   tunjangan_jabatan: number;
   tgl_lahir: number;
   bonus_sales: number;
+  bonus_lembur: number;
   status_kehadiran: {
     is_late_weekly: boolean;
     is_late_monthly: boolean;

@@ -106,6 +106,17 @@ const Payroll = (props: InjectedFormProps<PayrollInterFace>) => {
           </div>
           <div className="col-3">
             <Field
+              label="Bonus Lembur"
+              name="bonus_lembur"
+              type="text"
+              readOnly
+              placeholder="Bonus Lembur"
+              isRp
+              component={RenderNumber}
+            />
+          </div>
+          <div className="col-3">
+            <Field
               label="Bonus Absen"
               name="bonus_absen"
               type="text"
