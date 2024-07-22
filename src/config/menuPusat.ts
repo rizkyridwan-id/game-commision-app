@@ -136,6 +136,11 @@ const MenuPusat = [
         title: "Laporan Data Pegawai",
         is_show: false,
       },
+      {
+        path: "/app/laporan-lembur",
+        title: "Laporan Lembur",
+        is_show: false,
+      },
     ],
   },
   {

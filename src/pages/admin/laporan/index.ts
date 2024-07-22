@@ -6,3 +6,5 @@ export * from "./laporanPengajuanCuti";
 export * from "./laporanPotonganLainLain";
 export * from "./laporanTimeKeeping";
 export * from "./laporanDataPegawai";
+export * from "./laporanDataPegawai";
+export * from "./laporanLembur";

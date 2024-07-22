@@ -49,6 +49,7 @@ const urlApi = {
     potonganLain: "potongan-lain-lain/report",
     payroll: "payroll/report",
     globalPayroll: "payroll/report-global",
+    getReportLembur: "transaksi-lembur/report",
   },
   login: "auth/login",
   otorisasi: "user/otorisasi",

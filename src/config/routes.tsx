@@ -35,6 +35,7 @@ import {
   CetakMember,
   CreateSettingSystem,
   TransaksiLembur,
+  LaporanTransaksiLembur,
 } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 import SinkronDataPegawai from "@/pages/admin/transaksi/SinkronDataPegawai";
@@ -187,6 +188,15 @@ const AppRoute = [
         element: (
           <ProtectedRoute>
             <LaporanPotonganLainLain />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/app/laporan-lembur",
+        title: "Laporan Lembur",
+        element: (
+          <ProtectedRoute>
+            <LaporanTransaksiLembur />
           </ProtectedRoute>
         ),
       },
