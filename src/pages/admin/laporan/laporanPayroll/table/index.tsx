@@ -77,6 +77,20 @@ const TableLporanPayroll = () => {
       },
     },
     {
+      title: "Bonus Lembur",
+      dataIndex: "bonus_lembur",
+      key: "bonus_lembur",
+      align: "right",
+      render: (cell: number) => {
+        return (
+          <div className="text-end">
+            {" "}
+            {Number(cell || 0).toLocaleString("kr-ko")}
+          </div>
+        );
+      },
+    },
+    {
       title: "Bonus Jabatan",
       dataIndex: "bonus_jabatan",
       key: "bonus_jabatan",

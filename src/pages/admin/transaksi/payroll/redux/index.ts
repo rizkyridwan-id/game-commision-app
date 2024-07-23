@@ -44,6 +44,7 @@ export const payrolRedux = () => {
           bonus_target: formData.bonus_sales,
           bonus_absen: formData.bonus_absen || 0,
           bonus_jabatan: formData.bonus_jabatan || 0,
+          bonus_lembur: formData.bonus_lembur || 0,
           kasbon: feedBackData.potongan.kasbon || 0,
           potongan_lain: feedBackData.potongan.potongan_lain,
           grand_total: formData.total_gajih,

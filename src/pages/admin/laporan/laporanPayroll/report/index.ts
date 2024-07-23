@@ -75,6 +75,14 @@ const LaporanPPayrollPdfExcel = (
       },
     },
     {
+      label: "Bonus Lembur",
+      key: "bonus_lembur",
+      options: {
+        halign: "right",
+        format: "RP",
+      },
+    },
+    {
       label: "Bonus Jabatan",
       key: "bonus_jabatan",
       options: {
