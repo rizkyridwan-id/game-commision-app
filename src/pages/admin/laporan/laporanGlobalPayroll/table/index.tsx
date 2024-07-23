@@ -39,6 +39,14 @@ const TableLporanGlobalPayroll = () => {
       },
     },
     {
+      title: "Bonus Lembur",
+      dataIndex: "bonus_lembur",
+      key: "bonus_lembur",
+      render: (cell: number) => {
+        return Number(cell || 0).toLocaleString("kr-ko");
+      },
+    },
+    {
       title: "Bonus Absen",
       dataIndex: "bonus_absen",
       key: "bonus_absen",

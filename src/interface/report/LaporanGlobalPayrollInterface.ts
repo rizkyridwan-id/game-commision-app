@@ -6,6 +6,7 @@ export interface ReportPayrollGlobalDtoProps {
   bonus_target: number;
   bonus_absen: number;
   bonus_jabatan: number;
+  bonus_lembur: number;
   kasbon: number;
   potongan_lain: number;
   cuti: number;

@@ -48,6 +48,14 @@ const LaporanGlobalPayrollPdfExcel = (
       },
     },
     {
+      label: "Bonus Lembur",
+      key: "bonus_lembur",
+      options: {
+        halign: "right",
+        format: "RP",
+      },
+    },
+    {
       label: "Bonus Absen",
       key: "bonus_absen",
       options: {
