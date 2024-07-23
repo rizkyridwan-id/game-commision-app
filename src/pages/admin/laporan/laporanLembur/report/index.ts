@@ -56,6 +56,13 @@ const LaporanLemburPdfExcel = (
       label: "Jam Akhir Lembur",
       key: "jam_akhir",
     },
+    {
+      label: "Total Rupiah / Jam",
+      key: "total_rp",
+      options: {
+        format: "RP",
+      },
+    },
   ];
 
   const tgl_akhir = getAdjustedEndDate(new Date(formInput.tgl_akhir));

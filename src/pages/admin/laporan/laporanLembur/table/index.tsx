@@ -40,6 +40,14 @@ const TableLembur = () => {
       dataIndex: "jam_akhir",
       key: "jam_akhir",
     },
+    {
+      title: "Total Rupiah / Jam",
+      dataIndex: "total_rp",
+      key: "total_rp",
+      render(text: number) {
+        return text.toLocaleString("kr-ko");
+      },
+    },
   ];
   const datatmp = useAppSelector(
     (state) => state.utility.getDataTmp.data || []
