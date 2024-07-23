@@ -3,7 +3,13 @@ import {
   JenisLaporanType,
   ColumnGenarator,
 } from "@/interface";
-import { ExportPdfExcel, filterKodeToko, VITE_APP_KODE_TOKO } from "@/utils";
+import {
+  ExportPdfExcel,
+  filterKodeToko,
+  formatDate,
+  getAdjustedEndDate,
+  VITE_APP_KODE_TOKO,
+} from "@/utils";
 import { LaporanLemburDto } from "../dto";
 
 const LaporanLemburPdfExcel = (
@@ -52,6 +58,8 @@ const LaporanLemburPdfExcel = (
     },
   ];
 
+  const tgl_akhir = getAdjustedEndDate(new Date(formInput.tgl_akhir));
+
   ExportPdfExcel({
     formatPdf: {
       orientation: "l",
@@ -60,7 +68,7 @@ const LaporanLemburPdfExcel = (
     type: type,
     date: {
       start_date: formInput.tgl_awal,
-      end_date: formInput.tgl_akhir,
+      end_date: formatDate(tgl_akhir),
     },
     title: `LAPORAN LEMBUR PEGAWAI`,
     data: data.map((list, index) => {

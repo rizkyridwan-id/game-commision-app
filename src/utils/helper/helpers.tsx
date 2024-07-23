@@ -93,6 +93,30 @@ export const filterKodeToko = (kodeToko: string) => {
   return datatoko;
 };
 
+export function getAdjustedEndDate(startDate: Date): Date {
+  const year = startDate.getFullYear();
+  const month = startDate.getMonth();
+
+  // Cek apakah bulan tersebut memiliki 31 hari atau tidak
+  const lastDateOfMonth31 = new Date(year, month, 31);
+  const lastDateOfMonth30 = new Date(year, month, 30);
+
+  if (lastDateOfMonth31.getMonth() === month) {
+    // Jika bulan tersebut memiliki 31 hari, gunakan 31
+    return lastDateOfMonth31;
+  } else {
+    // Jika bulan tersebut hanya memiliki 30 hari, gunakan 30
+    return lastDateOfMonth30;
+  }
+}
+
+// export function formatDate(date: Date): string {
+//   const day = String(date.getDate()).padStart(2, "0");
+//   const month = String(date.getMonth() + 1).padStart(2, "0");
+//   const year = date.getFullYear();
+//   return `${day}-${month}-${year}`;
+// }
+
 export const speak = (text: string): void => {
   const utterance = new SpeechSynthesisUtterance(text);
 
